@@ -1,0 +1,122 @@
+resumen: Proyecto grupal con tres entregas secuenciales y una final: T1 diseña y puebla una base de datos en MongoDB con colecciones relacionadas y anidamiento profundo; T2 construye un script genérico en Python que consulta MongoDB, transforma JSON→XML y presenta HTML vía XSLT; T3 modela una ontología OWL en Protégé con razonado y consultas SPARQL, con retos en RDFlib para generar un grafo RDF desde Mongo y ejecutar consultas; la entrega Final integra y demuestra los resultados.
+entregas: items[4]:
+    - nombre: T1
+    descripcion: Diseño y poblamiento de base de datos en MongoDB con relaciones entre colecciones y anidamiento.
+    fechas:
+      apertura: lunes, 10 de noviembre de 2025, 11:56
+      cierre: sábado, 22 de noviembre de 2025, 23:43
+    requisitos: items[5]:
+        - Preferencia por MongoDB
+        - ≥ 3 colecciones interconectadas
+        - ≥ 3 niveles de anidamiento en cada colección
+        - Población suficiente para consultas de interés
+        - Datos realistas y vinculados a bioinformática
+    detalles_importantes: items[5]:
+        - Demostrar relaciones entre colecciones (referencias o embebidos) y justificar el modelado
+        - Alinear el esquema con posibles consultas analíticas posteriores
+        - Referencias sugeridas para relaciones en MongoDB: [https://medium.com/@diego.coder/relaciones-en-mongodb-edf2107a94ad](https://medium.com/@diego.coder/relaciones-en-mongodb-edf2107a94ad) , [https://es.stackoverflow.com/questions/249344/relaciones-entre-collections-mongo](https://es.stackoverflow.com/questions/249344/relaciones-entre-collections-mongo)
+        - Documentar decisiones de normalización/denormalización y claves
+        - Planificar campos índice para rendimiento de consultas futuras
+    dependencias: items[3]:
+        - No depende de entregas previas
+        - Afecta a T2 (las consultas dependen del modelo y datos)
+        - Afecta a T3 (la ontología refleja las interacciones del modelo de T1)
+    notas: items[5]:
+        - No se define el tamaño mínimo de la población de datos
+        - No se especifica criterio de evaluación del 'realismo' de los datos
+        - Ambigua la interpretación de 'tres niveles de anidamiento' (subdocumentos, arrays anidados, referencias mixtas)
+        - No se exige un esquema formal de validación (p. ej., JSON Schema) ni pruebas de integridad
+        - No se indican restricciones sobre uso de datos reales ni consideraciones de privacidad
+    - nombre: T2
+    descripcion: Script en Python que ejecuta 3 consultas sobre MongoDB, transforma JSON a XML y presenta HTML mediante XSLT.
+    fechas:
+      apertura: lunes, 27 de octubre de 2025, 10:56
+      cierre: sábado, 29 de noviembre de 2025, 23:43
+    requisitos: items[9]:
+        - Corregir previamente los errores de T1
+        - Diseñar 3 consultas que aprovechen relaciones entre colecciones
+        - Transformar resultados JSON a XML
+        - Aplicar plantilla XSLT para obtener HTML
+        - Entrada: credenciales de BD, TXT con especificación de consulta, documento XSLT
+        - Salida: documento HTML resultante
+        - Uso recomendado de argparse para parámetros
+        - Se valora limpieza de código, comentarios y captación de errores
+        - Se recomienda Black e Isort
+    detalles_importantes: items[5]:
+        - El script debe ser genérico: funcionar con cualquier BD Mongo, consulta y XSLT coherentes
+        - Validar coherencia entre consulta, esquema de BD y XSLT antes de ejecutar
+        - Diseñar contrato de entrada claro: ruta a credenciales, formato del TXT de consulta y de la plantilla XSLT
+        - Gestionar errores: conexión, autenticación, sintaxis de consulta, transformación XML, aplicación XSLT
+        - Registrar evidencias de ejecución y guardar artefactos (XML intermedio y HTML final) para trazabilidad
+    dependencias: items[3]:
+        - Depende de T1 corregida (modelo y datos definitivos)
+        - Afecta opcionalmente a T3-Reto si se reutiliza lógica para generación RDF
+        - Afecta a la Final (demostración integrada del pipeline)
+    notas: items[6]:
+        - Inconsistencia temporal: la apertura de T2 (27/10/2025) es anterior a la apertura de T1 y contradice 'tras corregir T1'
+        - No se define el formato exacto del TXT de consulta (p. ej., JSON, DSL, pipeline de agregación en texto)
+        - No se especifica el formato de credenciales (URI Mongo, archivo .env, JSON) ni mecanismos de seguridad
+        - No se indica versión mínima de Python ni de librerías (p. ej., lxml, xsltproc, pymongo)
+        - No se establecen requisitos de pruebas automáticas ni cobertura
+        - No se detallan criterios de evaluación del 'carácter genérico' del script
+    - nombre: T3
+    descripcion: Diseño de ontología en Protégé con razonado, población manual de individuos y 6 consultas SPARQL; retos con RDFlib para generar grafo RDF desde Mongo y ejecutar consultas.
+    fechas:
+      apertura: domingo, 30 de noviembre de 2025, 11:56
+      cierre: sábado, 13 de diciembre de 2025, 23:43
+    requisitos: items[7]:
+        - Ontología que refleje interacciones entre clases (propiedades de objeto) y con datos literales (propiedades de datos)
+        - Añadir individuos manualmente, suficientes para que 6 consultas SPARQL devuelvan resultados
+        - Aplicar un razonador para mejorar accesibilidad y consulta
+        - Diseñar y ejecutar 6 consultas SPARQL que cubran el espacio de búsqueda
+        - Entregables: ontologia.owl, ontologia_reasoned.owl, consultas.txt
+        - (Reto) Script Python con RDFlib que genere un grafo RDF desde Mongo
+        - (Reto) Script Python con RDFlib que ejecute las 6 consultas sobre el grafo generado
+    detalles_importantes: items[6]:
+        - Alinear clases y propiedades con el esquema lógico derivado de T1
+        - Definir IRIs estables y una base IRI coherente
+        - Seleccionar y documentar el razonador (p. ej., HermiT, Pellet, FaCT++) y las inferencias esperadas
+        - Asegurar que las 6 consultas cubren clases, propiedades de objeto, propiedades de datos, filtros y joins semánticos
+        - Para los retos: trazar mapeo JSON→RDF (clases, propiedades, tipado literal) y normalizar IRIs desde IDs Mongo
+        - Conservar ambos artefactos OWL: antes y después del razonado para comparación
+    dependencias: items[4]:
+        - Depende de T1 (la ontología refleja la BD y sus relaciones)
+        - Reto 1 depende de acceso a la BD de T1
+        - Reto 2 depende del grafo RDF del Reto 1
+        - Afecta a la Final (demostración semántica y consultas)
+    notas: items[7]:
+        - No se especifica el razonador requerido ni su versión
+        - No se define el perfil OWL (DL/EL/RL) ni lineamientos de modelado
+        - No se indica el tamaño mínimo de individuos ni estrategia de muestreo
+        - No se especifica el vocabulario externo recomendado ni si se deben reutilizar ontologías existentes
+        - No se detalla el formato de 'consultas.txt' (una por línea, prefijos, comentarios)
+        - No se indican criterios para 'cubrir todo el espacio de búsqueda'
+        - No se define cómo evaluar los retos ni si son obligatorios para nota extra
+    - nombre: Final
+    descripcion: Integración y demostración de los resultados de T1–T3 con evaluación conjunta.
+    fechas:
+      apertura: No especificado
+      cierre: No especificado
+    requisitos: items[1]:
+        - No especificados en el enunciado proporcionado
+    detalles_importantes: items[2]:
+        - Previsible integración: BD Mongo (T1), pipeline JSON→XML→HTML (T2), ontología y SPARQL con razonado (T3)
+        - Demostración reproducible con artefactos ejecutables y datos consistentes
+    dependencias: items[2]:
+        - Depende de T1, T2 y T3 completadas
+        - Afecta a la nota final del proyecto
+    notas: items[4]:
+        - No hay enunciado detallado para la Final
+        - No se proporcionan fechas de apertura/cierre
+        - No se definen entregables concretos ni criterios de evaluación
+        - No se especifica el formato de la demostración ni requerimientos de reproducibilidad
+reglas_codigo_limpio: items[9]:
+    - Usar argparse para parámetros y entradas del script
+    - Aplicar Black como formateador de código
+    - Aplicar Isort para ordenar importaciones
+    - Mantener el script genérico respecto a BD, consultas y XSLT
+    - Incluir comentarios que expliquen decisiones y pasos clave
+    - Implementar captura y manejo robusto de errores en conexión, consultas y transformaciones
+    - Validar coherencia entre entradas (credenciales, consulta, XSLT) antes de ejecutar
+    - Conservar artefactos intermedios (p. ej., XML) y resultados (HTML) para trazabilidad
+    - Documentar dependencias y versiones usadas en los scripts de los retos con RDFlib
