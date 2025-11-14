@@ -247,7 +247,10 @@ def check_gdc_files(
                         print(f"      Filas: {file_stat['num_rows']}, Columnas: {file_stat['num_columns']}, Tamaño: {file_stat['size_mb']} MB")
                         if i == 1 and file_stat["columns"]:
                             print(f"      Columnas disponibles: {', '.join(file_stat['columns'][:5])}{'...' if len(file_stat['columns']) > 5 else ''}")
-            else:
+                    # Imprimir los nombres de las columnas al final (son todas comunes)
+                    if stats["files"] and stats["files"][0]["columns"]:
+                        print(f"\n   🔤 Nombres de columnas comunes en archivos STAR-Counts: {', '.join(stats['files'][0]['columns'])}")
+            else:   
                 print(f"   ✗ Existe: No")
             continue
         
