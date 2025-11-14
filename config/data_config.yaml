@@ -1,0 +1,49 @@
+# Parámetros de acceso a datos para GDC y HGNC
+
+gdc:
+  base_url: "https://api.gdc.cancer.gov"
+
+  # Cohorte / proyecto
+  project_id: "TCGA-LGG"
+  data_category: "Transcriptome Profiling"
+  data_type: "Gene Expression Quantification"
+  workflow_type: "STAR - Counts"   # o el workflow concreto que hayáis elegido
+
+  # 1) Manifest tipo GDC Data Transfer Tool (5 columnas estándar)
+  fields: "file_id,file_name,md5sum,file_size,state"
+  manifest_output: "data/gdc_manifest_tcga_lgg.tsv"
+
+  # 2) Metadatos fichero–caso–muestra para explorar relaciones internas de GDC
+  file_metadata_fields: >
+    file_id,file_name,cases.case_id,cases.submitter_id,
+    cases.samples.sample_type,cases.project.project_id
+  file_metadata_output: "data/gdc_file_metadata_tcga_lgg.tsv"
+
+  # 3) Tabla de genes mínima para enlazar con HGNC
+  #    Lista pequeña de genes “ejemplo” relevantes en gliomas
+  gene_symbols:
+    - "TP53"
+    - "IDH1"
+    - "IDH2"
+    - "ATRX"
+  genes_output: "data/gdc_genes_tcga_lgg_example.tsv"
+
+  # Parámetros generales
+  page_size: 10000
+  token_path: null          # ruta al token si necesitáis datos protegidos; null para solo open-access
+  request_timeout: 120
+
+
+hgnc:
+  url: "https://storage.googleapis.com/public-download-files/hgnc/tsv/tsv/hgnc_complete_set.txt"
+  output_path: "data/hgnc_complete_set.tsv"
+  request_timeout: 60
+
+uniprot:
+  # Ejemplo: descarga de proteínas humanas en formato TSV
+  url: "https://rest.uniprot.org/uniprotkb/stream"
+  query: "organism_id:9606 AND reviewed:true"  # Humanos, Swiss-Prot reviewed
+  format: "tsv"
+  fields: "accession,id,gene_names,protein_name,organism_name,length"
+  output_path: "data/uniprot_human_reviewed.tsv"
+  request_timeout: 300  # Puede tardar más tiempo para grandes consultas
