@@ -1,8 +1,30 @@
+<!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
+
+# Tabla de Contenidos
+
+- [ProyectoEstandaresDatos](#proyectoestandaresdatos)
+   * [🚀 Instalación y Configuración](#-instalación-y-configuración)
+      + [1️⃣ Clonar el repositorio](#1-clonar-el-repositorio)
+      + [2️⃣ Cambiar a la rama de desarrollo](#2-cambiar-a-la-rama-de-desarrollo)
+      + [3️⃣ Crear entorno Conda](#3-crear-entorno-conda)
+      + [4️⃣ Instalar el paquete en modo desarrollo](#4-instalar-el-paquete-en-modo-desarrollo)
+      + [5️⃣ Configurar rutas personales](#5-configurar-rutas-personales)
+   * [📥 Descargar Datos](#-descargar-datos)
+   * [📊 Fuentes de Datos](#-fuentes-de-datos)
+   * [🔧 Verificación](#-verificación)
+   * [📖 Lectura](#-lectura)
+   * [❓ Problemas Comunes](#-problemas-comunes)
+
+<!-- TOC end -->
+
+<!-- TOC --><a name="proyectoestandaresdatos"></a>
 # ProyectoEstandaresDatos
 Repositorio Github para el proyecto final de la asignatura "Estándares de Datos"
 
+<!-- TOC --><a name="-instalación-y-configuración"></a>
 ## 🚀 Instalación y Configuración
 
+<!-- TOC --><a name="1-clonar-el-repositorio"></a>
 ### 1️⃣ Clonar el repositorio
 
 ```bash
@@ -10,6 +32,7 @@ git clone https://github.com/MarioPasc/ProyectoEstandaresDatos.git
 cd ProyectoEstandaresDatos
 ```
 
+<!-- TOC --><a name="2-cambiar-a-la-rama-de-desarrollo"></a>
 ### 2️⃣ Cambiar a la rama de desarrollo
 
 > [!IMPORTANT]
@@ -19,6 +42,7 @@ cd ProyectoEstandaresDatos
 git checkout descargarDatosAutomaticamente
 ```
 
+<!-- TOC --><a name="3-crear-entorno-conda"></a>
 ### 3️⃣ Crear entorno Conda
 
 > [!WARNING]
@@ -29,12 +53,14 @@ conda create -n estandares python=3.9 -y
 conda activate estandares
 ```
 
+<!-- TOC --><a name="4-instalar-el-paquete-en-modo-desarrollo"></a>
 ### 4️⃣ Instalar el paquete en modo desarrollo
 
 ```bash
 pip install -e .
 ```
 
+<!-- TOC --><a name="5-configurar-rutas-personales"></a>
 ### 5️⃣ Configurar rutas personales
 
 > [!CAUTION]
@@ -61,6 +87,7 @@ nano config/data_config.yaml  # o usa tu editor preferido
 
 📖 **Consulta** `config/README.md` para instrucciones detalladas.
 
+<!-- TOC --><a name="-descargar-datos"></a>
 ## 📥 Descargar Datos
 
 Una vez configurado tu archivo `config/data_config.yaml`:
@@ -80,12 +107,14 @@ datastandards-download --config config/data_config.yaml --source uniprot
 > - UniProt requiere que GDC y HGNC se hayan descargado primero
 > - Los directorios de salida se crean automáticamente
 
+<!-- TOC --><a name="-fuentes-de-datos"></a>
 ## 📊 Fuentes de Datos
 
 - **GDC (Genomic Data Commons)**: Datos RNA-seq del proyecto TCGA-LGG
 - **HGNC**: Nomenclatura completa de genes humanos
 - **UniProt**: Anotación de proteínas asociadas a los genes del proyecto
 
+<!-- TOC --><a name="-verificación"></a>
 ## 🔧 Verificación
 
 Después de la descarga, el sistema muestra automáticamente:
@@ -93,10 +122,12 @@ Después de la descarga, el sistema muestra automáticamente:
 - ✅ Número de registros y columnas
 - ✅ Validaciones de integridad
 
+<!-- TOC --><a name="-lectura"></a>
 ## 📖 Lectura
 
 Por favor! Leed con detenimiento [este fichero](docs/reports/T1_README_Datos.md), describe todo lo que creo que deberíamos de saber de los datos antes de empezar a trabajar con ellos 
 
+<!-- TOC --><a name="-problemas-comunes"></a>
 ## ❓ Problemas Comunes
 
 **Error: "No such file or directory"**
