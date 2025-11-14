@@ -37,8 +37,9 @@ classifiers = [
 ]
 
 dependencies = [
-    "requests>=2.31.0",
-    "pyyaml>=6.0",
+    "requests",
+    "types-requests",
+    "pyyaml",
 ]
 
 [project.urls]

@@ -72,13 +72,37 @@ class HGNCConfig:
 class UniProtConfig:
     """Configuración específica para descarga de datos de UniProt."""
 
-    url: str
-    query: str
-    format: str
-    fields: str
-    output_path: str
-    request_timeout: int = 300
+    # Activación/desactivación del módulo UniProt
+    enabled: bool = True
 
+    # Endpoint base de UniProtKB (búsquedas)
+    base_url: str = "https://rest.uniprot.org/uniprotkb/search"
+
+    # Parámetros biológicos
+    organism_id: int = 9606
+    reviewed_only: bool = True
+
+    # Campos a solicitar a UniProt en formato TSV
+    fields: str = (
+        "accession,id,reviewed,"
+        "gene_primary,gene_names,"
+        "organism_id,protein_name,length,protein_existence,"
+        "go_f,go_p,go_c,"
+        "cc_function,cc_subcellular_location"
+    )
+
+    # Parámetros de la API
+    batch_size: int = 200
+    max_retries: int = 3
+    timeout: int = 60
+    sleep_between: float = 0.34
+
+    # Control del tamaño del dataset (None = sin límite)
+    max_accessions: Optional[int] = None
+
+    # Ficheros de salida
+    mapping_output: str = "data/uniprot/uniprot_mapping_tcga_lgg.tsv"
+    metadata_output: str = "data/uniprot/uniprot_metadata_tcga_lgg.tsv"
 
 @dataclass
 class AppConfig:
@@ -87,7 +111,6 @@ class AppConfig:
     gdc: GDCConfig
     hgnc: HGNCConfig
     uniprot: Optional[UniProtConfig] = None
-
 
 def _load_yaml(path: Path) -> Dict[str, Any]:
     """Carga un fichero YAML y devuelve su contenido como diccionario."""

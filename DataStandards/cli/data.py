@@ -25,11 +25,11 @@ from DataStandards.data.entrypoints.access_gdc import (
     run_rnaseq_download_and_gene_extraction,
 )
 from DataStandards.data.entrypoints.access_hgnc import download_hgnc_complete_set
-from DataStandards.data.entrypoints.access_uniprot import download_uniprot_data as download_uniprot_impl
+from DataStandards.data.entrypoints import access_uniprot
 from DataStandards.utils.check_downloaded_filelength import (
     check_gdc_files,
     check_hgnc_files,
-    check_uniprot_files,
+    # check_uniprot_files,  # Temporalmente deshabilitado
 )
 
 
@@ -110,6 +110,10 @@ def download_uniprot_data(config: AppConfig) -> None:
     """
     Descarga datos de UniProt según la configuración.
     
+    IMPORTANTE: Este proceso requiere que previamente se hayan descargado:
+        1. Datos de GDC (genes del proyecto)
+        2. Datos de HGNC (tabla completa de genes)
+    
     Parameters
     ----------
     config : AppConfig
@@ -122,14 +126,27 @@ def download_uniprot_data(config: AppConfig) -> None:
         logger.info("=== Descarga de UniProt omitida ===")
         return
     
+    if not config.uniprot.enabled:
+        logger.info("Módulo UniProt deshabilitado en la configuración")
+        logger.info("=== Descarga de UniProt omitida ===")
+        return
+    
+    logger.info("Nota: UniProt requiere datos previos de GDC y HGNC")
+    
     try:
-        download_uniprot_impl(config.uniprot)
+        # Llamar a la función run() del módulo access_uniprot
+        access_uniprot.run(config)
         
-        # Verificar archivo descargado
-        logger.info("Verificando archivo descargado...")
-        check_uniprot_files(config.uniprot.output_path)
+        # TODO: Verificar archivos descargados cuando esté implementado
+        # logger.info("Verificando archivos descargados...")
+        # check_uniprot_files(config.uniprot.metadata_output)
         
         logger.info("=== Descarga de UniProt completada exitosamente ===")
+    except FileNotFoundError as e:
+        logger.error(f"Faltan archivos requeridos: {e}")
+        logger.error("Sugerencia: ejecute primero 'datastandards-download --source gdc' y '--source hgnc'")
+        logger.error("O ejecute 'datastandards-download --source all' para descargar todo en orden")
+        raise
     except Exception as e:
         logger.error(f"Error al descargar datos de UniProt: {e}")
         raise

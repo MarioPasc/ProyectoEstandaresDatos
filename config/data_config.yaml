@@ -34,7 +34,7 @@ gdc:
     output_dir: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc/star_counts"   # directorio donde se guardan los .gz
     overwrite_existing: false       # si false, no re-descarga si el fichero ya existe
     decompress_downloads: false     # si true, crea versión descomprimida junto al .gz
-    gene_table_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc_genes_tcga_lgg.tsv"  # lista de genes del proyecto
+    gene_table_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc/gdc_genes_tcga_lgg.tsv"  # lista de genes del proyecto
     gene_id_column_index: 0         # índice (0-based) de la columna con Ensembl IDs
     strip_version: true             # ENSG00000121410.8 -> ENSG00000121410
 
@@ -50,10 +50,32 @@ hgnc:
   request_timeout: 60
 
 uniprot:
-  # Ejemplo: descarga de proteínas humanas en formato TSV
-  url: "https://rest.uniprot.org/uniprotkb/stream"
-  query: "organism_id:9606 AND reviewed:true"  # Humanos, Swiss-Prot reviewed
-  format: "tsv"
-  fields: "accession,id,gene_names,protein_name,organism_name,length"
-  output_path: "data/uniprot_human_reviewed.tsv"
-  request_timeout: 300  # Puede tardar más tiempo para grandes consultas
+  enabled: true
+
+  # Endpoint base de UniProt (búsquedas sobre UniProtKB)
+  base_url: "https://rest.uniprot.org/uniprotkb/search"
+
+  # Parámetros biológicos
+  organism_id: 9606          # humano
+  reviewed_only: true        # solo Swiss-Prot (reviewed:true)
+
+  # Campos a devolver por UniProt (TSV)
+  fields: >
+    accession,id,reviewed,
+    gene_primary,gene_names,
+    organism_id,protein_name,length,protein_existence,
+    go_f,go_p,go_c,
+    cc_function,cc_subcellular_location
+
+  # Parámetros de la API
+  batch_size: 200            # nº máximo de accessions por petición
+  max_retries: 3             # reintentos por lote
+  timeout: 60                # timeout en segundos por petición
+  sleep_between: 0.34        # pausa entre peticiones (segundos)
+
+  # Control del tamaño del dataset (None = sin límite)
+  max_accessions: 2000
+
+  # Ficheros de salida
+  mapping_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/uniprot/uniprot_mapping_tcga_lgg.tsv"
+  metadata_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/uniprot/uniprot_metadata_tcga_lgg.tsv"
