@@ -119,9 +119,9 @@ def extract_project_uniprot_ids(
     """
     Extrae los UniProt IDs de los genes del proyecto a partir de HGNC.
 
-    Filtro:
-        - ensembl_gene_id ∈ project_ensembl_ids
-        - locus_type == "protein-coding gene"
+    Filtros aplicados:
+        - ensembl_gene_id ∈ project_ensembl_ids (considerando valores múltiples separados por '|')
+        - locus_group == "protein-coding gene"
         - uniprot_ids no vacío
 
     Devuelve:
@@ -144,11 +144,12 @@ def extract_project_uniprot_ids(
         reader = csv.DictReader(fh_in, delimiter="\t")
         fieldnames = reader.fieldnames or []
 
+        # Ahora exigimos locus_group (no solo locus_type)
         required_columns = [
             "ensembl_gene_id",
             "hgnc_id",
             "symbol",
-            "locus_type",
+            "locus_group",
             "uniprot_ids",
         ]
         for col in required_columns:
@@ -161,14 +162,34 @@ def extract_project_uniprot_ids(
         writer.writerow(["ensembl_gene_id", "hgnc_id", "symbol", "uniprot_id"])
 
         for row in reader:
-            ensembl_id = (row.get("ensembl_gene_id") or "").strip()
-            if not ensembl_id or ensembl_id not in project_ensembl_ids:
+            # 1) Ensembl IDs del gen (posiblemente múltiples separados por '|')
+            ensembl_field = (row.get("ensembl_gene_id") or "").strip()
+            if not ensembl_field:
                 continue
 
-            locus_type = (row.get("locus_type") or "").strip()
-            if locus_type != "protein-coding gene":
+            row_ensembl_ids = [
+                eid.strip()
+                for eid in ensembl_field.split("|")
+                if eid.strip()
+            ]
+            # Nos quedamos solo con los Ensembl IDs que están en el proyecto
+            matching_ensembl_ids = [
+                eid for eid in row_ensembl_ids if eid in project_ensembl_ids
+            ]
+            if not matching_ensembl_ids:
                 continue
 
+            # 2) Filtro de tipo de locus: usar locus_group, no locus_type
+            locus_group = (row.get("locus_group") or "").strip()
+            if locus_group != "protein-coding gene":
+                continue
+
+            locus_group = (row.get("locus_type") or "").strip()
+            if locus_group != "gene with protein product":
+                continue
+
+
+            # 3) Campo UniProt
             uniprot_field = (row.get("uniprot_ids") or "").strip()
             if not uniprot_field:
                 continue
@@ -176,12 +197,20 @@ def extract_project_uniprot_ids(
             hgnc_id = (row.get("hgnc_id") or "").strip()
             symbol = (row.get("symbol") or "").strip()
 
-            for acc in parse_uniprot_ids_field(uniprot_field):
+            uniprot_accessions = parse_uniprot_ids_field(uniprot_field)
+            if not uniprot_accessions:
+                continue
+
+            for ensembl_id in matching_ensembl_ids:
+                for acc in uniprot_accessions:
+                    if max_accessions is not None and len(unique_accessions) >= max_accessions:
+                        break
+                    unique_accessions.add(acc)
+                    writer.writerow([ensembl_id, hgnc_id, symbol, acc])
+                    n_rows_mapping += 1
+
                 if max_accessions is not None and len(unique_accessions) >= max_accessions:
                     break
-                unique_accessions.add(acc)
-                writer.writerow([ensembl_id, hgnc_id, symbol, acc])
-                n_rows_mapping += 1
 
             if max_accessions is not None and len(unique_accessions) >= max_accessions:
                 logger.info(
@@ -200,6 +229,7 @@ def extract_project_uniprot_ids(
     logger.info("Fichero de mapeo escrito en: %s", mapping_output_path)
 
     return accessions_sorted, n_rows_mapping
+
 
 
 # ---------------------------------------------------------------------------

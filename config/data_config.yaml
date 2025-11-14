@@ -68,7 +68,7 @@ uniprot:
     cc_function,cc_subcellular_location
 
   # Parámetros de la API
-  batch_size: 200            # nº máximo de accessions por petición
+  batch_size: 100            # nº máximo de accessions por petición
   max_retries: 3             # reintentos por lote
   timeout: 60                # timeout en segundos por petición
   sleep_between: 0.34        # pausa entre peticiones (segundos)
