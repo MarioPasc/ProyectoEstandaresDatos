@@ -3,34 +3,44 @@
 gdc:
   base_url: "https://api.gdc.cancer.gov"
 
-  # Cohorte / proyecto
+  # Cohorte / filtros básicos para /files
   project_id: "TCGA-LGG"
   data_category: "Transcriptome Profiling"
   data_type: "Gene Expression Quantification"
-  workflow_type: "STAR - Counts"   # o el workflow concreto que hayáis elegido
+  workflow_type: "STAR - Counts"
 
-  # 1) Manifest tipo GDC Data Transfer Tool (5 columnas estándar)
+  # 1) Manifest tipo GDC Data Transfer Tool
   fields: "file_id,file_name,md5sum,file_size,state"
   manifest_output: "data/gdc_manifest_tcga_lgg.tsv"
 
-  # 2) Metadatos fichero–caso–muestra para explorar relaciones internas de GDC
+  # 2) Metadatos fichero–caso–muestra
   file_metadata_fields: >
     file_id,file_name,cases.case_id,cases.submitter_id,
     cases.samples.sample_type,cases.project.project_id
   file_metadata_output: "data/gdc_file_metadata_tcga_lgg.tsv"
 
-  # 3) Tabla de genes mínima para enlazar con HGNC
-  #    Lista pequeña de genes “ejemplo” relevantes en gliomas
+  # 3) Tabla mínima de genes "de ejemplo" vía /genes (puedes mantenerla o dejarla vacía)
   gene_symbols:
-    - "TP53"
-    - "IDH1"
-    - "IDH2"
-    - "ATRX"
+    #- "TP53"
+    #- "IDH1"
+    #- "IDH2"
+    #- "ATRX"
   genes_output: "data/gdc_genes_tcga_lgg_example.tsv"
+
+  # 4) Nueva configuración específica para descargas RNA-seq STAR-Counts
+  rnaseq:
+    download_enabled: true          # poner a false si no quieres descargar nada
+    max_files: 5                    # N máximo de ficheros a descargar desde el manifest
+    output_dir: "data/gdc/star_counts"   # directorio donde se guardan los .gz
+    overwrite_existing: false       # si false, no re-descarga si el fichero ya existe
+    decompress_downloads: false     # si true, crea versión descomprimida junto al .gz
+    gene_table_output: "data/gdc_genes_tcga_lgg.tsv"  # lista de genes del proyecto
+    gene_id_column_index: 0         # índice (0-based) de la columna con Ensembl IDs
+    strip_version: true             # ENSG00000121410.8 -> ENSG00000121410
 
   # Parámetros generales
   page_size: 10000
-  token_path: null          # ruta al token si necesitáis datos protegidos; null para solo open-access
+  token_path: null                  # ruta a token GDC si necesitas datos restringidos
   request_timeout: 120
 
 

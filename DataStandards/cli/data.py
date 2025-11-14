@@ -22,6 +22,7 @@ from DataStandards.data.entrypoints.access_gdc import (
     download_file_metadata,
     fetch_genes_table,
     load_gdc_token,
+    run_rnaseq_download_and_gene_extraction,
 )
 from DataStandards.data.entrypoints.access_hgnc import download_hgnc_complete_set
 from DataStandards.data.entrypoints.access_uniprot import download_uniprot_data as download_uniprot_impl
@@ -63,12 +64,17 @@ def download_gdc_data(config: AppConfig) -> None:
         download_file_metadata(gdc_cfg, token)
         fetch_genes_table(gdc_cfg, token)
         
+        # Descarga RNA-seq y extracción de genes
+        run_rnaseq_download_and_gene_extraction(gdc_cfg, token)
+        
         # Verificar archivos descargados
         logger.info("Verificando archivos descargados...")
         check_gdc_files(
             manifest_path=gdc_cfg.manifest_output,
             file_metadata_path=gdc_cfg.file_metadata_output,
             genes_path=gdc_cfg.genes_output,
+            project_genes_path=gdc_cfg.rnaseq.gene_table_output if gdc_cfg.rnaseq else "data/gdc_genes_tcga_lgg.tsv",
+            star_counts_dir=gdc_cfg.rnaseq.output_dir if gdc_cfg.rnaseq else "data/gdc/star_counts",
         )
         
         logger.info("=== Descarga de GDC completada exitosamente ===")
