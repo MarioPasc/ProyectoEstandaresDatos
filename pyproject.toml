@@ -57,7 +57,8 @@ packages = [
     "DataStandards",
     "DataStandards.cli",
     "DataStandards.data",
-    "DataStandards.data.entrypoints"
+    "DataStandards.data.entrypoints",
+    "DataStandards.utils"
 ]
 [tool.setuptools.package-data]
 medsyn = ["py.typed"]

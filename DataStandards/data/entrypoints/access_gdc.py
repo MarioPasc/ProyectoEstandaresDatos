@@ -20,7 +20,8 @@ from typing import Any, Dict, List
 
 import requests
 
-from DataStandards.data.config import AppConfig, load_app_config, GDCConfig  
+from DataStandards.data.config import AppConfig, load_app_config, GDCConfig
+from DataStandards.utils.check_downloaded_filelength import check_gdc_files
 
 
 logger = logging.getLogger(__name__)
@@ -311,6 +312,7 @@ def main(config_path: str = "data_config.yaml") -> None:
     - Descarga el manifest de expresión para TCGA-LGG.
     - Descarga la tabla de metadatos fichero–caso–muestra.
     - Descarga la tabla mínima de genes para enlazar con HGNC.
+    - Verifica los archivos descargados y muestra estadísticas.
     """
     setup_logging()
     logger.info("Cargando configuración desde: %s", config_path)
@@ -323,6 +325,14 @@ def main(config_path: str = "data_config.yaml") -> None:
     download_manifest(gdc_cfg, token)
     download_file_metadata(gdc_cfg, token)
     fetch_genes_table(gdc_cfg, token)
+    
+    # Verificar archivos descargados
+    logger.info("Verificando archivos descargados...")
+    check_gdc_files(
+        manifest_path=gdc_cfg.manifest_output,
+        file_metadata_path=gdc_cfg.file_metadata_output,
+        genes_path=gdc_cfg.genes_output,
+    )
 
 
 if __name__ == "__main__":

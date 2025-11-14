@@ -25,6 +25,11 @@ from DataStandards.data.entrypoints.access_gdc import (
 )
 from DataStandards.data.entrypoints.access_hgnc import download_hgnc_complete_set
 from DataStandards.data.entrypoints.access_uniprot import download_uniprot_data as download_uniprot_impl
+from DataStandards.utils.check_downloaded_filelength import (
+    check_gdc_files,
+    check_hgnc_files,
+    check_uniprot_files,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -57,6 +62,15 @@ def download_gdc_data(config: AppConfig) -> None:
         download_manifest(gdc_cfg, token)
         download_file_metadata(gdc_cfg, token)
         fetch_genes_table(gdc_cfg, token)
+        
+        # Verificar archivos descargados
+        logger.info("Verificando archivos descargados...")
+        check_gdc_files(
+            manifest_path=gdc_cfg.manifest_output,
+            file_metadata_path=gdc_cfg.file_metadata_output,
+            genes_path=gdc_cfg.genes_output,
+        )
+        
         logger.info("=== Descarga de GDC completada exitosamente ===")
     except Exception as e:
         logger.error(f"Error al descargar datos de GDC: {e}")
@@ -75,6 +89,11 @@ def download_hgnc_data(config: AppConfig) -> None:
     logger.info("=== Iniciando descarga de datos HGNC ===")
     try:
         download_hgnc_complete_set(config.hgnc)
+        
+        # Verificar archivo descargado
+        logger.info("Verificando archivo descargado...")
+        check_hgnc_files(config.hgnc.output_path)
+        
         logger.info("=== Descarga de HGNC completada exitosamente ===")
     except Exception as e:
         logger.error(f"Error al descargar datos de HGNC: {e}")
@@ -99,6 +118,11 @@ def download_uniprot_data(config: AppConfig) -> None:
     
     try:
         download_uniprot_impl(config.uniprot)
+        
+        # Verificar archivo descargado
+        logger.info("Verificando archivo descargado...")
+        check_uniprot_files(config.uniprot.output_path)
+        
         logger.info("=== Descarga de UniProt completada exitosamente ===")
     except Exception as e:
         logger.error(f"Error al descargar datos de UniProt: {e}")
