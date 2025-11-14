@@ -29,7 +29,7 @@ from DataStandards.data.entrypoints import access_uniprot
 from DataStandards.utils.check_downloaded_filelength import (
     check_gdc_files,
     check_hgnc_files,
-    # check_uniprot_files,  # Temporalmente deshabilitado
+    check_uniprot_files,
 )
 
 
@@ -137,9 +137,12 @@ def download_uniprot_data(config: AppConfig) -> None:
         # Llamar a la función run() del módulo access_uniprot
         access_uniprot.run(config)
         
-        # TODO: Verificar archivos descargados cuando esté implementado
-        # logger.info("Verificando archivos descargados...")
-        # check_uniprot_files(config.uniprot.metadata_output)
+        # Verificar archivos descargados
+        logger.info("Verificando archivos descargados...")
+        check_uniprot_files(
+            mapping_path=config.uniprot.mapping_output,
+            metadata_path=config.uniprot.metadata_output,
+        )
         
         logger.info("=== Descarga de UniProt completada exitosamente ===")
     except FileNotFoundError as e:

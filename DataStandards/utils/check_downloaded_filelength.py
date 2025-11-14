@@ -451,45 +451,165 @@ def check_hgnc_files(hgnc_path: str | Path) -> Dict[str, Any]:
     return stats
 
 
-def check_uniprot_files(uniprot_path: str | Path) -> Dict[str, Any]:
+def check_uniprot_files(
+    mapping_path: str | Path,
+    metadata_path: str | Path,
+) -> Dict[str, Dict[str, Any]]:
     """
-    Verifica y analiza el archivo descargado de UniProt.
+    Verifica y analiza los archivos descargados de UniProt.
+
+    Esta función analiza los dos archivos generados por el entrypoint de UniProt:
+    1. Mapping: mapeo entre Ensembl gene IDs, HGNC IDs, symbols y UniProt IDs
+    2. Metadata: metadatos completos de proteínas desde la API de UniProt
 
     Parameters
     ----------
-    uniprot_path : str | Path
-        Ruta al archivo UniProt TSV.
+    mapping_path : str | Path
+        Ruta al archivo de mapeo UniProt TSV (uniprot_mapping_tcga_lgg.tsv).
+    metadata_path : str | Path
+        Ruta al archivo de metadatos UniProt TSV (uniprot_metadata_tcga_lgg.tsv).
 
     Returns
     -------
-    Dict[str, Any]
-        Diccionario con las estadísticas del archivo UniProt.
+    Dict[str, Dict[str, Any]]
+        Diccionario con las estadísticas de cada archivo:
+        - mapping: estadísticas del archivo de mapeo
+        - metadata: estadísticas del archivo de metadatos
     """
-    logger.info("=== Verificando archivo descargado de UniProt ===")
+    logger.info("=== Verificando archivos descargados de UniProt ===")
     
-    uniprot_path = Path(uniprot_path)
-    stats = analyze_tsv_file(uniprot_path)
+    mapping_path = Path(mapping_path)
+    metadata_path = Path(metadata_path)
+    
+    results = {
+        "mapping": analyze_tsv_file(mapping_path),
+        "metadata": analyze_tsv_file(metadata_path),
+    }
     
     # Imprimir resumen
     print("\n" + "=" * 80)
-    print("RESUMEN DE ARCHIVO DESCARGADO DE UNIPROT")
+    print("RESUMEN DE ARCHIVOS DESCARGADOS DE UNIPROT")
     print("=" * 80)
-    print(f"\n📄 UNIPROT DATA")
-    print(f"   Archivo: {stats['file_name']}")
     
-    if stats["exists"]:
+    # Archivo de mapeo
+    mapping_stats = results["mapping"]
+    print(f"\n📄 UNIPROT MAPPING (Ensembl ↔ HGNC ↔ UniProt)")
+    print(f"   Archivo: {mapping_stats['file_name']}")
+    
+    if mapping_stats["exists"]:
         print(f"   ✓ Existe: Sí")
-        print(f"   📊 Tamaño: {stats['size_kb']} KB ({stats['size_mb']} MB)")
-        print(f"   📈 Filas: {stats['num_rows']}")
-        print(f"   📋 Columnas: {stats['num_columns']}")
+        print(f"   📊 Tamaño: {mapping_stats['size_kb']} KB ({mapping_stats['size_mb']} MB)")
+        print(f"   📈 Filas: {mapping_stats['num_rows']}")
+        print(f"   📋 Columnas: {mapping_stats['num_columns']}")
         
-        if stats["columns"]:
-            print(f"   🔤 Nombres de columnas: {', '.join(stats['columns'])}")
+        if mapping_stats["columns"]:
+            print(f"   🔤 Nombres de columnas: {', '.join(mapping_stats['columns'])}")
+    else:
+        print(f"   ✗ Existe: No")
+    
+    # Archivo de metadatos
+    metadata_stats = results["metadata"]
+    print(f"\n📄 UNIPROT METADATA (Anotación proteica)")
+    print(f"   Archivo: {metadata_stats['file_name']}")
+    
+    if metadata_stats["exists"]:
+        print(f"   ✓ Existe: Sí")
+        print(f"   📊 Tamaño: {metadata_stats['size_kb']} KB ({metadata_stats['size_mb']} MB)")
+        print(f"   📈 Filas: {metadata_stats['num_rows']}")
+        print(f"   📋 Columnas: {metadata_stats['num_columns']}")
+        
+        if metadata_stats["columns"] and len(metadata_stats["columns"]) <= 10:
+            print(f"   🔤 Nombres de columnas: {', '.join(metadata_stats['columns'])}")
+        elif metadata_stats["columns"]:
+            print(f"   🔤 Primeras 10 columnas: {', '.join(metadata_stats['columns'][:10])}...")
     else:
         print(f"   ✗ Existe: No")
     
     print("\n" + "=" * 80)
     
-    logger.info("=== Verificación de archivo UniProt completada ===")
+    # Validaciones adicionales
+    _validate_uniprot_files(results)
     
-    return stats
+    logger.info("=== Verificación de archivos UniProt completada ===")
+    
+    return results
+
+
+def _validate_uniprot_files(results: Dict[str, Dict[str, Any]]) -> None:
+    """
+    Valida que los archivos UniProt cumplan con las expectativas mínimas.
+
+    Parameters
+    ----------
+    results : Dict[str, Dict[str, Any]]
+        Resultados del análisis de archivos UniProt.
+    """
+    print("\n🔍 VALIDACIONES:")
+    
+    # Validar mapping
+    mapping = results["mapping"]
+    if mapping["exists"]:
+        expected_mapping_cols = ["ensembl_gene_id", "hgnc_id", "symbol", "uniprot_id"]
+        has_expected_cols = all(col in mapping["columns"] for col in expected_mapping_cols)
+        
+        if has_expected_cols:
+            print(f"   ✓ Mapping tiene las columnas esperadas (ensembl_gene_id, hgnc_id, symbol, uniprot_id)")
+        else:
+            print(f"   ⚠ Mapping no tiene todas las columnas esperadas")
+            print(f"     Esperadas: {expected_mapping_cols}")
+            print(f"     Encontradas: {mapping['columns']}")
+        
+        if mapping["num_rows"] > 0:
+            print(f"   ✓ Mapping contiene {mapping['num_rows']} mapeos gen-proteína")
+        else:
+            print(f"   ⚠ Mapping no contiene registros")
+    else:
+        print(f"   ✗ Mapping no existe")
+    
+    # Validar metadata
+    metadata = results["metadata"]
+    if metadata["exists"]:
+        # Verificar columnas mínimas esperadas
+        expected_metadata_cols = ["Entry", "Entry Name"]  # columnas básicas de UniProt
+        has_expected_cols = any(
+            col in metadata["columns"] 
+            for col in ["Entry", "accession", "Entry Name", "id"]
+        )
+        
+        if has_expected_cols:
+            print(f"   ✓ Metadata tiene columnas de identificación de UniProt")
+        else:
+            print(f"   ⚠ Metadata no parece tener columnas estándar de UniProt")
+        
+        if metadata["num_rows"] > 0:
+            print(f"   ✓ Metadata contiene {metadata['num_rows']} proteínas anotadas")
+        else:
+            print(f"   ⚠ Metadata no contiene registros")
+        
+        # Verificar que tenga información funcional
+        has_functional_info = any(
+            term in col.lower() 
+            for col in metadata["columns"] 
+            for term in ["function", "go", "protein", "gene"]
+        )
+        if has_functional_info:
+            print(f"   ✓ Metadata contiene información funcional de proteínas")
+        else:
+            print(f"   ⚠ Metadata no parece contener información funcional")
+    else:
+        print(f"   ✗ Metadata no existe")
+    
+    # Validar consistencia entre archivos
+    if mapping["exists"] and metadata["exists"]:
+        # El número de filas en metadata debería ser <= que en mapping
+        # (puede haber múltiples mapeos para una misma proteína)
+        if metadata["num_rows"] > 0 and mapping["num_rows"] > 0:
+            if metadata["num_rows"] <= mapping["num_rows"]:
+                print(f"   ✓ Consistencia: Metadata ({metadata['num_rows']} proteínas) <= Mapping ({mapping['num_rows']} mapeos)")
+            else:
+                print(f"   ⚠ Advertencia: Metadata ({metadata['num_rows']}) tiene más registros que Mapping ({mapping['num_rows']})")
+        
+        if metadata["num_rows"] == 0 and mapping["num_rows"] > 0:
+            print(f"   ⚠ Inconsistencia: Mapping tiene {mapping['num_rows']} registros pero Metadata está vacío")
+        elif metadata["num_rows"] > 0 and mapping["num_rows"] == 0:
+            print(f"   ⚠ Inconsistencia: Metadata tiene {metadata['num_rows']} registros pero Mapping está vacío")
