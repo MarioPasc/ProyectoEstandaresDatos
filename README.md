@@ -67,12 +67,9 @@ pip install -e .
 > **CRÍTICO**: Debes personalizar las rutas de salida antes de ejecutar descargas.
 
 ```bash
-# Copiar tu archivo de configuración (reemplaza 'mario' por tu nombre)
-cp config/config_files/mario_data_config.yaml config/data_config.yaml
-
 # Editar el archivo y cambiar TODAS las rutas que contienen /home/mpascual
 # por tu ruta personal (ver config/README.md para detalles)
-nano config/data_config.yaml  # o usa tu editor preferido
+nano config/data/{tu nombre}_data_config.yaml  # o usa tu editor preferido
 ```
 
 **Rutas que debes cambiar** (6 en total):
