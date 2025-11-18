@@ -632,7 +632,20 @@ Mantener las colecciones **separadas** y unirlas mediante consultas MongoDB:
   "symbol": "TSPAN6",
   "ensembl_gene_id": "ENSG00000000003",  // ← CLAVE DE RELACIÓN
   "uniprot_ids": ["O43657"],
-  "projects": ["TCGA-LGG"]  // Array inverso para consultas eficientes
+  "projects": {
+    "TCGA-LGG": {
+      "case_ids": [
+        "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy"
+      ],
+      "n_cases": 2,
+      "file_ids": [
+        "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+      ]
+    }
+    // Otros proyectos (TCGA-GBM, etc.) se añadirían aquí
+  }
 }
 ```
 
@@ -641,19 +654,40 @@ Mantener las colecciones **separadas** y unirlas mediante consultas MongoDB:
 - ✅ Evita redundancia (no duplica 60,660 IDs en cada proyecto)
 - ✅ Facilita mantenimiento (actualizaciones en HGNC no afectan GDC)
 - ✅ Permite queries bidireccionales eficientes
+- ✅ **Granularidad por caso**: Acceso directo a casos específicos donde se expresa el gen
+- ✅ **Trazabilidad completa**: Enlaces directos a `case_id` y `file_id` en GDC
+- ✅ **Multi-proyecto**: Estructura escalable para múltiples proyectos TCGA
 
 #### Consultas de Ejemplo para Unir Colecciones
 
-**1. Obtener genes del proyecto TCGA-LGG:**
+**1. Obtener genes expresados en el proyecto TCGA-LGG:**
 ```javascript
-db.hgnc.find({ "projects": "TCGA-LGG" })
+db.hgnc.find({ "projects.TCGA-LGG": { $exists: true } })
 ```
 
-**2. Pipeline de agregación GDC → HGNC → UniProt:**
+**2. Obtener genes expresados en un caso específico:**
+```javascript
+db.hgnc.find({ 
+  "projects.TCGA-LGG.case_ids": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" 
+})
+```
+
+**3. Contar cuántos casos expresan un gen específico:**
+```javascript
+db.hgnc.findOne(
+  { "symbol": "TP53" },
+  { "projects.TCGA-LGG.n_cases": 1 }
+)
+```
+
+**4. Pipeline de agregación GDC → HGNC → UniProt con casos específicos:**
 ```javascript
 db.hgnc.aggregate([
-  // Filtrar genes del proyecto
-  { $match: { "projects": "TCGA-LGG" } },
+  // Filtrar genes del proyecto con al menos 100 casos
+  { $match: { 
+      "projects.TCGA-LGG": { $exists: true },
+      "projects.TCGA-LGG.n_cases": { $gte: 100 }
+  }},
   
   // Unir con proteínas UniProt
   { $lookup: {
@@ -668,24 +702,154 @@ db.hgnc.aggregate([
       gene_symbol: "$symbol",
       hgnc_id: 1,
       ensembl_gene_id: 1,
+      n_cases: "$projects.TCGA-LGG.n_cases",
+      example_case_ids: { $slice: ["$projects.TCGA-LGG.case_ids", 5] },
       n_proteins: { $size: "$proteins" },
       protein_names: "$proteins.protein_name"
   }}
 ])
 ```
 
-**3. Buscar casos GDC con genes específicos (conceptual):**
+**5. Buscar información completa de un caso desde HGNC:**
 ```javascript
-// Paso 1: Obtener ensembl_gene_id de un gen
-const gene = db.hgnc.findOne({ "symbol": "TP53" })
+// Paso 1: Obtener genes expresados en un caso específico
+const caseId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx";
+const genes = db.hgnc.find({ 
+  "projects.TCGA-LGG.case_ids": caseId 
+}, {
+  symbol: 1,
+  ensembl_gene_id: 1,
+  hgnc_id: 1
+});
 
-// Paso 2: Buscar en GDC (requiere colección de expresión génica detallada)
-// Nota: Esto requiere la implementación futura descrita en "Ampliaciones Futuras"
-db.gene_expression.find({
-  "gene_id": gene.ensembl_gene_id,
-  "project_id": "TCGA-LGG"
+// Paso 2: Buscar información del caso en GDC
+db.gdc_cases.aggregate([
+  { $match: { "_id": "TCGA-LGG" } },
+  { $unwind: "$cases" },
+  { $match: { "cases.case_id": caseId } },
+  { $project: {
+      case_id: "$cases.case_id",
+      submitter_id: "$cases.submitter_id",
+      n_files: { $size: "$cases.files" },
+      files: "$cases.files"
+  }}
+])
+```
+
+**6. Genes comunes entre múltiples casos:**
+```javascript
+// Encontrar genes expresados en al menos 2 casos específicos
+const targetCases = [
+  "case-uuid-1",
+  "case-uuid-2"
+];
+
+db.hgnc.find({
+  "projects.TCGA-LGG.case_ids": { $all: targetCases }
+}, {
+  symbol: 1,
+  ensembl_gene_id: 1,
+  "projects.TCGA-LGG.n_cases": 1
 })
 ```
+
+**7. Estadísticas de expresión génica por proyecto:**
+```javascript
+db.hgnc.aggregate([
+  { $match: { "projects.TCGA-LGG": { $exists: true } } },
+  { $group: {
+      _id: null,
+      total_genes: { $sum: 1 },
+      avg_cases_per_gene: { $avg: "$projects.TCGA-LGG.n_cases" },
+      max_cases: { $max: "$projects.TCGA-LGG.n_cases" },
+      min_cases: { $min: "$projects.TCGA-LGG.n_cases" }
+  }}
+])
+```
+
+### Índices Recomendados para Joins Eficientes
+
+```javascript
+// Colección GDC
+db.gdc_cases.createIndex({ "project_id": 1 })
+db.gdc_cases.createIndex({ "cases.case_id": 1 })
+db.gdc_cases.createIndex({ "cases.submitter_id": 1 })
+db.gdc_cases.createIndex({ "cases.files.file_id": 1 })
+
+// Colección HGNC (futura)
+db.hgnc.createIndex({ "ensembl_gene_id": 1 })
+db.hgnc.createIndex({ "symbol": 1 })
+db.hgnc.createIndex({ "projects.TCGA-LGG.case_ids": 1 })
+db.hgnc.createIndex({ "projects.TCGA-LGG.file_ids": 1 })
+db.hgnc.createIndex({ "projects.TCGA-LGG.n_cases": 1 })
+db.hgnc.createIndex({ "uniprot_ids": 1 })
+
+// Índice compuesto para búsquedas multi-proyecto (si se añaden más proyectos)
+db.hgnc.createIndex({ 
+  "projects.TCGA-LGG.n_cases": 1,
+  "projects.TCGA-GBM.n_cases": 1 
+})
+
+// Colección de expresión génica detallada (futura)
+db.gene_expression.createIndex({ "file_id": 1, "ensembl_gene_id": 1 })
+db.gene_expression.createIndex({ "project_id": 1, "ensembl_gene_id": 1 })
+db.gene_expression.createIndex({ "case_id": 1 })
+```
+
+### Construcción de la Colección HGNC desde GDC
+
+Para poblar la colección HGNC con la estructura de proyectos propuesta, se necesitará:
+
+**1. Extraer el mapeo `ensembl_gene_id` → `case_ids` + `file_ids` desde los ficheros STAR-Counts:**
+
+```python
+# Pseudocódigo del proceso
+gene_to_cases = {}
+
+for case in gdc_document["cases"]:
+    case_id = case["case_id"]
+    
+    for file in case["files"]:
+        file_id = file["file_id"]
+        star_counts_path = f"{star_counts_dir}/{file['file_name']}"
+        
+        # Leer genes expresados en el fichero
+        df = pd.read_csv(star_counts_path, sep='\t')
+        
+        for _, row in df.iterrows():
+            ensembl_id = row["gene_id"].split(".")[0]  # Sin versión
+            
+            if ensembl_id not in gene_to_cases:
+                gene_to_cases[ensembl_id] = {
+                    "case_ids": set(),
+                    "file_ids": set()
+                }
+            
+            gene_to_cases[ensembl_id]["case_ids"].add(case_id)
+            gene_to_cases[ensembl_id]["file_ids"].add(file_id)
+```
+
+**2. Combinar con metadatos HGNC:**
+
+```python
+# Para cada gen en HGNC
+hgnc_doc = {
+    "_id": hgnc_id,
+    "hgnc_id": hgnc_id,
+    "symbol": symbol,
+    "ensembl_gene_id": ensembl_id,
+    "uniprot_ids": uniprot_ids,
+    "projects": {
+        "TCGA-LGG": {
+            "case_ids": list(gene_to_cases[ensembl_id]["case_ids"]),
+            "n_cases": len(gene_to_cases[ensembl_id]["case_ids"]),
+            "file_ids": list(gene_to_cases[ensembl_id]["file_ids"])
+        }
+    }
+}
+```
+
+**Nota:** Este proceso será implementado en el importador HGNC (próxima tarea) que procesará tanto los datos HGNC como los ficheros STAR-Counts de GDC para construir las referencias cruzadas.
 
 ---
 
