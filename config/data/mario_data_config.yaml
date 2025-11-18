@@ -79,3 +79,15 @@ uniprot:
   # Ficheros de salida
   mapping_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/uniprot/uniprot_mapping_tcga_lgg.tsv"
   metadata_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/uniprot/uniprot_metadata_tcga_lgg.tsv"
+
+# Configuración de MongoDB para importadores (Issue T1)
+# NOTA: La configuración detallada de MongoDB está en config/db_mongo/mario_mongodb_config.yaml
+# Para importar datos GDC a MongoDB, usa:
+#   datastandards-import-gdc --config config/db_mongo/mario_mongodb_config.yaml
+mongodb_T1:
+  mongo_uri: "mongodb://localhost:27017/"
+  database_name: "estandares_db"
+  collections:
+    genes: "genes"           # Colección de genes (HGNC)
+    proteins: "proteins"     # Colección de proteínas (UniProt)
+    gdc_cases: "gdc_cases"   # Colección de casos GDC (Issue T1)
