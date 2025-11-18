@@ -47,6 +47,12 @@ Ejemplos de uso:
   # Modo silencioso (sin mensajes detallados)
   %(prog)s --config config/db_mongo/mario_mongodb_config.yaml --quiet
 
+  # Guardar colección como JSON en ruta específica
+  %(prog)s --config config/db_mongo/mario_mongodb_config.yaml --save-json /ruta/export.json
+
+  # No guardar como JSON (ignorar configuración YAML)
+  %(prog)s --config config/db_mongo/mario_mongodb_config.yaml --no-save-json
+
 Campos clave en el documento MongoDB resultante:
   - project_id: ID del proyecto (usado para joins)
   - cases[].case_id: ID del caso (usado para joins)
@@ -87,6 +93,19 @@ Campos clave en el documento MongoDB resultante:
         help='Modo silencioso (sin mensajes detallados)'
     )
 
+    parser.add_argument(
+        '--save-json',
+        type=str,
+        default=None,
+        help='Ruta donde guardar la colección como JSON después de importar (sobrescribe configuración YAML)'
+    )
+
+    parser.add_argument(
+        '--no-save-json',
+        action='store_true',
+        help='No guardar la colección como JSON (sobrescribe configuración YAML)'
+    )
+
     return parser.parse_args()
 
 
@@ -123,6 +142,12 @@ def main():
     if args.quiet:
         config.options.verbose = False
 
+    # Manejo de save_json
+    if args.no_save_json:
+        config.options.save_as_json = None
+    elif args.save_json is not None:
+        config.options.save_as_json = args.save_json
+
     # Ejecutar importación
     try:
         run_import(
@@ -147,6 +172,7 @@ def main():
             process_expression=config.options.process_expression,
             max_files=config.options.max_files_to_process,
             drop_collection=config.options.drop_collection,
+            save_as_json=config.options.save_as_json,
             verbose=config.options.verbose
         )
     except FileNotFoundError as e:

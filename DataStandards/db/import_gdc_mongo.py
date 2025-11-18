@@ -10,12 +10,14 @@ Issue: T1 - GDC MongoDB Import Task
 
 import os
 import sys
+import json
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 
 import pandas as pd
 import numpy as np
 from pymongo import MongoClient
+from bson import ObjectId
 
 
 def load_manifest(manifest_path: str) -> pd.DataFrame:
@@ -250,12 +252,101 @@ def build_gdc_document(
     return document
 
 
+def convert_objectid_to_str(obj: Any) -> Any:
+    """
+    Convierte ObjectId de BSON a string para serialización JSON.
+
+    Args:
+        obj: Objeto que puede contener ObjectIds
+
+    Returns:
+        Objeto con ObjectIds convertidos a strings
+    """
+    if isinstance(obj, ObjectId):
+        return str(obj)
+    elif isinstance(obj, dict):
+        return {k: convert_objectid_to_str(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [convert_objectid_to_str(item) for item in obj]
+    else:
+        return obj
+
+
+def export_collection_to_json(
+    mongo_uri: str,
+    database_name: str,
+    collection_name: str,
+    output_path: str,
+    verbose: bool = True
+) -> bool:
+    """
+    Exporta la colección MongoDB a un archivo JSON.
+
+    Args:
+        mongo_uri: URI de conexión a MongoDB
+        database_name: Nombre de la base de datos
+        collection_name: Nombre de la colección
+        output_path: Ruta donde guardar el archivo JSON
+        verbose: Si True, muestra información detallada
+
+    Returns:
+        True si la exportación fue exitosa, False en caso contrario
+    """
+    try:
+        # Conectar a MongoDB
+        client = MongoClient(mongo_uri)
+        db = client[database_name]
+        collection = db[collection_name]
+
+        if verbose:
+            print(f"\n[Exportación JSON] Recuperando documentos de MongoDB...")
+
+        # Obtener todos los documentos de la colección
+        documents = list(collection.find())
+
+        if not documents:
+            if verbose:
+                print(f"[Exportación JSON] Advertencia: La colección '{collection_name}' está vacía")
+            return False
+
+        if verbose:
+            print(f"[Exportación JSON] Recuperados {len(documents)} documento(s)")
+
+        # Convertir ObjectIds a strings para serialización JSON
+        documents_serializable = convert_objectid_to_str(documents)
+
+        # Crear directorio si no existe
+        output_file = Path(output_path)
+        output_file.parent.mkdir(parents=True, exist_ok=True)
+
+        # Guardar como JSON
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(documents_serializable, f, indent=2, ensure_ascii=False)
+
+        if verbose:
+            file_size = output_file.stat().st_size
+            file_size_mb = file_size / (1024 * 1024)
+            print(f"[Exportación JSON] Colección exportada exitosamente")
+            print(f"  - Archivo: {output_path}")
+            print(f"  - Tamaño: {file_size_mb:.2f} MB ({file_size:,} bytes)")
+            print(f"  - Documentos: {len(documents)}")
+
+        client.close()
+        return True
+
+    except Exception as e:
+        if verbose:
+            print(f"[Exportación JSON] Error durante la exportación: {e}")
+        return False
+
+
 def insert_to_mongo(
     document: Dict[str, Any],
     mongo_uri: str,
     database_name: str,
     collection_name: str,
     drop_collection: bool = False,
+    save_as_json: Optional[str] = None,
     verbose: bool = True
 ) -> None:
     """
@@ -267,6 +358,7 @@ def insert_to_mongo(
         database_name: Nombre de la base de datos
         collection_name: Nombre de la colección
         drop_collection: Si True, elimina la colección antes de insertar
+        save_as_json: Ruta donde guardar la colección como JSON (None = no guardar)
         verbose: Si True, muestra información detallada
     """
     try:
@@ -303,6 +395,16 @@ def insert_to_mongo(
 
         client.close()
 
+        # Exportar a JSON si se especificó
+        if save_as_json:
+            export_collection_to_json(
+                mongo_uri=mongo_uri,
+                database_name=database_name,
+                collection_name=collection_name,
+                output_path=save_as_json,
+                verbose=verbose
+            )
+
     except Exception as e:
         print(f"Error durante la inserción en MongoDB: {e}")
         sys.exit(1)
@@ -323,6 +425,7 @@ def run_import(
     process_expression: bool = False,
     max_files: Optional[int] = None,
     drop_collection: bool = False,
+    save_as_json: Optional[str] = None,
     verbose: bool = True
 ) -> None:
     """
@@ -378,6 +481,7 @@ def run_import(
         database_name=database_name,
         collection_name=collection_name,
         drop_collection=drop_collection,
+        save_as_json=save_as_json,
         verbose=verbose
     )
 
