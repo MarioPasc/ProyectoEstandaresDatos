@@ -577,12 +577,125 @@ pip install -e .
 
 ---
 
+## Relación con HGNC
+
+### Campo de Vinculación: ensembl_gene_id
+
+La relación entre las colecciones GDC y HGNC se establece a través del identificador **`ensembl_gene_id`**, que actúa como clave foránea natural entre ambas bases de datos.
+
+#### Flujo de Datos
+
+```
+GDC (STAR-Counts)
+    ↓
+gene_id (con versión: ENSG00000000003.15)
+    ↓
+ensembl_gene_id (sin versión: ENSG00000000003)
+    ↓
+HGNC (genes estandarizados)
+    ↓
+hgnc_id, symbol, uniprot_ids
+```
+
+### Estrategia de Vinculación Recomendada
+
+Mantener las colecciones **separadas** y unirlas mediante consultas MongoDB:
+
+**Colección GDC** (estructura actual sin cambios):
+```json
+{
+  "_id": "TCGA-LGG",
+  "project_id": "TCGA-LGG",
+  "disease_type": "Brain Lower Grade Glioma",
+  "cases": [
+    {
+      "case_id": "xxx",
+      "files": [
+        {
+          "file_id": "yyy",
+          "expression_summary": {
+            "n_genes": 60660
+            // Referencia implícita a genes por ensembl_gene_id
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Colección HGNC** (futura):
+```json
+{
+  "_id": "HGNC:5",
+  "hgnc_id": "HGNC:5",
+  "symbol": "TSPAN6",
+  "ensembl_gene_id": "ENSG00000000003",  // ← CLAVE DE RELACIÓN
+  "uniprot_ids": ["O43657"],
+  "projects": ["TCGA-LGG"]  // Array inverso para consultas eficientes
+}
+```
+
+**Ventajas de esta estrategia:**
+- ✅ Sigue principios de diseño MongoDB
+- ✅ Evita redundancia (no duplica 60,660 IDs en cada proyecto)
+- ✅ Facilita mantenimiento (actualizaciones en HGNC no afectan GDC)
+- ✅ Permite queries bidireccionales eficientes
+
+#### Consultas de Ejemplo para Unir Colecciones
+
+**1. Obtener genes del proyecto TCGA-LGG:**
+```javascript
+db.hgnc.find({ "projects": "TCGA-LGG" })
+```
+
+**2. Pipeline de agregación GDC → HGNC → UniProt:**
+```javascript
+db.hgnc.aggregate([
+  // Filtrar genes del proyecto
+  { $match: { "projects": "TCGA-LGG" } },
+  
+  // Unir con proteínas UniProt
+  { $lookup: {
+      from: "uniprot",
+      localField: "uniprot_ids",
+      foreignField: "uniprot_id",
+      as: "proteins"
+  }},
+  
+  // Proyectar campos relevantes
+  { $project: {
+      gene_symbol: "$symbol",
+      hgnc_id: 1,
+      ensembl_gene_id: 1,
+      n_proteins: { $size: "$proteins" },
+      protein_names: "$proteins.protein_name"
+  }}
+])
+```
+
+**3. Buscar casos GDC con genes específicos (conceptual):**
+```javascript
+// Paso 1: Obtener ensembl_gene_id de un gen
+const gene = db.hgnc.findOne({ "symbol": "TP53" })
+
+// Paso 2: Buscar en GDC (requiere colección de expresión génica detallada)
+// Nota: Esto requiere la implementación futura descrita en "Ampliaciones Futuras"
+db.gene_expression.find({
+  "gene_id": gene.ensembl_gene_id,
+  "project_id": "TCGA-LGG"
+})
+```
+
+---
+
 ## Referencias
 
 - **Issue T1:** Importador MongoDB para colección GDC
 - **Documentación GDC API:** https://docs.gdc.cancer.gov/API/
 - **PyMongo Documentation:** https://pymongo.readthedocs.io/
 - **MongoDB Aggregation:** https://www.mongodb.com/docs/manual/aggregation/
+- **HGNC Database:** https://www.genenames.org/
 
 ---
 
