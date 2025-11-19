@@ -172,6 +172,51 @@ class GDCMongoAppConfig:
 
 
 @dataclass
+class UniProtProjectMetadata:
+    """Metadata para un proyecto UniProt individual."""
+
+    project_id: str
+
+
+@dataclass
+class UniProtMongoDataConfig:
+    """Configuración de rutas de datos UniProt para importación a MongoDB.
+
+    Multi-project support: Configuration for importing multiple UniProt projects
+    into a single MongoDB document with uniprot_entries array structure.
+    """
+
+    # Base directory where project-specific data folders are located
+    base_data_dir: str
+
+    # List of projects to import
+    projects: List[UniProtProjectMetadata]
+
+    # Filename patterns (relative to {base_data_dir}/{project_id}/)
+    mapping_filename: str = "uniprot_mapping_{project_id_lower}.tsv"
+    metadata_filename: str = "uniprot_metadata_{project_id_lower}.tsv"
+
+
+@dataclass
+class UniProtMongoOptionsConfig:
+    """Opciones de procesamiento para la importación UniProt a MongoDB."""
+
+    drop_collection: bool = False
+    verbose: bool = True
+    save_as_json: Optional[str] = None
+    no_insert_mongo: bool = False  # Only generate JSON, don't insert to MongoDB
+
+
+@dataclass
+class UniProtMongoAppConfig:
+    """Configuración completa para importación UniProt a MongoDB."""
+
+    mongodb: MongoDBConfig
+    uniprot: UniProtMongoDataConfig
+    options: UniProtMongoOptionsConfig = field(default_factory=UniProtMongoOptionsConfig)
+
+
+@dataclass
 class AppConfig:
     """Configuración completa de la aplicación (GDC + HGNC + UniProt)."""
 
@@ -267,3 +312,49 @@ def load_gdc_mongo_config(config_path: str | Path) -> GDCMongoAppConfig:
     options_cfg = GDCMongoOptionsConfig(**options_raw)
 
     return GDCMongoAppConfig(mongodb=mongodb_cfg, gdc=gdc_cfg, options=options_cfg)
+
+
+def load_uniprot_mongo_config(config_path: str | Path) -> UniProtMongoAppConfig:
+    """
+    Carga la configuración de importación UniProt a MongoDB desde un fichero YAML
+    y construye las dataclasses correspondientes.
+
+    Multi-project support: Parses projects list from YAML and creates
+    UniProtProjectMetadata objects for each project.
+    """
+    path = Path(config_path).expanduser().resolve()
+    raw: Dict[str, Any] = _load_yaml(path)
+
+    # Cargar configuración MongoDB
+    mongodb_raw: Dict[str, Any] = raw.get("mongodb", {})
+    # Override collection_name for UniProt
+    mongodb_raw["collection_name"] = "uniprot_entries"
+    mongodb_cfg = MongoDBConfig(**mongodb_raw)
+
+    # Cargar configuración de datos UniProt
+    uniprot_raw: Dict[str, Any] = raw.get("uniprot", {})
+
+    # Parse projects list
+    projects_raw: List[Dict[str, Any]] = uniprot_raw.get("projects", [])
+    projects = [UniProtProjectMetadata(**proj) for proj in projects_raw]
+
+    # Create UniProtMongoDataConfig with parsed projects
+    uniprot_cfg = UniProtMongoDataConfig(
+        base_data_dir=uniprot_raw["base_data_dir"],
+        projects=projects,
+        mapping_filename=uniprot_raw.get("mapping_filename", "uniprot_mapping_{project_id_lower}.tsv"),
+        metadata_filename=uniprot_raw.get("metadata_filename", "uniprot_metadata_{project_id_lower}.tsv"),
+    )
+
+    # Cargar opciones (solo las relevantes para UniProt)
+    options_raw: Dict[str, Any] = raw.get("options", {})
+    # Filter only UniProt-relevant options
+    uniprot_options = {
+        "drop_collection": options_raw.get("drop_collection", False),
+        "verbose": options_raw.get("verbose", True),
+        "save_as_json": options_raw.get("save_as_json"),
+        "no_insert_mongo": options_raw.get("no_insert_mongo", False),
+    }
+    options_cfg = UniProtMongoOptionsConfig(**uniprot_options)
+
+    return UniProtMongoAppConfig(mongodb=mongodb_cfg, uniprot=uniprot_cfg, options=options_cfg)
