@@ -78,7 +78,7 @@ def load_mapping_file(mapping_path):
     """
     try:
         df_map = pd.read_csv(mapping_path, sep='\t')
-        df_map = df_map.fillna('')
+        df_map = df_map.fillna(None)
     except FileNotFoundError:
         print(f"Error: No se encuentra el fichero de mapeo de UniProt en {mapping_path}")
         print("Asegúrate de haberlo descargado con 'datastandards-download --source uniprot'")
@@ -129,7 +129,7 @@ def main():
         
     print(f"Leyendo fichero TSV de metadata desde {metadata_path}...")
     df_meta = pd.read_csv(metadata_path, sep='\t')
-    df_meta = df_meta.fillna('')
+    df_meta = df_meta.fillna(None)
     print(f"Se han leído {len(df_meta)} filas del fichero de metadata de UniProt.")
 
     # 5. Transformar y preparar operaciones
