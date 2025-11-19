@@ -105,6 +105,51 @@ class UniProtConfig:
     metadata_output: str = "data/uniprot/uniprot_metadata_tcga_lgg.tsv"
 
 @dataclass
+class MongoDBConfig:
+    """Configuración de conexión a MongoDB."""
+
+    mongo_uri: str = "mongodb://localhost:27017/"
+    database_name: str = "estandares_db"
+    collection_name: str = "gdc_cases"
+
+
+@dataclass
+class GDCMongoDataConfig:
+    """Configuración de rutas de datos GDC para importación a MongoDB."""
+
+    manifest_path: str
+    metadata_path: str
+    genes_path: str
+    star_counts_dir: str
+
+    # Información del proyecto
+    project_id: str = "TCGA-LGG"
+    disease_type: str = "Brain Lower Grade Glioma"
+    primary_site: str = "Brain"
+    data_category: str = "Transcriptome Profiling"
+
+
+@dataclass
+class GDCMongoOptionsConfig:
+    """Opciones de procesamiento para la importación GDC a MongoDB."""
+
+    drop_collection: bool = False
+    process_expression: bool = True
+    max_files_to_process: Optional[int] = None
+    verbose: bool = True
+    save_as_json: Optional[str] = None
+
+
+@dataclass
+class GDCMongoAppConfig:
+    """Configuración completa para importación GDC a MongoDB."""
+
+    mongodb: MongoDBConfig
+    gdc: GDCMongoDataConfig
+    options: GDCMongoOptionsConfig = field(default_factory=GDCMongoOptionsConfig)
+
+
+@dataclass
 class AppConfig:
     """Configuración completa de la aplicación (GDC + HGNC + UniProt)."""
 
@@ -161,3 +206,26 @@ def load_app_config(config_path: str | Path) -> AppConfig:
     uniprot_cfg = UniProtConfig(**uniprot_raw) if uniprot_raw else None
 
     return AppConfig(gdc=gdc_cfg, hgnc=hgnc_cfg, uniprot=uniprot_cfg)
+
+
+def load_gdc_mongo_config(config_path: str | Path) -> GDCMongoAppConfig:
+    """
+    Carga la configuración de importación GDC a MongoDB desde un fichero YAML
+    y construye las dataclasses correspondientes.
+    """
+    path = Path(config_path).expanduser().resolve()
+    raw: Dict[str, Any] = _load_yaml(path)
+
+    # Cargar configuración MongoDB
+    mongodb_raw: Dict[str, Any] = raw.get("mongodb", {})
+    mongodb_cfg = MongoDBConfig(**mongodb_raw)
+
+    # Cargar configuración de datos GDC
+    gdc_raw: Dict[str, Any] = raw.get("gdc", {})
+    gdc_cfg = GDCMongoDataConfig(**gdc_raw)
+
+    # Cargar opciones
+    options_raw: Dict[str, Any] = raw.get("options", {})
+    options_cfg = GDCMongoOptionsConfig(**options_raw)
+
+    return GDCMongoAppConfig(mongodb=mongodb_cfg, gdc=gdc_cfg, options=options_cfg)
