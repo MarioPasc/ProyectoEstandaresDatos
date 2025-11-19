@@ -74,7 +74,7 @@ Cada documento utiliza el `Entry` (accession de UniProt) como clave principal (`
   ],
   "go": {
     "molecular_function": [
-      "molecular_function (GO:0005576)"
+      "catalytic activity (GO:0003824)"
     ],
     "biological_process": [],
     "cellular_component": [
