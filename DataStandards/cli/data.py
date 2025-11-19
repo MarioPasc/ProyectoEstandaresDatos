@@ -50,6 +50,11 @@ def download_gdc_data(config: AppConfig) -> None:
     """
     Descarga todos los datos del GDC según la configuración.
     
+    Soporta múltiples proyectos. Para cada proyecto en project_ids:
+    - Descarga manifest
+    - Descarga metadatos de ficheros
+    - Descarga datos RNA-seq y extrae genes
+    
     Parameters
     ----------
     config : AppConfig
@@ -59,28 +64,38 @@ def download_gdc_data(config: AppConfig) -> None:
     gdc_cfg = config.gdc
     token = load_gdc_token(gdc_cfg.token_path)
     
+    # Descargar tabla general de genes (común a todos los proyectos)
     try:
-        download_manifest(gdc_cfg, token)
-        download_file_metadata(gdc_cfg, token)
+        logger.info("Descargando tabla de genes de ejemplo...")
         fetch_genes_table(gdc_cfg, token)
-        
-        # Descarga RNA-seq y extracción de genes
-        run_rnaseq_download_and_gene_extraction(gdc_cfg, token)
-        
-        # Verificar archivos descargados
-        logger.info("Verificando archivos descargados...")
-        check_gdc_files(
-            manifest_path=gdc_cfg.manifest_output,
-            file_metadata_path=gdc_cfg.file_metadata_output,
-            genes_path=gdc_cfg.genes_output,
-            project_genes_path=gdc_cfg.rnaseq.gene_table_output if gdc_cfg.rnaseq else "data/gdc_genes_tcga_lgg.tsv",
-            star_counts_dir=gdc_cfg.rnaseq.output_dir if gdc_cfg.rnaseq else "data/gdc/star_counts",
-        )
-        
-        logger.info("=== Descarga de GDC completada exitosamente ===")
     except Exception as e:
-        logger.error(f"Error al descargar datos de GDC: {e}")
+        logger.error(f"Error al descargar tabla de genes: {e}")
         raise
+    
+    # Procesar cada proyecto
+    for project_id in gdc_cfg.project_ids:
+        logger.info(f"--- Procesando proyecto: {project_id} ---")
+        try:
+            # Descargar manifest para este proyecto
+            manifest_path = download_manifest(gdc_cfg, project_id, token)
+            logger.info(f"Manifest descargado: {manifest_path}")
+            
+            # Descargar metadatos de ficheros para este proyecto
+            metadata_path = download_file_metadata(gdc_cfg, project_id, token)
+            logger.info(f"Metadatos descargados: {metadata_path}")
+            
+            # Descarga RNA-seq y extracción de genes para este proyecto
+            run_rnaseq_download_and_gene_extraction(gdc_cfg, project_id, manifest_path, token)
+            
+            logger.info(f"✓ Proyecto {project_id} procesado correctamente")
+            
+        except Exception as e:
+            logger.error(f"Error al procesar proyecto {project_id}: {e}")
+            # Continuar con el siguiente proyecto en lugar de abortar todo
+            continue
+    
+    logger.info("=== Descarga de GDC completada ===")
+    logger.info("Nota: La verificación de archivos se realiza manualmente con check_gdc_files")
 
 
 def download_hgnc_data(config: AppConfig) -> None:
@@ -137,14 +152,8 @@ def download_uniprot_data(config: AppConfig) -> None:
         # Llamar a la función run() del módulo access_uniprot
         access_uniprot.run(config)
         
-        # Verificar archivos descargados
-        logger.info("Verificando archivos descargados...")
-        check_uniprot_files(
-            mapping_path=config.uniprot.mapping_output,
-            metadata_path=config.uniprot.metadata_output,
-        )
-        
         logger.info("=== Descarga de UniProt completada exitosamente ===")
+        logger.info("Nota: Los archivos se organizan por proyecto en %s/{project_id}/", config.uniprot.base_output_dir)
     except FileNotFoundError as e:
         logger.error(f"Faltan archivos requeridos: {e}")
         logger.error("Sugerencia: ejecute primero 'datastandards-download --source gdc' y '--source hgnc'")

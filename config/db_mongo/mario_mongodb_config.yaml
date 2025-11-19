@@ -1,0 +1,51 @@
+# Configuración MongoDB para importador GDC
+# Issue: T1 - GDC MongoDB Import Task
+# Multi-project support: imports multiple GDC projects into single document
+
+mongodb:
+  mongo_uri: "mongodb://localhost:27017/"
+  database_name: "estandares_db"
+  collection_name: "gdc_cases"
+
+gdc:
+  # Base directory where project-specific data is located
+  base_data_dir: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc"
+
+  # Multi-project configuration
+  # Each project will have its data in: {base_data_dir}/{project_id}/
+  projects:
+    - project_id: "TCGA-LGG"
+      disease_type: "Brain Lower Grade Glioma"
+      primary_site: "Brain"
+      data_category: "Transcriptome Profiling"
+
+    - project_id: "TCGA-GBM"
+      disease_type: "Glioblastoma"
+      primary_site: "Brain"
+      data_category: "Transcriptome Profiling"
+
+  # File path patterns (relative to {base_data_dir}/{project_id}/)
+  # These will be resolved as: {base_data_dir}/{project_id}/{pattern}
+  manifest_filename: "gdc_manifest_{project_id_lower}.tsv"
+  metadata_filename: "gdc_file_metadata_{project_id_lower}.tsv"
+  genes_filename: "gdc_genes_{project_id_lower}.tsv"
+  star_counts_dirname: "star_counts"
+
+options:
+  # Si true, elimina la colección antes de insertar (útil para rehacer la carga)
+  drop_collection: false
+
+  # Si true, procesa ficheros STAR-Counts para calcular expression_summary
+  # Si false, solo inserta metadatos sin procesar expresión
+  process_expression: true
+
+  # Número máximo de ficheros STAR-Counts a procesar (None = todos)
+  # Útil para testing con subconjuntos de datos
+  max_files_to_process: null
+
+  # Si true, muestra información detallada durante la importación
+  verbose: true
+
+  # Ruta donde guardar la colección como JSON después de la importación exitosa
+  # Si es null o vacío, no se guarda el JSON
+  save_as_json: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc/gdc_collection_export.json"

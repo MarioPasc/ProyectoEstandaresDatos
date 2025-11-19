@@ -12,7 +12,7 @@ import os
 import sys
 import json
 from pathlib import Path
-from typing import Dict, Optional, Any
+from typing import Dict, Optional, Any, List
 
 import pandas as pd
 import numpy as np
@@ -253,6 +253,48 @@ def build_gdc_document(
     return document
 
 
+def build_multi_project_document(project_documents: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """
+    Construye un documento MongoDB con estructura multi-proyecto.
+
+    Estructura:
+    {
+        '_id': 'gdc_multi_project',
+        'projects': [
+            {
+                'project_id': 'TCGA-LGG',
+                'disease_type': '...',
+                'primary_site': '...',
+                'data_category': '...',
+                'cases': [...]
+            },
+            {
+                'project_id': 'TCGA-GBM',
+                ...
+            }
+        ]
+    }
+
+    Args:
+        project_documents: Lista de documentos de proyecto individuales
+
+    Returns:
+        Documento MongoDB multi-proyecto
+    """
+    # Remove _id from individual project documents (they'll be nested in projects array)
+    projects = []
+    for doc in project_documents:
+        project_doc = {k: v for k, v in doc.items() if k != '_id'}
+        projects.append(project_doc)
+
+    multi_doc = {
+        '_id': 'gdc_multi_project',
+        'projects': projects
+    }
+
+    return multi_doc
+
+
 def convert_objectid_to_str(obj: Any) -> Any:
     """
     Convierte ObjectId de BSON a string para serialización JSON.
@@ -411,17 +453,10 @@ def insert_to_mongo(
 
 
 def run_import(
-    manifest_path: str,
-    metadata_path: str,
-    genes_path: str,
-    project_id: str,
-    disease_type: str,
-    primary_site: str,
-    data_category: str,
+    gdc_config: 'GDCMongoDataConfig',
     mongo_uri: str,
     database_name: str,
     collection_name: str,
-    star_counts_dir: Optional[str] = None,
     process_expression: bool = False,
     max_files: Optional[int] = None,
     drop_collection: bool = False,
@@ -429,54 +464,132 @@ def run_import(
     verbose: bool = True
 ) -> None:
     """
-    Función principal que orquesta todo el proceso de importación.
+    Función principal que orquesta todo el proceso de importación multi-proyecto.
 
-    Esta función es llamada desde gdc_config.py con los parámetros de configuración.
+    Multi-project support: Procesa todos los proyectos configurados y los combina
+    en un único documento MongoDB con estructura de array de proyectos.
+
+    Args:
+        gdc_config: Configuración GDC con lista de proyectos
+        mongo_uri: URI de MongoDB
+        database_name: Nombre de la base de datos
+        collection_name: Nombre de la colección
+        process_expression: Si True, procesa ficheros STAR-Counts
+        max_files: Máximo número de ficheros a procesar por proyecto (None = todos)
+        drop_collection: Si True, elimina la colección antes de insertar
+        save_as_json: Ruta donde guardar el documento como JSON
+        verbose: Si True, muestra información detallada
     """
     if verbose:
-        print("=" * 60)
-        print("IMPORTADOR GDC A MONGODB")
-        print("=" * 60)
+        print("=" * 100)
+        print("IMPORTADOR GDC MULTI-PROYECTO A MONGODB")
+        print("=" * 100)
+        print(f"\nProcesando {len(gdc_config.projects)} proyecto(s):")
+        for proj in gdc_config.projects:
+            print(f"  - {proj.project_id}: {proj.disease_type}")
+        print("=" * 100)
 
-    # 1. Cargar ficheros TSV
+    project_documents = []
+
+    # Process each project
+    for project_idx, project_meta in enumerate(gdc_config.projects, 1):
+        if verbose:
+            print(f"\n{'=' * 100}")
+            print(f"PROCESANDO PROYECTO {project_idx}/{len(gdc_config.projects)}: {project_meta.project_id}")
+            print(f"{'=' * 100}")
+
+        try:
+            # Build project-specific file paths
+            base_dir = Path(gdc_config.base_data_dir).expanduser().resolve()
+            project_dir = base_dir / project_meta.project_id
+
+            # Replace {project_id_lower} in filename patterns
+            project_id_lower = project_meta.project_id.lower().replace("-", "_")
+            manifest_filename = gdc_config.manifest_filename.replace("{project_id_lower}", project_id_lower)
+            metadata_filename = gdc_config.metadata_filename.replace("{project_id_lower}", project_id_lower)
+            genes_filename = gdc_config.genes_filename.replace("{project_id_lower}", project_id_lower)
+
+            manifest_path = project_dir / manifest_filename
+            metadata_path = project_dir / metadata_filename
+            genes_path = project_dir / genes_filename
+            star_counts_dir = project_dir / gdc_config.star_counts_dirname
+
+            if verbose:
+                print(f"\n[1/3] Cargando ficheros TSV para {project_meta.project_id}...")
+                print(f"  - Manifest: {manifest_path}")
+                print(f"  - Metadata: {metadata_path}")
+                print(f"  - Genes: {genes_path}")
+                print(f"  - Star counts: {star_counts_dir}")
+
+            # Verify files exist
+            if not manifest_path.exists():
+                raise FileNotFoundError(f"Manifest no encontrado: {manifest_path}")
+            if not metadata_path.exists():
+                raise FileNotFoundError(f"Metadata no encontrado: {metadata_path}")
+            if not genes_path.exists():
+                raise FileNotFoundError(f"Genes no encontrado: {genes_path}")
+
+            # Load TSV files
+            manifest_df = load_manifest(str(manifest_path))
+            if verbose:
+                print(f"  ✓ Manifest cargado: {len(manifest_df)} ficheros")
+
+            metadata_df = load_file_metadata(str(metadata_path))
+            if verbose:
+                print(f"  ✓ Metadata cargado: {len(metadata_df)} relaciones caso-fichero")
+
+            genes_df = load_genes_table(str(genes_path))
+            if not genes_df.empty and verbose:
+                print(f"  ✓ Genes cargados: {len(genes_df)} genes")
+
+            # Build project document
+            if verbose:
+                print(f"\n[2/3] Construyendo documento MongoDB para {project_meta.project_id}...")
+
+            project_doc = build_gdc_document(
+                manifest_df=manifest_df,
+                metadata_df=metadata_df,
+                project_id=project_meta.project_id,
+                disease_type=project_meta.disease_type,
+                primary_site=project_meta.primary_site,
+                data_category=project_meta.data_category,
+                star_counts_dir=str(star_counts_dir) if process_expression else None,
+                process_expression=process_expression,
+                max_files=max_files,
+                verbose=verbose
+            )
+
+            project_documents.append(project_doc)
+
+            if verbose:
+                print(f"  ✓ Documento construido para {project_meta.project_id}")
+
+        except Exception as e:
+            print(f"\n✗ ERROR procesando proyecto {project_meta.project_id}: {e}")
+            raise
+
+    # Build multi-project document
     if verbose:
-        print("\n[1/3] Cargando ficheros TSV...")
+        print(f"\n{'=' * 100}")
+        print(f"[3/3] Construyendo documento multi-proyecto...")
+        print(f"{'=' * 100}")
 
-    manifest_df = load_manifest(manifest_path)
+    multi_doc = build_multi_project_document(project_documents)
+
     if verbose:
-        print(f"  - Manifest cargado: {len(manifest_df)} ficheros")
+        total_cases = sum(len(proj.get('cases', [])) for proj in multi_doc['projects'])
+        print(f"\n  ✓ Documento multi-proyecto construido:")
+        print(f"    - Total proyectos: {len(multi_doc['projects'])}")
+        print(f"    - Total casos: {total_cases}")
 
-    metadata_df = load_file_metadata(metadata_path)
+    # Insert to MongoDB
     if verbose:
-        print(f"  - Metadata cargado: {len(metadata_df)} relaciones caso-fichero")
-
-    genes_df = load_genes_table(genes_path)
-    if not genes_df.empty and verbose:
-        print(f"  - Genes cargados: {len(genes_df)} genes")
-
-    # 2. Construir documento MongoDB
-    if verbose:
-        print("\n[2/3] Construyendo documento MongoDB...")
-
-    document = build_gdc_document(
-        manifest_df=manifest_df,
-        metadata_df=metadata_df,
-        project_id=project_id,
-        disease_type=disease_type,
-        primary_site=primary_site,
-        data_category=data_category,
-        star_counts_dir=star_counts_dir,
-        process_expression=process_expression,
-        max_files=max_files,
-        verbose=verbose
-    )
-
-    # 3. Insertar en MongoDB
-    if verbose:
-        print("\n[3/3] Insertando en MongoDB...")
+        print(f"\n{'=' * 100}")
+        print("INSERTANDO EN MONGODB...")
+        print(f"{'=' * 100}")
 
     insert_to_mongo(
-        document=document,
+        document=multi_doc,
         mongo_uri=mongo_uri,
         database_name=database_name,
         collection_name=collection_name,
@@ -486,6 +599,6 @@ def run_import(
     )
 
     if verbose:
-        print("\n" + "=" * 60)
-        print("PROCESO COMPLETADO")
-        print("=" * 60)
+        print(f"\n{'=' * 100}")
+        print("✓ PROCESO COMPLETADO EXITOSAMENTE")
+        print(f"{'=' * 100}")

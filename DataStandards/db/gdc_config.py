@@ -148,20 +148,11 @@ def main():
     elif args.save_json is not None:
         config.options.save_as_json = args.save_json
 
-    # Ejecutar importación
+    # Ejecutar importación multi-proyecto
     try:
         run_import(
-            # Rutas de datos
-            manifest_path=config.gdc.manifest_path,
-            metadata_path=config.gdc.metadata_path,
-            genes_path=config.gdc.genes_path,
-            star_counts_dir=config.gdc.star_counts_dir,
-
-            # Información del proyecto
-            project_id=config.gdc.project_id,
-            disease_type=config.gdc.disease_type,
-            primary_site=config.gdc.primary_site,
-            data_category=config.gdc.data_category,
+            # GDC configuration with projects list
+            gdc_config=config.gdc,
 
             # Conexión MongoDB
             mongo_uri=config.mongodb.mongo_uri,
