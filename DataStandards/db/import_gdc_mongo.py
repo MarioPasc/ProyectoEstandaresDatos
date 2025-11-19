@@ -294,46 +294,45 @@ def export_collection_to_json(
         True si la exportación fue exitosa, False en caso contrario
     """
     try:
-        # Conectar a MongoDB
-        client = MongoClient(mongo_uri)
-        db = client[database_name]
-        collection = db[collection_name]
+        # Conectar a MongoDB usando context manager para asegurar el cierre
+        with MongoClient(mongo_uri) as client:
+            db = client[database_name]
+            collection = db[collection_name]
 
-        if verbose:
-            print(f"\n[Exportación JSON] Recuperando documentos de MongoDB...")
-
-        # Obtener todos los documentos de la colección
-        documents = list(collection.find())
-
-        if not documents:
             if verbose:
-                print(f"[Exportación JSON] Advertencia: La colección '{collection_name}' está vacía")
-            return False
+                print(f"\n[Exportación JSON] Recuperando documentos de MongoDB...")
 
-        if verbose:
-            print(f"[Exportación JSON] Recuperados {len(documents)} documento(s)")
+            # Obtener todos los documentos de la colección
+            documents = list(collection.find())
 
-        # Convertir ObjectIds a strings para serialización JSON
-        documents_serializable = convert_objectid_to_str(documents)
+            if not documents:
+                if verbose:
+                    print(f"[Exportación JSON] Advertencia: La colección '{collection_name}' está vacía")
+                return False
 
-        # Crear directorio si no existe
-        output_file = Path(output_path)
-        output_file.parent.mkdir(parents=True, exist_ok=True)
+            if verbose:
+                print(f"[Exportación JSON] Recuperados {len(documents)} documento(s)")
 
-        # Guardar como JSON
-        with open(output_file, 'w', encoding='utf-8') as f:
-            json.dump(documents_serializable, f, indent=2, ensure_ascii=False)
+            # Convertir ObjectIds a strings para serialización JSON
+            documents_serializable = convert_objectid_to_str(documents)
 
-        if verbose:
-            file_size = output_file.stat().st_size
-            file_size_mb = file_size / (1024 * 1024)
-            print(f"[Exportación JSON] Colección exportada exitosamente")
-            print(f"  - Archivo: {output_path}")
-            print(f"  - Tamaño: {file_size_mb:.2f} MB ({file_size:,} bytes)")
-            print(f"  - Documentos: {len(documents)}")
+            # Crear directorio si no existe
+            output_file = Path(output_path)
+            output_file.parent.mkdir(parents=True, exist_ok=True)
 
-        client.close()
-        return True
+            # Guardar como JSON
+            with open(output_file, 'w', encoding='utf-8') as f:
+                json.dump(documents_serializable, f, indent=2, ensure_ascii=False)
+
+            if verbose:
+                file_size = output_file.stat().st_size
+                file_size_mb = file_size / (1024 * 1024)
+                print(f"[Exportación JSON] Colección exportada exitosamente")
+                print(f"  - Archivo: {output_path}")
+                print(f"  - Tamaño: {file_size_mb:.2f} MB ({file_size:,} bytes)")
+                print(f"  - Documentos: {len(documents)}")
+
+            return True
 
     except Exception as e:
         if verbose:
