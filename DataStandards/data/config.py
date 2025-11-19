@@ -172,6 +172,40 @@ class GDCMongoAppConfig:
 
 
 @dataclass
+class HGNCMongoConfig:
+    """Configuración de datos HGNC para importación a MongoDB.
+
+    Contiene las rutas y configuración necesaria para importar datos HGNC
+    combinados con datos de expresión de GDC.
+    """
+
+    # Path to HGNC complete set TSV file
+    hgnc_tsv_path: str
+
+    # MongoDB collection name for HGNC data
+    collection_name: str = "hgnc_genes"
+
+
+@dataclass
+class HGNCMongoOptionsConfig:
+    """Opciones de procesamiento para la importación HGNC a MongoDB."""
+
+    drop_collection: bool = False
+    verbose: bool = True
+    save_as_json_hgnc: Optional[str] = None
+
+
+@dataclass
+class HGNCMongoAppConfig:
+    """Configuración completa para importación HGNC a MongoDB."""
+
+    mongodb: MongoDBConfig
+    hgnc: HGNCMongoConfig
+    gdc: GDCMongoDataConfig
+    options: HGNCMongoOptionsConfig = field(default_factory=HGNCMongoOptionsConfig)
+
+
+@dataclass
 class AppConfig:
     """Configuración completa de la aplicación (GDC + HGNC + UniProt)."""
 
@@ -267,3 +301,61 @@ def load_gdc_mongo_config(config_path: str | Path) -> GDCMongoAppConfig:
     options_cfg = GDCMongoOptionsConfig(**options_raw)
 
     return GDCMongoAppConfig(mongodb=mongodb_cfg, gdc=gdc_cfg, options=options_cfg)
+
+
+def load_hgnc_mongo_config(config_path: str | Path) -> HGNCMongoAppConfig:
+    """
+    Carga la configuración de importación HGNC a MongoDB desde un fichero YAML
+    y construye las dataclasses correspondientes.
+
+    Integrates HGNC gene data with GDC expression data for all configured projects.
+    """
+    path = Path(config_path).expanduser().resolve()
+    raw: Dict[str, Any] = _load_yaml(path)
+
+    # Cargar configuración MongoDB
+    mongodb_raw: Dict[str, Any] = raw.get("mongodb", {})
+
+    # Extract hgnc_collection_name before creating MongoDBConfig
+    hgnc_collection_name = mongodb_raw.get("hgnc_collection_name", "hgnc_genes")
+
+    # Create MongoDBConfig with only the fields it accepts
+    mongodb_cfg = MongoDBConfig(
+        mongo_uri=mongodb_raw.get("mongo_uri", "mongodb://localhost:27017/"),
+        database_name=mongodb_raw.get("database_name", "estandares_db"),
+        collection_name=mongodb_raw.get("collection_name", "gdc_cases")
+    )
+
+    # Cargar configuración HGNC
+    hgnc_raw: Dict[str, Any] = raw.get("hgnc", {})
+    hgnc_cfg = HGNCMongoConfig(
+        hgnc_tsv_path=hgnc_raw["output_path"],
+        collection_name=hgnc_collection_name
+    )
+
+    # Cargar configuración de datos GDC (reutilizamos la misma estructura)
+    gdc_raw: Dict[str, Any] = raw.get("gdc", {})
+
+    # Parse projects list
+    projects_raw: List[Dict[str, Any]] = gdc_raw.get("projects", [])
+    projects = [ProjectMetadata(**proj) for proj in projects_raw]
+
+    # Create GDCMongoDataConfig with parsed projects
+    gdc_cfg = GDCMongoDataConfig(
+        base_data_dir=gdc_raw["base_data_dir"],
+        projects=projects,
+        manifest_filename=gdc_raw.get("manifest_filename", "gdc_manifest_{project_id_lower}.tsv"),
+        metadata_filename=gdc_raw.get("metadata_filename", "gdc_file_metadata_{project_id_lower}.tsv"),
+        genes_filename=gdc_raw.get("genes_filename", "gdc_genes_{project_id_lower}.tsv"),
+        star_counts_dirname=gdc_raw.get("star_counts_dirname", "star_counts"),
+    )
+
+    # Cargar opciones
+    options_raw: Dict[str, Any] = raw.get("options", {})
+    hgnc_options_cfg = HGNCMongoOptionsConfig(
+        drop_collection=options_raw.get("drop_collection", False),
+        verbose=options_raw.get("verbose", True),
+        save_as_json_hgnc=options_raw.get("save_as_json_hgnc")
+    )
+
+    return HGNCMongoAppConfig(mongodb=mongodb_cfg, hgnc=hgnc_cfg, gdc=gdc_cfg, options=hgnc_options_cfg)

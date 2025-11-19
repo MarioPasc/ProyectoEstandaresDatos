@@ -54,6 +54,7 @@ Changelog = "https://github.com/MarioPasc/ProyectoEstandaresDatos/releases"
 [project.scripts]
 datastandards-download = "DataStandards.cli.data:main"
 datastandards-import-gdc = "DataStandards.db.gdc_config:main"
+datastandards-import-hgnc = "DataStandards.db.hgnc_config:main"
 
 
 [tool.setuptools]
