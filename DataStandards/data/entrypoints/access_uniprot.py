@@ -325,9 +325,15 @@ def fetch_uniprot_batch(
 def download_uniprot_metadata(
     cfg: UniProtConfig,
     accessions: Sequence[str],
+    output_path: Optional[Path] = None,
 ) -> None:
     """
     Descarga anotación UniProt para una lista de accesos y la guarda en un TSV.
+
+    Args:
+        cfg: Configuración UniProt
+        accessions: Lista de accesos UniProt
+        output_path: Path de salida opcional (si no se proporciona, usa cfg.base_output_dir)
     """
     logger = logging.getLogger("download_uniprot_metadata")
 
@@ -335,7 +341,11 @@ def download_uniprot_metadata(
         logger.warning("Lista de accesos UniProt vacía; se omite la descarga de anotación.")
         return
 
-    output_path = Path(cfg.metadata_output).expanduser().resolve()
+    if output_path is None:
+        # Backwards compatibility: use base_output_dir as default
+        output_path = Path(cfg.base_output_dir).expanduser().resolve() / "uniprot_metadata.tsv"
+
+    output_path = Path(output_path).expanduser().resolve()
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     logger.info("Archivo de salida: %s", output_path)
@@ -397,8 +407,11 @@ def download_uniprot_metadata(
 
 def run(app_cfg: AppConfig) -> None:
     """
-    Orquesta el flujo completo de obtención de datos de UniProt para el
-    proyecto configurado en GDC, usando HGNC como puente.
+    Orquesta el flujo completo de obtención de datos de UniProt para todos
+    los proyectos configurados en GDC, usando HGNC como puente.
+
+    Multi-project support: Procesa cada proyecto por separado, creando
+    subdirectorios específicos para UniProt data.
     """
     logger = logging.getLogger("run")
 
@@ -411,67 +424,86 @@ def run(app_cfg: AppConfig) -> None:
         logger.info("Módulo UniProt deshabilitado en la configuración; se omite.")
         return
 
-    logger.info("Iniciando proceso de descarga de datos UniProt...")
+    logger.info("=" * 100)
+    logger.info("INICIANDO PROCESO DE DESCARGA UNIPROT PARA %d PROYECTO(S)", len(app_cfg.gdc.project_ids))
+    logger.info("Proyectos: %s", ", ".join(app_cfg.gdc.project_ids))
+    logger.info("=" * 100)
 
-    # Entradas: genes del proyecto GDC y tabla completa de HGNC
-    project_genes_path = Path(app_cfg.gdc.rnaseq.gene_table_output).expanduser().resolve()
+    # Verificar que existe HGNC
     hgnc_path = Path(app_cfg.hgnc.output_path).expanduser().resolve()
-
-    mapping_output_path = Path(uni_cfg.mapping_output).expanduser().resolve()
-
-    # Verificar que existan los archivos necesarios
-    if not project_genes_path.is_file():
-        logger.error(
-            "No se encontró el fichero de genes del proyecto GDC: %s",
-            project_genes_path
-        )
-        logger.error(
-            "Este archivo se genera al ejecutar: "
-            "datastandards-download --config <config> --source gdc"
-        )
-        raise FileNotFoundError(
-            f"Archivo requerido no encontrado: {project_genes_path}\n"
-            f"Ejecute primero: datastandards-download --config <config> --source gdc"
-        )
-    
     if not hgnc_path.is_file():
-        logger.error(
-            "No se encontró el fichero de datos HGNC: %s",
-            hgnc_path
-        )
-        logger.error(
-            "Este archivo se genera al ejecutar: "
-            "datastandards-download --config <config> --source hgnc"
-        )
+        logger.error("No se encontró el fichero de datos HGNC: %s", hgnc_path)
+        logger.error("Este archivo se genera al ejecutar: datastandards-download --config <config> --source hgnc")
         raise FileNotFoundError(
             f"Archivo requerido no encontrado: {hgnc_path}\n"
             f"Ejecute primero: datastandards-download --config <config> --source hgnc"
         )
 
-    logger.info("Cargando genes del proyecto GDC desde: %s", project_genes_path)
-    project_ids = load_project_ensembl_ids(project_genes_path)
+    # Process each project
+    for project_idx, project_id in enumerate(app_cfg.gdc.project_ids, 1):
+        logger.info("\n" + "=" * 100)
+        logger.info("PROCESANDO UNIPROT PARA PROYECTO %d/%d: %s", project_idx, len(app_cfg.gdc.project_ids), project_id)
+        logger.info("=" * 100)
 
-    logger.info("Extrayendo accesos UniProt desde HGNC: %s", hgnc_path)
-    accessions, n_rows_mapping = extract_project_uniprot_ids(
-        project_ensembl_ids=project_ids,
-        hgnc_path=hgnc_path,
-        mapping_output_path=mapping_output_path,
-        max_accessions=uni_cfg.max_accessions,
-    )
+        try:
+            # Build project-specific paths
+            gdc_base_dir = Path(app_cfg.gdc.base_output_dir).expanduser().resolve()
+            project_dir = gdc_base_dir / project_id
+            project_id_lower = project_id.lower().replace("-", "_")
+            project_genes_path = project_dir / f"gdc_genes_{project_id_lower}.tsv"
 
-    if not accessions:
-        logger.warning("No se obtuvieron accesos UniProt para el proyecto; nada que descargar.")
-        return
+            # Build UniProt output paths for this project
+            uniprot_base_dir = Path(uni_cfg.base_output_dir).expanduser().resolve()
+            uniprot_project_dir = uniprot_base_dir / project_id
+            uniprot_project_dir.mkdir(parents=True, exist_ok=True)
 
-    logger.info(
-        "Número de accesos UniProt seleccionados para anotación: %d (mapeos: %d).",
-        len(accessions),
-        n_rows_mapping,
-    )
+            mapping_output_path = uniprot_project_dir / f"uniprot_mapping_{project_id_lower}.tsv"
+            metadata_output_path = uniprot_project_dir / f"uniprot_metadata_{project_id_lower}.tsv"
 
-    logger.info("Iniciando descarga de metadatos de UniProt...")
-    download_uniprot_metadata(uni_cfg, accessions)
-    logger.info("Proceso de descarga de UniProt completado exitosamente.")
+            # Verificar que exista el fichero de genes del proyecto
+            if not project_genes_path.is_file():
+                logger.error("No se encontró el fichero de genes para proyecto %s: %s", project_id, project_genes_path)
+                logger.error("Este archivo se genera al ejecutar: datastandards-download --config <config> --source gdc")
+                raise FileNotFoundError(
+                    f"Archivo requerido no encontrado: {project_genes_path}\n"
+                    f"Ejecute primero: datastandards-download --config <config> --source gdc"
+                )
+
+            logger.info("Cargando genes del proyecto %s desde: %s", project_id, project_genes_path)
+            project_ensembl_ids = load_project_ensembl_ids(project_genes_path)
+
+            logger.info("Extrayendo accesos UniProt desde HGNC: %s", hgnc_path)
+            accessions, n_rows_mapping = extract_project_uniprot_ids(
+                project_ensembl_ids=project_ensembl_ids,
+                hgnc_path=hgnc_path,
+                mapping_output_path=mapping_output_path,
+                max_accessions=uni_cfg.max_accessions,
+            )
+
+            if not accessions:
+                logger.warning("No se obtuvieron accesos UniProt para %s; se omite descarga de metadatos.", project_id)
+                continue
+
+            logger.info(
+                "Número de accesos UniProt seleccionados para %s: %d (mapeos: %d).",
+                project_id,
+                len(accessions),
+                n_rows_mapping,
+            )
+
+            logger.info("Iniciando descarga de metadatos de UniProt para %s...", project_id)
+            # Download to project-specific path
+            download_uniprot_metadata(uni_cfg, accessions, output_path=metadata_output_path)
+
+            logger.info("✓ Proceso UniProt completado para proyecto %s", project_id)
+
+        except Exception as e:
+            logger.error("✗ Error al procesar UniProt para proyecto %s: %s", project_id, e, exc_info=True)
+            raise
+
+    logger.info("\n" + "=" * 100)
+    logger.info("DESCARGA UNIPROT COMPLETADA PARA TODOS LOS PROYECTOS")
+    logger.info("=" * 100)
 
 
 def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:

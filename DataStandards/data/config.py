@@ -20,35 +20,38 @@ class RnaSeqConfig:
 
     download_enabled: bool = True
     max_files: int = 5
-    output_dir: str = "data/gdc/star_counts"
     overwrite_existing: bool = False
     decompress_downloads: bool = False
-    gene_table_output: str = "data/gdc_genes_tcga_lgg.tsv"
     gene_id_column_index: int = 0
     strip_version: bool = True
 
 
 @dataclass
 class GDCConfig:
-    """Configuración específica para acceso al GDC."""
+    """Configuración específica para acceso al GDC.
+
+    Multi-project support: project_ids is a list of project IDs to download.
+    Output files will be organized in: {base_output_dir}/{project_id}/
+    """
 
     base_url: str
-    project_id: str
+    project_ids: List[str]  # Changed from project_id to support multiple projects
     data_category: str
     data_type: str
     workflow_type: str
 
+    # Base output directory for all GDC data
+    # Project-specific subdirectories will be created as: {base_output_dir}/{project_id}/
+    base_output_dir: str
+
     # Manifest /files
     fields: str
-    manifest_output: str
 
     # Metadatos fichero–caso–muestra
     file_metadata_fields: str
-    file_metadata_output: str
 
     # Tabla de genes de ejemplo vía /genes
     gene_symbols: List[str]
-    genes_output: str
 
     # Parámetros generales de la API
     page_size: int = 10000
@@ -70,7 +73,11 @@ class HGNCConfig:
 
 @dataclass
 class UniProtConfig:
-    """Configuración específica para descarga de datos de UniProt."""
+    """Configuración específica para descarga de datos de UniProt.
+
+    Multi-project support: UniProt data will be organized per-project in:
+    {base_output_dir}/{project_id}/
+    """
 
     # Activación/desactivación del módulo UniProt
     enabled: bool = True
@@ -100,9 +107,69 @@ class UniProtConfig:
     # Control del tamaño del dataset (None = sin límite)
     max_accessions: Optional[int] = None
 
-    # Ficheros de salida
-    mapping_output: str = "data/uniprot/uniprot_mapping_tcga_lgg.tsv"
-    metadata_output: str = "data/uniprot/uniprot_metadata_tcga_lgg.tsv"
+    # Base output directory for UniProt data
+    # Project-specific subdirectories will be created as: {base_output_dir}/{project_id}/
+    base_output_dir: str = "data/uniprot"
+
+@dataclass
+class MongoDBConfig:
+    """Configuración de conexión a MongoDB."""
+
+    mongo_uri: str = "mongodb://localhost:27017/"
+    database_name: str = "estandares_db"
+    collection_name: str = "gdc_cases"
+
+
+@dataclass
+class ProjectMetadata:
+    """Metadata para un proyecto GDC individual."""
+
+    project_id: str
+    disease_type: str
+    primary_site: str
+    data_category: str
+
+
+@dataclass
+class GDCMongoDataConfig:
+    """Configuración de rutas de datos GDC para importación a MongoDB.
+
+    Multi-project support: Configuration for importing multiple GDC projects
+    into a single MongoDB document with a projects array structure.
+    """
+
+    # Base directory where project-specific data folders are located
+    base_data_dir: str
+
+    # List of projects to import with their metadata
+    projects: List[ProjectMetadata]
+
+    # Filename patterns (relative to {base_data_dir}/{project_id}/)
+    manifest_filename: str = "gdc_manifest_{project_id_lower}.tsv"
+    metadata_filename: str = "gdc_file_metadata_{project_id_lower}.tsv"
+    genes_filename: str = "gdc_genes_{project_id_lower}.tsv"
+    star_counts_dirname: str = "star_counts"
+
+
+@dataclass
+class GDCMongoOptionsConfig:
+    """Opciones de procesamiento para la importación GDC a MongoDB."""
+
+    drop_collection: bool = False
+    process_expression: bool = True
+    max_files_to_process: Optional[int] = None
+    verbose: bool = True
+    save_as_json: Optional[str] = None
+
+
+@dataclass
+class GDCMongoAppConfig:
+    """Configuración completa para importación GDC a MongoDB."""
+
+    mongodb: MongoDBConfig
+    gdc: GDCMongoDataConfig
+    options: GDCMongoOptionsConfig = field(default_factory=GDCMongoOptionsConfig)
+
 
 @dataclass
 class AppConfig:
@@ -122,6 +189,8 @@ def load_app_config(config_path: str | Path) -> AppConfig:
     """
     Carga la configuración de aplicación desde un fichero YAML y construye
     las dataclasses AppConfig, GDCConfig, HGNCConfig, UniProtConfig y RnaSeqConfig.
+
+    Multi-project support: Expects project_ids as a list in the YAML config.
     """
     path = Path(config_path).expanduser().resolve()
     raw: Dict[str, Any] = _load_yaml(path)
@@ -136,16 +205,14 @@ def load_app_config(config_path: str | Path) -> AppConfig:
     # Extraemos explícitamente las claves de GDC, dejando fuera 'rnaseq'
     gdc_cfg = GDCConfig(
         base_url=gdc_raw["base_url"],
-        project_id=gdc_raw["project_id"],
+        project_ids=gdc_raw["project_ids"],  # Changed to project_ids (list)
         data_category=gdc_raw["data_category"],
         data_type=gdc_raw["data_type"],
         workflow_type=gdc_raw["workflow_type"],
+        base_output_dir=gdc_raw["base_output_dir"],  # Changed to base_output_dir
         fields=gdc_raw["fields"],
-        manifest_output=gdc_raw["manifest_output"],
         file_metadata_fields=gdc_raw["file_metadata_fields"],
-        file_metadata_output=gdc_raw["file_metadata_output"],
         gene_symbols=gdc_raw.get("gene_symbols", []),
-        genes_output=gdc_raw["genes_output"],
         page_size=gdc_raw.get("page_size", 10000),
         token_path=gdc_raw.get("token_path"),
         request_timeout=gdc_raw.get("request_timeout", 120),
@@ -161,3 +228,42 @@ def load_app_config(config_path: str | Path) -> AppConfig:
     uniprot_cfg = UniProtConfig(**uniprot_raw) if uniprot_raw else None
 
     return AppConfig(gdc=gdc_cfg, hgnc=hgnc_cfg, uniprot=uniprot_cfg)
+
+
+def load_gdc_mongo_config(config_path: str | Path) -> GDCMongoAppConfig:
+    """
+    Carga la configuración de importación GDC a MongoDB desde un fichero YAML
+    y construye las dataclasses correspondientes.
+
+    Multi-project support: Parses projects list from YAML and creates
+    ProjectMetadata objects for each project.
+    """
+    path = Path(config_path).expanduser().resolve()
+    raw: Dict[str, Any] = _load_yaml(path)
+
+    # Cargar configuración MongoDB
+    mongodb_raw: Dict[str, Any] = raw.get("mongodb", {})
+    mongodb_cfg = MongoDBConfig(**mongodb_raw)
+
+    # Cargar configuración de datos GDC
+    gdc_raw: Dict[str, Any] = raw.get("gdc", {})
+
+    # Parse projects list
+    projects_raw: List[Dict[str, Any]] = gdc_raw.get("projects", [])
+    projects = [ProjectMetadata(**proj) for proj in projects_raw]
+
+    # Create GDCMongoDataConfig with parsed projects
+    gdc_cfg = GDCMongoDataConfig(
+        base_data_dir=gdc_raw["base_data_dir"],
+        projects=projects,
+        manifest_filename=gdc_raw.get("manifest_filename", "gdc_manifest_{project_id_lower}.tsv"),
+        metadata_filename=gdc_raw.get("metadata_filename", "gdc_file_metadata_{project_id_lower}.tsv"),
+        genes_filename=gdc_raw.get("genes_filename", "gdc_genes_{project_id_lower}.tsv"),
+        star_counts_dirname=gdc_raw.get("star_counts_dirname", "star_counts"),
+    )
+
+    # Cargar opciones
+    options_raw: Dict[str, Any] = raw.get("options", {})
+    options_cfg = GDCMongoOptionsConfig(**options_raw)
+
+    return GDCMongoAppConfig(mongodb=mongodb_cfg, gdc=gdc_cfg, options=options_cfg)

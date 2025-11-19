@@ -4,20 +4,25 @@ gdc:
   base_url: "https://api.gdc.cancer.gov"
 
   # Cohorte / filtros básicos para /files
-  project_id: "TCGA-LGG"
+  # Multi-project support: list of project IDs to download
+  project_ids: ["TCGA-LGG", "TCGA-GBM"]
   data_category: "Transcriptome Profiling"
   data_type: "Gene Expression Quantification"
   workflow_type: "STAR - Counts"
 
+  # Base output directory for GDC data
+  # Project-specific folders will be created as: base_output_dir/{project_id}/
+  base_output_dir: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc"
+
   # 1) Manifest tipo GDC Data Transfer Tool
   fields: "file_id,file_name,md5sum,file_size,state"
-  manifest_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc/gdc_manifest_tcga_lgg.tsv"
+  # Output pattern: {base_output_dir}/{project_id}/gdc_manifest_{project_id_lower}.tsv
 
   # 2) Metadatos fichero–caso–muestra
   file_metadata_fields: >
     file_id,file_name,cases.case_id,cases.submitter_id,
     cases.samples.sample_type,cases.project.project_id
-  file_metadata_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc/gdc_file_metadata_tcga_lgg.tsv"
+  # Output pattern: {base_output_dir}/{project_id}/gdc_file_metadata_{project_id_lower}.tsv
 
   # 3) Tabla mínima de genes "de ejemplo" vía /genes (puedes mantenerla o dejarla vacía)
   gene_symbols:
@@ -25,16 +30,16 @@ gdc:
     #- "IDH1"
     #- "IDH2"
     #- "ATRX"
-  genes_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc/gdc_genes_tcga_lgg_example.tsv"
+  # Output pattern: {base_output_dir}/{project_id}/gdc_genes_{project_id_lower}_example.tsv
 
   # 4) Nueva configuración específica para descargas RNA-seq STAR-Counts
   rnaseq:
     download_enabled: true          # poner a false si no quieres descargar nada
     max_files: 5                    # N máximo de ficheros a descargar desde el manifest
-    output_dir: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc/star_counts"   # directorio donde se guardan los .gz
+    # Output pattern: {base_output_dir}/{project_id}/star_counts/
     overwrite_existing: false       # si false, no re-descarga si el fichero ya existe
     decompress_downloads: false     # si true, crea versión descomprimida junto al .gz
-    gene_table_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc/gdc_genes_tcga_lgg.tsv"  # lista de genes del proyecto
+    # Gene table pattern: {base_output_dir}/{project_id}/gdc_genes_{project_id_lower}.tsv
     gene_id_column_index: 0         # índice (0-based) de la columna con Ensembl IDs
     strip_version: true             # ENSG00000121410.8 -> ENSG00000121410
 
@@ -76,6 +81,20 @@ uniprot:
   # Control del tamaño del dataset (None = sin límite)
   max_accessions: 2000
 
-  # Ficheros de salida
-  mapping_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/uniprot/uniprot_mapping_tcga_lgg.tsv"
-  metadata_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/uniprot/uniprot_metadata_tcga_lgg.tsv"
+  # Base output directory for UniProt data
+  # Project-specific folders will be created as: base_output_dir/{project_id}/
+  base_output_dir: "/home/mpascual/misc/Universidad25-26/Estandares/data/uniprot"
+  # Output pattern: {base_output_dir}/{project_id}/uniprot_mapping_{project_id_lower}.tsv
+  # Output pattern: {base_output_dir}/{project_id}/uniprot_metadata_{project_id_lower}.tsv
+
+# Configuración de MongoDB para importadores (Issue T1)
+# NOTA: La configuración detallada de MongoDB está en config/db_mongo/mario_mongodb_config.yaml
+# Para importar datos GDC a MongoDB, usa:
+#   datastandards-import-gdc --config config/db_mongo/mario_mongodb_config.yaml
+mongodb_T1:
+  mongo_uri: "mongodb://localhost:27017/"
+  database_name: "estandares_db"
+  collections:
+    genes: "genes"           # Colección de genes (HGNC)
+    proteins: "proteins"     # Colección de proteínas (UniProt)
+    gdc_cases: "gdc_cases"   # Colección de casos GDC (Issue T1)
