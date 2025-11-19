@@ -31,6 +31,22 @@ gdc:
   genes_filename: "gdc_genes_{project_id_lower}.tsv"
   star_counts_dirname: "star_counts"
 
+uniprot:
+  # Base directory where project-specific UniProt data is located
+  base_data_dir: "/home/mpascual/misc/Universidad25-26/Estandares/data/uniprot"
+
+  # Multi-project configuration
+  # Each project will have its data in: {base_data_dir}/{project_id}/
+  projects:
+    - project_id: "TCGA-LGG"
+
+    - project_id: "TCGA-GBM"
+
+  # File path patterns (relative to {base_data_dir}/{project_id}/)
+  # These will be resolved as: {base_data_dir}/{project_id}/{pattern}
+  mapping_filename: "uniprot_mapping_{project_id_lower}.tsv"
+  metadata_filename: "uniprot_metadata_{project_id_lower}.tsv"
+
 options:
   # Si true, elimina la colección antes de insertar (útil para rehacer la carga)
   drop_collection: true
