@@ -195,10 +195,11 @@ def build_gdc_document(
         file_data = file_info.iloc[0]
 
         # Construir información del fichero
+        file_size_value = file_data.get('file_size', '')
         file_doc = {
             'file_id': str(file_data.get('file_id', '')),
             'file_name': str(file_data.get('file_name', '')),
-            'file_size': int(file_data.get('file_size', 0)) if file_data.get('file_size') else None,
+            'file_size': int(file_size_value) if file_size_value not in (None, '') else None,
             'md5sum': str(file_data.get('md5sum', '')),
             'state': str(file_data.get('state', ''))
         }
