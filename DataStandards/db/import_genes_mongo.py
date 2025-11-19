@@ -11,7 +11,7 @@ def load_config(config_path='config/data_config.yaml'):
             # Usamos FullLoader para evitar warnings de seguridad
             return yaml.safe_load(f)
     except FileNotFoundError:
-        print(f"Error: Fichero de configuración no encontrado en {config_path}")
+        print(f"Error: Configuration file not found at {config_path}")
         sys.exit(1)
     except Exception as e:
         print(f"Error cargando YAML: {e}")
