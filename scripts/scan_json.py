@@ -26,12 +26,13 @@ def check_connections(json_1, json_2, key_1, key_2):
     return connections
 
 # Función principal para realizar el escaneo
-def scan_jsons(data_dir):
-    # Cargar los archivos JSON
-    uniprot_file = os.path.join(data_dir, 'uniprot_collection_export.json')
-    gdc_file = os.path.join(data_dir, 'gdc_collection_export.json')
-    hgnc_file = os.path.join(data_dir, 'hgnc_collection_export.json')
+def scan_json(data_root):
+    # Definir las rutas de los archivos JSON dentro de las subcarpetas
+    uniprot_file = os.path.join(data_root, 'uniprot', 'uniprot_collection_export.json')
+    gdc_file = os.path.join(data_root, 'gdc', 'gdc_collection_export.json')
+    hgnc_file = os.path.join(data_root, 'hgnc', 'hgnc_collection_export.json')
 
+    # Cargar los archivos JSON
     uniprot_data = load_json(uniprot_file)
     gdc_data = load_json(gdc_file)
     hgnc_data = load_json(hgnc_file)
@@ -59,4 +60,4 @@ def scan_jsons(data_dir):
     print("Informe generado: 'json_scan_report.csv'")
 
 # Ejecutar el script
-scan_jsons('/path/to/data')
+scan_json('C:/Users/User/MyDocs/Universidad/CUARTO_2026/Estandares_de_datos/PROYECTO/data/data')
