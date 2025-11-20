@@ -159,7 +159,8 @@ class GDCMongoOptionsConfig:
     process_expression: bool = True
     max_files_to_process: Optional[int] = None
     verbose: bool = True
-    save_as_json: Optional[str] = None
+    save_as_json_gdc: Optional[str] = None
+    save_as_json_hgnc: Optional[str] = None
 
 
 @dataclass
