@@ -11,13 +11,15 @@ gdc:
 
   # 1) Manifest tipo GDC Data Transfer Tool
   fields: "file_id,file_name,md5sum,file_size,state"
-  manifest_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc/gdc_manifest_tcga_lgg.tsv"
+  manifest_output: "/Users/User/MyDocs/Universidad/CUARTO_2026/Estandares_de_datos/PROYECTO/ProyectoEstandaresDatos
+    /data/gdc/gdc_manifest_tcga_lgg.tsv"
 
   # 2) Metadatos fichero–caso–muestra
   file_metadata_fields: >
     file_id,file_name,cases.case_id,cases.submitter_id,
     cases.samples.sample_type,cases.project.project_id
-  file_metadata_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc/gdc_file_metadata_tcga_lgg.tsv"
+  file_metadata_output: "/Users/User/MyDocs/Universidad/CUARTO_2026/Estandares_de_datos/PROYECTO/ProyectoEstandaresDatos
+    /data/gdc/gdc_file_metadata_tcga_lgg.tsv"
 
   # 3) Tabla mínima de genes "de ejemplo" vía /genes (puedes mantenerla o dejarla vacía)
   gene_symbols:
@@ -25,16 +27,19 @@ gdc:
     #- "IDH1"
     #- "IDH2"
     #- "ATRX"
-  genes_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc/gdc_genes_tcga_lgg_example.tsv"
+  genes_output: "/Users/User/MyDocs/Universidad/CUARTO_2026/Estandares_de_datos/PROYECTO/ProyectoEstandaresDatos
+    /data/gdc/gdc_genes_tcga_lgg_example.tsv"
 
   # 4) Nueva configuración específica para descargas RNA-seq STAR-Counts
   rnaseq:
     download_enabled: true          # poner a false si no quieres descargar nada
     max_files: 5                    # N máximo de ficheros a descargar desde el manifest
-    output_dir: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc/star_counts"   # directorio donde se guardan los .gz
+    output_dir: "/Users/User/MyDocs/Universidad/CUARTO_2026/Estandares_de_datos/PROYECTO/ProyectoEstandaresDatos
+      /data/gdc/star_counts"   # directorio donde se guardan los .gz
     overwrite_existing: false       # si false, no re-descarga si el fichero ya existe
     decompress_downloads: false     # si true, crea versión descomprimida junto al .gz
-    gene_table_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc/gdc_genes_tcga_lgg.tsv"  # lista de genes del proyecto
+    gene_table_output: "/Users/User/MyDocs/Universidad/CUARTO_2026/Estandares_de_datos/PROYECTO/ProyectoEstandaresDatos
+      /data/gdc/gdc_genes_tcga_lgg.tsv"  # lista de genes del proyecto
     gene_id_column_index: 0         # índice (0-based) de la columna con Ensembl IDs
     strip_version: true             # ENSG00000121410.8 -> ENSG00000121410
 
@@ -46,7 +51,8 @@ gdc:
 
 hgnc:
   url: "https://storage.googleapis.com/public-download-files/hgnc/tsv/tsv/hgnc_complete_set.txt"
-  output_path: "/home/mpascual/misc/Universidad25-26/Estandares/data/hgnc/hgnc_complete_set.tsv"
+  output_path: "/Users/User/MyDocs/Universidad/CUARTO_2026/Estandares_de_datos/PROYECTO/ProyectoEstandaresDatos
+    /data/hgnc/hgnc_complete_set.tsv"
   request_timeout: 60
 
 uniprot:
@@ -77,5 +83,7 @@ uniprot:
   max_accessions: 2000
 
   # Ficheros de salida
-  mapping_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/uniprot/uniprot_mapping_tcga_lgg.tsv"
-  metadata_output: "/home/mpascual/misc/Universidad25-26/Estandares/data/uniprot/uniprot_metadata_tcga_lgg.tsv"
+  mapping_output: "/Users/User/MyDocs/Universidad/CUARTO_2026/Estandares_de_datos/PROYECTO/ProyectoEstandaresDatos
+    /data/uniprot/uniprot_mapping_tcga_lgg.tsv"
+  metadata_output: "/Users/User/MyDocs/Universidad/CUARTO_2026/Estandares_de_datos/PROYECTO/ProyectoEstandaresDatos
+    /data/uniprot/uniprot_metadata_tcga_lgg.tsv"
