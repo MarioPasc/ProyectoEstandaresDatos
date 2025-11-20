@@ -65,7 +65,7 @@ def build_uniprot_docs(mapping_path: str, metadata_path: str, project_id: str = 
 
     docs = []
 
-    # Agrupar por uniprot_id (unidad básica de documento)
+    # Group by uniprot_id (basic document unit)
     for uniprot_id, group in map_df.groupby("uniprot_id"):
         all_hgnc_ids = sorted({v for v in group["hgnc_id"].dropna().unique() if v})
         all_ensembl_ids = sorted({v for v in group["ensembl_gene_id"].dropna().unique() if v})
