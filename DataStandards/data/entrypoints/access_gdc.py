@@ -49,7 +49,7 @@ def setup_logging() -> None:
     )
 
 
-def build_gdc_files_filters(gdc_cfg: GDCConfig) -> Dict[str, Any]:
+def build_gdc_files_filters(gdc_cfg: GDCConfig, project_id: str) -> Dict[str, Any]:
     """
     Construye el diccionario de filtros para el endpoint /files del GDC.
 
@@ -58,6 +58,10 @@ def build_gdc_files_filters(gdc_cfg: GDCConfig) -> Dict[str, Any]:
         - Data Category (data_category)
         - Data Type (data_type)
         - Workflow (analysis.workflow_type), si está configurado.
+
+    Args:
+        gdc_cfg: Configuración GDC
+        project_id: ID del proyecto específico para filtrar (e.g., "TCGA-LGG")
     """
     filters: Dict[str, Any] = {
         "op": "and",
@@ -66,7 +70,7 @@ def build_gdc_files_filters(gdc_cfg: GDCConfig) -> Dict[str, Any]:
                 "op": "in",
                 "content": {
                     "field": "cases.project.project_id",
-                    "value": [gdc_cfg.project_id],
+                    "value": [project_id],  # Single project ID for this filter
                 },
             },
             {
@@ -166,13 +170,62 @@ def write_text_to_file(content: str, output_path: Path) -> None:
     logger.info("Fichero escrito: %s", output_path)
 
 
-def download_manifest(gdc_cfg: GDCConfig, token: Optional[str]) -> None:
+def get_project_output_dir(base_output_dir: str, project_id: str) -> Path:
+    """
+    Construye el directorio de salida para un proyecto específico.
+
+    Args:
+        base_output_dir: Directorio base de salida
+        project_id: ID del proyecto (e.g., "TCGA-LGG")
+
+    Returns:
+        Path del directorio de salida para el proyecto
+    """
+    project_dir = Path(base_output_dir).expanduser().resolve() / project_id
+    project_dir.mkdir(parents=True, exist_ok=True)
+    return project_dir
+
+
+def get_project_filename(project_id: str, file_type: str) -> str:
+    """
+    Construye el nombre de fichero para un proyecto específico.
+
+    Args:
+        project_id: ID del proyecto (e.g., "TCGA-LGG")
+        file_type: Tipo de fichero ("manifest", "metadata", "genes", "genes_example")
+
+    Returns:
+        Nombre del fichero con el formato correcto
+    """
+    project_id_lower = project_id.lower().replace("-", "_")
+
+    if file_type == "manifest":
+        return f"gdc_manifest_{project_id_lower}.tsv"
+    elif file_type == "metadata":
+        return f"gdc_file_metadata_{project_id_lower}.tsv"
+    elif file_type == "genes":
+        return f"gdc_genes_{project_id_lower}.tsv"
+    elif file_type == "genes_example":
+        return f"gdc_genes_{project_id_lower}_example.tsv"
+    else:
+        raise ValueError(f"Unknown file_type: {file_type}")
+
+
+def download_manifest(gdc_cfg: GDCConfig, project_id: str, token: Optional[str]) -> Path:
     """
     Genera un manifest tipo GDC Data Transfer Tool para ficheros de expresión
-    de TCGA-LGG y lo escribe en gdc_cfg.manifest_output.
+    de un proyecto específico.
+
+    Args:
+        gdc_cfg: Configuración GDC
+        project_id: ID del proyecto (e.g., "TCGA-LGG")
+        token: Token GDC opcional
+
+    Returns:
+        Path del manifest generado
     """
     files_endpoint = gdc_cfg.base_url.rstrip("/") + "/files"
-    filters = build_gdc_files_filters(gdc_cfg)
+    filters = build_gdc_files_filters(gdc_cfg, project_id)
     content = _post_gdc_files(
         endpoint=files_endpoint,
         filters=filters,
@@ -183,16 +236,26 @@ def download_manifest(gdc_cfg: GDCConfig, token: Optional[str]) -> None:
         fmt="TSV",
     )
 
-    write_text_to_file(content, Path(gdc_cfg.manifest_output))
+    project_dir = get_project_output_dir(gdc_cfg.base_output_dir, project_id)
+    output_path = project_dir / get_project_filename(project_id, "manifest")
+    write_text_to_file(content, output_path)
+    return output_path
 
 
-def download_file_metadata(gdc_cfg: GDCConfig, token: Optional[str]) -> None:
+def download_file_metadata(gdc_cfg: GDCConfig, project_id: str, token: Optional[str]) -> Path:
     """
-    Descarga metadatos fichero–caso–muestra para los ficheros del manifest
-    y los escribe en gdc_cfg.file_metadata_output.
+    Descarga metadatos fichero–caso–muestra para los ficheros del manifest.
+
+    Args:
+        gdc_cfg: Configuración GDC
+        project_id: ID del proyecto (e.g., "TCGA-LGG")
+        token: Token GDC opcional
+
+    Returns:
+        Path del fichero de metadatos generado
     """
     files_endpoint = gdc_cfg.base_url.rstrip("/") + "/files"
-    filters = build_gdc_files_filters(gdc_cfg)
+    filters = build_gdc_files_filters(gdc_cfg, project_id)
     content = _post_gdc_files(
         endpoint=files_endpoint,
         filters=filters,
@@ -203,7 +266,10 @@ def download_file_metadata(gdc_cfg: GDCConfig, token: Optional[str]) -> None:
         fmt="TSV",
     )
 
-    write_text_to_file(content, Path(gdc_cfg.file_metadata_output))
+    project_dir = get_project_output_dir(gdc_cfg.base_output_dir, project_id)
+    output_path = project_dir / get_project_filename(project_id, "metadata")
+    write_text_to_file(content, output_path)
+    return output_path
 
 
 def fetch_genes_table(gdc_cfg: GDCConfig, token: Optional[str]) -> None:
@@ -345,6 +411,7 @@ def select_files_from_manifest(
 
 def download_files_via_data_endpoint(
     gdc_cfg: GDCConfig,
+    project_id: str,
     token: Optional[str],
     files_to_download: Sequence[SelectedFile],
 ) -> List[Path]:
@@ -354,7 +421,9 @@ def download_files_via_data_endpoint(
     Parameters
     ----------
     gdc_cfg:
-        Configuración GDC, incluida la ruta de salida (rnaseq.output_dir).
+        Configuración GDC
+    project_id:
+        ID del proyecto (e.g., "TCGA-LGG")
     token:
         Token GDC o None.
     files_to_download:
@@ -365,15 +434,19 @@ def download_files_via_data_endpoint(
     list of Path
         Rutas locales a los ficheros descargados.
     """
-    logger.info("Iniciando descarga de ficheros vía endpoint /data")
+    logger.info("Iniciando descarga de ficheros vía endpoint /data para %s", project_id)
     logger.info("Número de ficheros a descargar: %d", len(files_to_download))
-    
+
     if not files_to_download:
         logger.info("No hay ficheros seleccionados para descarga; se omite /data.")
         return []
 
     data_base_url = gdc_cfg.base_url.rstrip("/") + "/data"
-    output_dir = Path(gdc_cfg.rnaseq.output_dir).expanduser().resolve()
+    # Build project-specific star_counts directory
+    project_dir = get_project_output_dir(gdc_cfg.base_output_dir, project_id)
+    output_dir = project_dir / "star_counts"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
     logger.info("Directorio de salida: %s", output_dir)
     logger.info("Overwrite existing: %s", gdc_cfg.rnaseq.overwrite_existing)
     logger.info("Decompress downloads: %s", gdc_cfg.rnaseq.decompress_downloads)
@@ -512,17 +585,24 @@ def extract_gene_ids_from_star_counts(
 
 def build_gene_table_from_counts(
     gdc_cfg: GDCConfig,
+    project_id: str,
     downloaded_files: Sequence[Path],
 ) -> Optional[Path]:
     """
-    Construye la tabla de genes del proyecto (gdc_genes_tcga_lgg.tsv) a partir de
-    uno de los ficheros STAR-Counts descargados.
+    Construye la tabla de genes del proyecto a partir de uno de los ficheros
+    STAR-Counts descargados.
 
-    Usa el primer fichero de downloaded_files como referencia.
+    Args:
+        gdc_cfg: Configuración GDC
+        project_id: ID del proyecto (e.g., "TCGA-LGG")
+        downloaded_files: Lista de ficheros descargados
+
+    Returns:
+        Path de la tabla de genes generada, o None si no hay ficheros
     """
-    logger.info("Iniciando construcción de tabla de genes del proyecto")
+    logger.info("Iniciando construcción de tabla de genes del proyecto %s", project_id)
     logger.info("Número de ficheros descargados disponibles: %d", len(downloaded_files))
-    
+
     if not downloaded_files:
         logger.warning(
             "No hay ficheros descargados de STAR-Counts; se omite construcción de tabla de genes."
@@ -531,7 +611,7 @@ def build_gene_table_from_counts(
 
     counts_file = downloaded_files[0]
     logger.info("Usando como referencia el fichero: %s", counts_file)
-    
+
     try:
         lines = extract_gene_ids_from_star_counts(
             counts_file=counts_file,
@@ -542,9 +622,10 @@ def build_gene_table_from_counts(
         logger.error("Error al extraer gene IDs: %s", e)
         raise
 
-    output_path = Path(gdc_cfg.rnaseq.gene_table_output).expanduser().resolve()
+    # Build project-specific output path
+    project_dir = get_project_output_dir(gdc_cfg.base_output_dir, project_id)
+    output_path = project_dir / get_project_filename(project_id, "genes")
     logger.info("Ruta de salida de la tabla de genes: %s", output_path)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
 
     header = "ensembl_gene_id_gdc\tensembl_gene_id"
     content = "\n".join([header] + lines) + "\n"
@@ -557,33 +638,38 @@ def build_gene_table_from_counts(
 
 def run_rnaseq_download_and_gene_extraction(
     gdc_cfg: GDCConfig,
+    project_id: str,
+    manifest_path: Path,
     token: Optional[str],
 ) -> None:
     """
     Orquesta la selección de ficheros STAR-Counts, descarga vía /data y
     construcción de la tabla de genes del proyecto.
+
+    Args:
+        gdc_cfg: Configuración GDC
+        project_id: ID del proyecto (e.g., "TCGA-LGG")
+        manifest_path: Path al manifest del proyecto
+        token: Token GDC opcional
     """
     logger.info("=" * 80)
-    logger.info("INICIANDO PROCESO DE DESCARGA RNA-SEQ Y EXTRACCIÓN DE GENES")
+    logger.info("INICIANDO PROCESO DE DESCARGA RNA-SEQ Y EXTRACCIÓN DE GENES PARA %s", project_id)
     logger.info("=" * 80)
-    
+
     logger.info("Verificando configuración RNA-seq...")
     logger.info("  download_enabled: %s", gdc_cfg.rnaseq.download_enabled)
     logger.info("  max_files: %d", gdc_cfg.rnaseq.max_files)
-    logger.info("  output_dir: %s", gdc_cfg.rnaseq.output_dir)
     logger.info("  overwrite_existing: %s", gdc_cfg.rnaseq.overwrite_existing)
     logger.info("  decompress_downloads: %s", gdc_cfg.rnaseq.decompress_downloads)
-    logger.info("  gene_table_output: %s", gdc_cfg.rnaseq.gene_table_output)
-    
+
     if not gdc_cfg.rnaseq.download_enabled:
         logger.info("Descarga RNA-seq deshabilitada en la configuración; se omite.")
         logger.info("=" * 80)
         return
 
-    manifest_path = Path(gdc_cfg.manifest_output).expanduser().resolve()
     logger.info("Ruta del manifest: %s", manifest_path)
     logger.info("Manifest existe: %s", manifest_path.exists())
-    
+
     try:
         selected_files = select_files_from_manifest(
             manifest_path=manifest_path,
@@ -604,6 +690,7 @@ def run_rnaseq_download_and_gene_extraction(
     try:
         downloaded_paths = download_files_via_data_endpoint(
             gdc_cfg=gdc_cfg,
+            project_id=project_id,
             token=token,
             files_to_download=selected_files,
         )
@@ -620,14 +707,14 @@ def run_rnaseq_download_and_gene_extraction(
         return
 
     try:
-        build_gene_table_from_counts(gdc_cfg, downloaded_paths)
+        build_gene_table_from_counts(gdc_cfg, project_id, downloaded_paths)
     except Exception as e:
         logger.error("Error al construir la tabla de genes: %s", e)
         logger.info("=" * 80)
         raise
-    
+
     logger.info("=" * 80)
-    logger.info("PROCESO DE DESCARGA RNA-SEQ COMPLETADO EXITOSAMENTE")
+    logger.info("PROCESO DE DESCARGA RNA-SEQ COMPLETADO EXITOSAMENTE PARA %s", project_id)
     logger.info("=" * 80)
 
 
@@ -635,12 +722,12 @@ def main(config_path: str = "data_config.yaml") -> None:
     """
     Punto de entrada principal del script.
 
-    - Carga la configuración YAML.
-    - Descarga el manifest de expresión para TCGA-LGG.
-    - Descarga la tabla de metadatos fichero–caso–muestra.
-    - Descarga la tabla mínima de genes vía /genes (opcional).
-    - Descarga N ficheros STAR-Counts vía /data.
-    - Construye la tabla de genes del proyecto a partir de un fichero STAR-Counts.
+    Multi-project support: Procesa todos los proyectos configurados en project_ids.
+    Para cada proyecto:
+    - Descarga el manifest de expresión
+    - Descarga la tabla de metadatos fichero–caso–muestra
+    - Descarga N ficheros STAR-Counts vía /data
+    - Construye la tabla de genes del proyecto
     """
     setup_logging()
     logger.info("Cargando configuración desde: %s", config_path)
@@ -650,21 +737,36 @@ def main(config_path: str = "data_config.yaml") -> None:
 
     token = load_gdc_token(gdc_cfg.token_path)
 
-    logger.info("Paso 1/4: Descargando manifest...")
-    download_manifest(gdc_cfg, token)
-    
-    logger.info("Paso 2/4: Descargando metadatos de ficheros...")
-    download_file_metadata(gdc_cfg, token)
-    
-    logger.info("Paso 3/4: Descargando tabla de genes vía /genes...")
-    fetch_genes_table(gdc_cfg, token)
-    
-    logger.info("Paso 4/4: Ejecutando descarga RNA-seq y extracción de genes...")
-    try:
-        run_rnaseq_download_and_gene_extraction(gdc_cfg, token)
-    except Exception as e:
-        logger.error("Error en descarga RNA-seq: %s", e, exc_info=True)
-        raise
+    logger.info("=" * 100)
+    logger.info("INICIANDO DESCARGA DE DATOS GDC PARA %d PROYECTO(S)", len(gdc_cfg.project_ids))
+    logger.info("Proyectos: %s", ", ".join(gdc_cfg.project_ids))
+    logger.info("=" * 100)
+
+    # Process each project
+    for project_idx, project_id in enumerate(gdc_cfg.project_ids, 1):
+        logger.info("\n" + "=" * 100)
+        logger.info("PROCESANDO PROYECTO %d/%d: %s", project_idx, len(gdc_cfg.project_ids), project_id)
+        logger.info("=" * 100)
+
+        try:
+            logger.info("Paso 1/3: Descargando manifest para %s...", project_id)
+            manifest_path = download_manifest(gdc_cfg, project_id, token)
+
+            logger.info("Paso 2/3: Descargando metadatos de ficheros para %s...", project_id)
+            download_file_metadata(gdc_cfg, project_id, token)
+
+            logger.info("Paso 3/3: Ejecutando descarga RNA-seq y extracción de genes para %s...", project_id)
+            run_rnaseq_download_and_gene_extraction(gdc_cfg, project_id, manifest_path, token)
+
+            logger.info("✓ Proyecto %s completado exitosamente", project_id)
+
+        except Exception as e:
+            logger.error("✗ Error al procesar proyecto %s: %s", project_id, e, exc_info=True)
+            raise
+
+    logger.info("\n" + "=" * 100)
+    logger.info("DESCARGA COMPLETADA PARA TODOS LOS PROYECTOS")
+    logger.info("=" * 100)
 
 
 if __name__ == "__main__":
