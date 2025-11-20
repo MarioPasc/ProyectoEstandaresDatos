@@ -6,6 +6,7 @@ mongodb:
   mongo_uri: "mongodb://localhost:27017/"
   database_name: "estandares_db"
   collection_name: "gdc_cases"
+  hgnc_collection_name: "hgnc_genes"
 
 gdc:
   # Base directory where project-specific data is located
@@ -46,6 +47,9 @@ uniprot:
   # These will be resolved as: {base_data_dir}/{project_id}/{pattern}
   mapping_filename: "uniprot_mapping_{project_id_lower}.tsv"
   metadata_filename: "uniprot_metadata_{project_id_lower}.tsv"
+hgnc:
+  # Path to HGNC complete set TSV file (downloaded via datastandards-download)
+  output_path: "/home/mpascual/misc/Universidad25-26/Estandares/data/hgnc/hgnc_complete_set.tsv"
 
 options:
   # Si true, elimina la colección antes de insertar (útil para rehacer la carga)
@@ -64,4 +68,5 @@ options:
 
   # Ruta donde guardar la colección como JSON después de la importación exitosa
   # Si es null o vacío, no se guarda el JSON
-  save_as_json: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc/gdc_collection_export.json"
+  save_as_json_gdc: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc/gdc_collection_export.json"
+  save_as_json_hgnc: "/home/mpascual/misc/Universidad25-26/Estandares/data/hgnc/hgnc_collection_export.json"
