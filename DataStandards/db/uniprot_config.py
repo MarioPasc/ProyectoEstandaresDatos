@@ -71,7 +71,7 @@ Campos clave en el documento MongoDB resultante:
     )
 
     parser.add_argument(
-        '--no-insert-mongo',
+        '--no-insert',
         action='store_true',
         help='Solo generar JSON sin insertar en MongoDB (útil para testing)'
     )
@@ -122,21 +122,21 @@ def main():
     if args.drop_collection:
         config.options.drop_collection = True
 
-    if args.no_insert_mongo:
-        config.options.no_insert_mongo = True
+    if args.no_insert:
+        config.options.insert_into_mongodb = False
 
     if args.quiet:
         config.options.verbose = False
 
     # Manejo de save_json
     if args.no_save_json:
-        config.options.save_as_json = None
+        config.options.save_as_json_uniprot = None
     elif args.save_json is not None:
-        config.options.save_as_json = args.save_json
+        config.options.save_as_json_uniprot = args.save_json
 
-    # Si no_insert_mongo está activado pero no hay save_as_json, usar valor por defecto
-    if config.options.no_insert_mongo and not config.options.save_as_json:
-        config.options.save_as_json = "uniprot_multi_project_export.json"
+    # Si no se inserta en MongoDB pero no hay save_as_json_uniprot, usar valor por defecto
+    if not config.options.insert_into_mongodb and not config.options.save_as_json_uniprot:
+        config.options.save_as_json_uniprot = "uniprot_multi_project_export.json"
 
     # Ejecutar importación multi-proyecto
     try:
@@ -150,9 +150,9 @@ def main():
             collection_name=config.mongodb.collection_name,
 
             # Opciones
+            insert_into_mongodb=config.options.insert_into_mongodb,
             drop_collection=config.options.drop_collection,
-            save_as_json=config.options.save_as_json,
-            no_insert_mongo=config.options.no_insert_mongo,
+            save_as_json_uniprot=config.options.save_as_json_uniprot,
             verbose=config.options.verbose
         )
     except FileNotFoundError as e:

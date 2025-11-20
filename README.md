@@ -2,18 +2,19 @@
 
 # Tabla de Contenidos
 
+- [Tabla de Contenidos](#tabla-de-contenidos)
 - [ProyectoEstandaresDatos](#proyectoestandaresdatos)
-   * [🚀 Instalación y Configuración](#-instalación-y-configuración)
-      + [1️⃣ Clonar el repositorio](#1-clonar-el-repositorio)
-      + [2️⃣ Cambiar a la rama de desarrollo](#2-cambiar-a-la-rama-de-desarrollo)
-      + [3️⃣ Crear entorno Conda](#3-crear-entorno-conda)
-      + [4️⃣ Instalar el paquete en modo desarrollo](#4-instalar-el-paquete-en-modo-desarrollo)
-      + [5️⃣ Configurar rutas personales](#5-configurar-rutas-personales)
-   * [📥 Descargar Datos](#-descargar-datos)
-   * [📊 Fuentes de Datos](#-fuentes-de-datos)
-   * [🔧 Verificación](#-verificación)
-   * [📖 Lectura](#-lectura)
-   * [❓ Problemas Comunes](#-problemas-comunes)
+  - [🚀 Instalación y Configuración](#-instalación-y-configuración)
+    - [1️⃣ Clonar el repositorio](#1️⃣-clonar-el-repositorio)
+    - [2️⃣ Cambiar a la rama de desarrollo](#2️⃣-cambiar-a-la-rama-de-desarrollo)
+    - [3️⃣ Crear entorno Conda](#3️⃣-crear-entorno-conda)
+    - [4️⃣ Instalar el paquete en modo desarrollo](#4️⃣-instalar-el-paquete-en-modo-desarrollo)
+    - [5️⃣ Configurar rutas personales](#5️⃣-configurar-rutas-personales)
+  - [📥 Descargar Datos](#-descargar-datos)
+  - [📊 Fuentes de Datos](#-fuentes-de-datos)
+  - [🔧 Verificación](#-verificación)
+  - [📖 Lectura](#-lectura)
+  - [❓ Problemas Comunes](#-problemas-comunes)
 
 <!-- TOC end -->
 
@@ -36,10 +37,10 @@ cd ProyectoEstandaresDatos
 ### 2️⃣ Cambiar a la rama de desarrollo
 
 > [!IMPORTANT]
-> **DEBES** trabajar en la rama `descargarDatosAutomaticamente` para tener acceso a las últimas funcionalidades de descarga de datos.
+> **DEBES** trabajar en la rama `dev` para tener acceso a las últimas funcionalidades de descarga de datos.
 
 ```bash
-git checkout descargarDatosAutomaticamente
+git checkout dev
 ```
 
 <!-- TOC --><a name="3-crear-entorno-conda"></a>

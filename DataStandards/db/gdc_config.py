@@ -144,9 +144,9 @@ def main():
 
     # Manejo de save_json
     if args.no_save_json:
-        config.options.save_as_json = None
+        config.options.save_as_json_gdc = None
     elif args.save_json is not None:
-        config.options.save_as_json = args.save_json
+        config.options.save_as_json_gdc = args.save_json
 
     # Ejecutar importación multi-proyecto
     try:
@@ -160,10 +160,11 @@ def main():
             collection_name=config.mongodb.collection_name,
 
             # Opciones
+            insert_into_mongodb=config.options.insert_into_mongodb,
             process_expression=config.options.process_expression,
             max_files=config.options.max_files_to_process,
             drop_collection=config.options.drop_collection,
-            save_as_json=config.options.save_as_json,
+            save_as_json=config.options.save_as_json_gdc,
             verbose=config.options.verbose
         )
     except FileNotFoundError as e:

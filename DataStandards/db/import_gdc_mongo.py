@@ -382,6 +382,49 @@ def export_collection_to_json(
         return False
 
 
+def save_document_as_json(
+    document: Dict[str, Any],
+    output_path: str,
+    verbose: bool = True
+) -> bool:
+    """
+    Guarda el documento como archivo JSON (sin insertar en MongoDB).
+
+    Args:
+        document: Documento a guardar
+        output_path: Ruta donde guardar el archivo JSON
+        verbose: Si True, muestra información detallada
+
+    Returns:
+        True si el guardado fue exitoso, False en caso contrario
+    """
+    try:
+        if verbose:
+            print(f"\n[Guardado JSON] Guardando documento como JSON...")
+
+        # Crear directorio si no existe
+        output_file = Path(output_path)
+        output_file.parent.mkdir(parents=True, exist_ok=True)
+
+        # Guardar como JSON
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(document, f, indent=2, ensure_ascii=False)
+
+        if verbose:
+            file_size = output_file.stat().st_size
+            file_size_mb = file_size / (1024 * 1024)
+            print(f"[Guardado JSON] Documento guardado exitosamente")
+            print(f"  - Archivo: {output_path}")
+            print(f"  - Tamaño: {file_size_mb:.2f} MB ({file_size:,} bytes)")
+
+        return True
+
+    except Exception as e:
+        if verbose:
+            print(f"[Guardado JSON] Error durante el guardado: {e}")
+        return False
+
+
 def insert_to_mongo(
     document: Dict[str, Any],
     mongo_uri: str,
@@ -457,6 +500,7 @@ def run_import(
     mongo_uri: str,
     database_name: str,
     collection_name: str,
+    insert_into_mongodb: bool = True,
     process_expression: bool = False,
     max_files: Optional[int] = None,
     drop_collection: bool = False,
@@ -474,6 +518,7 @@ def run_import(
         mongo_uri: URI de MongoDB
         database_name: Nombre de la base de datos
         collection_name: Nombre de la colección
+        insert_into_mongodb: Si True, inserta en MongoDB; si False, solo genera JSON
         process_expression: Si True, procesa ficheros STAR-Counts
         max_files: Máximo número de ficheros a procesar por proyecto (None = todos)
         drop_collection: Si True, elimina la colección antes de insertar
@@ -582,23 +627,45 @@ def run_import(
         print(f"    - Total proyectos: {len(multi_doc['projects'])}")
         print(f"    - Total casos: {total_cases}")
 
-    # Insert to MongoDB
-    if verbose:
-        print(f"\n{'=' * 100}")
-        print("INSERTANDO EN MONGODB...")
-        print(f"{'=' * 100}")
+    # Handle insert_into_mongodb flag
+    if not insert_into_mongodb:
+        if verbose:
+            print(f"\n{'=' * 100}")
+            print("MODO SOLO JSON: No insertando en MongoDB...")
+            print(f"{'=' * 100}")
 
-    insert_to_mongo(
-        document=multi_doc,
-        mongo_uri=mongo_uri,
-        database_name=database_name,
-        collection_name=collection_name,
-        drop_collection=drop_collection,
-        save_as_json=save_as_json,
-        verbose=verbose
-    )
+        if not save_as_json:
+            # Generate default output path
+            save_as_json = "gdc_multi_project_export.json"
 
-    if verbose:
-        print(f"\n{'=' * 100}")
-        print("✓ PROCESO COMPLETADO EXITOSAMENTE")
-        print(f"{'=' * 100}")
+        save_document_as_json(
+            document=multi_doc,
+            output_path=save_as_json,
+            verbose=verbose
+        )
+
+        if verbose:
+            print(f"\n{'=' * 100}")
+            print("✓ PROCESO COMPLETADO EXITOSAMENTE (sin inserción en MongoDB)")
+            print(f"{'=' * 100}")
+    else:
+        # Insert to MongoDB
+        if verbose:
+            print(f"\n{'=' * 100}")
+            print("INSERTANDO EN MONGODB...")
+            print(f"{'=' * 100}")
+
+        insert_to_mongo(
+            document=multi_doc,
+            mongo_uri=mongo_uri,
+            database_name=database_name,
+            collection_name=collection_name,
+            drop_collection=drop_collection,
+            save_as_json=save_as_json,
+            verbose=verbose
+        )
+
+        if verbose:
+            print(f"\n{'=' * 100}")
+            print("✓ PROCESO COMPLETADO EXITOSAMENTE")
+            print(f"{'=' * 100}")

@@ -617,9 +617,9 @@ def run_import(
     gdc_config: 'GDCMongoDataConfig',
     mongo_uri: str,
     database_name: str,
+    insert_into_mongodb: bool = True,
     drop_collection: bool = False,
     save_as_json_hgnc: Optional[str] = None,
-    only_json: bool = False,
     verbose: bool = True
 ) -> None:
     """
@@ -630,9 +630,9 @@ def run_import(
         gdc_config: Configuración GDC con lista de proyectos
         mongo_uri: URI de MongoDB
         database_name: Nombre de la base de datos
+        insert_into_mongodb: Si True, inserta en MongoDB; si False, solo genera JSON
         drop_collection: Si True, elimina la colección antes de insertar
         save_as_json_hgnc: Ruta donde guardar el documento como JSON
-        only_json: Si True, solo guarda JSON (no inserta en MongoDB)
         verbose: Si True, muestra información detallada
     """
     if verbose:
@@ -652,32 +652,32 @@ def run_import(
     # Construir documentos
     documents = build_hgnc_documents(hgnc_df, gdc_config, verbose=verbose)
 
-    # Guardar solo JSON si se solicita
-    if only_json:
-        if save_as_json_hgnc:
-            if verbose:
-                print(f"\n{'=' * 100}")
-                print(f"MODO SOLO JSON (--only-json)")
-                print(f"{'=' * 100}")
+    # Handle insert_into_mongodb flag
+    if not insert_into_mongodb:
+        if verbose:
+            print(f"\n{'=' * 100}")
+            print(f"MODO SOLO JSON: No insertando en MongoDB...")
+            print(f"{'=' * 100}")
 
-            # Crear directorio si no existe
-            output_file = Path(save_as_json_hgnc)
-            output_file.parent.mkdir(parents=True, exist_ok=True)
+        if not save_as_json_hgnc:
+            # Generate default output path
+            save_as_json_hgnc = "hgnc_genes_export.json"
 
-            # Guardar como JSON
-            with open(output_file, 'w', encoding='utf-8') as f:
-                json.dump(documents, f, indent=2, ensure_ascii=False)
+        # Crear directorio si no existe
+        output_file = Path(save_as_json_hgnc)
+        output_file.parent.mkdir(parents=True, exist_ok=True)
 
-            if verbose:
-                file_size = output_file.stat().st_size
-                file_size_mb = file_size / (1024 * 1024)
-                print(f"\n  ✓ Colección exportada como JSON:")
-                print(f"    - Archivo: {save_as_json_hgnc}")
-                print(f"    - Tamaño: {file_size_mb:.2f} MB ({file_size:,} bytes)")
-                print(f"    - Documentos: {len(documents)}")
-        else:
-            print("\n[ERROR] --only-json especificado pero no se proporcionó ruta de JSON")
-            sys.exit(1)
+        # Guardar como JSON
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(documents, f, indent=2, ensure_ascii=False)
+
+        if verbose:
+            file_size = output_file.stat().st_size
+            file_size_mb = file_size / (1024 * 1024)
+            print(f"\n  ✓ Colección exportada como JSON:")
+            print(f"    - Archivo: {save_as_json_hgnc}")
+            print(f"    - Tamaño: {file_size_mb:.2f} MB ({file_size:,} bytes)")
+            print(f"    - Documentos: {len(documents)}")
     else:
         # Insertar en MongoDB + exportar JSON
         insert_to_mongo(

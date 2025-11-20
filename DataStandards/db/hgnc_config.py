@@ -88,7 +88,7 @@ Estructura del documento MongoDB resultante:
     )
 
     parser.add_argument(
-        '--only-json',
+        '--no-insert',
         action='store_true',
         help='Solo guardar JSON, sin insertar en MongoDB'
     )
@@ -141,6 +141,9 @@ def main():
     if args.drop_collection:
         config.options.drop_collection = True
 
+    if args.no_insert:
+        config.options.insert_into_mongodb = False
+
     if args.quiet:
         config.options.verbose = False
 
@@ -149,6 +152,10 @@ def main():
         config.options.save_as_json_hgnc = None
     elif args.save_json is not None:
         config.options.save_as_json_hgnc = args.save_json
+
+    # Si no se inserta en MongoDB pero no hay save_as_json_hgnc, usar valor por defecto
+    if not config.options.insert_into_mongodb and not config.options.save_as_json_hgnc:
+        config.options.save_as_json_hgnc = "hgnc_genes_export.json"
 
     # Ejecutar importación
     try:
@@ -164,9 +171,9 @@ def main():
             database_name=config.mongodb.database_name,
 
             # Opciones
+            insert_into_mongodb=config.options.insert_into_mongodb,
             drop_collection=config.options.drop_collection,
             save_as_json_hgnc=config.options.save_as_json_hgnc,
-            only_json=args.only_json,
             verbose=config.options.verbose
         )
     except FileNotFoundError as e:

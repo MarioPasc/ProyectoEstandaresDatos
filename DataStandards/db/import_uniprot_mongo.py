@@ -410,7 +410,7 @@ def insert_to_mongo(
     database_name: str,
     collection_name: str,
     drop_collection: bool = False,
-    save_as_json: Optional[str] = None,
+    save_as_json_uniprot: Optional[str] = None,
     verbose: bool = True
 ) -> None:
     """
@@ -422,7 +422,7 @@ def insert_to_mongo(
         database_name: Nombre de la base de datos
         collection_name: Nombre de la colección
         drop_collection: Si True, elimina la colección antes de insertar
-        save_as_json: Ruta donde guardar la colección como JSON (None = no guardar)
+        save_as_json_uniprot: Ruta donde guardar la colección como JSON (None = no guardar)
         verbose: Si True, muestra información detallada
     """
     try:
@@ -460,12 +460,12 @@ def insert_to_mongo(
         client.close()
 
         # Exportar a JSON si se especificó
-        if save_as_json:
+        if save_as_json_uniprot:
             export_collection_to_json(
                 mongo_uri=mongo_uri,
                 database_name=database_name,
                 collection_name=collection_name,
-                output_path=save_as_json,
+                output_path=save_as_json_uniprot,
                 verbose=verbose
             )
 
@@ -479,9 +479,9 @@ def run_import(
     mongo_uri: str,
     database_name: str,
     collection_name: str,
+    insert_into_mongodb: bool = True,
     drop_collection: bool = False,
-    save_as_json: Optional[str] = None,
-    no_insert_mongo: bool = False,
+    save_as_json_uniprot: Optional[str] = None,
     verbose: bool = True
 ) -> None:
     """
@@ -495,9 +495,9 @@ def run_import(
         mongo_uri: URI de MongoDB
         database_name: Nombre de la base de datos
         collection_name: Nombre de la colección
+        insert_into_mongodb: Si True, inserta en MongoDB; si False, solo genera JSON
         drop_collection: Si True, elimina la colección antes de insertar
-        save_as_json: Ruta donde guardar el documento como JSON
-        no_insert_mongo: Si True, solo genera JSON sin insertar en MongoDB
+        save_as_json_uniprot: Ruta donde guardar el documento como JSON
         verbose: Si True, muestra información detallada
     """
     if verbose:
@@ -591,20 +591,20 @@ def run_import(
         print(f"\n  ✓ Documento multi-proyecto construido:")
         print(f"    - Total entradas UniProt: {len(multi_doc['uniprot_entries'])}")
 
-    # Handle no_insert_mongo mode
-    if no_insert_mongo:
+    # Handle insert_into_mongodb flag
+    if not insert_into_mongodb:
         if verbose:
             print(f"\n{'=' * 100}")
-            print("MODO NO-INSERT-MONGO: Solo generando JSON...")
+            print("MODO SOLO JSON: No insertando en MongoDB...")
             print(f"{'=' * 100}")
 
-        if not save_as_json:
+        if not save_as_json_uniprot:
             # Generate default output path
-            save_as_json = "uniprot_multi_project_export.json"
+            save_as_json_uniprot = "uniprot_multi_project_export.json"
 
         save_document_as_json(
             document=multi_doc,
-            output_path=save_as_json,
+            output_path=save_as_json_uniprot,
             verbose=verbose
         )
 
@@ -625,7 +625,7 @@ def run_import(
             database_name=database_name,
             collection_name=collection_name,
             drop_collection=drop_collection,
-            save_as_json=save_as_json,
+            save_as_json_uniprot=save_as_json_uniprot,
             verbose=verbose
         )
 

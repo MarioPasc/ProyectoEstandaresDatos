@@ -52,21 +52,20 @@ hgnc:
   output_path: "/home/mpascual/misc/Universidad25-26/Estandares/data/hgnc/hgnc_complete_set.tsv"
 
 options:
+  # Si true, inserta los datos en MongoDB
+  insert_into_mongodb: false
   # Si true, elimina la colección antes de insertar (útil para rehacer la carga)
   drop_collection: true
-
   # Si true, procesa ficheros STAR-Counts para calcular expression_summary
   # Si false, solo inserta metadatos sin procesar expresión
   process_expression: true
-
   # Número máximo de ficheros STAR-Counts a procesar (None = todos)
   # Útil para testing con subconjuntos de datos
-  max_files_to_process: null
-
+  max_files_to_process: 5
   # Si true, muestra información detallada durante la importación
   verbose: true
-
   # Ruta donde guardar la colección como JSON después de la importación exitosa
   # Si es null o vacío, no se guarda el JSON
   save_as_json_gdc: "/home/mpascual/misc/Universidad25-26/Estandares/data/gdc/gdc_collection_export.json"
   save_as_json_hgnc: "/home/mpascual/misc/Universidad25-26/Estandares/data/hgnc/hgnc_collection_export.json"
+  save_as_json_uniprot: "/home/mpascual/misc/Universidad25-26/Estandares/data/uniprot/uniprot_collection_export.json"

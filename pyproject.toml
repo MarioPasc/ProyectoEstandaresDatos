@@ -56,6 +56,7 @@ datastandards-download = "DataStandards.cli.data:main"
 datastandards-import-gdc = "DataStandards.db.gdc_config:main"
 datastandards-import-uniprot = "DataStandards.db.uniprot_config:main"
 datastandards-import-hgnc = "DataStandards.db.hgnc_config:main"
+datastandards-import-all = "DataStandards.db.import_all_mongo:main"
 
 
 [tool.setuptools]
