@@ -17,7 +17,6 @@ from pathlib import Path
 from typing import Dict, Optional, Any, List, Set
 
 import pandas as pd
-import numpy as np
 from pymongo import MongoClient
 from bson import ObjectId
 
