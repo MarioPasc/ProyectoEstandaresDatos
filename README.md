@@ -11,6 +11,7 @@
     - [4️⃣ Instalar el paquete en modo desarrollo](#4️⃣-instalar-el-paquete-en-modo-desarrollo)
     - [5️⃣ Configurar rutas personales](#5️⃣-configurar-rutas-personales)
   - [📥 Descargar Datos](#-descargar-datos)
+  - [🗄️ Importar a JSON y MongoDB](#️-importar-a-json-y-mongodb)
   - [📊 Fuentes de Datos](#-fuentes-de-datos)
   - [🔧 Verificación](#-verificación)
   - [📖 Lectura](#-lectura)
@@ -104,6 +105,49 @@ datastandards-download --config config/data_config.yaml --source uniprot
 > - La descarga completa puede tardar varios minutos
 > - UniProt requiere que GDC y HGNC se hayan descargado primero
 > - Los directorios de salida se crean automáticamente
+
+<!-- TOC --><a name="-importar-a-json-y-mongodb"></a>
+## 🗄️ Importar a JSON y MongoDB
+
+Una vez descargados los datos crudos, puedes procesarlos y convertirlos a formato JSON, y opcionalmente importarlos a MongoDB.
+
+> [!CAUTION]
+> **CRÍTICO**: Debes crear tu propio archivo de configuración de MongoDB.
+
+```bash
+# Crear tu archivo de configuración personalizado
+cp config/db_mongo/mario_mongodb_config.yaml config/db_mongo/{tu_nombre}_mongodb_config.yaml
+
+# Editar y cambiar TODAS las rutas que contienen /home/mpascual
+nano config/db_mongo/{tu_nombre}_mongodb_config.yaml
+```
+
+**Comandos de importación:**
+
+```bash
+# Importar TODAS las fuentes (GDC + HGNC + UniProt) a JSON y MongoDB
+datastandards-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml
+
+# Solo generar archivos JSON sin insertar en MongoDB
+datastandards-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --no-insert
+
+# Omitir fuentes específicas durante la importación
+datastandards-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --skip-gdc
+datastandards-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --skip-hgnc
+datastandards-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --skip-uniprot
+```
+
+**Resultado esperado:**
+
+Tras la ejecución exitosa, se generarán archivos JSON:
+- ✅ **GDC**: ~7.6KB
+- ✅ **HGNC**: ~139MB
+- ✅ **UniProt**: ~5.8MB
+
+> [!NOTE]
+> - Los archivos JSON se generan incluso con `--no-insert`
+> - La importación a MongoDB requiere tener MongoDB en ejecución
+> - Los tres importadores (GDC, HGNC, UniProt) se ejecutan en secuencia
 
 <!-- TOC --><a name="-fuentes-de-datos"></a>
 ## 📊 Fuentes de Datos
