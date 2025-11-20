@@ -215,6 +215,9 @@ class UniProtMongoAppConfig:
     mongodb: MongoDBConfig
     uniprot: UniProtMongoDataConfig
     options: UniProtMongoOptionsConfig = field(default_factory=UniProtMongoOptionsConfig)
+
+
+@dataclass
 class HGNCMongoConfig:
     """Configuración de datos HGNC para importación a MongoDB.
 
