@@ -13,7 +13,7 @@ import sys
 import json
 import math
 from pathlib import Path
-from typing import Dict, Optional, Any, List, Set
+from typing import Dict, Optional, Any, List
 
 import pandas as pd
 from pymongo import MongoClient
