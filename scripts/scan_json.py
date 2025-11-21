@@ -91,6 +91,193 @@ def map_hgnc_to_uniprot(hgnc_genes_found, uniprot):
 # INFORME POR CONSOLA
 # ============================================================
 
+def realistic_query_example(gdc, hgnc, uniprot):
+    """
+    Demuestra un caso de consulta realista que cruza las tres bases de datos.
+    
+    Caso de uso: Para un paciente específico con cáncer, identificar:
+    1. Sus datos clínicos (proyecto, caso)
+    2. Genes expresados en ese paciente (con valores de expresión)
+    3. Proteínas asociadas a esos genes (con anotaciones funcionales)
+    """
+    print("\n6) EJEMPLO DE CONSULTA REALISTA")
+    print("=" * 70)
+    print("\n  CASO DE USO: Análisis de perfil molecular de un paciente")
+    print("  " + "-" * 66)
+    
+    # PASO 1: Seleccionar un paciente del primer proyecto
+    print("\n  [PASO 1] Selección de paciente")
+    print("  " + "·" * 66)
+    
+    if not gdc["projects"]:
+        print("  ❌ No hay proyectos en GDC")
+        return
+    
+    project = gdc["projects"][0]
+    project_id = project["project_id"]
+    disease_type = project.get("disease_type", "N/A")
+    
+    if not project["cases"]:
+        print("  ❌ No hay casos en el proyecto")
+        return
+    
+    case = project["cases"][0]
+    case_id = case["case_id"]
+    submitter_id = case.get("submitter_id", "N/A")
+    
+    print(f"  → Proyecto: {project_id} ({disease_type})")
+    print(f"  → Paciente: {case_id}")
+    print(f"  → Submitter ID: {submitter_id}")
+    print(f"  → Nº ficheros: {len(case['files'])}")
+    
+    # Verificar datos de expresión
+    files_with_expression = [f for f in case["files"] 
+                            if f.get("expression_summary") is not None]
+    
+    if not files_with_expression:
+        print("  ⚠ Este caso no tiene datos de expresión procesados")
+        return
+    
+    # Tomar el primer fichero con expresión
+    expr_file = files_with_expression[0]
+    expr_summary = expr_file["expression_summary"]
+    stats = expr_summary["stats"]
+    
+    print(f"\n  Fichero de expresión: {expr_file['file_name']}")
+    print(f"    • Genes analizados: {expr_summary['n_genes']}")
+    print(f"    • Expresión media: {stats['mean']:.2f}")
+    print(f"    • Mediana: {stats['median']:.2f}")
+    print(f"    • Desv. estándar: {stats['std']:.2f}")
+    
+    # PASO 2: Buscar genes expresados en este paciente
+    print(f"\n  [PASO 2] Búsqueda de genes expresados en este paciente")
+    print("  " + "·" * 66)
+    
+    # Buscar genes en HGNC que tengan este case_id
+    patient_genes = []
+    for gene in hgnc:
+        if "projects" not in gene:
+            continue
+        
+        if project_id not in gene["projects"]:
+            continue
+        
+        gene_cases = gene["projects"][project_id].get("cases", {})
+        
+        if case_id in gene_cases:
+            case_data = gene_cases[case_id]
+            patient_genes.append({
+                "hgnc_id": gene["hgnc_id"],
+                "symbol": gene["symbol"],
+                "ensembl_id": gene.get("ensembl_gene_id", "N/A"),
+                "expression": case_data
+            })
+    
+    if not patient_genes:
+        print("  ⚠ No se encontraron genes para este paciente en HGNC")
+        return
+    
+    print(f"  → Genes encontrados: {len(patient_genes)}")
+    print(f"\n  Muestra de los primeros 3 genes:")
+    
+    for i, gene_info in enumerate(patient_genes[:3], 1):
+        print(f"\n    {i}. {gene_info['symbol']} ({gene_info['hgnc_id']})")
+        print(f"       • Ensembl ID: {gene_info['ensembl_id']}")
+        
+        # Mostrar valores de expresión disponibles
+        expr = gene_info['expression']
+        expr_values = []
+        if 'unstranded' in expr and expr['unstranded'] is not None:
+            expr_values.append(f"unstranded={expr['unstranded']:.0f}")
+        if 'stranded_first' in expr and expr['stranded_first'] is not None:
+            expr_values.append(f"stranded_first={expr['stranded_first']:.0f}")
+        if 'stranded_second' in expr and expr['stranded_second'] is not None:
+            expr_values.append(f"stranded_second={expr['stranded_second']:.0f}")
+        
+        if expr_values:
+            print(f"       • Expresión: {', '.join(expr_values)}")
+    
+    # PASO 3: Buscar proteínas asociadas a estos genes
+    print(f"\n  [PASO 3] Búsqueda de proteínas asociadas")
+    print("  " + "·" * 66)
+    
+    # Extraer HGNC IDs de los genes encontrados
+    gene_hgnc_ids = {g["hgnc_id"] for g in patient_genes}
+    
+    # Buscar proteínas que coincidan con estos genes
+    associated_proteins = []
+    for protein in uniprot["uniprot_entries"]:
+        protein_hgnc_ids = protein.get("gene", {}).get("hgnc_ids", [])
+        
+        # Verificar si algún HGNC ID coincide
+        matching_genes = gene_hgnc_ids.intersection(set(protein_hgnc_ids))
+        
+        if matching_genes:
+            associated_proteins.append({
+                "uniprot_id": protein["uniprot_id"],
+                "protein_name": protein.get("protein_names", {}).get("recommended", "N/A"),
+                "reviewed": protein.get("reviewed", False),
+                "organism": protein.get("organism", "N/A"),
+                "matching_genes": list(matching_genes),
+                "go_terms": protein.get("go_terms", {}),
+                "projects": protein.get("projects", {})
+            })
+    
+    if not associated_proteins:
+        print("  ⚠ No se encontraron proteínas para estos genes en UniProt")
+        return
+    
+    print(f"  → Proteínas encontradas: {len(associated_proteins)}")
+    print(f"\n  Muestra de las primeras 2 proteínas:")
+    
+    for i, prot in enumerate(associated_proteins[:2], 1):
+        print(f"\n    {i}. {prot['uniprot_id']} - {prot['protein_name']}")
+        print(f"       • Estado: {'✓ Reviewed' if prot['reviewed'] else '○ Unreviewed'}")
+        print(f"       • Organismo: {prot['organism']}")
+        print(f"       • Genes asociados: {', '.join(prot['matching_genes'])}")
+        
+        # GO terms summary
+        go = prot["go_terms"]
+        n_process = len(go.get("biological_process", []))
+        n_function = len(go.get("molecular_function", []))
+        n_component = len(go.get("cellular_component", []))
+        
+        print(f"       • GO terms: {n_process} procesos, {n_function} funciones, "
+              f"{n_component} componentes")
+        
+        # Mostrar algunos GO terms si existen
+        if n_process > 0:
+            sample_go = go["biological_process"][:2]
+            print(f"       • Procesos biológicos (muestra):")
+            for go_term in sample_go:
+                print(f"         - {go_term}")
+    
+    # PASO 4: Resumen estadístico
+    print(f"\n  [RESUMEN]")
+    print("  " + "·" * 66)
+    print(f"  ✓ Paciente analizado: {case_id} ({project_id})")
+    print(f"  ✓ Genes identificados: {len(patient_genes)}")
+    print(f"  ✓ Proteínas asociadas: {len(associated_proteins)}")
+    
+    # Calcular proteínas reviewed vs unreviewed
+    reviewed = sum(1 for p in associated_proteins if p["reviewed"])
+    unreviewed = len(associated_proteins) - reviewed
+    print(f"  ✓ Proteínas revisadas: {reviewed}/{len(associated_proteins)}")
+    
+    # Calcular promedio de GO terms
+    total_go = sum(
+        len(p["go_terms"].get("biological_process", [])) +
+        len(p["go_terms"].get("molecular_function", [])) +
+        len(p["go_terms"].get("cellular_component", []))
+        for p in associated_proteins
+    )
+    avg_go = total_go / len(associated_proteins) if associated_proteins else 0
+    print(f"  ✓ Promedio GO terms por proteína: {avg_go:.1f}")
+    
+    print("\n  → Esta consulta demuestra la integración completa de los datos:")
+    print("    GDC (paciente) → HGNC (genes) → UniProt (proteínas)")
+
+
 def print_report(gdc, hgnc, uniprot):
     print("\n==================== INFORME DE VALIDACIÓN JSON ====================\n")
 
@@ -189,7 +376,12 @@ def print_report(gdc, hgnc, uniprot):
     print(f"  → Conclusión: datos biológicos coherentes y realistas")
     print()
 
-    print("==================== FIN DEL INFORME ====================\n")
+    # -----------------------------------------------------------------
+    # CONSULTA REALISTA
+    # -----------------------------------------------------------------
+    realistic_query_example(gdc, hgnc, uniprot)
+
+    print("\n==================== FIN DEL INFORME ====================\n")
 
 
 # ============================================================
