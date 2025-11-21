@@ -1,0 +1,89 @@
+# Parámetros de acceso a datos para GDC y HGNC
+
+gdc:
+  base_url: "https://api.gdc.cancer.gov"
+
+  # Cohorte / filtros básicos para /files
+  project_id: "TCGA-LGG"
+  data_category: "Transcriptome Profiling"
+  data_type: "Gene Expression Quantification"
+  workflow_type: "STAR - Counts"
+
+  # 1) Manifest tipo GDC Data Transfer Tool
+  fields: "file_id,file_name,md5sum,file_size,state"
+  manifest_output: "/Users/User/MyDocs/Universidad/CUARTO_2026/Estandares_de_datos/PROYECTO/ProyectoEstandaresDatos
+    /data/gdc/gdc_manifest_tcga_lgg.tsv"
+
+  # 2) Metadatos fichero–caso–muestra
+  file_metadata_fields: >
+    file_id,file_name,cases.case_id,cases.submitter_id,
+    cases.samples.sample_type,cases.project.project_id
+  file_metadata_output: "/Users/User/MyDocs/Universidad/CUARTO_2026/Estandares_de_datos/PROYECTO/ProyectoEstandaresDatos
+    /data/gdc/gdc_file_metadata_tcga_lgg.tsv"
+
+  # 3) Tabla mínima de genes "de ejemplo" vía /genes (puedes mantenerla o dejarla vacía)
+  gene_symbols:
+    #- "TP53"
+    #- "IDH1"
+    #- "IDH2"
+    #- "ATRX"
+  genes_output: "/Users/User/MyDocs/Universidad/CUARTO_2026/Estandares_de_datos/PROYECTO/ProyectoEstandaresDatos
+    /data/gdc/gdc_genes_tcga_lgg_example.tsv"
+
+  # 4) Nueva configuración específica para descargas RNA-seq STAR-Counts
+  rnaseq:
+    download_enabled: true          # poner a false si no quieres descargar nada
+    max_files: 5                    # N máximo de ficheros a descargar desde el manifest
+    output_dir: "/Users/User/MyDocs/Universidad/CUARTO_2026/Estandares_de_datos/PROYECTO/ProyectoEstandaresDatos
+      /data/gdc/star_counts"   # directorio donde se guardan los .gz
+    overwrite_existing: false       # si false, no re-descarga si el fichero ya existe
+    decompress_downloads: false     # si true, crea versión descomprimida junto al .gz
+    gene_table_output: "/Users/User/MyDocs/Universidad/CUARTO_2026/Estandares_de_datos/PROYECTO/ProyectoEstandaresDatos
+      /data/gdc/gdc_genes_tcga_lgg.tsv"  # lista de genes del proyecto
+    gene_id_column_index: 0         # índice (0-based) de la columna con Ensembl IDs
+    strip_version: true             # ENSG00000121410.8 -> ENSG00000121410
+
+  # Parámetros generales
+  page_size: 10000
+  token_path: null                  # ruta a token GDC si necesitas datos restringidos
+  request_timeout: 120
+
+
+hgnc:
+  url: "https://storage.googleapis.com/public-download-files/hgnc/tsv/tsv/hgnc_complete_set.txt"
+  output_path: "/Users/User/MyDocs/Universidad/CUARTO_2026/Estandares_de_datos/PROYECTO/ProyectoEstandaresDatos
+    /data/hgnc/hgnc_complete_set.tsv"
+  request_timeout: 60
+
+uniprot:
+  enabled: true
+
+  # Endpoint base de UniProt (búsquedas sobre UniProtKB)
+  base_url: "https://rest.uniprot.org/uniprotkb/search"
+
+  # Parámetros biológicos
+  organism_id: 9606          # humano
+  reviewed_only: true        # solo Swiss-Prot (reviewed:true)
+
+  # Campos a devolver por UniProt (TSV)
+  fields: >
+    accession,id,reviewed,
+    gene_primary,gene_names,
+    organism_id,protein_name,length,protein_existence,
+    go_f,go_p,go_c,
+    cc_function,cc_subcellular_location
+
+  # Parámetros de la API
+  batch_size: 100            # nº máximo de accessions por petición
+  max_retries: 3             # reintentos por lote
+  timeout: 60                # timeout en segundos por petición
+  sleep_between: 0.34        # pausa entre peticiones (segundos)
+
+  # Control del tamaño del dataset (None = sin límite)
+  max_accessions: 2000
+
+  # Ficheros de salida
+  mapping_output: "/Users/User/MyDocs/Universidad/CUARTO_2026/Estandares_de_datos/PROYECTO/ProyectoEstandaresDatos
+    /data/uniprot/uniprot_mapping_tcga_lgg.tsv"
+  metadata_output: "/Users/User/MyDocs/Universidad/CUARTO_2026/Estandares_de_datos/PROYECTO/ProyectoEstandaresDatos
+    /data/uniprot/uniprot_metadata_tcga_lgg.tsv"
