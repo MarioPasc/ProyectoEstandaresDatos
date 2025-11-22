@@ -1,3 +1,52 @@
+```
+╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                                   ║
+║   ██████╗ ██╗ ██████╗ ██╗███╗   ██╗████████╗███████╗ ██████╗ ██████╗  █████╗ ████████╗███████╗    ║
+║   ██╔══██╗██║██╔═══██╗██║████╗  ██║╚══██╔══╝██╔════╝██╔════╝ ██╔══██╗██╔══██╗╚══██╔══╝██╔════╝    ║
+║   ██████╔╝██║██║   ██║██║██╔██╗ ██║   ██║   █████╗  ██║  ███╗██████╔╝███████║   ██║   █████╗      ║
+║   ██╔══██╗██║██║   ██║██║██║╚██╗██║   ██║   ██╔══╝  ██║   ██║██╔══██╗██╔══██║   ██║   ██╔══╝      ║
+║   ██████╔╝██║╚██████╔╝██║██║ ╚████║   ██║   ███████╗╚██████╔╝██║  ██║██║  ██║   ██║   ███████╗    ║ 
+║   ╚═════╝ ╚═╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝    ║
+║                                                                                                   ║
+║                                                                                                   ║
+║                         Pipeline de Integración de Datos Bioinformáticos                          ║
+║                            GDC · HGNC · UniProt → MongoDB / JSON                                  ║
+║                                                                                                   ║
+╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝
+```
+- **DATOS GENERALES**
+  - Proyecto:       BioIntegrate - Pipeline de Integración de Datos Bioinformáticos
+  - Versión:        0.1.0
+  - Asignatura:     Estándares de Datos
+  - Universidad:    Universidad de Málaga (UMA)
+  - Curso académico: 2024-2025
+  - Repositorio:    https://github.com/MarioPasc/ProyectoEstandaresDatos
+
+- **TUTOR ASIGNADO**
+  - Nombre:         Dr.Rybinski, Maciej
+  - Universidad:    Universidad de Málaga (UMA)
+
+- **EQUIPO DE DESARROLLO**
+  1. Mario Pascual-González
+     Email: mpascual@uma.es
+     Rol:   Developer
+
+  2. Teresa Vega Martínez
+     Email: teresavegamar@gmail.com
+     Rol:   Developer
+
+  3. Juan Soriano
+     Email: 0610948742@uma.es
+     Rol:   Developer
+
+  4. Ainhoa Pérez
+     Email: ainhoa140602@gmail.com
+     Rol:   Developer
+
+  5. Martina Cebolla Salas
+     Email: martinacesalas@gmail.com
+     Rol:   Developer
+
 <!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
 
 # Tabla de Contenidos
