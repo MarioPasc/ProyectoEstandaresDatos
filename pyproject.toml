@@ -3,7 +3,7 @@ requires = ["setuptools>=65.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "datastandards"
+name = "biointegrate"
 version = "0.1.0"
 description = "Proyecto de Estándares de Datos para la gestión y análisis de datos biomédicos"
 readme = "README.md"
@@ -52,12 +52,12 @@ Repository = "https://github.com/MarioPasc/ProyectoEstandaresDatos"
 Changelog = "https://github.com/MarioPasc/ProyectoEstandaresDatos/releases"
 
 [project.scripts]
-datastandards-download = "DataStandards.cli.data:main"
-datastandards-import-gdc = "DataStandards.db.gdc_config:main"
-datastandards-import-uniprot = "DataStandards.db.uniprot_config:main"
-datastandards-import-hgnc = "DataStandards.db.hgnc_config:main"
-datastandards-import-all = "DataStandards.db.import_all_mongo:main"
-datastandards-pipeline = "DataStandards.cli.pipeline:main"
+biointegrate-download = "DataStandards.cli.data:main"
+biointegrate-import-gdc = "DataStandards.db.gdc_config:main"
+biointegrate-import-uniprot = "DataStandards.db.uniprot_config:main"
+biointegrate-import-hgnc = "DataStandards.db.hgnc_config:main"
+biointegrate-import-all = "DataStandards.db.import_all_mongo:main"
+biointegrate-pipeline = "DataStandards.cli.pipeline:main"
 
 
 [tool.setuptools]

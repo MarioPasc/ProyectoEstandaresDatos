@@ -35,7 +35,7 @@ from typing import Dict, Iterable, List, Optional, Sequence, Set, Tuple
 
 import requests
 
-from DataStandards.data.config import AppConfig, UniProtConfig, load_app_config
+from biointegrate.data.config import AppConfig, UniProtConfig, load_app_config
 
 
 class UniProtAPIError(RuntimeError):

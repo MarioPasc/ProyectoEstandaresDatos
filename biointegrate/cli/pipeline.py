@@ -28,23 +28,23 @@ from pathlib import Path
 from typing import Any, Optional
 
 # Importaciones internas
-from DataStandards.data.config import (
+from biointegrate.data.config import (
     AppConfig,
     load_app_config,
     load_gdc_mongo_config,
     load_hgnc_mongo_config,
     load_uniprot_mongo_config,
 )
-from DataStandards.cli.presentation import show_presentation
-from DataStandards.cli.data import (
+from biointegrate.cli.presentation import show_presentation
+from biointegrate.cli.data import (
     download_gdc_data,
     download_hgnc_data,
     download_uniprot_data,
 )
-from DataStandards.db.import_gdc_mongo import run_import as run_gdc_import
-from DataStandards.db.import_hgnc_mongo import run_import as run_hgnc_import
-from DataStandards.db.import_uniprot_mongo import run_import as run_uniprot_import
-from DataStandards.quality.evaluate import run_quality_evaluation
+from biointegrate.db.import_gdc_mongo import run_import as run_gdc_import
+from biointegrate.db.import_hgnc_mongo import run_import as run_hgnc_import
+from biointegrate.db.import_uniprot_mongo import run_import as run_uniprot_import
+from biointegrate.quality.evaluate import run_quality_evaluation
 
 
 # Configuración del logger

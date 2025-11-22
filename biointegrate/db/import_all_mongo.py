@@ -15,14 +15,14 @@ import argparse
 import sys
 from pathlib import Path
 
-from DataStandards.data.config import (
+from biointegrate.data.config import (
     load_gdc_mongo_config,
     load_hgnc_mongo_config,
     load_uniprot_mongo_config
 )
-from DataStandards.db.import_gdc_mongo import run_import as run_gdc_import
-from DataStandards.db.import_hgnc_mongo import run_import as run_hgnc_import
-from DataStandards.db.import_uniprot_mongo import run_import as run_uniprot_import
+from biointegrate.db.import_gdc_mongo import run_import as run_gdc_import
+from biointegrate.db.import_hgnc_mongo import run_import as run_hgnc_import
+from biointegrate.db.import_uniprot_mongo import run_import as run_uniprot_import
 
 
 def parse_args():

@@ -10,6 +10,7 @@
     - [3️⃣ Crear entorno Conda](#3️⃣-crear-entorno-conda)
     - [4️⃣ Instalar el paquete en modo desarrollo](#4️⃣-instalar-el-paquete-en-modo-desarrollo)
     - [5️⃣ Configurar rutas personales](#5️⃣-configurar-rutas-personales)
+  - [Quick Start](#quick-start)
   - [📥 Descargar Datos](#-descargar-datos)
   - [🗄️ Importar a JSON y MongoDB](#️-importar-a-json-y-mongodb)
   - [📊 Fuentes de Datos](#-fuentes-de-datos)
@@ -86,6 +87,35 @@ nano config/data/{tu nombre}_data_config.yaml  # o usa tu editor preferido
 
 📖 **Consulta** `config/README.md` para instrucciones detalladas.
 
+## Quick Start
+
+Se puede ejecutar el pipeline completo con:
+
+```bash
+  # Pipeline completo
+  biointegrate-pipeline \
+    --data-config config/data/mario_data_config.yaml \
+    --mongo-config config/db_mongo/mario_mongodb_config.yaml
+
+  # Solo crear JSONs sin insertar en MongoDB
+  biointegrate-pipeline \
+    --data-config config/data/mario_data_config.yaml \
+    --mongo-config config/db_mongo/mario_mongodb_config.yaml \
+    --no-insert
+
+  # Omitir descarga (datos ya existen)
+  biointegrate-pipeline \
+    --data-config config/data/mario_data_config.yaml \
+    --mongo-config config/db_mongo/mario_mongodb_config.yaml \
+    --skip-download
+
+  # Sin confirmación (ejecución directa)
+  biointegrate-pipeline \
+    --data-config config/data/mario_data_config.yaml \
+    --mongo-config config/db_mongo/mario_mongodb_config.yaml \
+    --yes
+```
+
 <!-- TOC --><a name="-descargar-datos"></a>
 ## 📥 Descargar Datos
 
@@ -93,12 +123,12 @@ Una vez configurado tu archivo `config/data_config.yaml`:
 
 ```bash
 # Descargar TODOS los datos (GDC + HGNC + UniProt)
-datastandards-download --config config/data_config.yaml --source all
+biointegrate-download --config config/data_config.yaml --source all
 
 # O descargar fuentes individuales:
-datastandards-download --config config/data_config.yaml --source gdc
-datastandards-download --config config/data_config.yaml --source hgnc
-datastandards-download --config config/data_config.yaml --source uniprot
+biointegrate-download --config config/data_config.yaml --source gdc
+biointegrate-download --config config/data_config.yaml --source hgnc
+biointegrate-download --config config/data_config.yaml --source uniprot
 ```
 
 > [!NOTE]
@@ -126,15 +156,15 @@ nano config/db_mongo/{tu_nombre}_mongodb_config.yaml
 
 ```bash
 # Importar TODAS las fuentes (GDC + HGNC + UniProt) a JSON y MongoDB
-datastandards-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml
+biointegrate-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml
 
 # Solo generar archivos JSON sin insertar en MongoDB
-datastandards-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --no-insert
+biointegrate-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --no-insert
 
 # Omitir fuentes específicas durante la importación
-datastandards-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --skip-gdc
-datastandards-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --skip-hgnc
-datastandards-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --skip-uniprot
+biointegrate-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --skip-gdc
+biointegrate-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --skip-hgnc
+biointegrate-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --skip-uniprot
 ```
 
 **Resultado esperado:**

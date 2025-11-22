@@ -7,7 +7,7 @@ archivos ya descargados sin necesidad de volver a descargarlos.
 """
 
 from pathlib import Path
-from DataStandards.utils.check_downloaded_filelength import (
+from biointegrate.utils.check_downloaded_filelength import (
     check_gdc_files,
     check_hgnc_files,
     check_uniprot_files,

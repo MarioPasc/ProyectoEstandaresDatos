@@ -16,10 +16,10 @@ import sys
 from pathlib import Path
 
 # Importar el loader de configuración
-from DataStandards.data.config import load_uniprot_mongo_config
+from biointegrate.data.config import load_uniprot_mongo_config
 
 # Importar la función principal de importación
-from DataStandards.db.import_uniprot_mongo import run_import
+from biointegrate.db.import_uniprot_mongo import run_import
 
 
 def parse_args():

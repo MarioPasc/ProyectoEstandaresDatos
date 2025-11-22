@@ -4,7 +4,7 @@ DataStandards.quality
 Módulo para evaluación de calidad de datos JSON generados por el pipeline.
 """
 
-from DataStandards.quality.evaluate import (
+from biointegrate.quality.evaluate import (
     QualityReport,
     evaluate_gdc_json,
     evaluate_hgnc_json,
