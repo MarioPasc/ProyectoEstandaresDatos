@@ -253,46 +253,37 @@ def build_gdc_document(
     return document
 
 
-def build_multi_project_document(project_documents: List[Dict[str, Any]]) -> Dict[str, Any]:
+def prepare_project_documents_for_export(project_documents: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """
-    Construye un documento MongoDB con estructura multi-proyecto.
+    Prepara los documentos de proyecto individuales para exportación.
 
-    Estructura:
-    {
-        '_id': 'gdc_multi_project',
-        'projects': [
-            {
-                'project_id': 'TCGA-LGG',
-                'disease_type': '...',
-                'primary_site': '...',
-                'data_category': '...',
-                'cases': [...]
-            },
-            {
-                'project_id': 'TCGA-GBM',
-                ...
-            }
-        ]
-    }
+    Cada proyecto se exporta como un documento independiente con su project_id como _id.
+    Esto facilita consultas con find() e índices en MongoDB sin necesidad de $unwind.
+
+    Estructura resultante (array de documentos):
+    [
+        {
+            '_id': 'TCGA-LGG',
+            'project_id': 'TCGA-LGG',
+            'disease_type': '...',
+            'primary_site': '...',
+            'data_category': '...',
+            'cases': [...]
+        },
+        {
+            '_id': 'TCGA-GBM',
+            ...
+        }
+    ]
 
     Args:
         project_documents: Lista de documentos de proyecto individuales
 
     Returns:
-        Documento MongoDB multi-proyecto
+        Lista de documentos de proyecto listos para MongoDB/JSON
     """
-    # Remove _id from individual project documents (they'll be nested in projects array)
-    projects = []
-    for doc in project_documents:
-        project_doc = {k: v for k, v in doc.items() if k != '_id'}
-        projects.append(project_doc)
-
-    multi_doc = {
-        '_id': 'gdc_multi_project',
-        'projects': projects
-    }
-
-    return multi_doc
+    # Los documentos ya vienen con _id = project_id desde build_gdc_document
+    return project_documents
 
 
 def convert_objectid_to_str(obj: Any) -> Any:
@@ -382,16 +373,16 @@ def export_collection_to_json(
         return False
 
 
-def save_document_as_json(
-    document: Dict[str, Any],
+def save_documents_as_json(
+    documents: List[Dict[str, Any]],
     output_path: str,
     verbose: bool = True
 ) -> bool:
     """
-    Guarda el documento como archivo JSON (sin insertar en MongoDB).
+    Guarda una lista de documentos como archivo JSON (sin insertar en MongoDB).
 
     Args:
-        document: Documento a guardar
+        documents: Lista de documentos a guardar (array de proyectos)
         output_path: Ruta donde guardar el archivo JSON
         verbose: Si True, muestra información detallada
 
@@ -400,22 +391,23 @@ def save_document_as_json(
     """
     try:
         if verbose:
-            print(f"\n[Guardado JSON] Guardando documento como JSON...")
+            print(f"\n[Guardado JSON] Guardando {len(documents)} documento(s) como JSON...")
 
         # Crear directorio si no existe
         output_file = Path(output_path)
         output_file.parent.mkdir(parents=True, exist_ok=True)
 
-        # Guardar como JSON
+        # Guardar como JSON (array de documentos)
         with open(output_file, 'w', encoding='utf-8') as f:
-            json.dump(document, f, indent=2, ensure_ascii=False)
+            json.dump(documents, f, indent=2, ensure_ascii=False)
 
         if verbose:
             file_size = output_file.stat().st_size
             file_size_mb = file_size / (1024 * 1024)
-            print(f"[Guardado JSON] Documento guardado exitosamente")
+            print(f"[Guardado JSON] Documentos guardados exitosamente")
             print(f"  - Archivo: {output_path}")
             print(f"  - Tamaño: {file_size_mb:.2f} MB ({file_size:,} bytes)")
+            print(f"  - Documentos: {len(documents)}")
 
         return True
 
@@ -613,18 +605,18 @@ def run_import(
             print(f"\n✗ ERROR procesando proyecto {project_meta.project_id}: {e}")
             raise
 
-    # Build multi-project document
+    # Preparar documentos para exportación (array de proyectos individuales)
     if verbose:
         print(f"\n{'=' * 100}")
-        print(f"[3/3] Construyendo documento multi-proyecto...")
+        print(f"[3/3] Preparando documentos de proyecto para exportación...")
         print(f"{'=' * 100}")
 
-    multi_doc = build_multi_project_document(project_documents)
+    export_documents = prepare_project_documents_for_export(project_documents)
 
     if verbose:
-        total_cases = sum(len(proj.get('cases', [])) for proj in multi_doc['projects'])
-        print(f"\n  ✓ Documento multi-proyecto construido:")
-        print(f"    - Total proyectos: {len(multi_doc['projects'])}")
+        total_cases = sum(len(proj.get('cases', [])) for proj in export_documents)
+        print(f"\n  ✓ Documentos preparados (array de proyectos individuales):")
+        print(f"    - Total proyectos: {len(export_documents)}")
         print(f"    - Total casos: {total_cases}")
 
     # Handle insert_into_mongodb flag
@@ -636,10 +628,10 @@ def run_import(
 
         if not save_as_json:
             # Generate default output path
-            save_as_json = "gdc_multi_project_export.json"
+            save_as_json = "gdc_projects_export.json"
 
-        save_document_as_json(
-            document=multi_doc,
+        save_documents_as_json(
+            documents=export_documents,
             output_path=save_as_json,
             verbose=verbose
         )
@@ -649,21 +641,33 @@ def run_import(
             print("✓ PROCESO COMPLETADO EXITOSAMENTE (sin inserción en MongoDB)")
             print(f"{'=' * 100}")
     else:
-        # Insert to MongoDB
+        # Insert to MongoDB - insertar cada proyecto como documento individual
         if verbose:
             print(f"\n{'=' * 100}")
             print("INSERTANDO EN MONGODB...")
             print(f"{'=' * 100}")
 
-        insert_to_mongo(
-            document=multi_doc,
-            mongo_uri=mongo_uri,
-            database_name=database_name,
-            collection_name=collection_name,
-            drop_collection=drop_collection,
-            save_as_json=save_as_json,
-            verbose=verbose
-        )
+        # Insertar cada proyecto como documento independiente
+        for project_doc in export_documents:
+            insert_to_mongo(
+                document=project_doc,
+                mongo_uri=mongo_uri,
+                database_name=database_name,
+                collection_name=collection_name,
+                drop_collection=drop_collection if project_doc == export_documents[0] else False,
+                save_as_json=None,  # No exportar JSON aquí, lo haremos al final
+                verbose=verbose
+            )
+
+        # Exportar colección completa a JSON si se especificó
+        if save_as_json:
+            export_collection_to_json(
+                mongo_uri=mongo_uri,
+                database_name=database_name,
+                collection_name=collection_name,
+                output_path=save_as_json,
+                verbose=verbose
+            )
 
         if verbose:
             print(f"\n{'=' * 100}")
