@@ -24,15 +24,7 @@ gdc:
     cases.samples.sample_type,cases.project.project_id
   # Output pattern: {base_output_dir}/{project_id}/gdc_file_metadata_{project_id_lower}.tsv
 
-  # 3) Tabla mínima de genes "de ejemplo" vía /genes (puedes mantenerla o dejarla vacía)
-  gene_symbols:
-    #- "TP53"
-    #- "IDH1"
-    #- "IDH2"
-    #- "ATRX"
-  # Output pattern: {base_output_dir}/{project_id}/gdc_genes_{project_id_lower}_example.tsv
-
-  # 4) Nueva configuración específica para descargas RNA-seq STAR-Counts
+  # 3) Nueva configuración específica para descargas RNA-seq STAR-Counts
   rnaseq:
     download_enabled: true          # poner a false si no quieres descargar nada
     max_files: 5                    # N máximo de ficheros a descargar desde el manifest

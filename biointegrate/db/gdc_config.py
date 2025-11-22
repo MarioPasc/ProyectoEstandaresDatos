@@ -1,20 +1,16 @@
 """
-hgnc_config.py
+gdc_config.py
 
-Script de configuración para el importador HGNC a MongoDB.
-Lee la configuración desde un archivo YAML y ejecuta la importación de genes HGNC
-combinados con datos de expresión de GDC.
+Script de configuración para el importador GDC a MongoDB.
+Lee la configuración desde un archivo YAML y ejecuta la importación.
 
 Uso:
-    python DataStandards/db/hgnc_config.py --config config/db_mongo/mario_mongodb_config.yaml
+    python DataStandards/db/gdc_config.py --config config/db_mongo/mario_mongodb_config.yaml
 
     # O con el script instalado:
-    datastandards-import-hgnc --config config/db_mongo/mario_mongodb_config.yaml
+    datastandards-import-gdc --config config/db_mongo/mario_mongodb_config.yaml
 
-    # Solo guardar JSON (sin insertar en MongoDB):
-    datastandards-import-hgnc --config config.yaml --only-json
-
-Issue: #16 - HGNC + GDC Expression Integration
+Issue: T1 - GDC MongoDB Import Task
 """
 
 import argparse
@@ -22,16 +18,16 @@ import sys
 from pathlib import Path
 
 # Importar el loader de configuración
-from DataStandards.data.config import load_hgnc_mongo_config
+from biointegrate.data.config import load_gdc_mongo_config
 
 # Importar la función principal de importación
-from DataStandards.db.import_hgnc_mongo import run_import
+from biointegrate.db.import_gdc_mongo import run_import
 
 
 def parse_args():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser(
-        description='Importador de datos HGNC con expresión GDC a MongoDB',
+        description='Importador de datos GDC a MongoDB',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Ejemplos de uso:
@@ -42,8 +38,11 @@ Ejemplos de uso:
   # Eliminar colección antes de importar (útil para rehacer la carga)
   %(prog)s --config config/db_mongo/mario_mongodb_config.yaml --drop-collection
 
-  # Solo guardar JSON, sin insertar en MongoDB
-  %(prog)s --config config/db_mongo/mario_mongodb_config.yaml --only-json
+  # Importar solo metadatos sin procesar expresión
+  %(prog)s --config config/db_mongo/mario_mongodb_config.yaml --no-expression
+
+  # Procesar solo los primeros 10 ficheros (útil para testing)
+  %(prog)s --config config/db_mongo/mario_mongodb_config.yaml --max-files 10
 
   # Modo silencioso (sin mensajes detallados)
   %(prog)s --config config/db_mongo/mario_mongodb_config.yaml --quiet
@@ -54,23 +53,11 @@ Ejemplos de uso:
   # No guardar como JSON (ignorar configuración YAML)
   %(prog)s --config config/db_mongo/mario_mongodb_config.yaml --no-save-json
 
-Estructura del documento MongoDB resultante:
-  - _id / hgnc_id: ID del gen HGNC (usado como clave principal)
-  - symbol: Símbolo del gen (ej. TP53)
-  - ensembl_gene_id: ID de Ensembl
-  - uniprot_ids: Lista de IDs de UniProt
-  - projects: Diccionario de proyectos GDC con datos de expresión
-    - {project_id}:
-      - n_cases: Número de casos con datos
-      - cases:
-        - {case_id}:
-          - file_id: ID del fichero STAR-counts
-          - unstranded: Valor de expresión unstranded
-          - stranded_first: Valor de expresión stranded_first
-          - stranded_second: Valor de expresión stranded_second
-          - tpm_unstranded: TPM (Transcripts Per Million)
-          - fpkm_unstranded: FPKM (Fragments Per Kilobase Million)
-          - fpkm_uq_unstranded: FPKM Upper Quartile
+Campos clave en el documento MongoDB resultante:
+  - project_id: ID del proyecto (usado para joins)
+  - cases[].case_id: ID del caso (usado para joins)
+  - cases[].files[].file_id: ID del fichero (usado para joins)
+  - cases[].files[].expression_summary: Estadísticas de expresión
 """
     )
 
@@ -88,9 +75,16 @@ Estructura del documento MongoDB resultante:
     )
 
     parser.add_argument(
-        '--no-insert',
+        '--no-expression',
         action='store_true',
-        help='Solo guardar JSON, sin insertar en MongoDB'
+        help='No procesar ficheros STAR-Counts (solo importar metadatos)'
+    )
+
+    parser.add_argument(
+        '--max-files',
+        type=int,
+        default=None,
+        help='Número máximo de ficheros a procesar (útil para testing)'
     )
 
     parser.add_argument(
@@ -130,58 +124,52 @@ def main():
 
     # Cargar configuración
     try:
-        config = load_hgnc_mongo_config(config_path)
+        config = load_gdc_mongo_config(config_path)
     except Exception as e:
         print(f"Error cargando configuración desde {config_path}: {e}")
-        import traceback
-        traceback.print_exc()
         sys.exit(1)
 
     # Sobrescribir opciones con argumentos de línea de comandos
     if args.drop_collection:
         config.options.drop_collection = True
 
-    if args.no_insert:
-        config.options.insert_into_mongodb = False
+    if args.no_expression:
+        config.options.process_expression = False
+
+    if args.max_files is not None:
+        config.options.max_files_to_process = args.max_files
 
     if args.quiet:
         config.options.verbose = False
 
     # Manejo de save_json
     if args.no_save_json:
-        config.options.save_as_json_hgnc = None
+        config.options.save_as_json_gdc = None
     elif args.save_json is not None:
-        config.options.save_as_json_hgnc = args.save_json
+        config.options.save_as_json_gdc = args.save_json
 
-    # Si no se inserta en MongoDB pero no hay save_as_json_hgnc, usar valor por defecto
-    if not config.options.insert_into_mongodb and not config.options.save_as_json_hgnc:
-        config.options.save_as_json_hgnc = "hgnc_genes_export.json"
-
-    # Ejecutar importación
+    # Ejecutar importación multi-proyecto
     try:
         run_import(
-            # HGNC configuration
-            hgnc_config=config.hgnc,
-
             # GDC configuration with projects list
             gdc_config=config.gdc,
 
             # Conexión MongoDB
             mongo_uri=config.mongodb.mongo_uri,
             database_name=config.mongodb.database_name,
+            collection_name=config.mongodb.collection_name,
 
             # Opciones
             insert_into_mongodb=config.options.insert_into_mongodb,
+            process_expression=config.options.process_expression,
+            max_files=config.options.max_files_to_process,
             drop_collection=config.options.drop_collection,
-            save_as_json_hgnc=config.options.save_as_json_hgnc,
+            save_as_json=config.options.save_as_json_gdc,
             verbose=config.options.verbose
         )
     except FileNotFoundError as e:
         print(f"\nError: {e}")
-        print("\nAsegúrate de haber descargado los datos HGNC y GDC primero:")
-        print("  # Descargar HGNC:")
-        print("  datastandards-download --config config/data/mario_data_config.yaml --source hgnc")
-        print("\n  # Descargar GDC:")
+        print("\nAsegúrate de haber descargado los datos GDC primero:")
         print("  datastandards-download --config config/data/mario_data_config.yaml --source gdc")
         sys.exit(1)
     except Exception as e:

@@ -1,15 +1,65 @@
+```
+════════════════════════════════════════════════════════════════════════════════════════════
+                                                                                            
+██████╗ ██╗ ██████╗ ██╗███╗   ██╗████████╗███████╗ ██████╗ ██████╗  █████╗ ████████╗███████╗
+██╔══██╗██║██╔═══██╗██║████╗  ██║╚══██╔══╝██╔════╝██╔════╝ ██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
+██████╔╝██║██║   ██║██║██╔██╗ ██║   ██║   █████╗  ██║  ███╗██████╔╝███████║   ██║   █████╗  
+██╔══██╗██║██║   ██║██║██║╚██╗██║   ██║   ██╔══╝  ██║   ██║██╔══██╗██╔══██║   ██║   ██╔══╝  
+██████╔╝██║╚██████╔╝██║██║ ╚████║   ██║   ███████╗╚██████╔╝██║  ██║██║  ██║   ██║   ███████╗ 
+╚═════╝ ╚═╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
+                                                                                            
+                                                                                            
+                      Pipeline de Integración de Datos Bioinformáticos                      
+                         GDC · HGNC · UniProt → MongoDB / JSON                              
+                                                                                            
+════════════════════════════════════════════════════════════════════════════════════════════
+```
+- **DATOS GENERALES**
+  - Proyecto:       BioIntegrate - Pipeline de Integración de Datos Bioinformáticos
+  - Versión:        0.1.0
+  - Asignatura:     Estándares de Datos
+  - Universidad:    Universidad de Málaga (UMA)
+  - Curso académico: 2024-2025
+  - Repositorio:    https://github.com/MarioPasc/ProyectoEstandaresDatos
+
+- **TUTOR ASIGNADO**
+  - Nombre:         Dr.Rybinski, Maciej
+  - Universidad:    Universidad de Málaga (UMA)
+
+- **EQUIPO DE DESARROLLO**
+  1. Mario Pascual-González
+     Email: mpascual@uma.es
+     Rol:   Developer
+
+  2. Teresa Vega Martínez
+     Email: teresavegamar@gmail.com
+     Rol:   Developer
+
+  3. Juan Soriano
+     Email: 0610948742@uma.es
+     Rol:   Developer
+
+  4. Ainhoa Pérez
+     Email: ainhoa140602@gmail.com
+     Rol:   Developer
+
+  5. Martina Cebolla Salas
+     Email: martinacesalas@gmail.com
+     Rol:   Developer
+
 <!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
 
 # Tabla de Contenidos
 
 - [Tabla de Contenidos](#tabla-de-contenidos)
-- [ProyectoEstandaresDatos](#proyectoestandaresdatos)
+- [BioIntegrate](#biointegrate)
   - [🚀 Instalación y Configuración](#-instalación-y-configuración)
     - [1️⃣ Clonar el repositorio](#1️⃣-clonar-el-repositorio)
     - [2️⃣ Cambiar a la rama de desarrollo](#2️⃣-cambiar-a-la-rama-de-desarrollo)
     - [3️⃣ Crear entorno Conda](#3️⃣-crear-entorno-conda)
     - [4️⃣ Instalar el paquete en modo desarrollo](#4️⃣-instalar-el-paquete-en-modo-desarrollo)
     - [5️⃣ Configurar rutas personales](#5️⃣-configurar-rutas-personales)
+  - [Quick Start](#quick-start)
   - [📥 Descargar Datos](#-descargar-datos)
   - [🗄️ Importar a JSON y MongoDB](#️-importar-a-json-y-mongodb)
   - [📊 Fuentes de Datos](#-fuentes-de-datos)
@@ -20,7 +70,7 @@
 <!-- TOC end -->
 
 <!-- TOC --><a name="proyectoestandaresdatos"></a>
-# ProyectoEstandaresDatos
+# BioIntegrate
 Repositorio Github para el proyecto final de la asignatura "Estándares de Datos"
 
 <!-- TOC --><a name="-instalación-y-configuración"></a>
@@ -86,6 +136,55 @@ nano config/data/{tu nombre}_data_config.yaml  # o usa tu editor preferido
 
 📖 **Consulta** `config/README.md` para instrucciones detalladas.
 
+## Quick Start
+
+Se puede ejecutar el pipeline completo con:
+
+```bash
+  # Pipeline completo
+  biointegrate-pipeline \
+    --data-config config/data/mario_data_config.yaml \
+    --mongo-config config/db_mongo/mario_mongodb_config.yaml
+
+  # Solo crear JSONs sin insertar en MongoDB
+  biointegrate-pipeline \
+    --data-config config/data/mario_data_config.yaml \
+    --mongo-config config/db_mongo/mario_mongodb_config.yaml \
+    --no-insert
+
+  # Omitir descarga (datos ya existen)
+  biointegrate-pipeline \
+    --data-config config/data/mario_data_config.yaml \
+    --mongo-config config/db_mongo/mario_mongodb_config.yaml \
+    --skip-download
+
+  # Sin confirmación (ejecución directa)
+  biointegrate-pipeline \
+    --data-config config/data/mario_data_config.yaml \
+    --mongo-config config/db_mongo/mario_mongodb_config.yaml \
+    --yes
+```
+
+En el ordenador de Mario Pascual González:
+
+```bash
+====================================================================================================
+PIPELINE COMPLETADO
+====================================================================================================
+  Estado:           EXITOSO
+  Tiempo total:     2m 7s
+  Descarga:         Ejecutada
+  JSONs creados:    Sí
+  MongoDB:          No (--no-insert)
+  Evaluación:       Ejecutada
+
+  Ficheros JSON generados:
+    - GDC: /home/mpascual/misc/Universidad25-26/Estandares/data/gdc/gdc_collection_export.json
+    - HGNC: /home/mpascual/misc/Universidad25-26/Estandares/data/hgnc/hgnc_collection_export.json
+    - UniProt: /home/mpascual/misc/Universidad25-26/Estandares/data/uniprot/uniprot_collection_export.json
+====================================================================================================
+2025-11-22 09:51:27 - biointegrate.cli.pipeline - INFO - Pipeline completado exitosamente
+```
 <!-- TOC --><a name="-descargar-datos"></a>
 ## 📥 Descargar Datos
 
@@ -93,12 +192,12 @@ Una vez configurado tu archivo `config/data_config.yaml`:
 
 ```bash
 # Descargar TODOS los datos (GDC + HGNC + UniProt)
-datastandards-download --config config/data_config.yaml --source all
+biointegrate-download --config config/data_config.yaml --source all
 
 # O descargar fuentes individuales:
-datastandards-download --config config/data_config.yaml --source gdc
-datastandards-download --config config/data_config.yaml --source hgnc
-datastandards-download --config config/data_config.yaml --source uniprot
+biointegrate-download --config config/data_config.yaml --source gdc
+biointegrate-download --config config/data_config.yaml --source hgnc
+biointegrate-download --config config/data_config.yaml --source uniprot
 ```
 
 > [!NOTE]
@@ -126,15 +225,15 @@ nano config/db_mongo/{tu_nombre}_mongodb_config.yaml
 
 ```bash
 # Importar TODAS las fuentes (GDC + HGNC + UniProt) a JSON y MongoDB
-datastandards-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml
+biointegrate-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml
 
 # Solo generar archivos JSON sin insertar en MongoDB
-datastandards-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --no-insert
+biointegrate-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --no-insert
 
 # Omitir fuentes específicas durante la importación
-datastandards-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --skip-gdc
-datastandards-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --skip-hgnc
-datastandards-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --skip-uniprot
+biointegrate-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --skip-gdc
+biointegrate-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --skip-hgnc
+biointegrate-import-all --config config/db_mongo/{tu_nombre}_mongodb_config.yaml --skip-uniprot
 ```
 
 **Resultado esperado:**

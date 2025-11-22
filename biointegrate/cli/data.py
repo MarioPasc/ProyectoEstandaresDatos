@@ -16,17 +16,17 @@ import logging
 import sys
 from pathlib import Path
 
-from DataStandards.data.config import AppConfig, load_app_config
-from DataStandards.data.entrypoints.access_gdc import (
+from biointegrate.data.config import AppConfig, load_app_config
+from biointegrate.data.entrypoints.access_gdc import (
     download_manifest,
     download_file_metadata,
     fetch_genes_table,
     load_gdc_token,
     run_rnaseq_download_and_gene_extraction,
 )
-from DataStandards.data.entrypoints.access_hgnc import download_hgnc_complete_set
-from DataStandards.data.entrypoints import access_uniprot
-from DataStandards.utils.check_downloaded_filelength import (
+from biointegrate.data.entrypoints.access_hgnc import download_hgnc_complete_set
+from biointegrate.data.entrypoints import access_uniprot
+from biointegrate.utils.check_downloaded_filelength import (
     check_gdc_files,
     check_hgnc_files,
     check_uniprot_files,

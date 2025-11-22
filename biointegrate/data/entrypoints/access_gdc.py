@@ -27,7 +27,7 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence
 
 import requests
 
-from DataStandards.data.config import AppConfig, GDCConfig, load_app_config
+from biointegrate.data.config import AppConfig, GDCConfig, load_app_config
 
 
 logger = logging.getLogger(__name__)
