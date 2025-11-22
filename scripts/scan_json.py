@@ -38,10 +38,13 @@ def map_gdc_to_hgnc(gdc, hgnc):
     """
     Verifica relaciones caso → gen entre GDC y HGNC.
     Devuelve lista de tuplas: (proyecto, case_id, lista_genes_encontrados)
+
+    NOTA: gdc ahora es un array de proyectos (no un dict con key "projects")
     """
     results = []
 
-    for project in gdc["projects"]:
+    # gdc es ahora un array de proyectos directamente
+    for project in gdc:
         project_id = project["project_id"]
 
         for case in project["cases"]:
@@ -71,16 +74,16 @@ def map_hgnc_to_uniprot(hgnc_genes_found, uniprot):
     """
     Para cada gen encontrado en HGNC, buscar proteínas relacionadas en UniProt.
     Devuelve diccionario: gen → lista_proteínas
+
+    NOTA: uniprot ahora es un array de entradas (no un dict con key "uniprot_entries")
     """
     mapping = {}
 
-    # Convertimos uniprot entries en una lista manejable
-    entries = uniprot["uniprot_entries"]
-
+    # uniprot es ahora un array de entradas directamente
     for gen in hgnc_genes_found:
         mapping[gen] = []
 
-        for protein in entries:
+        for protein in uniprot:
             if gen in protein["gene"]["hgnc_ids"]:
                 mapping[gen].append(protein["uniprot_id"])
 
@@ -94,26 +97,29 @@ def map_hgnc_to_uniprot(hgnc_genes_found, uniprot):
 def realistic_query_example(gdc, hgnc, uniprot):
     """
     Demuestra un caso de consulta realista que cruza las tres bases de datos.
-    
+
     Caso de uso: Para un paciente específico con cáncer, identificar:
     1. Sus datos clínicos (proyecto, caso)
     2. Genes expresados en ese paciente (con valores de expresión)
     3. Proteínas asociadas a esos genes (con anotaciones funcionales)
+
+    NOTA: gdc y uniprot ahora son arrays de documentos directamente.
     """
     print("\n6) EJEMPLO DE CONSULTA REALISTA")
     print("=" * 70)
     print("\n  CASO DE USO: Análisis de perfil molecular de un paciente")
     print("  " + "-" * 66)
-    
+
     # PASO 1: Seleccionar un paciente del primer proyecto
     print("\n  [PASO 1] Selección de paciente")
     print("  " + "·" * 66)
-    
-    if not gdc["projects"]:
+
+    # gdc es ahora un array de proyectos directamente
+    if not gdc:
         print("  ❌ No hay proyectos en GDC")
         return
-    
-    project = gdc["projects"][0]
+
+    project = gdc[0]
     project_id = project["project_id"]
     disease_type = project.get("disease_type", "N/A")
     
@@ -200,13 +206,14 @@ def realistic_query_example(gdc, hgnc, uniprot):
     # PASO 3: Buscar proteínas asociadas a estos genes
     print(f"\n  [PASO 3] Búsqueda de proteínas asociadas")
     print("  " + "·" * 66)
-    
+
     # Extraer HGNC IDs de los genes encontrados
     gene_hgnc_ids = {g["hgnc_id"] for g in patient_genes}
-    
+
     # Buscar proteínas que coincidan con estos genes
+    # uniprot es ahora un array de entradas directamente
     associated_proteins = []
-    for protein in uniprot["uniprot_entries"]:
+    for protein in uniprot:
         protein_hgnc_ids = protein.get("gene", {}).get("hgnc_ids", [])
         
         # Verificar si algún HGNC ID coincide
@@ -342,9 +349,10 @@ def print_report(gdc, hgnc, uniprot):
     # -----------------------------------------------------------------
     print("4) POBLACIÓN / CANTIDAD DE DATOS")
     print("-------------------------------------------------------")
-    print(f"  Nº proyectos en GDC: {len(gdc['projects'])}")
+    # gdc y uniprot son ahora arrays de documentos directamente
+    print(f"  Nº proyectos en GDC: {len(gdc)}")
     print(f"  Nº genes en HGNC: {len(hgnc)}")
-    print(f"  Nº proteínas en UniProt: {len(uniprot['uniprot_entries'])}")
+    print(f"  Nº proteínas en UniProt: {len(uniprot)}")
     print("  ✔ Población suficiente: Sí (datos cargados y diversos)")
     print()
 
@@ -356,16 +364,16 @@ def print_report(gdc, hgnc, uniprot):
 
     realistic = True
 
-    # 1. Comprobamos expresión en GDC
-    for project in gdc["projects"]:
+    # 1. Comprobamos expresión en GDC (gdc es ahora array de proyectos)
+    for project in gdc:
         for case in project["cases"]:
             for f in case["files"]:
                 mean_expr = f["expression_summary"]["stats"]["mean"]
                 if mean_expr < 0:
                     realistic = False
 
-    # 2. GO terms en UniProt
-    for protein in uniprot["uniprot_entries"]:
+    # 2. GO terms en UniProt (uniprot es ahora array de entradas)
+    for protein in uniprot:
         go = protein.get("go_terms", {})
         if all(len(v) == 0 for v in go.values()):
             # Se acepta, pero lo anotamos

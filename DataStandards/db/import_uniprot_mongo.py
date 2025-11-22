@@ -240,38 +240,39 @@ def merge_uniprot_entries(all_project_docs: List[List[Dict[str, Any]]]) -> List[
     return list(merged_entries.values())
 
 
-def build_multi_project_document(all_uniprot_entries: List[Dict[str, Any]]) -> Dict[str, Any]:
+def prepare_uniprot_entries_for_export(all_uniprot_entries: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """
-    Construye un documento MongoDB con estructura multi-proyecto para UniProt.
+    Prepara las entradas UniProt para exportación como documentos individuales.
 
-    Estructura:
-    {
-        '_id': 'uniprot_multi_project',
-        'uniprot_entries': [
-            {
-                '_id': 'P12345',
-                'uniprot_id': 'P12345',
-                'projects': {
-                    'TCGA-LGG': {...},
-                    'TCGA-GBM': {...}
-                }
+    Cada entrada UniProt se exporta como documento independiente con su uniprot_id como _id.
+    Esto facilita consultas con find() e índices en MongoDB sin necesidad de $unwind.
+
+    Estructura resultante (array de documentos):
+    [
+        {
+            '_id': 'P12345',
+            'uniprot_id': 'P12345',
+            'entry_name': 'GENE_HUMAN',
+            'reviewed': true,
+            'gene': {...},
+            'go_terms': {...},
+            'projects': {
+                'TCGA-LGG': {...},
+                'TCGA-GBM': {...}
             }
-        ]
-    }
+        },
+        ...
+    ]
 
     Args:
         all_uniprot_entries: Lista de todas las entradas UniProt con información
                             de proyectos combinada
 
     Returns:
-        Documento MongoDB multi-proyecto
+        Lista de documentos UniProt listos para MongoDB/JSON
     """
-    multi_doc = {
-        '_id': 'uniprot_multi_project',
-        'uniprot_entries': all_uniprot_entries
-    }
-
-    return multi_doc
+    # Los documentos ya vienen con _id = uniprot_id desde build_uniprot_docs
+    return all_uniprot_entries
 
 
 def convert_objectid_to_str(obj: Any) -> Any:
@@ -361,16 +362,16 @@ def export_collection_to_json(
         return False
 
 
-def save_document_as_json(
-    document: Dict[str, Any],
+def save_documents_as_json(
+    documents: List[Dict[str, Any]],
     output_path: str,
     verbose: bool = True
 ) -> bool:
     """
-    Guarda el documento como archivo JSON (sin insertar en MongoDB).
+    Guarda una lista de documentos como archivo JSON (sin insertar en MongoDB).
 
     Args:
-        document: Documento a guardar
+        documents: Lista de documentos a guardar (array de entradas UniProt)
         output_path: Ruta donde guardar el archivo JSON
         verbose: Si True, muestra información detallada
 
@@ -379,22 +380,23 @@ def save_document_as_json(
     """
     try:
         if verbose:
-            print(f"\n[Guardado JSON] Guardando documento como JSON...")
+            print(f"\n[Guardado JSON] Guardando {len(documents)} documento(s) como JSON...")
 
         # Crear directorio si no existe
         output_file = Path(output_path)
         output_file.parent.mkdir(parents=True, exist_ok=True)
 
-        # Guardar como JSON
+        # Guardar como JSON (array de documentos)
         with open(output_file, 'w', encoding='utf-8') as f:
-            json.dump(document, f, indent=2, ensure_ascii=False)
+            json.dump(documents, f, indent=2, ensure_ascii=False)
 
         if verbose:
             file_size = output_file.stat().st_size
             file_size_mb = file_size / (1024 * 1024)
-            print(f"[Guardado JSON] Documento guardado exitosamente")
+            print(f"[Guardado JSON] Documentos guardados exitosamente")
             print(f"  - Archivo: {output_path}")
             print(f"  - Tamaño: {file_size_mb:.2f} MB ({file_size:,} bytes)")
+            print(f"  - Documentos: {len(documents)}")
 
         return True
 
@@ -579,17 +581,17 @@ def run_import(
     if verbose:
         print(f"\n  ✓ Entradas UniProt combinadas: {len(merged_entries)}")
 
-    # Build multi-project document
+    # Preparar documentos para exportación (array de entradas individuales)
     if verbose:
         print(f"\n{'=' * 100}")
-        print(f"CONSTRUYENDO DOCUMENTO MULTI-PROYECTO...")
+        print(f"PREPARANDO ENTRADAS UNIPROT PARA EXPORTACIÓN...")
         print(f"{'=' * 100}")
 
-    multi_doc = build_multi_project_document(merged_entries)
+    export_documents = prepare_uniprot_entries_for_export(merged_entries)
 
     if verbose:
-        print(f"\n  ✓ Documento multi-proyecto construido:")
-        print(f"    - Total entradas UniProt: {len(multi_doc['uniprot_entries'])}")
+        print(f"\n  ✓ Documentos preparados (array de entradas individuales):")
+        print(f"    - Total entradas UniProt: {len(export_documents)}")
 
     # Handle insert_into_mongodb flag
     if not insert_into_mongodb:
@@ -600,10 +602,10 @@ def run_import(
 
         if not save_as_json_uniprot:
             # Generate default output path
-            save_as_json_uniprot = "uniprot_multi_project_export.json"
+            save_as_json_uniprot = "uniprot_entries_export.json"
 
-        save_document_as_json(
-            document=multi_doc,
+        save_documents_as_json(
+            documents=export_documents,
             output_path=save_as_json_uniprot,
             verbose=verbose
         )
@@ -613,21 +615,38 @@ def run_import(
             print("✓ PROCESO COMPLETADO EXITOSAMENTE (sin inserción en MongoDB)")
             print(f"{'=' * 100}")
     else:
-        # Insert to MongoDB
+        # Insert to MongoDB - insertar cada entrada como documento individual
         if verbose:
             print(f"\n{'=' * 100}")
             print("INSERTANDO EN MONGODB...")
             print(f"{'=' * 100}")
 
-        insert_to_mongo(
-            document=multi_doc,
-            mongo_uri=mongo_uri,
-            database_name=database_name,
-            collection_name=collection_name,
-            drop_collection=drop_collection,
-            save_as_json_uniprot=save_as_json_uniprot,
-            verbose=verbose
-        )
+        # Insertar cada entrada UniProt como documento independiente
+        first_doc = True
+        for uniprot_doc in export_documents:
+            insert_to_mongo(
+                document=uniprot_doc,
+                mongo_uri=mongo_uri,
+                database_name=database_name,
+                collection_name=collection_name,
+                drop_collection=drop_collection if first_doc else False,
+                save_as_json_uniprot=None,  # No exportar JSON aquí, lo haremos al final
+                verbose=False  # Reducir verbosidad para muchos documentos
+            )
+            first_doc = False
+
+        if verbose:
+            print(f"  ✓ Insertados {len(export_documents)} documentos UniProt")
+
+        # Exportar colección completa a JSON si se especificó
+        if save_as_json_uniprot:
+            export_collection_to_json(
+                mongo_uri=mongo_uri,
+                database_name=database_name,
+                collection_name=collection_name,
+                output_path=save_as_json_uniprot,
+                verbose=verbose
+            )
 
         if verbose:
             print(f"\n{'=' * 100}")
