@@ -57,6 +57,7 @@ datastandards-import-gdc = "DataStandards.db.gdc_config:main"
 datastandards-import-uniprot = "DataStandards.db.uniprot_config:main"
 datastandards-import-hgnc = "DataStandards.db.hgnc_config:main"
 datastandards-import-all = "DataStandards.db.import_all_mongo:main"
+datastandards-pipeline = "DataStandards.cli.pipeline:main"
 
 
 [tool.setuptools]
@@ -66,7 +67,8 @@ packages = [
     "DataStandards.data",
     "DataStandards.data.entrypoints",
     "DataStandards.db",
-    "DataStandards.utils"
+    "DataStandards.utils",
+    "DataStandards.quality"
 ]
 [tool.setuptools.package-data]
 medsyn = ["py.typed"]
