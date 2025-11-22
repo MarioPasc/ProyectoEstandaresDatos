@@ -52,26 +52,26 @@ Repository = "https://github.com/MarioPasc/ProyectoEstandaresDatos"
 Changelog = "https://github.com/MarioPasc/ProyectoEstandaresDatos/releases"
 
 [project.scripts]
-biointegrate-download = "DataStandards.cli.data:main"
-biointegrate-import-gdc = "DataStandards.db.gdc_config:main"
-biointegrate-import-uniprot = "DataStandards.db.uniprot_config:main"
-biointegrate-import-hgnc = "DataStandards.db.hgnc_config:main"
-biointegrate-import-all = "DataStandards.db.import_all_mongo:main"
-biointegrate-pipeline = "DataStandards.cli.pipeline:main"
+biointegrate-download = "biointegrate.cli.data:main"
+biointegrate-import-gdc = "biointegrate.db.gdc_config:main"
+biointegrate-import-uniprot = "biointegrate.db.uniprot_config:main"
+biointegrate-import-hgnc = "biointegrate.db.hgnc_config:main"
+biointegrate-import-all = "biointegrate.db.import_all_mongo:main"
+biointegrate-pipeline = "biointegrate.cli.pipeline:main"
 
 
 [tool.setuptools]
 packages = [
-    "DataStandards",
-    "DataStandards.cli",
-    "DataStandards.data",
-    "DataStandards.data.entrypoints",
-    "DataStandards.db",
-    "DataStandards.utils",
-    "DataStandards.quality"
+    "biointegrate",
+    "biointegrate.cli",
+    "biointegrate.data",
+    "biointegrate.data.entrypoints",
+    "biointegrate.db",
+    "biointegrate.utils",
+    "biointegrate.quality"
 ]
 [tool.setuptools.package-data]
-medsyn = ["py.typed"]
+biointegrate = ["py.typed"]
 
 [tool.mypy]
 python_version = "3.9"
