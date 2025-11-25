@@ -469,3 +469,91 @@ def load_uniprot_mongo_config(config_path: str | Path) -> UniProtMongoAppConfig:
     )
 
     return UniProtMongoAppConfig(mongodb=mongodb_cfg, uniprot=uniprot_cfg, options=options_cfg)
+
+
+# ============================================================================
+# T2: Query Execution Configuration
+# ============================================================================
+
+@dataclass
+class QueryMongoConfig:
+    """MongoDB connection configuration for queries."""
+    mongo_uri: str
+    database: str
+
+
+@dataclass
+class QueryExecutionConfig:
+    """Query execution parameters."""
+    default_limit: Optional[int] = None  # None = unlimited
+    timeout_s: int = 30
+
+
+@dataclass
+class QueryLoggingConfig:
+    """Logging configuration."""
+    level: str = "INFO"
+
+
+@dataclass
+class QueryAppConfig:
+    """Complete configuration for query execution."""
+    mongo: QueryMongoConfig
+    execution: QueryExecutionConfig = field(default_factory=QueryExecutionConfig)
+    logging: QueryLoggingConfig = field(default_factory=QueryLoggingConfig)
+
+
+def load_query_config(config_path: str | Path) -> QueryAppConfig:
+    """
+    Load and validate query execution configuration from YAML.
+
+    Args:
+        config_path: Path to YAML configuration file
+
+    Returns:
+        QueryAppConfig with validated configuration
+
+    Raises:
+        FileNotFoundError: If config file doesn't exist
+        ValueError: If YAML is invalid or missing required fields
+        yaml.YAMLError: If YAML parsing fails
+    """
+    path = Path(config_path).expanduser().resolve()
+
+    if not path.exists():
+        raise FileNotFoundError(f"Config file not found: {path}")
+
+    try:
+        raw: Dict[str, Any] = _load_yaml(path)
+    except yaml.YAMLError as e:
+        raise ValueError(f"Invalid YAML in {path}: {e}")
+
+    # Extract and validate mongo section
+    mongo_raw = raw.get("mongo", {})
+    if not mongo_raw.get("uri"):
+        raise ValueError("Missing required field: mongo.uri")
+    if not mongo_raw.get("database"):
+        raise ValueError("Missing required field: mongo.database")
+
+    mongo = QueryMongoConfig(
+        mongo_uri=mongo_raw["uri"],
+        database=mongo_raw["database"]
+    )
+
+    # Extract optional sections
+    exec_raw = raw.get("execution", {})
+    execution = QueryExecutionConfig(
+        default_limit=exec_raw.get("default_limit"),
+        timeout_s=exec_raw.get("timeout_s", 30)
+    )
+
+    log_raw = raw.get("logging", {})
+    logging_cfg = QueryLoggingConfig(
+        level=log_raw.get("level", "INFO")
+    )
+
+    return QueryAppConfig(
+        mongo=mongo,
+        execution=execution,
+        logging=logging_cfg
+    )
