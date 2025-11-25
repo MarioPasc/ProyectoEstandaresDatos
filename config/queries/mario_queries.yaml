@@ -1,0 +1,22 @@
+# MongoDB Query Execution Configuration
+# For use with: biointegrate-execute-queries
+# Issue: T2 - Generic Query CLI
+
+mongo:
+  # MongoDB connection URI
+  # Format: mongodb://[username:password@]host:port/
+  uri: "mongodb://localhost:27017/"
+
+  # Target database name
+  database: "estandares_db"
+
+execution:
+  # Default limit for results (null = unlimited)
+  default_limit: null
+
+  # Query timeout in seconds
+  timeout_s: 30
+
+logging:
+  # Logging level: DEBUG, INFO, WARNING, ERROR
+  level: "INFO"
