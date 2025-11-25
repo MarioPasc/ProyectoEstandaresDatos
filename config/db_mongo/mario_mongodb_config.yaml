@@ -52,7 +52,7 @@ hgnc:
 
 options:
   # Si true, inserta los datos en MongoDB
-  insert_into_mongodb: false
+  insert_into_mongodb: true
   # Si true, elimina la colección antes de insertar (útil para rehacer la carga)
   drop_collection: true
   # Si true, procesa ficheros STAR-Counts para calcular expression_summary
