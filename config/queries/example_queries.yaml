@@ -1,0 +1,27 @@
+# MongoDB Query Execution Configuration Template
+# For use with: biointegrate-execute-queries
+
+mongo:
+  # REQUIRED: MongoDB connection URI
+  # Format: mongodb://[username:password@]host:port/
+  # Example without auth: "mongodb://localhost:27017/"
+  # Example with auth: "mongodb://user:password@host:27017/"
+  uri: "mongodb://localhost:27017/"
+
+  # REQUIRED: Target database name
+  database: "your_database_name"
+
+execution:
+  # OPTIONAL: Default limit for results (null = unlimited)
+  # Use this to cap result set sizes across all queries
+  default_limit: null
+
+  # OPTIONAL: Query timeout in seconds
+  # Prevents long-running queries from blocking
+  timeout_s: 30
+
+logging:
+  # OPTIONAL: Logging level
+  # Valid values: DEBUG, INFO, WARNING, ERROR
+  # Default: INFO
+  level: "INFO"

@@ -58,6 +58,7 @@ biointegrate-import-uniprot = "biointegrate.db.uniprot_config:main"
 biointegrate-import-hgnc = "biointegrate.db.hgnc_config:main"
 biointegrate-import-all = "biointegrate.db.import_all_mongo:main"
 biointegrate-pipeline = "biointegrate.cli.pipeline:main"
+biointegrate-execute-queries = "biointegrate.cli.queries:main"
 
 
 [tool.setuptools]
@@ -68,7 +69,8 @@ packages = [
     "biointegrate.data.entrypoints",
     "biointegrate.db",
     "biointegrate.utils",
-    "biointegrate.quality"
+    "biointegrate.quality",
+    "biointegrate.queries"
 ]
 [tool.setuptools.package-data]
 biointegrate = ["py.typed"]
