@@ -1,0 +1,116 @@
+{
+  "name": "query_2_completa",
+  "collection": "hgnc_genes",
+  "type": "aggregate",
+  "pipeline": [
+    {
+      "$match": {
+        "projects.TCGA-LGG": {
+          "$exists": true
+        },
+        "projects.TCGA-GBM": {
+          "$exists": true
+        }
+      }
+    },
+    {
+      "$addFields": {
+        "lgg_cases_arr": {
+          "$objectToArray": "$projects.TCGA-LGG.cases"
+        },
+        "gbm_cases_arr": {
+          "$objectToArray": "$projects.TCGA-GBM.cases"
+        }
+      }
+    },
+    {
+      "$project": {
+        "hgnc_id": 1,
+        "symbol": 1,
+        "uniprot_ids": 1,
+        "mean_lgg": {
+          "$avg": "$lgg_cases_arr.v.tpm_unstranded"
+        },
+        "mean_gbm": {
+          "$avg": "$gbm_cases_arr.v.tpm_unstranded"
+        }
+      }
+    },
+    {
+      "$match": {
+        "mean_lgg": {
+          "$gt": 0
+        },
+        "mean_gbm": {
+          "$gt": 0
+        }
+      }
+    },
+    {
+      "$addFields": {
+        "log2_fold_change": {
+          "$divide": [
+            {
+              "$ln": {
+                "$divide": ["$mean_gbm", "$mean_lgg"]
+              }
+            },
+            {
+              "$ln": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "$lookup": {
+        "from": "uniprot_entries",
+        "localField": "uniprot_ids",
+        "foreignField": "_id",
+        "as": "uniprot_data"
+      }
+    },
+    {
+      "$project": {
+        "_id": 0,
+        "hgnc_id": 1,
+        "gene_symbol": "$symbol",
+        "statistics": {
+          "tpm_mean_lgg": "$mean_lgg",
+          "tpm_mean_gbm": "$mean_gbm",
+          "log2_fc": "$log2_fold_change"
+        },
+        "uniprot_annotation": {
+          "$let": {
+            "vars": {
+              "first_match": {
+                "$arrayElemAt": ["$uniprot_data", 0]
+              }
+            },
+            "in": {
+              "protein_name": {
+                "$arrayElemAt": [
+                  "$$first_match.protein.names",
+                  0
+                ]
+              },
+              "function":
+                "$$first_match.protein.function_cc",
+              "molecular_function": {
+                "$arrayElemAt": [
+                  "$$first_match.go_terms.molecular_function",
+                  0
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$sort": {
+        "statistics.log2_fc": -1
+      }
+    }
+  ]
+}
