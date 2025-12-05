@@ -1,0 +1,242 @@
+{
+  "collection": "uniprot",
+  "pipeline": [
+    {
+      "$match": {
+        "organism.taxonomy_id": 9606,
+        "$or": [
+          {
+            "protein.subcellular_location_cc": {
+              "$elemMatch": { "$regex": "membrane", "$options": "i" }
+            }
+          },
+          {
+            "go_terms.cellular_component": {
+              "$elemMatch": { "$regex": "membrane", "$options": "i" }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "$addFields": {
+        "membrane_annotations": {
+          "$concatArrays": [
+            {
+              "$filter": {
+                "input": { "$ifNull": [ "$protein.subcellular_location_cc", [] ] },
+                "as": "loc",
+                "cond": {
+                  "$regexMatch": {
+                    "input": "$$loc",
+                    "regex": "membrane",
+                    "options": "i"
+                  }
+                }
+              }
+            },
+            {
+              "$filter": {
+                "input": { "$ifNull": [ "$go_terms.cellular_component", [] ] },
+                "as": "cc",
+                "cond": {
+                  "$regexMatch": {
+                    "input": "$$cc",
+                    "regex": "membrane",
+                    "options": "i"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "cancer_annotations": {
+          "$concatArrays": [
+            {
+              "$cond": [
+                {
+                  "$regexMatch": {
+                    "input": { "$ifNull": [ "$protein.function_cc", "" ] },
+                    "regex": "cancer|tumor|carcinoma|glioma|oncogen",
+                    "options": "i"
+                  }
+                },
+                [
+                  {
+                    "$substrCP": [
+                      { "$ifNull": [ "$protein.function_cc", "" ] },
+                      0,
+                      300
+                    ]
+                  }
+                ],
+                []
+              ]
+            },
+            {
+              "$filter": {
+                "input": { "$ifNull": [ "$go_terms.biological_process", [] ] },
+                "as": "bp",
+                "cond": {
+                  "$regexMatch": {
+                    "input": "$$bp",
+                    "regex": "cancer|tumor|carcinoma|glioma|oncogen",
+                    "options": "i"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "$lookup": {
+        "from": "hgnc",
+        "localField": "uniprot_id",
+        "foreignField": "uniprot_ids",
+        "as": "hgnc_genes"
+      }
+    },
+    {
+      "$unwind": {
+        "path": "$hgnc_genes",
+        "preserveNullAndEmptyArrays": false
+      }
+    },
+    {
+      "$addFields": {
+        "lgg_cases_array": {
+          "$objectToArray": {
+            "$ifNull": [ "$hgnc_genes.projects.TCGA-LGG.cases", {} ]
+          }
+        },
+        "gbm_cases_array": {
+          "$objectToArray": {
+            "$ifNull": [ "$hgnc_genes.projects.TCGA-GBM.cases", {} ]
+          }
+        }
+      }
+    },
+    {
+      "$addFields": {
+        "lgg_positive_cases": {
+          "$size": {
+            "$filter": {
+              "input": "$lgg_cases_array",
+              "as": "c",
+              "cond": {
+                "$gt": [
+                  { "$ifNull": [ "$$c.v.tpm_unstranded", 0 ] },
+                  1.0
+                ]
+              }
+            }
+          }
+        },
+        "gbm_positive_cases": {
+          "$size": {
+            "$filter": {
+              "input": "$gbm_cases_array",
+              "as": "c",
+              "cond": {
+                "$gt": [
+                  { "$ifNull": [ "$$c.v.tpm_unstranded", 0 ] },
+                  1.0
+                ]
+              }
+            }
+          }
+        },
+        "lgg_n_cases": {
+          "$ifNull": [ "$hgnc_genes.projects.TCGA-LGG.n_cases", 0 ]
+        },
+        "gbm_n_cases": {
+          "$ifNull": [ "$hgnc_genes.projects.TCGA-GBM.n_cases", 0 ]
+        }
+      }
+    },
+    {
+      "$addFields": {
+        "lgg_coverage": {
+          "$cond": [
+            { "$gt": [ "$lgg_n_cases", 0 ] },
+            { "$divide": [ "$lgg_positive_cases", "$lgg_n_cases" ] },
+            null
+          ]
+        },
+        "gbm_coverage": {
+          "$cond": [
+            { "$gt": [ "$gbm_n_cases", 0 ] },
+            { "$divide": [ "$gbm_positive_cases", "$gbm_n_cases" ] },
+            null
+          ]
+        },
+        "project_ids": {
+          "$setUnion": [
+            {
+              "$cond": [
+                { "$ifNull": [ "$hgnc_genes.projects.TCGA-LGG", false ] },
+                [ "TCGA-LGG" ],
+                []
+              ]
+            },
+            {
+              "$cond": [
+                { "$ifNull": [ "$hgnc_genes.projects.TCGA-GBM", false ] },
+                [ "TCGA-GBM" ],
+                []
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "$lookup": {
+        "from": "gdc",
+        "let": { "pids": "$project_ids" },
+        "pipeline": [
+          {
+            "$match": {
+              "$expr": {
+                "$in": [ "$project_id", "$$pids" ]
+              }
+            }
+          },
+          {
+            "$project": {
+              "_id": 0,
+              "project_id": 1,
+              "disease_type": 1,
+              "primary_site": 1
+            }
+          }
+        ],
+        "as": "gdc_projects"
+      }
+    },
+    {
+      "$project": {
+        "_id": 0,
+        "uniprot_id": 1,
+        "entry_name": 1,
+        "gene_symbol": "$gene.primary_symbol",
+        "hgnc_id": "$hgnc_genes.hgnc_id",
+        "membrane_annotations": 1,
+        "cancer_annotations": 1,
+        "lgg": {
+          "n_cases": "$lgg_n_cases",
+          "positive_cases": "$lgg_positive_cases",
+          "coverage": "$lgg_coverage"
+        },
+        "gbm": {
+          "n_cases": "$gbm_n_cases",
+          "positive_cases": "$gbm_positive_cases",
+          "coverage": "$gbm_coverage"
+        },
+        "gdc_projects": 1
+      }
+    }
+  ]
+}
