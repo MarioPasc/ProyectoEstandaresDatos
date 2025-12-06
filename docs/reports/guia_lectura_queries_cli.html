@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Lectura: CLI de Ejecución de Consultas</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 2rem;
+        }
+        h1 { margin: 0; font-size: 2rem; }
+        h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 0.5rem; margin-top: 2rem; }
+        h3 { color: #34495e; margin-top: 1.5rem; }
+        
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+        
+        code {
+            background-color: #f0f0f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.9em;
+            color: #e83e8c;
+        }
+        
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+        
+        a { color: #3498db; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th { background-color: #f8f9fa; font-weight: 600; }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25em 0.4em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.25rem;
+            background-color: #17a2b8;
+            color: white;
+        }
+        .file-link { font-family: monospace; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Guía de Lectura: CLI de Ejecución de Consultas</h1>
+    <p>Análisis del flujo de ejecución para <code>biointegrate/cli/queries.py</code></p>
+    <p><small><a href="https://github.com/MarioPasc/ProyectoEstandaresDatos" style="color: #aaddff;">Ver Repositorio en GitHub</a></small></p>
+</header>
+
+<div class="card">
+    <h2>1. Contexto de Ejecución</h2>
+    <p>Esta guía detalla el funcionamiento interno del script cuando se invoca el siguiente comando para la entrega T2:</p>
+    <p>Agradecemos al Dr.Rybinski, Maciej por su guía durante el proyecto. Sinceramente, los <strong>integrantes del grupo C: Mario Pascual, Juan Soriano, Ainhoa Pérez, Teresa Vega, y Martina Cebolla </strong></p>
+    <p>Este documento ha sido <strong>generado por Gemini 3-Pro y revisado por Mario Pascual González</strong></p>
+    <pre><code>biointegrate-execute-queries \
+  --config config/queries/mario_queries.yaml \
+  --queries docs/t2-queries/Query2Completa.txt,docs/t2-queries/Query1_LGG_UniProt.txt,docs/t2-queries/Query3_MembraneCancerCoverage.txt \
+  --output-dir docs/t2-resultados \
+  --xslt docs/xslt/biointegrate_report.xslt</code></pre>
+
+    <h3>Mapeo de Argumentos a Componentes</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Argumento</th>
+                <th>Fichero / Recurso</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>--config</code></td>
+                <td><a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/config/queries/mario_queries.yaml" class="file-link">config/queries/mario_queries.yaml</a></td>
+                <td>Define credenciales de MongoDB y niveles de log.</td>
+            </tr>
+            <tr>
+                <td><code>--queries</code></td>
+                <td><a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/tree/main/docs/t2-queries" class="file-link">docs/t2-queries/*.txt</a></td>
+                <td>Lista de ficheros con la lógica de las consultas (pipelines de agregación).</td>
+            </tr>
+            <tr>
+                <td><code>--output-dir</code></td>
+                <td><a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/tree/main/docs/t2-resultados" class="file-link">docs/t2-resultados</a></td>
+                <td>Directorio raíz para la generación de artefactos.</td>
+            </tr>
+            <tr>
+                <td><code>--xslt</code></td>
+                <td><a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/docs/xslt/biointegrate_report.xslt" class="file-link">docs/xslt/biointegrate_report.xslt</a></td>
+                <td>Plantilla para transformar XML a HTML.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="card">
+    <h2>2. Flujo de Ejecución (Paso a Paso)</h2>
+    
+    <h3>Paso 1: Punto de Entrada</h3>
+    <p>El script principal es <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/biointegrate/cli/queries.py" class="file-link">biointegrate/cli/queries.py</a>. La función <code>main()</code> orquesta todo el proceso.</p>
+
+    <h3>Paso 2: Carga de Configuración</h3>
+    <p>Se utiliza <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/biointegrate/data/config.py" class="file-link">biointegrate/data/config.py</a> para leer el YAML y establecer la conexión.</p>
+    <pre><code class="language-python">config = load_query_config(args.config)</code></pre>
+
+    <h3>Paso 3: Parsing de Consultas</h3>
+    <p>El módulo <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/biointegrate/queries/query_parser.py" class="file-link">biointegrate/queries/query_parser.py</a> lee los ficheros <code>.txt</code> e interpreta si son consultas simples (<code>find</code>) o complejas (<code>aggregate</code>).</p>
+
+    <h3>Paso 4: Ejecución en MongoDB</h3>
+    <p>El motor <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/biointegrate/queries/mongo_executor.py" class="file-link">biointegrate/queries/mongo_executor.py</a> envía las consultas a la base de datos y recupera los documentos.</p>
+
+    <h3>Paso 5: Pipeline de Transformación T2</h3>
+    <p>Al detectar el flag <code>--xslt</code>, se activa el módulo <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/biointegrate/t2/transform.py" class="file-link">biointegrate/t2/transform.py</a> para realizar la conversión en cascada:</p>
+    <ol>
+        <li><strong>JSON:</strong> Se guardan los datos crudos en <code>docs/t2-resultados/json/</code>.</li>
+        <li><strong>XML:</strong> Se convierte la estructura de objetos a un árbol XML y se guarda en <code>docs/t2-resultados/xml/</code>.</li>
+        <li><strong>HTML:</strong> Se aplica la plantilla XSLT para generar el informe final en <code>docs/t2-resultados/html/</code>.</li>
+    </ol>
+</div>
+
+<div class="card">
+    <h2>3. Detalle de las Consultas y Utilidad en Investigación</h2>
+    <p>A continuación se describen las consultas ejecutadas, su propósito científico y enlaces a sus definiciones y resultados.</p>
+
+    <h3>🔬 Query 1: LGG UniProt</h3>
+    <p><strong>Utilidad:</strong> Permite aislar y analizar las anotaciones proteicas específicas para genes relacionados con el Glioma de Bajo Grado (LGG), facilitando estudios de proteómica dirigida en este tipo de cáncer.</p>
+    <ul>
+        <li><strong>Definición:</strong> <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/docs/t2-queries/Query1_LGG_UniProt.txt">Query1_LGG_UniProt.txt</a></li>
+        <li><strong>Resultado HTML:</strong> <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/docs/t2-resultados/html/query_1_lgg_uniprot.html">query_1_lgg_uniprot.html</a></li>
+    </ul>
+
+    <h3>🧬 Query 2: Completa (Integración Multi-ómica)</h3>
+    <p><strong>Utilidad:</strong> Genera un "dataset maestro" cruzando datos clínicos, genómicos y proteómicos, esencial para entrenar modelos de aprendizaje automático que busquen correlaciones complejas entre genotipo y fenotipo.</p>
+    <ul>
+        <li><strong>Definición:</strong> <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/docs/t2-queries/Query2Completa.txt">Query2Completa.txt</a></li>
+        <li><strong>Resultado HTML:</strong> <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/docs/t2-resultados/html/query_2_completa.html">query_2_completa.html</a></li>
+    </ul>
+
+    <h3>🎯 Query 3: Cobertura de Proteínas de Membrana en Cáncer</h3>
+    <p><strong>Utilidad:</strong> Evalúa la disponibilidad de datos para proteínas de membrana a través de diferentes tipos de cáncer, lo cual es crítico para identificar posibles dianas terapéuticas accesibles a fármacos (drug targets).</p>
+    <ul>
+        <li><strong>Definición:</strong> <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/docs/t2-queries/Query3_MembraneCancerCoverage.txt">Query3_MembraneCancerCoverage.txt</a></li>
+        <li><strong>Resultado HTML:</strong> <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/docs/t2-resultados/html/query_3_coverage_cancer_membrane.html">query_3_coverage_cancer_membrane.html</a></li>
+    </ul>
+</div>
+
+<footer>
+    <p style="text-align: center; color: #7f8c8d; font-size: 0.9rem;">
+        Generado para el proyecto <strong>BioIntegrate</strong> | <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos">Repositorio GitHub</a>
+    </p>
+</footer>
+
+</body>
+</html>
