@@ -6,6 +6,11 @@ This module provides a command-line interface for:
 - Parsing query specification files (find/aggregate)
 - Executing queries against MongoDB
 - Saving results as JSON files
+- [T2] Transforming results to XML and applying XSLT to generate HTML
+
+Output Directory Structure:
+- JSON-only mode (no --xslt): Saves to output-dir/*.json
+- Full transformation mode (--xslt): Creates json/, xml/, html/ subdirectories
 """
 
 from __future__ import annotations
@@ -17,6 +22,7 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, List
 
+# Importaciones internas existentes
 from biointegrate.data.config import load_query_config
 from biointegrate.queries.mongo_executor import (
     MongoConnectionError,
@@ -29,6 +35,9 @@ from biointegrate.queries.query_parser import (
     load_queries,
     parse_queries_arg,
 )
+
+# [NUEVO] Importaciones para la tarea T2
+from biointegrate.t2.transform import json_to_xml, save_xml, apply_xslt
 
 logger = logging.getLogger(__name__)
 
@@ -76,45 +85,23 @@ def print_summary(results: Dict[str, List[Dict[str, Any]]]) -> None:
 def parse_args() -> argparse.Namespace:
     """Parse command-line arguments."""
     parser = argparse.ArgumentParser(
-        description="Execute MongoDB queries from specification files",
+        description="Execute MongoDB queries and apply XSLT transformations",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Execute single query with default config
+  # Execute queries and save as JSON
   biointegrate-execute-queries \\
-    --config config/queries/mario_queries.yaml \\
-    --queries queries/q1.txt
-
-  # Execute multiple queries and save results
-  biointegrate-execute-queries \\
-    --config config/queries/mario_queries.yaml \\
-    --queries queries/q1.txt,queries/q2.txt,queries/q3.txt \\
+    --config config.yaml \\
+    --queries q1.txt \\
     --output-dir results/
 
-  # Dry run (validate config and queries without executing)
+  # [T2] Execute, transform to XML and generate HTML via XSLT
+  # Creates results/json/, results/xml/, results/html/ subdirectories
   biointegrate-execute-queries \\
-    --config config/queries/mario_queries.yaml \\
-    --queries queries/q1.txt,queries/q2.txt \\
-    --dry-run
-
-Config YAML format:
-  mongo:
-    uri: "mongodb://localhost:27017/"
-    database: "estandares_db"
-  execution:
-    default_limit: 100
-    timeout_s: 30
-  logging:
-    level: "INFO"
-
-Query file format (JSON):
-  {
-    "name": "hgnc_find",
-    "collection": "hgnc_genes",
-    "type": "find",
-    "filter": {"symbol": "TP53"},
-    "projection": {"_id": 0, "symbol": 1, "hgnc_id": 1}
-  }
+    --config config.yaml \\
+    --queries q1.txt \\
+    --output-dir results/ \\
+    --xslt templates/report.xslt
         """,
     )
 
@@ -153,19 +140,12 @@ Query file format (JSON):
         help="Validate config and queries without executing against MongoDB",
     )
 
-    # Placeholder for future T2 features
+    # [NUEVO] Argumentos para T2
     parser.add_argument(
         "--xslt",
         type=str,
         default=None,
-        help="(Not implemented) XSLT transformation file for JSON→XML→HTML",
-    )
-
-    parser.add_argument(
-        "--output-html-dir",
-        type=str,
-        default=None,
-        help="(Not implemented) Directory for HTML output files",
+        help="[T2] Path to XSLT transformation file for JSON->XML->HTML conversion. Requires --output-dir.",
     )
 
     return parser.parse_args()
@@ -221,13 +201,61 @@ def main() -> int:
         # 6. Output results
         print_summary(results)
 
-        # 7. Save to files if requested
-        if args.output_dir:
-            output_dir = Path(args.output_dir).expanduser().resolve()
-            logger.info(f"Saving results to {output_dir}")
-            save_results_to_files(results, output_dir)
+        # 7. [NUEVO T2] Validación: Si se proporciona --xslt, se requiere --output-dir
+        if args.xslt and not args.output_dir:
+            logger.error("--xslt requires --output-dir to be specified")
+            print("Error: --xslt requires --output-dir to be specified")
+            return 1
 
-        logger.info("✓ All queries executed successfully")
+        # 8. Procesamiento según modo (JSON-only vs Full transformation)
+        if args.xslt:
+            # MODO COMPLETO: JSON + XML + HTML en subdirectorios
+            base_output_dir = Path(args.output_dir).expanduser().resolve()
+            json_dir = base_output_dir / "json"
+            xml_dir = base_output_dir / "xml"
+            html_dir = base_output_dir / "html"
+
+            xslt_path = Path(args.xslt).expanduser().resolve()
+
+            logger.info("--- Starting T2 Transformation Pipeline ---")
+            logger.info(f"Output directory structure:")
+            logger.info(f"  JSON: {json_dir}")
+            logger.info(f"  XML:  {xml_dir}")
+            logger.info(f"  HTML: {html_dir}")
+            logger.info(f"Using XSLT template: {xslt_path}")
+
+            # Guardar JSON en subdirectorio
+            logger.info(f"Saving JSON results to {json_dir}")
+            save_results_to_files(results, json_dir)
+
+            # Transformar cada query: JSON -> XML -> HTML
+            for query_name, documents in results.items():
+                try:
+                    # A. Convertir JSON (lista de dicts) a Árbol XML
+                    logger.info(f"Transforming '{query_name}' to XML...")
+                    xml_tree = json_to_xml(documents, root_tag="results")
+
+                    # B. Guardar XML en subdirectorio
+                    xml_file = xml_dir / f"{query_name}.xml"
+                    save_xml(xml_tree, xml_file)
+                    logger.info(f"Saved XML to {xml_file}")
+
+                    # C. Aplicar XSLT para generar HTML
+                    html_file = html_dir / f"{query_name}.html"
+                    logger.info(f"Applying XSLT -> {html_file}")
+                    apply_xslt(xml_file, xslt_path, html_file)
+
+                except Exception as e:
+                    logger.error(f"Failed to transform query '{query_name}': {e}")
+                    # No detenemos el loop, intentamos con la siguiente query
+
+        elif args.output_dir:
+            # MODO JSON-ONLY: Guardar solo JSON en la raíz de output-dir
+            base_output_dir = Path(args.output_dir).expanduser().resolve()
+            logger.info(f"Saving JSON results to {base_output_dir}")
+            save_results_to_files(results, base_output_dir)
+
+        logger.info("✓ All queries processed successfully")
         return 0
 
     except FileNotFoundError as e:

@@ -42,6 +42,7 @@ dependencies = [
     "pyyaml",
     "pymongo",
     "pandas",
+    "lxml"
 ]
 
 [project.urls]

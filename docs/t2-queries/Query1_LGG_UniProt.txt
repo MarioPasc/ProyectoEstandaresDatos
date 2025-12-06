@@ -1,0 +1,123 @@
+{
+  "name": "query_1_lgg_uniprot",
+  "collection": "hgnc_genes",
+  "type": "aggregate",
+  "pipeline": [
+    {
+      "$match": {
+        "projects.TCGA-LGG": {
+          "$exists": true
+        }
+      }
+    },
+    {
+      "$addFields": {
+        "cases_array": {
+          "$objectToArray": "$projects.TCGA-LGG.cases"
+        }
+      }
+    },
+    {
+      "$project": {
+        "hgnc_id": 1,
+        "symbol": 1,
+        "ensembl_gene_id": 1,
+        "uniprot_ids": 1,
+        "mean_tpm_unstranded": {
+          "$avg": "$cases_array.v.tpm_unstranded"
+        },
+        "n_cases": {
+          "$size": "$cases_array"
+        }
+      }
+    },
+    {
+      "$sort": {
+        "mean_tpm_unstranded": -1
+      }
+    },
+    {
+      "$limit": 100
+    },
+    {
+      "$lookup": {
+        "from": "uniprot_entries",
+        "let": {
+          "ids": "$uniprot_ids"
+        },
+        "pipeline": [
+          {
+            "$match": {
+              "$expr": {
+                "$in": [
+                  "$_id",
+                  {
+                    "$ifNull": [
+                      "$$ids",
+                      []
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "$project": {
+              "_id": 0,
+              "uniprot_id": "$_id",
+              "protein_name": {
+                "$arrayElemAt": [
+                  "$protein.names",
+                  0
+                ]
+              },
+              "protein_length": "$protein.length",
+              "function_cc": "$protein.function_cc",
+              "go_molecular_function": "$go_terms.molecular_function"
+            }
+          }
+        ],
+        "as": "uniprot_annotations"
+      }
+    },
+    {
+      "$lookup": {
+        "from": "gdc_cases",
+        "pipeline": [
+          {
+            "$match": {
+              "project_id": "TCGA-LGG"
+            }
+          },
+          {
+            "$project": {
+              "_id": 0,
+              "project_id": 1,
+              "disease_type": 1,
+              "primary_site": 1
+            }
+          },
+          {
+            "$limit": 1
+          }
+        ],
+        "as": "gdc_project"
+      }
+    },
+    {
+      "$addFields": {
+        "project": {
+          "$arrayElemAt": [
+            "$gdc_project",
+            0
+          ]
+        }
+      }
+    },
+    {
+      "$project": {
+        "gdc_project": 0
+      }
+    }
+  ]
+}
