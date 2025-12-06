@@ -39,47 +39,56 @@ def process_single_file(json_path, xslt_path, output_name):
         # import traceback; traceback.print_exc()
 
 def main():
-    # --- CONFIGURACIÓN DE RUTAS ---
-    # Ruta donde están tus JSONs (la que me pasaste)
-    base_json_dir = Path(r"C:\Users\jismbs\Documents\ProyectoEstandaresDatos\docs\t2-resultados")
+    # --- CONFIGURACIÓN DE RUTAS GENÉRICAS ---
     
-    # Ruta a la plantilla XSLT Universal
-    xslt_path = Path("xslt/biointegrate_report.xslt")
+    # 1. Obtener la raíz del proyecto dinámicamente
+    # (El script está en /scripts, así que subimos 2 niveles: scripts -> root)
+    project_root = Path(__file__).resolve().parent.parent
     
-    # Mapa de archivos a procesar: Nombre del JSON -> Nombre del Reporte Salida
+    # 2. Definir rutas relativas desde la raíz
+    base_json_dir = project_root / "docs" / "t2-resultados"
+    xslt_path = project_root / "xslt" / "biointegrate_report.xslt"
+    
+    # Ruta alternativa para buscar JSONs (ejemplos)
+    alt_json_dir = project_root / "docs" / "t2-queries-ejemplos" / "results"
+
+    # Mapa de archivos a procesar
     files_map = {
         "query_1_lgg_uniprot.json": "1_Reporte_LGG_Expression",
         "query_2_completa.json": "2_Reporte_Biomarcadores_Waterfall_v2", 
         "query_3_coverage_cancer_membrane.json": "3_Reporte_Cobertura_Membrana"
     }
 
-    print("=== Generador de Reportes T2 (Multi-Query) ===")
+    print(f"=== Generador de Reportes T2 (Ruta Base: {project_root.name}) ===")
     
     if not xslt_path.exists():
-        print(f" Error: No se encuentra la plantilla XSLT en {xslt_path}")
+        print(f" Error: No se encuentra la plantilla XSLT en: {xslt_path}")
         return
 
     # Iterar y procesar
     found_any = False
     for json_filename, output_name in files_map.items():
+        # Intentar ruta principal
         json_full_path = base_json_dir / json_filename
         
         if json_full_path.exists():
             found_any = True
             process_single_file(json_full_path, xslt_path, output_name)
         else:
-            # Intentar buscar en la carpeta docs/t2-queries-ejemplos/results por si acaso
-            alt_path = Path(r"C:\Users\jismbs\Documents\ProyectoEstandaresDatos\docs\t2-queries-ejemplos\results") / json_filename
+            # Intentar ruta alternativa
+            alt_path = alt_json_dir / json_filename
             if alt_path.exists():
                 found_any = True
                 process_single_file(alt_path, xslt_path, output_name)
             else:
-                print(f" Aviso: No se encuentra {json_filename}")
+                print(f" Aviso: No se encuentra '{json_filename}' en ninguna de las carpetas de docs/")
 
     if found_any:
-        print("\n ¡Proceso finalizado! Revisa la carpeta 'results/t2_final_reports'.")
+        # Indicar ruta de salida relativa para que sea fácil de leer
+        out_rel = (project_root / "results" / "t2_final_reports")
+        print(f"\n ¡Proceso finalizado! Revisa la carpeta: {out_rel}")
     else:
-        print("\n No se procesó ningún archivo. Verifica las rutas en el script.")
+        print("\n No se procesó ningún archivo. Verifica que los JSON estén en 'docs/t2-resultados' o 'docs/t2-queries-ejemplos/results'.")
 
 if __name__ == "__main__":
     main()
