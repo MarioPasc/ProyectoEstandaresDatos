@@ -1,5 +1,7 @@
 {
-  "collection": "uniprot",
+  "name": "query_3_coverage_cancer_membrane",
+  "collection": "uniprot_entries",
+  "type": "aggregate",
   "pipeline": [
     {
       "$match": {
@@ -92,7 +94,7 @@
     },
     {
       "$lookup": {
-        "from": "hgnc",
+        "from": "hgnc_genes",
         "localField": "uniprot_id",
         "foreignField": "uniprot_ids",
         "as": "hgnc_genes"
@@ -194,7 +196,7 @@
     },
     {
       "$lookup": {
-        "from": "gdc",
+        "from": "gdc_cases",
         "let": { "pids": "$project_ids" },
         "pipeline": [
           {
