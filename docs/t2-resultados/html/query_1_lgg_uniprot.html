@@ -1,0 +1,1794 @@
+<html>
+<head>
+<title>Reporte BioIntegrate</title>
+<style>
+      body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f8f9fa; color: #333; }
+      h1 { text-align: center; color: #2c3e50; margin-bottom: 20px; }
+      .summary { text-align: center; margin-bottom: 30px; font-style: italic; color: #666; }
+      
+      table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 40px; }
+      th, td { padding: 12px 15px; border-bottom: 1px solid #ddd; }
+      th { background-color: #f1f1f1; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; text-align: left; }
+      tr:hover { background-color: #f9f9f9; }
+      
+      .tag { display: inline-block; background: #e3f2fd; color: #0d47a1; padding: 2px 6px; border-radius: 4px; font-size: 10px; margin: 1px; border: 1px solid #bbdefb; }
+      .meta { font-size: 11px; color: #7f8c8d; display: block; margin-top: 2px; }
+      .val-mono { font-family: 'Consolas', monospace; font-weight: bold; color: #2c3e50; }
+
+      /* ESTILOS QUERY 2 (Waterfall) */
+      .chart-cell { width: 400px; position: relative; border-left: 1px dashed #ccc; border-right: 1px dashed #ccc; }
+      .axis-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background-color: #333; z-index: 10; opacity: 0.3; }
+      .bar-wrapper { display: flex; align-items: center; height: 18px; width: 100%; }
+      .bar-pos { height: 100%; background-color: #e74c3c; margin-left: 50%; border-radius: 0 3px 3px 0; transition: width 0.3s ease; }
+      .bar-neg { height: 100%; background-color: #27ae60; margin-right: 50%; margin-left: auto; border-radius: 3px 0 0 3px; transition: width 0.3s ease; }
+      .val-text { font-family: 'Consolas', monospace; font-size: 11px; text-align: right; }
+    </style>
+</head>
+<body>
+<h1>Genes con Alta Expresión en LGG (&gt;500 TPM)</h1>
+<p class="summary">Listado de genes altamente expresados y su correspondencia en UniProt.</p>
+<table>
+<thead><tr>
+<th>Gen (HGNC)</th>
+<th>Identificadores</th>
+<th style="text-align:right">TPM Medio</th>
+<th>Anotación Funcional (UniProt)</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT-ND4</div>
+<span class="meta">HGNC:7459</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000198886</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">32,437.64</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P03905</strong>: NADH-ubiquinone oxidoreductase chain 4 (EC 7.1.1.2) (NADH dehydrogenase subunit 4)<br><span class="meta">Longitud: 459 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Core subunit of the mitochondrial membrane respiratory chain NADH dehydrogenase (Complex I) which catalyzes el...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT-CO1</div>
+<span class="meta">HGNC:7419</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000198804</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">31,684.67</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P00395</strong>: Cytochrome c oxidase subunit 1 (EC 7.1.1.9) (Cytochrome c oxidase polypeptide I)<br><span class="meta">Longitud: 513 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Component of the cytochrome c oxidase, the last enzyme in the mitochondrial electron transport chain which dri...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT-CO2</div>
+<span class="meta">HGNC:7421</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000198712</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">29,715.46</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P00403</strong>: Cytochrome c oxidase subunit 2 (EC 7.1.1.9) (Cytochrome c oxidase polypeptide II)<br><span class="meta">Longitud: 227 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Component of the cytochrome c oxidase, the last enzyme in the mitochondrial electron transport chain which dri...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT-RNR2</div>
+<span class="meta">HGNC:7471</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000210082</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">28,499.63</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT-CO3</div>
+<span class="meta">HGNC:7422</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000198938</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">28,445.41</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P00414</strong>: Cytochrome c oxidase subunit 3 (EC 7.1.1.9) (Cytochrome c oxidase polypeptide III)<br><span class="meta">Longitud: 261 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Component of the cytochrome c oxidase, the last enzyme in the mitochondrial electron transport chain which dri...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT-ATP6</div>
+<span class="meta">HGNC:7414</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000198899</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">20,759.67</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P00846</strong>: ATP synthase F(0) complex subunit a (F-ATPase protein 6) (Proton-conducting channel, ATP synthase F(0) complex subunit a)<br><span class="meta">Longitud: 226 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Subunit a, of the mitochondrial membrane ATP synthase complex (F(1)F(0) ATP synthase or Complex V) that produc...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT-ND3</div>
+<span class="meta">HGNC:7458</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000198840</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">19,725.89</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P03897</strong>: NADH-ubiquinone oxidoreductase chain 3 (EC 7.1.1.2) (NADH dehydrogenase subunit 3)<br><span class="meta">Longitud: 115 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Core subunit of the mitochondrial membrane respiratory chain NADH dehydrogenase (Complex I) which catalyzes el...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT-CYB</div>
+<span class="meta">HGNC:7427</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000198727</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">16,671.08</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P00156</strong>: Cytochrome b (Complex III subunit 3) (Complex III subunit III) (Cytochrome b-c1 complex subunit 3) (Ubiquinol-cytochrome-c reductase complex cytochrome b subunit)<br><span class="meta">Longitud: 380 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Component of the ubiquinol-cytochrome c reductase complex (complex III or cytochrome b-c1 complex) that is par...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT-ND1</div>
+<span class="meta">HGNC:7455</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000198888</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">16,521.01</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P03886</strong>: NADH-ubiquinone oxidoreductase chain 1 (EC 7.1.1.2) (NADH dehydrogenase subunit 1)<br><span class="meta">Longitud: 318 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Core subunit of the mitochondrial membrane respiratory chain NADH dehydrogenase (Complex I) which catalyzes el...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT-ND2</div>
+<span class="meta">HGNC:7456</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000198763</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">15,305.44</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P03891</strong>: NADH-ubiquinone oxidoreductase chain 2 (EC 7.1.1.2) (NADH dehydrogenase subunit 2)<br><span class="meta">Longitud: 347 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Core subunit of the mitochondrial membrane respiratory chain NADH dehydrogenase (Complex I) which catalyzes el...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT-ND6</div>
+<span class="meta">HGNC:7462</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000198695</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">13,293.55</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P03923</strong>: NADH-ubiquinone oxidoreductase chain 6 (EC 7.1.1.2) (NADH dehydrogenase subunit 6)<br><span class="meta">Longitud: 174 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Core subunit of the mitochondrial membrane respiratory chain NADH dehydrogenase (Complex I) which catalyzes el...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT-ND5</div>
+<span class="meta">HGNC:7461</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000198786</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">8,825.93</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P03915</strong>: NADH-ubiquinone oxidoreductase chain 5 (EC 7.1.1.2) (NADH dehydrogenase subunit 5)<br><span class="meta">Longitud: 603 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Core subunit of the mitochondrial membrane respiratory chain NADH dehydrogenase (Complex I) which catalyzes el...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT-RNR1</div>
+<span class="meta">HGNC:7470</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000211459</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">8,068.54</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT-ND4L</div>
+<span class="meta">HGNC:7460</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000212907</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">7,552.56</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P03901</strong>: NADH-ubiquinone oxidoreductase chain 4L (EC 7.1.1.2) (NADH dehydrogenase subunit 4L) (ND4L)<br><span class="meta">Longitud: 98 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Core subunit of the mitochondrial membrane respiratory chain NADH dehydrogenase (Complex I) which catalyzes el...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">GFAP</div>
+<span class="meta">HGNC:4235</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000131095</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">6,524.13</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P14136</strong>: Glial fibrillary acidic protein (GFAP)<br><span class="meta">Longitud: 432 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: GFAP, a class-III intermediate filament, is a cell-specific marker that, during the development of the central...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">FTL</div>
+<span class="meta">HGNC:3999</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000087086</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">6,119.11</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P02792</strong>: Ferritin light chain (Ferritin L subunit)<br><span class="meta">Longitud: 175 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Stores iron in a soluble, non-toxic, readily available form. Important for iron homeostasis. Iron is taken up ...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT-ATP8</div>
+<span class="meta">HGNC:7415</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000228253</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">4,805.65</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P03928</strong>: ATP synthase F(0) complex subunit 8 (A6L) (F-ATPase subunit 8)<br><span class="meta">Longitud: 68 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Subunit 8, of the mitochondrial membrane ATP synthase complex (F(1)F(0) ATP synthase or Complex V) that produc...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">APOE</div>
+<span class="meta">HGNC:613</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000130203</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">4,056.01</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P02649</strong>: Apolipoprotein E (Apo-E)<br><span class="meta">Longitud: 317 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: APOE is an apolipoprotein, a protein associating with lipid particles, that mainly functions in lipoprotein-me...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">BCAN</div>
+<span class="meta">HGNC:23059</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000132692</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">4,049.63</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>Q96GW7</strong>: Brevican core protein (Brain-enriched hyaluronan-binding protein) (BEHAB) (Chondroitin sulfate proteoglycan 7)<br><span class="meta">Longitud: 911 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: May play a role in the terminally differentiating and the adult nervous system during postnatal development. C...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">PEA15</div>
+<span class="meta">HGNC:8822</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000162734</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">4,015.28</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>Q15121</strong>: Astrocytic phosphoprotein PEA-15 (15 kDa phosphoprotein enriched in astrocytes) (Phosphoprotein enriched in diabetes) (PED)<br><span class="meta">Longitud: 130 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Blocks Ras-mediated inhibition of integrin activation and modulates the ERK MAP kinase cascade. Inhibits RPS6K...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">ACTB</div>
+<span class="meta">HGNC:132</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000075624</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">3,509.59</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P60709</strong>: Actin, cytoplasmic 1 (EC 3.6.4.-) (Beta-actin) [Cleaved into: Actin, cytoplasmic 1, N-terminally processed]<br><span class="meta">Longitud: 375 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Actin is a highly conserved protein that polymerizes to produce filaments that form cross-linked networks in t...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">CLU</div>
+<span class="meta">HGNC:2095</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000120885</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">3,452.33</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">SPARC</div>
+<span class="meta">HGNC:11219</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000113140</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">3,439.45</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPS12</div>
+<span class="meta">HGNC:10385</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000112306</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">3,424.01</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MTATP6P1</div>
+<span class="meta">HGNC:44575</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000248527</strong>
+</div>
+<div class="meta">UniProt IDs: 0</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">3,183.36</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">ACTG1</div>
+<span class="meta">HGNC:144</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000184009</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">3,157.62</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P63261</strong>: Actin, cytoplasmic 2 (EC 3.6.4.-) (Gamma-actin) [Cleaved into: Actin, cytoplasmic 2, N-terminally processed]<br><span class="meta">Longitud: 375 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Actins are highly conserved proteins that are involved in various types of cell motility and are ubiquitously ...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">SPARCL1</div>
+<span class="meta">HGNC:11220</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000152583</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">2,767.20</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">PSAP</div>
+<span class="meta">HGNC:9498</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000197746</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">2,576.47</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P07602</strong>: Prosaposin (Proactivator polypeptide) [Cleaved into: Saposin-A (Protein A)<br><span class="meta">Longitud: 524 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Saposin-A and saposin-C stimulate the hydrolysis of glucosylceramide by beta-glucosylceramidase (EC 3.2.1.45) ...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">CRYAB</div>
+<span class="meta">HGNC:2389</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000109846</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">2,308.21</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">EEF2</div>
+<span class="meta">HGNC:3214</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000167658</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">2,274.64</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MARCKSL1</div>
+<span class="meta">HGNC:7142</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000175130</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">2,180.16</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P49006</strong>: MARCKS-related protein (MARCKS-like protein 1) (Macrophage myristoylated alanine-rich C kinase substrate) (Mac-MARCKS) (MacMARCKS)<br><span class="meta">Longitud: 195 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Controls cell movement by regulating actin cytoskeleton homeostasis and filopodium and lamellipodium formation...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">TUBA1A</div>
+<span class="meta">HGNC:20766</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000167552</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,912.89</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">TMSB10</div>
+<span class="meta">HGNC:11879</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000034510</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,858.84</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">PLP1</div>
+<span class="meta">HGNC:9086</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000123560</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,832.81</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P60201</strong>: Myelin proteolipid protein (PLP) (Lipophilin)<br><span class="meta">Longitud: 277 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: This is the major myelin protein from the central nervous system. It plays an important role in the formation ...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">CPE</div>
+<span class="meta">HGNC:2303</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000109472</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,826.80</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPS11</div>
+<span class="meta">HGNC:10384</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000142534</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,744.77</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT-TP</div>
+<span class="meta">HGNC:7494</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000210196</strong>
+</div>
+<div class="meta">UniProt IDs: 0</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,722.19</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">ITM2C</div>
+<span class="meta">HGNC:6175</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000135916</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,608.17</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>Q9NQX7</strong>: Integral membrane protein 2C (Cerebral protein 14) (Transmembrane protein BRI3) [Cleaved into: CT-BRI3]<br><span class="meta">Longitud: 267 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Negative regulator of amyloid-beta peptide production. May inhibit the processing of APP by blocking its acces...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">GAPDH</div>
+<span class="meta">HGNC:4141</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000111640</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,593.35</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P04406</strong>: Glyceraldehyde-3-phosphate dehydrogenase (GAPDH) (EC 1.2.1.12) (Peptidyl-cysteine S-nitrosylase GAPDH) (EC 2.6.99.-)<br><span class="meta">Longitud: 335 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Has both glyceraldehyde-3-phosphate dehydrogenase and nitrosylase activities, thereby playing a role in glycol...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">TMSB4X</div>
+<span class="meta">HGNC:11881</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000205542</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,558.37</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">PEBP1</div>
+<span class="meta">HGNC:8630</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000089220</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,486.04</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P30086</strong>: Phosphatidylethanolamine-binding protein 1 (PEBP-1) (HCNPpp) (Neuropolypeptide h3) (Prostatic-binding protein) (Raf kinase inhibitor protein) (RKIP) [Cleaved into: Hippocampal cholinergic neurostimulating peptide (HCNP)]<br><span class="meta">Longitud: 187 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Binds ATP, opioids and phosphatidylethanolamine. Has lower affinity for phosphatidylinositol and phosphatidylc...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">EEF1A1</div>
+<span class="meta">HGNC:3189</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000156508</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,429.40</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPL8</div>
+<span class="meta">HGNC:10368</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000161016</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,387.89</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">CKB</div>
+<span class="meta">HGNC:1991</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000166165</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,384.89</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPL3</div>
+<span class="meta">HGNC:10332</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000100316</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,382.96</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">BCYRN1</div>
+<span class="meta">HGNC:1022</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000236824</strong>
+</div>
+<div class="meta">UniProt IDs: 0</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,334.24</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPS6</div>
+<span class="meta">HGNC:10429</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000137154</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,313.69</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">PMP2</div>
+<span class="meta">HGNC:9117</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000147588</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,281.66</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P02689</strong>: Myelin P2 protein (Peripheral myelin protein 2)<br><span class="meta">Longitud: 132 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: May play a role in lipid transport protein in Schwann cells. May bind cholesterol. {ECO:0000269|PubMed:2042197...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">OLIG1</div>
+<span class="meta">HGNC:16983</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000184221</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,273.28</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>Q8TAK6</strong>: Oligodendrocyte transcription factor 1 (Oligo1) (Class B basic helix-loop-helix protein 6) (bHLHb6) (Class E basic helix-loop-helix protein 21) (bHLHe21)<br><span class="meta">Longitud: 271 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Promotes formation and maturation of oligodendrocytes, especially within the brain. Cooperates with OLIG2 to e...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">HSP90AB1</div>
+<span class="meta">HGNC:5258</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000096384</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,269.29</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P08238</strong>: Heat shock protein HSP 90-beta (HSP 90) (Heat shock 84 kDa) (HSP 84) (HSP84) (Heat shock protein family C member 3)<br><span class="meta">Longitud: 724 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Molecular chaperone that promotes the maturation, structural maintenance and proper regulation of specific tar...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">SCD5</div>
+<span class="meta">HGNC:21088</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000145284</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,260.69</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPS27</div>
+<span class="meta">HGNC:10416</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000177954</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,212.96</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">YWHAE</div>
+<span class="meta">HGNC:12851</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000108953</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,182.11</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">PTMS</div>
+<span class="meta">HGNC:9629</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000159335</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,179.85</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P20962</strong>: Parathymosin<br><span class="meta">Longitud: 102 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Parathymosin may mediate immune function by blocking the effect of prothymosin alpha which confers resistance ...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPL7A</div>
+<span class="meta">HGNC:10364</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000148303</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,174.11</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPS18</div>
+<span class="meta">HGNC:10401</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000231500</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,163.48</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">SPP1</div>
+<span class="meta">HGNC:11255</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000118785</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,142.88</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT2A</div>
+<span class="meta">HGNC:7406</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000125148</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,125.40</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P02795</strong>: Metallothionein-2 (MT-2) (Metallothionein-2A) (Metallothionein-II) (MT-II)<br><span class="meta">Longitud: 61 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Metallothioneins have a high content of cysteine residues that bind various heavy metals; these proteins are t...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPLP2</div>
+<span class="meta">HGNC:10377</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000177600</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,090.25</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">GPM6B</div>
+<span class="meta">HGNC:4461</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000046653</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,086.37</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>Q13491</strong>: Neuronal membrane glycoprotein M6-b (M6b)<br><span class="meta">Longitud: 265 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: May be involved in neural development. Involved in regulation of osteoblast function and bone formation. Invol...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">S100B</div>
+<span class="meta">HGNC:10500</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000160307</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,064.34</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPL13A</div>
+<span class="meta">HGNC:10304</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000142541</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,028.56</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPS4X</div>
+<span class="meta">HGNC:10424</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000198034</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">1,006.24</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">BEX3</div>
+<span class="meta">HGNC:13388</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000166681</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">995.83</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>Q00994</strong>: Protein BEX3 (Brain-expressed X-linked protein 3) (Nerve growth factor receptor-associated protein 1) (Ovarian granulosa cell 13.0 kDa protein HGR74) (p75NTR-associated cell death executor)<br><span class="meta">Longitud: 111 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: May be a signaling adapter molecule involved in NGFR/p75NTR-mediated apoptosis induced by NGF. Plays a role in...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MARCKS</div>
+<span class="meta">HGNC:6759</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000277443</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">995.03</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P29966</strong>: Myristoylated alanine-rich C-kinase substrate (MARCKS) (Protein kinase C substrate, 80 kDa protein, light chain) (80K-L protein) (PKCSL)<br><span class="meta">Longitud: 332 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Membrane-associated protein that plays a role in the structural modulation of the actin cytoskeleton, chemotax...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">AGT</div>
+<span class="meta">HGNC:333</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000135744</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">978.53</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P01019</strong>: Angiotensinogen (Serpin A8) [Cleaved into: Angiotensin-1 (Angiotensin 1-10) (Angiotensin I) (Ang I)<br><span class="meta">Longitud: 476 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Essential component of the renin-angiotensin system (RAS), a potent regulator of blood pressure, body fluid an...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPLP0</div>
+<span class="meta">HGNC:10371</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000089157</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">963.20</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">PRDX5</div>
+<span class="meta">HGNC:9355</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000126432</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">959.52</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P30044</strong>: Peroxiredoxin-5, mitochondrial (EC 1.11.1.24) (Alu corepressor 1) (Antioxidant enzyme B166) (AOEB166) (Liver tissue 2D-page spot 71B) (PLP) (Peroxiredoxin V) (Prx-V) (Peroxisomal antioxidant enzyme) (TPx type VI) (Thioredoxin peroxidase PMP20) (Thioredoxin-dependent peroxiredoxin 5)<br><span class="meta">Longitud: 214 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Thiol-specific peroxidase that catalyzes the reduction of hydrogen peroxide and organic hydroperoxides to wate...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">PTN</div>
+<span class="meta">HGNC:9630</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000105894</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">946.93</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P21246</strong>: Pleiotrophin (PTN) (Heparin-binding brain mitogen) (HBBM) (Heparin-binding growth factor 8) (HBGF-8) (Heparin-binding growth-associated molecule) (HB-GAM) (Heparin-binding neurite outgrowth-promoting factor) (HBNF) (Heparin-binding neurite outgrowth-promoting factor 1) (HBNF-1) (Osteoblast-specific factor 1) (OSF-1)<br><span class="meta">Longitud: 168 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Secreted growth factor that mediates its signal through cell-surface proteoglycan and non-proteoglycan recepto...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">SCD</div>
+<span class="meta">HGNC:10571</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000099194</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">944.50</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">CHI3L1</div>
+<span class="meta">HGNC:1932</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000133048</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">944.19</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">HLA-DRA</div>
+<span class="meta">HGNC:4947</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000204287</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">936.74</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P01903</strong>: HLA class II histocompatibility antigen, DR alpha chain (MHC class II antigen DRA)<br><span class="meta">Longitud: 254 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: An alpha chain of antigen-presenting major histocompatibility complex class II (MHCII) molecule. In complex wi...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">ALDOC</div>
+<span class="meta">HGNC:418</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000109107</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">920.75</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P09972</strong>: Fructose-bisphosphate aldolase C (EC 4.1.2.13) (Brain-type aldolase)<br><span class="meta">Longitud: 364 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">HTRA1</div>
+<span class="meta">HGNC:9476</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000166033</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">914.11</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>Q92743</strong>: Serine protease HTRA1 (EC 3.4.21.-) (High-temperature requirement A serine peptidase 1) (L56) (Serine protease 11)<br><span class="meta">Longitud: 480 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Serine protease with a variety of targets, including extracellular matrix proteins such as fibronectin. HTRA1-...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">APP</div>
+<span class="meta">HGNC:620</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000142192</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">881.97</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P05067</strong>: Amyloid-beta precursor protein (APP) (ABPP) (APPI) (Alzheimer disease amyloid A4 protein homolog) (Alzheimer disease amyloid protein) (Amyloid precursor protein) (Amyloid-beta (A4) precursor protein) (Amyloid-beta A4 protein) (Cerebral vascular amyloid peptide) (CVAP) (PreA4) (Protease nexin-II) (PN-II) [Cleaved into: N-APP<br><span class="meta">Longitud: 770 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Functions as a cell surface receptor and performs physiological functions on the surface of neurons relevant t...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">NDRG2</div>
+<span class="meta">HGNC:14460</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000165795</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">864.64</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>Q9UN36</strong>: Protein NDRG2 (N-myc downstream-regulated gene 2 protein) (Protein Syld709613)<br><span class="meta">Longitud: 371 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Contributes to the regulation of the Wnt signaling pathway. Down-regulates CTNNB1-mediated transcriptional act...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPS25</div>
+<span class="meta">HGNC:10413</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000118181</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">854.35</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">HES6</div>
+<span class="meta">HGNC:18254</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000144485</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">844.82</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>Q96HZ4</strong>: Transcription cofactor HES-6 (C-HAIRY1) (Class B basic helix-loop-helix protein 41) (bHLHb41) (Hairy and enhancer of split 6)<br><span class="meta">Longitud: 224 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Does not bind DNA itself but suppresses both HES1-mediated N box-dependent transcriptional repression and bind...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPL19</div>
+<span class="meta">HGNC:10312</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000108298</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">843.19</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MRFAP1</div>
+<span class="meta">HGNC:24549</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000179010</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">836.95</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>Q9Y605</strong>: MORF4 family-associated protein 1 (Protein PGR1) (Protein associated with MRG of 14 kDa)<br><span class="meta">Longitud: 127 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">ATP5F1B</div>
+<span class="meta">HGNC:830</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000110955</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">833.89</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P06576</strong>: ATP synthase F(1) complex subunit beta, mitochondrial (EC 7.1.2.2) (ATP synthase F1 subunit beta)<br><span class="meta">Longitud: 529 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Catalytic subunit beta, of the mitochondrial membrane ATP synthase complex (F(1)F(0) ATP synthase or Complex V...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">HSPA8</div>
+<span class="meta">HGNC:5241</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000109971</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">831.50</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P11142</strong>: Heat shock cognate 71 kDa protein (EC 3.6.4.10) (Heat shock 70 kDa protein 8) (Heat shock protein family A member 8) (Lipopolysaccharide-associated protein 1) (LAP-1) (LPS-associated protein 1)<br><span class="meta">Longitud: 646 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Molecular chaperone implicated in a wide variety of cellular processes, including protection of the proteome f...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPS21</div>
+<span class="meta">HGNC:10409</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000171858</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">820.97</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">SOX8</div>
+<span class="meta">HGNC:11203</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000005513</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">820.07</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPL4</div>
+<span class="meta">HGNC:10353</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000174444</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">815.90</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">BEX1</div>
+<span class="meta">HGNC:1036</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000133169</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">812.38</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>Q9HBH7</strong>: Protein BEX1 (Brain-expressed X-linked protein 1)<br><span class="meta">Longitud: 125 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Signaling adapter molecule involved in p75NTR/NGFR signaling. Plays a role in cell cycle progression and neuro...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">B2M</div>
+<span class="meta">HGNC:914</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000166710</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">800.29</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P61769</strong>: Beta-2-microglobulin [Cleaved into: Beta-2-microglobulin form pI 5.3]<br><span class="meta">Longitud: 119 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Component of the class I major histocompatibility complex (MHC). Involved in the presentation of peptide antig...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RHOB</div>
+<span class="meta">HGNC:668</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000143878</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">794.29</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">MT3</div>
+<span class="meta">HGNC:7408</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000087250</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">779.16</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P25713</strong>: Metallothionein-3 (MT-3) (GIFB) (GIF) (Growth inhibitory factor) (Metallothionein-III) (MT-III)<br><span class="meta">Longitud: 68 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Binds heavy metals. Contains three zinc and three copper atoms per polypeptide chain and only a negligible amo...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPLP1</div>
+<span class="meta">HGNC:10372</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000137818</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">775.01</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">ATP1B2</div>
+<span class="meta">HGNC:805</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000129244</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">758.54</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P14415</strong>: Sodium/potassium-transporting ATPase subunit beta-2 (Adhesion molecule in glia) (AMOG) (Sodium/potassium-dependent ATPase subunit beta-2)<br><span class="meta">Longitud: 290 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: This is the non-catalytic component of the active enzyme, which catalyzes the hydrolysis of ATP coupled with t...
+                                            </div>
+</div></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPS2</div>
+<span class="meta">HGNC:10404</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000140988</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">758.28</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPL10A</div>
+<span class="meta">HGNC:10299</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000198755</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">751.14</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">CST3</div>
+<span class="meta">HGNC:2475</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000101439</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">749.07</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">SMOC1</div>
+<span class="meta">HGNC:20318</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000198732</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">746.51</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">CD74</div>
+<span class="meta">HGNC:1697</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000019582</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">740.66</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RTL8C</div>
+<span class="meta">HGNC:2569</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000134590</strong>
+</div>
+<div class="meta">UniProt IDs: 2</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">738.23</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPL13</div>
+<span class="meta">HGNC:10303</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000167526</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">731.57</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">RPS8</div>
+<span class="meta">HGNC:10441</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000142937</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">731.05</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;">PTPRZ1</div>
+<span class="meta">HGNC:9685</span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333">ENSG00000106278</strong>
+</div>
+<div class="meta">UniProt IDs: 1</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">726.78</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td><div style="margin-bottom:8px; border-left: 2px solid #3498db; padding-left:8px;">
+<strong>P23471</strong>: Receptor-type tyrosine-protein phosphatase zeta (R-PTP-zeta) (EC 3.1.3.48) (Protein-tyrosine phosphatase receptor type Z polypeptide 1) (Protein-tyrosine phosphatase receptor type Z polypeptide 2) (R-PTP-zeta-2)<br><span class="meta">Longitud: 2315 aa</span><div style="font-size:11px; color:#555; margin-top:2px; font-style:italic;">FUNCTION: Protein tyrosine phosphatase that negatively regulates oligodendrocyte precursor proliferation in the embryoni...
+                                            </div>
+</div></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
