@@ -13,7 +13,7 @@ def process_single_file(json_path, xslt_path, output_name):
     print(f"\n Procesando: {json_path.name}")
     
     # Directorio de salida
-    results_dir = Path("results/t2_final_reports")
+    results_dir = Path("docs/t2-resultados/t2_final_reports")
     results_dir.mkdir(parents=True, exist_ok=True)
     
     xml_out = results_dir / f"{output_name}.xml"
