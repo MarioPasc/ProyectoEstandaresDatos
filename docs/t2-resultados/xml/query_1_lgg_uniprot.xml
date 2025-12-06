@@ -1,0 +1,2408 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<results>
+  <result>
+    <id>HGNC:7459</id>
+    <ensembl_gene_id>ENSG00000198886</ensembl_gene_id>
+    <hgnc_id>HGNC:7459</hgnc_id>
+    <symbol>MT-ND4</symbol>
+    <uniprot_ids>
+      <uniprot_id>P03905</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>32437.637079999997</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P03905</uniprot_id>
+        <protein_name>NADH-ubiquinone oxidoreductase chain 4 (EC 7.1.1.2) (NADH dehydrogenase subunit 4)</protein_name>
+        <protein_length>459</protein_length>
+        <function_cc>FUNCTION: Core subunit of the mitochondrial membrane respiratory chain NADH dehydrogenase (Complex I) which catalyzes electron transfer from NADH through the respiratory chain, using ubiquinone as an electron acceptor (PubMed:15250827, PubMed:8344246, PubMed:8644732). Essential for the catalytic activity and assembly of complex I (PubMed:15250827, PubMed:8344246, PubMed:8644732). {ECO:0000269|PubMed:15250827, ECO:0000269|PubMed:8344246, ECO:0000269|PubMed:8644732}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>NADH dehydrogenase (ubiquinone) activity [GO:0008137]</go_molecular_function_item>
+          <go_molecular_function_item>ubiquinone binding [GO:0048039]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7419</id>
+    <ensembl_gene_id>ENSG00000198804</ensembl_gene_id>
+    <hgnc_id>HGNC:7419</hgnc_id>
+    <symbol>MT-CO1</symbol>
+    <uniprot_ids>
+      <uniprot_id>P00395</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>31684.67428</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P00395</uniprot_id>
+        <protein_name>Cytochrome c oxidase subunit 1 (EC 7.1.1.9) (Cytochrome c oxidase polypeptide I)</protein_name>
+        <protein_length>513</protein_length>
+        <function_cc>FUNCTION: Component of the cytochrome c oxidase, the last enzyme in the mitochondrial electron transport chain which drives oxidative phosphorylation. The respiratory chain contains 3 multisubunit complexes succinate dehydrogenase (complex II, CII), ubiquinol-cytochrome c oxidoreductase (cytochrome b-c1 complex, complex III, CIII) and cytochrome c oxidase (complex IV, CIV), that cooperate to transfer electrons derived from NADH and succinate to molecular oxygen, creating an electrochemical gradient over the inner membrane that drives transmembrane transport and the ATP synthase. Cytochrome c oxidase is the component of the respiratory chain that catalyzes the reduction of oxygen to water. Electrons originating from reduced cytochrome c in the intermembrane space (IMS) are transferred via the dinuclear copper A center (CU(A)) of subunit 2 and heme A of subunit 1 to the active site in subunit 1, a binuclear center (BNC) formed by heme A3 and copper B (CU(B)). The BNC reduces molecular oxygen to 2 water molecules using 4 electrons from cytochrome c in the IMS and 4 protons from the mitochondrial matrix. {ECO:0000250|UniProtKB:P00401}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>cytochrome-c oxidase activity [GO:0004129]</go_molecular_function_item>
+          <go_molecular_function_item>heme binding [GO:0020037]</go_molecular_function_item>
+          <go_molecular_function_item>metal ion binding [GO:0046872]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7421</id>
+    <ensembl_gene_id>ENSG00000198712</ensembl_gene_id>
+    <hgnc_id>HGNC:7421</hgnc_id>
+    <symbol>MT-CO2</symbol>
+    <uniprot_ids>
+      <uniprot_id>P00403</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>29715.45921</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P00403</uniprot_id>
+        <protein_name>Cytochrome c oxidase subunit 2 (EC 7.1.1.9) (Cytochrome c oxidase polypeptide II)</protein_name>
+        <protein_length>227</protein_length>
+        <function_cc>FUNCTION: Component of the cytochrome c oxidase, the last enzyme in the mitochondrial electron transport chain which drives oxidative phosphorylation. The respiratory chain contains 3 multisubunit complexes succinate dehydrogenase (complex II, CII), ubiquinol-cytochrome c oxidoreductase (cytochrome b-c1 complex, complex III, CIII) and cytochrome c oxidase (complex IV, CIV), that cooperate to transfer electrons derived from NADH and succinate to molecular oxygen, creating an electrochemical gradient over the inner membrane that drives transmembrane transport and the ATP synthase. Cytochrome c oxidase is the component of the respiratory chain that catalyzes the reduction of oxygen to water. Electrons originating from reduced cytochrome c in the intermembrane space (IMS) are transferred via the dinuclear copper A center (CU(A)) of subunit 2 and heme A of subunit 1 to the active site in subunit 1, a binuclear center (BNC) formed by heme A3 and copper B (CU(B)). The BNC reduces molecular oxygen to 2 water molecules using 4 electrons from cytochrome c in the IMS and 4 protons from the mitochondrial matrix. {ECO:0000250|UniProtKB:P00410}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>copper ion binding [GO:0005507]</go_molecular_function_item>
+          <go_molecular_function_item>cytochrome-c oxidase activity [GO:0004129]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7471</id>
+    <ensembl_gene_id>ENSG00000210082</ensembl_gene_id>
+    <hgnc_id>HGNC:7471</hgnc_id>
+    <symbol>MT-RNR2</symbol>
+    <uniprot_ids>
+      <uniprot_id>Q8IVG9</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>28499.63014</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7422</id>
+    <ensembl_gene_id>ENSG00000198938</ensembl_gene_id>
+    <hgnc_id>HGNC:7422</hgnc_id>
+    <symbol>MT-CO3</symbol>
+    <uniprot_ids>
+      <uniprot_id>P00414</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>28445.40748</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P00414</uniprot_id>
+        <protein_name>Cytochrome c oxidase subunit 3 (EC 7.1.1.9) (Cytochrome c oxidase polypeptide III)</protein_name>
+        <protein_length>261</protein_length>
+        <function_cc>FUNCTION: Component of the cytochrome c oxidase, the last enzyme in the mitochondrial electron transport chain which drives oxidative phosphorylation. The respiratory chain contains 3 multisubunit complexes succinate dehydrogenase (complex II, CII), ubiquinol-cytochrome c oxidoreductase (cytochrome b-c1 complex, complex III, CIII) and cytochrome c oxidase (complex IV, CIV), that cooperate to transfer electrons derived from NADH and succinate to molecular oxygen, creating an electrochemical gradient over the inner membrane that drives transmembrane transport and the ATP synthase. Cytochrome c oxidase is the component of the respiratory chain that catalyzes the reduction of oxygen to water. Electrons originating from reduced cytochrome c in the intermembrane space (IMS) are transferred via the dinuclear copper A center (CU(A)) of subunit 2 and heme A of subunit 1 to the active site in subunit 1, a binuclear center (BNC) formed by heme A3 and copper B (CU(B)). The BNC reduces molecular oxygen to 2 water molecules using 4 electrons from cytochrome c in the IMS and 4 protons from the mitochondrial matrix. {ECO:0000250|UniProtKB:P00420}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>cytochrome-c oxidase activity [GO:0004129]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7414</id>
+    <ensembl_gene_id>ENSG00000198899</ensembl_gene_id>
+    <hgnc_id>HGNC:7414</hgnc_id>
+    <symbol>MT-ATP6</symbol>
+    <uniprot_ids>
+      <uniprot_id>P00846</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>20759.66715</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P00846</uniprot_id>
+        <protein_name>ATP synthase F(0) complex subunit a (F-ATPase protein 6) (Proton-conducting channel, ATP synthase F(0) complex subunit a)</protein_name>
+        <protein_length>226</protein_length>
+        <function_cc>FUNCTION: Subunit a, of the mitochondrial membrane ATP synthase complex (F(1)F(0) ATP synthase or Complex V) that produces ATP from ADP in the presence of a proton gradient across the membrane which is generated by electron transport complexes of the respiratory chain (Probable). ATP synthase complex consist of a soluble F(1) head domain - the catalytic core - and a membrane F(1) domain - the membrane proton channel (PubMed:37244256). These two domains are linked by a central stalk rotating inside the F(1) region and a stationary peripheral stalk (PubMed:37244256). During catalysis, ATP synthesis in the catalytic domain of F(1) is coupled via a rotary mechanism of the central stalk subunits to proton translocation (Probable). With the subunit c (ATP5MC1), forms the proton-conducting channel in the F(0) domain, that contains two crucial half-channels (inlet and outlet) that facilitate proton movement from the mitochondrial intermembrane space (IMS) into the matrix (PubMed:37244256). Protons are taken up via the inlet half-channel and released through the outlet half-channel, following a Grotthuss mechanism (PubMed:37244256). {ECO:0000269|PubMed:37244256, ECO:0000305|PubMed:37244256}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>proton channel activity [GO:0015252]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7458</id>
+    <ensembl_gene_id>ENSG00000198840</ensembl_gene_id>
+    <hgnc_id>HGNC:7458</hgnc_id>
+    <symbol>MT-ND3</symbol>
+    <uniprot_ids>
+      <uniprot_id>P03897</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>19725.888329999998</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P03897</uniprot_id>
+        <protein_name>NADH-ubiquinone oxidoreductase chain 3 (EC 7.1.1.2) (NADH dehydrogenase subunit 3)</protein_name>
+        <protein_length>115</protein_length>
+        <function_cc>FUNCTION: Core subunit of the mitochondrial membrane respiratory chain NADH dehydrogenase (Complex I) which catalyzes electron transfer from NADH through the respiratory chain, using ubiquinone as an electron acceptor (PubMed:25118196). Essential for the catalytic activity of complex I (PubMed:25118196). {ECO:0000269|PubMed:25118196}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>NADH dehydrogenase (ubiquinone) activity [GO:0008137]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7427</id>
+    <ensembl_gene_id>ENSG00000198727</ensembl_gene_id>
+    <hgnc_id>HGNC:7427</hgnc_id>
+    <symbol>MT-CYB</symbol>
+    <uniprot_ids>
+      <uniprot_id>P00156</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>16671.075409999998</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P00156</uniprot_id>
+        <protein_name>Cytochrome b (Complex III subunit 3) (Complex III subunit III) (Cytochrome b-c1 complex subunit 3) (Ubiquinol-cytochrome-c reductase complex cytochrome b subunit)</protein_name>
+        <protein_length>380</protein_length>
+        <function_cc>FUNCTION: Component of the ubiquinol-cytochrome c reductase complex (complex III or cytochrome b-c1 complex) that is part of the mitochondrial respiratory chain. The b-c1 complex mediates electron transfer from ubiquinol to cytochrome c. Contributes to the generation of a proton gradient across the mitochondrial membrane that is then used for ATP synthesis. {ECO:0000250|UniProtKB:P00157}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>metal ion binding [GO:0046872]</go_molecular_function_item>
+          <go_molecular_function_item>protein-containing complex binding [GO:0044877]</go_molecular_function_item>
+          <go_molecular_function_item>ubiquinol-cytochrome-c reductase activity [GO:0008121]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7455</id>
+    <ensembl_gene_id>ENSG00000198888</ensembl_gene_id>
+    <hgnc_id>HGNC:7455</hgnc_id>
+    <symbol>MT-ND1</symbol>
+    <uniprot_ids>
+      <uniprot_id>P03886</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>16521.009169999998</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P03886</uniprot_id>
+        <protein_name>NADH-ubiquinone oxidoreductase chain 1 (EC 7.1.1.2) (NADH dehydrogenase subunit 1)</protein_name>
+        <protein_length>318</protein_length>
+        <function_cc>FUNCTION: Core subunit of the mitochondrial membrane respiratory chain NADH dehydrogenase (Complex I) which catalyzes electron transfer from NADH through the respiratory chain, using ubiquinone as an electron acceptor (PubMed:1959619). Essential for the catalytic activity and assembly of complex I (PubMed:1959619, PubMed:26929434). {ECO:0000269|PubMed:1959619, ECO:0000269|PubMed:26929434}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>NADH dehydrogenase (ubiquinone) activity [GO:0008137]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7456</id>
+    <ensembl_gene_id>ENSG00000198763</ensembl_gene_id>
+    <hgnc_id>HGNC:7456</hgnc_id>
+    <symbol>MT-ND2</symbol>
+    <uniprot_ids>
+      <uniprot_id>P03891</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>15305.43823</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P03891</uniprot_id>
+        <protein_name>NADH-ubiquinone oxidoreductase chain 2 (EC 7.1.1.2) (NADH dehydrogenase subunit 2)</protein_name>
+        <protein_length>347</protein_length>
+        <function_cc>FUNCTION: Core subunit of the mitochondrial membrane respiratory chain NADH dehydrogenase (Complex I) which catalyzes electron transfer from NADH through the respiratory chain, using ubiquinone as an electron acceptor (PubMed:16996290). Essential for the catalytic activity and assembly of complex I (PubMed:16996290). {ECO:0000269|PubMed:16996290}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>ionotropic glutamate receptor binding [GO:0035255]</go_molecular_function_item>
+          <go_molecular_function_item>NADH dehydrogenase (ubiquinone) activity [GO:0008137]</go_molecular_function_item>
+          <go_molecular_function_item>protein kinase binding [GO:0019901]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7462</id>
+    <ensembl_gene_id>ENSG00000198695</ensembl_gene_id>
+    <hgnc_id>HGNC:7462</hgnc_id>
+    <symbol>MT-ND6</symbol>
+    <uniprot_ids>
+      <uniprot_id>P03923</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>13293.54876</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P03923</uniprot_id>
+        <protein_name>NADH-ubiquinone oxidoreductase chain 6 (EC 7.1.1.2) (NADH dehydrogenase subunit 6)</protein_name>
+        <protein_length>174</protein_length>
+        <function_cc>FUNCTION: Core subunit of the mitochondrial membrane respiratory chain NADH dehydrogenase (Complex I) which catalyzes electron transfer from NADH through the respiratory chain, using ubiquinone as an electron acceptor (PubMed:14595656, PubMed:8644732). Essential for the catalytic activity and assembly of complex I (PubMed:14595656, PubMed:8644732). {ECO:0000269|PubMed:14595656, ECO:0000269|PubMed:8644732}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>NADH dehydrogenase (ubiquinone) activity [GO:0008137]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7461</id>
+    <ensembl_gene_id>ENSG00000198786</ensembl_gene_id>
+    <hgnc_id>HGNC:7461</hgnc_id>
+    <symbol>MT-ND5</symbol>
+    <uniprot_ids>
+      <uniprot_id>P03915</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>8825.93023</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P03915</uniprot_id>
+        <protein_name>NADH-ubiquinone oxidoreductase chain 5 (EC 7.1.1.2) (NADH dehydrogenase subunit 5)</protein_name>
+        <protein_length>603</protein_length>
+        <function_cc>FUNCTION: Core subunit of the mitochondrial membrane respiratory chain NADH dehydrogenase (Complex I) which catalyzes electron transfer from NADH through the respiratory chain, using ubiquinone as an electron acceptor (PubMed:15250827). Essential for the catalytic activity and assembly of complex I (PubMed:15250827). {ECO:0000269|PubMed:15250827}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>NADH dehydrogenase (ubiquinone) activity [GO:0008137]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7470</id>
+    <ensembl_gene_id>ENSG00000211459</ensembl_gene_id>
+    <hgnc_id>HGNC:7470</hgnc_id>
+    <symbol>MT-RNR1</symbol>
+    <uniprot_ids>
+      <uniprot_id>A0A0C5B5G6</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>8068.54228</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7460</id>
+    <ensembl_gene_id>ENSG00000212907</ensembl_gene_id>
+    <hgnc_id>HGNC:7460</hgnc_id>
+    <symbol>MT-ND4L</symbol>
+    <uniprot_ids>
+      <uniprot_id>P03901</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>7552.56217</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P03901</uniprot_id>
+        <protein_name>NADH-ubiquinone oxidoreductase chain 4L (EC 7.1.1.2) (NADH dehydrogenase subunit 4L) (ND4L)</protein_name>
+        <protein_length>98</protein_length>
+        <function_cc>FUNCTION: Core subunit of the mitochondrial membrane respiratory chain NADH dehydrogenase (Complex I) which catalyzes electron transfer from NADH through the respiratory chain, using ubiquinone as an electron acceptor (PubMed:28844695). Part of the enzyme membrane arm which is embedded in the lipid bilayer and involved in proton translocation (PubMed:28844695). {ECO:0000269|PubMed:28844695}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>NADH dehydrogenase (ubiquinone) activity [GO:0008137]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:4235</id>
+    <ensembl_gene_id>ENSG00000131095</ensembl_gene_id>
+    <hgnc_id>HGNC:4235</hgnc_id>
+    <symbol>GFAP</symbol>
+    <uniprot_ids>
+      <uniprot_id>P14136</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>6524.12636</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P14136</uniprot_id>
+        <protein_name>Glial fibrillary acidic protein (GFAP)</protein_name>
+        <protein_length>432</protein_length>
+        <function_cc>FUNCTION: GFAP, a class-III intermediate filament, is a cell-specific marker that, during the development of the central nervous system, distinguishes astrocytes from other glial cells.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>identical protein binding [GO:0042802]</go_molecular_function_item>
+          <go_molecular_function_item>integrin binding [GO:0005178]</go_molecular_function_item>
+          <go_molecular_function_item>kinase binding [GO:0019900]</go_molecular_function_item>
+          <go_molecular_function_item>structural constituent of cytoskeleton [GO:0005200]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:3999</id>
+    <ensembl_gene_id>ENSG00000087086</ensembl_gene_id>
+    <hgnc_id>HGNC:3999</hgnc_id>
+    <symbol>FTL</symbol>
+    <uniprot_ids>
+      <uniprot_id>P02792</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>6119.11097</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P02792</uniprot_id>
+        <protein_name>Ferritin light chain (Ferritin L subunit)</protein_name>
+        <protein_length>175</protein_length>
+        <function_cc>FUNCTION: Stores iron in a soluble, non-toxic, readily available form. Important for iron homeostasis. Iron is taken up in the ferrous form and deposited as ferric hydroxides after oxidation. Also plays a role in delivery of iron to cells. Mediates iron uptake in capsule cells of the developing kidney (By similarity). Delivery to lysosomes by the cargo receptor NCOA4 for autophagic degradation and release or iron (PubMed:24695223). {ECO:0000250, ECO:0000269|PubMed:19923220, ECO:0000269|PubMed:20159981, ECO:0000269|PubMed:24695223}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>ferric iron binding [GO:0008199]</go_molecular_function_item>
+          <go_molecular_function_item>ferrous iron binding [GO:0008198]</go_molecular_function_item>
+          <go_molecular_function_item>identical protein binding [GO:0042802]</go_molecular_function_item>
+          <go_molecular_function_item>iron ion binding [GO:0005506]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7415</id>
+    <ensembl_gene_id>ENSG00000228253</ensembl_gene_id>
+    <hgnc_id>HGNC:7415</hgnc_id>
+    <symbol>MT-ATP8</symbol>
+    <uniprot_ids>
+      <uniprot_id>P03928</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>4805.64925</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P03928</uniprot_id>
+        <protein_name>ATP synthase F(0) complex subunit 8 (A6L) (F-ATPase subunit 8)</protein_name>
+        <protein_length>68</protein_length>
+        <function_cc>FUNCTION: Subunit 8, of the mitochondrial membrane ATP synthase complex (F(1)F(0) ATP synthase or Complex V) that produces ATP from ADP in the presence of a proton gradient across the membrane which is generated by electron transport complexes of the respiratory chain (PubMed:37244256). ATP synthase complex consist of a soluble F(1) head domain - the catalytic core - and a membrane F(1) domain - the membrane proton channel (PubMed:37244256). These two domains are linked by a central stalk rotating inside the F(1) region and a stationary peripheral stalk (PubMed:37244256). During catalysis, ATP synthesis in the catalytic domain of F(1) is coupled via a rotary mechanism of the central stalk subunits to proton translocation (Probable). In vivo, can only synthesize ATP although its ATP hydrolase activity can be activated artificially in vitro (By similarity). Part of the complex F(0) domain (PubMed:37244256). {ECO:0000250|UniProtKB:P19483, ECO:0000269|PubMed:37244256, ECO:0000305|PubMed:37244256}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>proton transmembrane transporter activity [GO:0015078]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:613</id>
+    <ensembl_gene_id>ENSG00000130203</ensembl_gene_id>
+    <hgnc_id>HGNC:613</hgnc_id>
+    <symbol>APOE</symbol>
+    <uniprot_ids>
+      <uniprot_id>P02649</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>4056.01488</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P02649</uniprot_id>
+        <protein_name>Apolipoprotein E (Apo-E)</protein_name>
+        <protein_length>317</protein_length>
+        <function_cc>FUNCTION: APOE is an apolipoprotein, a protein associating with lipid particles, that mainly functions in lipoprotein-mediated lipid transport between organs via the plasma and interstitial fluids (PubMed:14754908, PubMed:1911868, PubMed:6860692). APOE is a core component of plasma lipoproteins and is involved in their production, conversion and clearance (PubMed:14754908, PubMed:1911868, PubMed:1917954, PubMed:23620513, PubMed:2762297, PubMed:6860692, PubMed:9395455). Apolipoproteins are amphipathic molecules that interact both with lipids of the lipoprotein particle core and the aqueous environment of the plasma (PubMed:2762297, PubMed:6860692, PubMed:9395455). As such, APOE associates with chylomicrons, chylomicron remnants, very low density lipoproteins (VLDL) and intermediate density lipoproteins (IDL) but shows a preferential binding to high-density lipoproteins (HDL) (PubMed:1911868, PubMed:6860692). It also binds a wide range of cellular receptors including the LDL receptor/LDLR, the LDL receptor-related proteins LRP1, LRP2 and LRP8 and the very low-density lipoprotein receptor/VLDLR that mediate the cellular uptake of the APOE-containing lipoprotein particles (PubMed:12950167, PubMed:1530612, PubMed:1917954, PubMed:20030366, PubMed:20303980, PubMed:2063194, PubMed:2762297, PubMed:7635945, PubMed:7768901, PubMed:8756331, PubMed:8939961). Finally, APOE also has a heparin-binding activity and binds heparan-sulfate proteoglycans on the surface of cells, a property that supports the capture and the receptor-mediated uptake of APOE-containing lipoproteins by cells (PubMed:23676495, PubMed:7635945, PubMed:9395455, PubMed:9488694). A main function of APOE is to mediate lipoprotein clearance through the uptake of chylomicrons, VLDLs, and HDLs by hepatocytes (PubMed:1911868, PubMed:1917954, PubMed:23676495, PubMed:29516132, PubMed:9395455). APOE is also involved in the biosynthesis by the liver of VLDLs as well as their uptake by peripheral tissues ensuring the delivery of triglycerides and energy storage in muscle, heart and adipose tissues (PubMed:2762297, PubMed:29516132). By participating in the lipoprotein-mediated distribution of lipids among tissues, APOE plays a critical role in plasma and tissues lipid homeostasis (PubMed:1917954, PubMed:2762297, PubMed:29516132). APOE is also involved in two steps of reverse cholesterol transport, the HDLs-mediated transport of cholesterol from peripheral tissues to the liver, and thereby plays an important role in cholesterol homeostasis (PubMed:14754908, PubMed:23620513, PubMed:9395455). First, it is functionally associated with ABCA1 in the biogenesis of HDLs in tissues (PubMed:14754908, PubMed:23620513). Second, it is enriched in circulating HDLs and mediates their uptake by hepatocytes (PubMed:9395455). APOE also plays an important role in lipid transport in the central nervous system, regulating neuron survival and sprouting (PubMed:25173806, PubMed:8939961). APOE is also involved in innate and adaptive immune responses, controlling for instance the survival of myeloid-derived suppressor cells (By similarity). Binds to the immune cell receptor LILRB4 (PubMed:30333625). APOE may also play a role in transcription regulation through a receptor-dependent and cholesterol-independent mechanism, that activates MAP3K12 and a non-canonical MAPK signal transduction pathway that results in enhanced AP-1-mediated transcription of APP (PubMed:28111074). {ECO:0000250|UniProtKB:P08226, ECO:0000269|PubMed:12950167, ECO:0000269|PubMed:14754908, ECO:0000269|PubMed:1530612, ECO:0000269|PubMed:1911868, ECO:0000269|PubMed:1917954, ECO:0000269|PubMed:20030366, ECO:0000269|PubMed:20303980, ECO:0000269|PubMed:2063194, ECO:0000269|PubMed:23620513, ECO:0000269|PubMed:23676495, ECO:0000269|PubMed:2762297, ECO:0000269|PubMed:28111074, ECO:0000269|PubMed:30333625, ECO:0000269|PubMed:6860692, ECO:0000269|PubMed:7635945, ECO:0000269|PubMed:7768901, ECO:0000269|PubMed:8756331, ECO:0000269|PubMed:8939961, ECO:0000269|PubMed:9395455, ECO:0000269|PubMed:9488694, ECO:0000303|PubMed:25173806, ECO:0000303|PubMed:29516132}.; FUNCTION: (Microbial infection) Through its interaction with HCV envelope glycoprotein E2, participates in the attachment of HCV to HSPGs and other receptors (LDLr, VLDLr, and SR-B1) on the cell surface and to the assembly, maturation and infectivity of HCV viral particles (PubMed:25122793, PubMed:29695434). This interaction is probably promoted via the up-regulation of cellular autophagy by the virus (PubMed:29695434). {ECO:0000269|PubMed:25122793, ECO:0000269|PubMed:29695434}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>amyloid-beta binding [GO:0001540]</go_molecular_function_item>
+          <go_molecular_function_item>antioxidant activity [GO:0016209]</go_molecular_function_item>
+          <go_molecular_function_item>cholesterol transfer activity [GO:0120020]</go_molecular_function_item>
+          <go_molecular_function_item>enzyme binding [GO:0019899]</go_molecular_function_item>
+          <go_molecular_function_item>heparan sulfate proteoglycan binding [GO:0043395]</go_molecular_function_item>
+          <go_molecular_function_item>heparin binding [GO:0008201]</go_molecular_function_item>
+          <go_molecular_function_item>identical protein binding [GO:0042802]</go_molecular_function_item>
+          <go_molecular_function_item>lipid binding [GO:0008289]</go_molecular_function_item>
+          <go_molecular_function_item>lipid transporter activity [GO:0005319]</go_molecular_function_item>
+          <go_molecular_function_item>lipoprotein particle binding [GO:0071813]</go_molecular_function_item>
+          <go_molecular_function_item>low-density lipoprotein particle receptor binding [GO:0050750]</go_molecular_function_item>
+          <go_molecular_function_item>metal chelating activity [GO:0046911]</go_molecular_function_item>
+          <go_molecular_function_item>phosphatidylcholine-sterol O-acyltransferase activator activity [GO:0060228]</go_molecular_function_item>
+          <go_molecular_function_item>phospholipid binding [GO:0005543]</go_molecular_function_item>
+          <go_molecular_function_item>protein dimerization activity [GO:0046983]</go_molecular_function_item>
+          <go_molecular_function_item>protein homodimerization activity [GO:0042803]</go_molecular_function_item>
+          <go_molecular_function_item>protein-containing complex binding [GO:0044877]</go_molecular_function_item>
+          <go_molecular_function_item>receptor ligand activity [GO:0048018]</go_molecular_function_item>
+          <go_molecular_function_item>signaling receptor binding [GO:0005102]</go_molecular_function_item>
+          <go_molecular_function_item>structural molecule activity [GO:0005198]</go_molecular_function_item>
+          <go_molecular_function_item>tau protein binding [GO:0048156]</go_molecular_function_item>
+          <go_molecular_function_item>very-low-density lipoprotein particle receptor binding [GO:0070326]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:23059</id>
+    <ensembl_gene_id>ENSG00000132692</ensembl_gene_id>
+    <hgnc_id>HGNC:23059</hgnc_id>
+    <symbol>BCAN</symbol>
+    <uniprot_ids>
+      <uniprot_id>Q96GW7</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>4049.6285799999996</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>Q96GW7</uniprot_id>
+        <protein_name>Brevican core protein (Brain-enriched hyaluronan-binding protein) (BEHAB) (Chondroitin sulfate proteoglycan 7)</protein_name>
+        <protein_length>911</protein_length>
+        <function_cc>FUNCTION: May play a role in the terminally differentiating and the adult nervous system during postnatal development. Could stabilize interactions between hyaluronan (HA) and brain proteoglycans.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>carbohydrate binding [GO:0030246]</go_molecular_function_item>
+          <go_molecular_function_item>hyaluronic acid binding [GO:0005540]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:8822</id>
+    <ensembl_gene_id>ENSG00000162734</ensembl_gene_id>
+    <hgnc_id>HGNC:8822</hgnc_id>
+    <symbol>PEA15</symbol>
+    <uniprot_ids>
+      <uniprot_id>Q15121</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>4015.28424</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>Q15121</uniprot_id>
+        <protein_name>Astrocytic phosphoprotein PEA-15 (15 kDa phosphoprotein enriched in astrocytes) (Phosphoprotein enriched in diabetes) (PED)</protein_name>
+        <protein_length>130</protein_length>
+        <function_cc>FUNCTION: Blocks Ras-mediated inhibition of integrin activation and modulates the ERK MAP kinase cascade. Inhibits RPS6KA3 activities by retaining it in the cytoplasm (By similarity). Inhibits both TNFRSF6- and TNFRSF1A-mediated CASP8 activity and apoptosis. Regulates glucose transport by controlling both the content of SLC2A1 glucose transporters on the plasma membrane and the insulin-dependent trafficking of SLC2A4 from the cell interior to the surface. {ECO:0000250, ECO:0000269|PubMed:10442631, ECO:0000269|PubMed:9670003}.</function_cc>
+        <go_molecular_function/>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:132</id>
+    <ensembl_gene_id>ENSG00000075624</ensembl_gene_id>
+    <hgnc_id>HGNC:132</hgnc_id>
+    <symbol>ACTB</symbol>
+    <uniprot_ids>
+      <uniprot_id>P60709</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>3509.5945699999997</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P60709</uniprot_id>
+        <protein_name>Actin, cytoplasmic 1 (EC 3.6.4.-) (Beta-actin) [Cleaved into: Actin, cytoplasmic 1, N-terminally processed]</protein_name>
+        <protein_length>375</protein_length>
+        <function_cc>FUNCTION: Actin is a highly conserved protein that polymerizes to produce filaments that form cross-linked networks in the cytoplasm of cells (PubMed:25255767, PubMed:29581253). Actin exists in both monomeric (G-actin) and polymeric (F-actin) forms, both forms playing key functions, such as cell motility and contraction (PubMed:29581253). In addition to their role in the cytoplasmic cytoskeleton, G- and F-actin also localize in the nucleus, and regulate gene transcription and motility and repair of damaged DNA (PubMed:29925947). Plays a role in the assembly of the gamma-tubulin ring complex (gTuRC), which regulates the minus-end nucleation of alpha-beta tubulin heterodimers that grow into microtubule protafilaments (PubMed:39321809, PubMed:38609661). Part of the ACTR1A/ACTB filament around which the dynactin complex is built (By similarity). The dynactin multiprotein complex activates the molecular motor dynein for ultra-processive transport along microtubules (By similarity). {ECO:0000250|UniProtKB:Q6QAQ1, ECO:0000269|PubMed:25255767, ECO:0000269|PubMed:29581253, ECO:0000269|PubMed:29925947, ECO:0000269|PubMed:38609661, ECO:0000269|PubMed:39321809}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>ATP binding [GO:0005524]</go_molecular_function_item>
+          <go_molecular_function_item>ATP hydrolysis activity [GO:0016887]</go_molecular_function_item>
+          <go_molecular_function_item>identical protein binding [GO:0042802]</go_molecular_function_item>
+          <go_molecular_function_item>kinesin binding [GO:0019894]</go_molecular_function_item>
+          <go_molecular_function_item>nitric-oxide synthase binding [GO:0050998]</go_molecular_function_item>
+          <go_molecular_function_item>nitric-oxide synthase regulator activity [GO:0030235]</go_molecular_function_item>
+          <go_molecular_function_item>protein kinase binding [GO:0019901]</go_molecular_function_item>
+          <go_molecular_function_item>structural constituent of cytoskeleton [GO:0005200]</go_molecular_function_item>
+          <go_molecular_function_item>structural constituent of postsynaptic actin cytoskeleton [GO:0098973]</go_molecular_function_item>
+          <go_molecular_function_item>Tat protein binding [GO:0030957]</go_molecular_function_item>
+          <go_molecular_function_item>tau protein binding [GO:0048156]</go_molecular_function_item>
+          <go_molecular_function_item>transporter regulator activity [GO:0141108]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:2095</id>
+    <ensembl_gene_id>ENSG00000120885</ensembl_gene_id>
+    <hgnc_id>HGNC:2095</hgnc_id>
+    <symbol>CLU</symbol>
+    <uniprot_ids>
+      <uniprot_id>P10909</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>3452.3278400000004</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:11219</id>
+    <ensembl_gene_id>ENSG00000113140</ensembl_gene_id>
+    <hgnc_id>HGNC:11219</hgnc_id>
+    <symbol>SPARC</symbol>
+    <uniprot_ids>
+      <uniprot_id>P09486</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>3439.454</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10385</id>
+    <ensembl_gene_id>ENSG00000112306</ensembl_gene_id>
+    <hgnc_id>HGNC:10385</hgnc_id>
+    <symbol>RPS12</symbol>
+    <uniprot_ids>
+      <uniprot_id>P25398</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>3424.0086600000004</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:44575</id>
+    <ensembl_gene_id>ENSG00000248527</ensembl_gene_id>
+    <hgnc_id>HGNC:44575</hgnc_id>
+    <symbol>MTATP6P1</symbol>
+    <uniprot_ids/>
+    <mean_tpm_unstranded>3183.36236</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:144</id>
+    <ensembl_gene_id>ENSG00000184009</ensembl_gene_id>
+    <hgnc_id>HGNC:144</hgnc_id>
+    <symbol>ACTG1</symbol>
+    <uniprot_ids>
+      <uniprot_id>P63261</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>3157.61555</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P63261</uniprot_id>
+        <protein_name>Actin, cytoplasmic 2 (EC 3.6.4.-) (Gamma-actin) [Cleaved into: Actin, cytoplasmic 2, N-terminally processed]</protein_name>
+        <protein_length>375</protein_length>
+        <function_cc>FUNCTION: Actins are highly conserved proteins that are involved in various types of cell motility and are ubiquitously expressed in all eukaryotic cells. May play a role in the repair of noise-induced stereocilia gaps thereby maintains hearing sensitivity following loud noise damage (By similarity). {ECO:0000250|UniProtKB:P63260, ECO:0000305|PubMed:29581253}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>ATP binding [GO:0005524]</go_molecular_function_item>
+          <go_molecular_function_item>hydrolase activity [GO:0016787]</go_molecular_function_item>
+          <go_molecular_function_item>identical protein binding [GO:0042802]</go_molecular_function_item>
+          <go_molecular_function_item>profilin binding [GO:0005522]</go_molecular_function_item>
+          <go_molecular_function_item>protein kinase binding [GO:0019901]</go_molecular_function_item>
+          <go_molecular_function_item>structural constituent of cytoskeleton [GO:0005200]</go_molecular_function_item>
+          <go_molecular_function_item>structural constituent of postsynaptic actin cytoskeleton [GO:0098973]</go_molecular_function_item>
+          <go_molecular_function_item>ubiquitin protein ligase binding [GO:0031625]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:11220</id>
+    <ensembl_gene_id>ENSG00000152583</ensembl_gene_id>
+    <hgnc_id>HGNC:11220</hgnc_id>
+    <symbol>SPARCL1</symbol>
+    <uniprot_ids>
+      <uniprot_id>Q14515</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>2767.19965</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:9498</id>
+    <ensembl_gene_id>ENSG00000197746</ensembl_gene_id>
+    <hgnc_id>HGNC:9498</hgnc_id>
+    <symbol>PSAP</symbol>
+    <uniprot_ids>
+      <uniprot_id>P07602</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>2576.47479</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P07602</uniprot_id>
+        <protein_name>Prosaposin (Proactivator polypeptide) [Cleaved into: Saposin-A (Protein A)</protein_name>
+        <protein_length>524</protein_length>
+        <function_cc>FUNCTION: Saposin-A and saposin-C stimulate the hydrolysis of glucosylceramide by beta-glucosylceramidase (EC 3.2.1.45) and galactosylceramide by beta-galactosylceramidase (EC 3.2.1.46). Saposin-C apparently acts by combining with the enzyme and acidic lipid to form an activated complex, rather than by solubilizing the substrate.; FUNCTION: Saposin-B stimulates the hydrolysis of galacto-cerebroside sulfate by arylsulfatase A (EC 3.1.6.8), GM1 gangliosides by beta-galactosidase (EC 3.2.1.23) and globotriaosylceramide by alpha-galactosidase A (EC 3.2.1.22). Saposin-B forms a solubilizing complex with the substrates of the sphingolipid hydrolases.; FUNCTION: Saposin-D is a specific sphingomyelin phosphodiesterase activator (EC 3.1.4.12).; FUNCTION: [Prosaposin]: Behaves as a myelinotrophic and neurotrophic factor, these effects are mediated by its G-protein-coupled receptors, GPR37 and GPR37L1, undergoing ligand-mediated internalization followed by ERK phosphorylation signaling. {ECO:0000250|UniProtKB:Q61207, ECO:0000269|PubMed:10383054}.; FUNCTION: Saposins are specific low-molecular mass non-enzymic proteins, they participate in the lysosomal degradation of sphingolipids, which takes place by the sequential action of specific hydrolases.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>enzyme activator activity [GO:0008047]</go_molecular_function_item>
+          <go_molecular_function_item>ganglioside GM1 binding [GO:1905573]</go_molecular_function_item>
+          <go_molecular_function_item>ganglioside GM2 binding [GO:1905574]</go_molecular_function_item>
+          <go_molecular_function_item>ganglioside GM3 binding [GO:1905575]</go_molecular_function_item>
+          <go_molecular_function_item>ganglioside GP1c binding [GO:1905577]</go_molecular_function_item>
+          <go_molecular_function_item>ganglioside GT1b binding [GO:1905576]</go_molecular_function_item>
+          <go_molecular_function_item>identical protein binding [GO:0042802]</go_molecular_function_item>
+          <go_molecular_function_item>phospholipid binding [GO:0005543]</go_molecular_function_item>
+          <go_molecular_function_item>protease binding [GO:0002020]</go_molecular_function_item>
+          <go_molecular_function_item>protein homodimerization activity [GO:0042803]</go_molecular_function_item>
+          <go_molecular_function_item>scaffold protein binding [GO:0097110]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:2389</id>
+    <ensembl_gene_id>ENSG00000109846</ensembl_gene_id>
+    <hgnc_id>HGNC:2389</hgnc_id>
+    <symbol>CRYAB</symbol>
+    <uniprot_ids>
+      <uniprot_id>P02511</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>2308.20533</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:3214</id>
+    <ensembl_gene_id>ENSG00000167658</ensembl_gene_id>
+    <hgnc_id>HGNC:3214</hgnc_id>
+    <symbol>EEF2</symbol>
+    <uniprot_ids>
+      <uniprot_id>P13639</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>2274.63739</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7142</id>
+    <ensembl_gene_id>ENSG00000175130</ensembl_gene_id>
+    <hgnc_id>HGNC:7142</hgnc_id>
+    <symbol>MARCKSL1</symbol>
+    <uniprot_ids>
+      <uniprot_id>P49006</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>2180.15566</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P49006</uniprot_id>
+        <protein_name>MARCKS-related protein (MARCKS-like protein 1) (Macrophage myristoylated alanine-rich C kinase substrate) (Mac-MARCKS) (MacMARCKS)</protein_name>
+        <protein_length>195</protein_length>
+        <function_cc>FUNCTION: Controls cell movement by regulating actin cytoskeleton homeostasis and filopodium and lamellipodium formation (PubMed:22751924). When unphosphorylated, induces cell migration (By similarity). When phosphorylated by MAPK8, induces actin bundles formation and stabilization, thereby reducing actin plasticity, hence restricting cell movement, including neuronal migration (By similarity). May be involved in coupling the protein kinase C and calmodulin signal transduction systems (By similarity). {ECO:0000250|UniProtKB:P28667, ECO:0000269|PubMed:22751924}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>actin filament binding [GO:0051015]</go_molecular_function_item>
+          <go_molecular_function_item>calmodulin binding [GO:0005516]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:20766</id>
+    <ensembl_gene_id>ENSG00000167552</ensembl_gene_id>
+    <hgnc_id>HGNC:20766</hgnc_id>
+    <symbol>TUBA1A</symbol>
+    <uniprot_ids>
+      <uniprot_id>Q71U36</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1912.8915499999998</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:11879</id>
+    <ensembl_gene_id>ENSG00000034510</ensembl_gene_id>
+    <hgnc_id>HGNC:11879</hgnc_id>
+    <symbol>TMSB10</symbol>
+    <uniprot_ids>
+      <uniprot_id>P63313</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1858.83747</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:9086</id>
+    <ensembl_gene_id>ENSG00000123560</ensembl_gene_id>
+    <hgnc_id>HGNC:9086</hgnc_id>
+    <symbol>PLP1</symbol>
+    <uniprot_ids>
+      <uniprot_id>P60201</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1832.8097999999998</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P60201</uniprot_id>
+        <protein_name>Myelin proteolipid protein (PLP) (Lipophilin)</protein_name>
+        <protein_length>277</protein_length>
+        <function_cc>FUNCTION: This is the major myelin protein from the central nervous system. It plays an important role in the formation or maintenance of the multilamellar structure of myelin.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>identical protein binding [GO:0042802]</go_molecular_function_item>
+          <go_molecular_function_item>structural constituent of myelin sheath [GO:0019911]</go_molecular_function_item>
+          <go_molecular_function_item>structural molecule activity [GO:0005198]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:2303</id>
+    <ensembl_gene_id>ENSG00000109472</ensembl_gene_id>
+    <hgnc_id>HGNC:2303</hgnc_id>
+    <symbol>CPE</symbol>
+    <uniprot_ids>
+      <uniprot_id>P16870</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1826.7999800000002</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10384</id>
+    <ensembl_gene_id>ENSG00000142534</ensembl_gene_id>
+    <hgnc_id>HGNC:10384</hgnc_id>
+    <symbol>RPS11</symbol>
+    <uniprot_ids>
+      <uniprot_id>P62280</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1744.7652000000003</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7494</id>
+    <ensembl_gene_id>ENSG00000210196</ensembl_gene_id>
+    <hgnc_id>HGNC:7494</hgnc_id>
+    <symbol>MT-TP</symbol>
+    <uniprot_ids/>
+    <mean_tpm_unstranded>1722.18599</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:6175</id>
+    <ensembl_gene_id>ENSG00000135916</ensembl_gene_id>
+    <hgnc_id>HGNC:6175</hgnc_id>
+    <symbol>ITM2C</symbol>
+    <uniprot_ids>
+      <uniprot_id>Q9NQX7</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1608.17307</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>Q9NQX7</uniprot_id>
+        <protein_name>Integral membrane protein 2C (Cerebral protein 14) (Transmembrane protein BRI3) [Cleaved into: CT-BRI3]</protein_name>
+        <protein_length>267</protein_length>
+        <function_cc>FUNCTION: Negative regulator of amyloid-beta peptide production. May inhibit the processing of APP by blocking its access to alpha- and beta-secretase. Binding to the beta-secretase-cleaved APP C-terminal fragment is negligible, suggesting that ITM2C is a poor gamma-secretase cleavage inhibitor. May play a role in TNF-induced cell death and neuronal differentiation (By similarity). {ECO:0000250, ECO:0000269|PubMed:18452648, ECO:0000269|PubMed:19366692}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>amyloid-beta binding [GO:0001540]</go_molecular_function_item>
+          <go_molecular_function_item>ATP binding [GO:0005524]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:4141</id>
+    <ensembl_gene_id>ENSG00000111640</ensembl_gene_id>
+    <hgnc_id>HGNC:4141</hgnc_id>
+    <symbol>GAPDH</symbol>
+    <uniprot_ids>
+      <uniprot_id>P04406</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1593.35437</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P04406</uniprot_id>
+        <protein_name>Glyceraldehyde-3-phosphate dehydrogenase (GAPDH) (EC 1.2.1.12) (Peptidyl-cysteine S-nitrosylase GAPDH) (EC 2.6.99.-)</protein_name>
+        <protein_length>335</protein_length>
+        <function_cc>FUNCTION: Has both glyceraldehyde-3-phosphate dehydrogenase and nitrosylase activities, thereby playing a role in glycolysis and nuclear functions, respectively (PubMed:11724794, PubMed:3170585). Glyceraldehyde-3-phosphate dehydrogenase is a key enzyme in glycolysis that catalyzes the first step of the pathway by converting D-glyceraldehyde 3-phosphate (G3P) into 3-phospho-D-glyceroyl phosphate (PubMed:11724794, PubMed:3170585). Modulates the organization and assembly of the cytoskeleton (By similarity). Facilitates the CHP1-dependent microtubule and membrane associations through its ability to stimulate the binding of CHP1 to microtubules (By similarity). Component of the GAIT (gamma interferon-activated inhibitor of translation) complex which mediates interferon-gamma-induced transcript-selective translation inhibition in inflammation processes (PubMed:23071094). Upon interferon-gamma treatment assembles into the GAIT complex which binds to stem loop-containing GAIT elements in the 3'-UTR of diverse inflammatory mRNAs (such as ceruplasmin) and suppresses their translation (PubMed:23071094). Also plays a role in innate immunity by promoting TNF-induced NF-kappa-B activation and type I interferon production, via interaction with TRAF2 and TRAF3, respectively (PubMed:23332158, PubMed:27387501). Participates in nuclear events including transcription, RNA transport, DNA replication and apoptosis (By similarity). Nuclear functions are probably due to the nitrosylase activity that mediates cysteine S-nitrosylation of nuclear target proteins such as SIRT1, HDAC2 and PRKDC (By similarity). {ECO:0000250|UniProtKB:P04797, ECO:0000269|PubMed:11724794, ECO:0000269|PubMed:23071094, ECO:0000269|PubMed:23332158, ECO:0000269|PubMed:27387501, ECO:0000269|PubMed:3170585}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>aspartic-type endopeptidase inhibitor activity [GO:0019828]</go_molecular_function_item>
+          <go_molecular_function_item>disordered domain specific binding [GO:0097718]</go_molecular_function_item>
+          <go_molecular_function_item>glyceraldehyde-3-phosphate dehydrogenase (NAD+) (phosphorylating) activity [GO:0004365]</go_molecular_function_item>
+          <go_molecular_function_item>identical protein binding [GO:0042802]</go_molecular_function_item>
+          <go_molecular_function_item>microtubule binding [GO:0008017]</go_molecular_function_item>
+          <go_molecular_function_item>NAD binding [GO:0051287]</go_molecular_function_item>
+          <go_molecular_function_item>NADP binding [GO:0050661]</go_molecular_function_item>
+          <go_molecular_function_item>peptidyl-cysteine S-nitrosylase activity [GO:0035605]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:11881</id>
+    <ensembl_gene_id>ENSG00000205542</ensembl_gene_id>
+    <hgnc_id>HGNC:11881</hgnc_id>
+    <symbol>TMSB4X</symbol>
+    <uniprot_ids>
+      <uniprot_id>P62328</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1558.37215</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:8630</id>
+    <ensembl_gene_id>ENSG00000089220</ensembl_gene_id>
+    <hgnc_id>HGNC:8630</hgnc_id>
+    <symbol>PEBP1</symbol>
+    <uniprot_ids>
+      <uniprot_id>P30086</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1486.03592</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P30086</uniprot_id>
+        <protein_name>Phosphatidylethanolamine-binding protein 1 (PEBP-1) (HCNPpp) (Neuropolypeptide h3) (Prostatic-binding protein) (Raf kinase inhibitor protein) (RKIP) [Cleaved into: Hippocampal cholinergic neurostimulating peptide (HCNP)]</protein_name>
+        <protein_length>187</protein_length>
+        <function_cc>FUNCTION: Binds ATP, opioids and phosphatidylethanolamine. Has lower affinity for phosphatidylinositol and phosphatidylcholine. Serine protease inhibitor which inhibits thrombin, neuropsin and chymotrypsin but not trypsin, tissue type plasminogen activator and elastase (By similarity). Inhibits the kinase activity of RAF1 by inhibiting its activation and by dissociating the RAF1/MEK complex and acting as a competitive inhibitor of MEK phosphorylation. {ECO:0000250, ECO:0000269|PubMed:18294816}.; FUNCTION: HCNP may be involved in the function of the presynaptic cholinergic neurons of the central nervous system. HCNP increases the production of choline acetyltransferase but not acetylcholinesterase. Seems to be mediated by a specific receptor (By similarity). {ECO:0000250}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>ATP binding [GO:0005524]</go_molecular_function_item>
+          <go_molecular_function_item>enzyme binding [GO:0019899]</go_molecular_function_item>
+          <go_molecular_function_item>phosphatidylethanolamine binding [GO:0008429]</go_molecular_function_item>
+          <go_molecular_function_item>protein kinase binding [GO:0019901]</go_molecular_function_item>
+          <go_molecular_function_item>RNA binding [GO:0003723]</go_molecular_function_item>
+          <go_molecular_function_item>serine-type endopeptidase inhibitor activity [GO:0004867]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:3189</id>
+    <ensembl_gene_id>ENSG00000156508</ensembl_gene_id>
+    <hgnc_id>HGNC:3189</hgnc_id>
+    <symbol>EEF1A1</symbol>
+    <uniprot_ids>
+      <uniprot_id>P68104</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1429.39752</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10368</id>
+    <ensembl_gene_id>ENSG00000161016</ensembl_gene_id>
+    <hgnc_id>HGNC:10368</hgnc_id>
+    <symbol>RPL8</symbol>
+    <uniprot_ids>
+      <uniprot_id>P62917</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1387.88625</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:1991</id>
+    <ensembl_gene_id>ENSG00000166165</ensembl_gene_id>
+    <hgnc_id>HGNC:1991</hgnc_id>
+    <symbol>CKB</symbol>
+    <uniprot_ids>
+      <uniprot_id>P12277</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1384.89494</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10332</id>
+    <ensembl_gene_id>ENSG00000100316</ensembl_gene_id>
+    <hgnc_id>HGNC:10332</hgnc_id>
+    <symbol>RPL3</symbol>
+    <uniprot_ids>
+      <uniprot_id>P39023</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1382.9625899999999</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:1022</id>
+    <ensembl_gene_id>ENSG00000236824</ensembl_gene_id>
+    <hgnc_id>HGNC:1022</hgnc_id>
+    <symbol>BCYRN1</symbol>
+    <uniprot_ids/>
+    <mean_tpm_unstranded>1334.23936</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10429</id>
+    <ensembl_gene_id>ENSG00000137154</ensembl_gene_id>
+    <hgnc_id>HGNC:10429</hgnc_id>
+    <symbol>RPS6</symbol>
+    <uniprot_ids>
+      <uniprot_id>P62753</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1313.68809</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:9117</id>
+    <ensembl_gene_id>ENSG00000147588</ensembl_gene_id>
+    <hgnc_id>HGNC:9117</hgnc_id>
+    <symbol>PMP2</symbol>
+    <uniprot_ids>
+      <uniprot_id>P02689</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1281.65908</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P02689</uniprot_id>
+        <protein_name>Myelin P2 protein (Peripheral myelin protein 2)</protein_name>
+        <protein_length>132</protein_length>
+        <function_cc>FUNCTION: May play a role in lipid transport protein in Schwann cells. May bind cholesterol. {ECO:0000269|PubMed:20421974}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>cholesterol binding [GO:0015485]</go_molecular_function_item>
+          <go_molecular_function_item>fatty acid binding [GO:0005504]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:16983</id>
+    <ensembl_gene_id>ENSG00000184221</ensembl_gene_id>
+    <hgnc_id>HGNC:16983</hgnc_id>
+    <symbol>OLIG1</symbol>
+    <uniprot_ids>
+      <uniprot_id>Q8TAK6</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1273.28396</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>Q8TAK6</uniprot_id>
+        <protein_name>Oligodendrocyte transcription factor 1 (Oligo1) (Class B basic helix-loop-helix protein 6) (bHLHb6) (Class E basic helix-loop-helix protein 21) (bHLHe21)</protein_name>
+        <protein_length>271</protein_length>
+        <function_cc>FUNCTION: Promotes formation and maturation of oligodendrocytes, especially within the brain. Cooperates with OLIG2 to establish the pMN domain of the embryonic neural tube (By similarity). {ECO:0000250, ECO:0000269|PubMed:10719889}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>DNA-binding transcription factor activity, RNA polymerase II-specific [GO:0000981]</go_molecular_function_item>
+          <go_molecular_function_item>E-box binding [GO:0070888]</go_molecular_function_item>
+          <go_molecular_function_item>protein dimerization activity [GO:0046983]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:5258</id>
+    <ensembl_gene_id>ENSG00000096384</ensembl_gene_id>
+    <hgnc_id>HGNC:5258</hgnc_id>
+    <symbol>HSP90AB1</symbol>
+    <uniprot_ids>
+      <uniprot_id>P08238</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1269.2912099999999</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P08238</uniprot_id>
+        <protein_name>Heat shock protein HSP 90-beta (HSP 90) (Heat shock 84 kDa) (HSP 84) (HSP84) (Heat shock protein family C member 3)</protein_name>
+        <protein_length>724</protein_length>
+        <function_cc>FUNCTION: Molecular chaperone that promotes the maturation, structural maintenance and proper regulation of specific target proteins involved for instance in cell cycle control and signal transduction. Undergoes a functional cycle linked to its ATPase activity. This cycle probably induces conformational changes in the client proteins, thereby causing their activation. Interacts dynamically with various co-chaperones that modulate its substrate recognition, ATPase cycle and chaperone function (PubMed:16478993, PubMed:19696785). Engages with a range of client protein classes via its interaction with various co-chaperone proteins or complexes, that act as adapters, simultaneously able to interact with the specific client and the central chaperone itself. Recruitment of ATP and co-chaperone followed by client protein forms a functional chaperone. After the completion of the chaperoning process, properly folded client protein and co-chaperone leave HSP90 in an ADP-bound partially open conformation and finally, ADP is released from HSP90 which acquires an open conformation for the next cycle (PubMed:26991466, PubMed:27295069). Apart from its chaperone activity, it also plays a role in the regulation of the transcription machinery. HSP90 and its co-chaperones modulate transcription at least at three different levels. They first alter the steady-state levels of certain transcription factors in response to various physiological cues. Second, they modulate the activity of certain epigenetic modifiers, such as histone deacetylases or DNA methyl transferases, and thereby respond to the change in the environment. Third, they participate in the eviction of histones from the promoter region of certain genes and thereby turn on gene expression (PubMed:25973397). Antagonizes STUB1-mediated inhibition of TGF-beta signaling via inhibition of STUB1-mediated SMAD3 ubiquitination and degradation (PubMed:24613385). Promotes cell differentiation by chaperoning BIRC2 and thereby protecting from auto-ubiquitination and degradation by the proteasomal machinery (PubMed:18239673). Main chaperone involved in the phosphorylation/activation of the STAT1 by chaperoning both JAK2 and PRKCE under heat shock and in turn, activates its own transcription (PubMed:20353823). Involved in the translocation into ERGIC (endoplasmic reticulum-Golgi intermediate compartment) of leaderless cargos (lacking the secretion signal sequence) such as the interleukin 1/IL-1; the translocation process is mediated by the cargo receptor TMED10 (PubMed:32272059). {ECO:0000269|PubMed:16478993, ECO:0000269|PubMed:18239673, ECO:0000269|PubMed:19696785, ECO:0000269|PubMed:20353823, ECO:0000269|PubMed:24613385, ECO:0000269|PubMed:32272059, ECO:0000303|PubMed:25973397, ECO:0000303|PubMed:26991466, ECO:0000303|PubMed:27295069}.; FUNCTION: (Microbial infection) Binding to N.meningitidis NadA stimulates monocytes (PubMed:21949862). Seems to interfere with N.meningitidis NadA-mediated invasion of human cells (Probable). {ECO:0000269|PubMed:21949862, ECO:0000305|PubMed:22066472}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>ATP binding [GO:0005524]</go_molecular_function_item>
+          <go_molecular_function_item>ATP hydrolysis activity [GO:0016887]</go_molecular_function_item>
+          <go_molecular_function_item>ATP-dependent protein binding [GO:0043008]</go_molecular_function_item>
+          <go_molecular_function_item>ATP-dependent protein folding chaperone [GO:0140662]</go_molecular_function_item>
+          <go_molecular_function_item>cadherin binding [GO:0045296]</go_molecular_function_item>
+          <go_molecular_function_item>disordered domain specific binding [GO:0097718]</go_molecular_function_item>
+          <go_molecular_function_item>DNA polymerase binding [GO:0070182]</go_molecular_function_item>
+          <go_molecular_function_item>double-stranded RNA binding [GO:0003725]</go_molecular_function_item>
+          <go_molecular_function_item>heat shock protein binding [GO:0031072]</go_molecular_function_item>
+          <go_molecular_function_item>histone deacetylase binding [GO:0042826]</go_molecular_function_item>
+          <go_molecular_function_item>histone methyltransferase binding [GO:1990226]</go_molecular_function_item>
+          <go_molecular_function_item>identical protein binding [GO:0042802]</go_molecular_function_item>
+          <go_molecular_function_item>kinase binding [GO:0019900]</go_molecular_function_item>
+          <go_molecular_function_item>MHC class II protein complex binding [GO:0023026]</go_molecular_function_item>
+          <go_molecular_function_item>nitric-oxide synthase regulator activity [GO:0030235]</go_molecular_function_item>
+          <go_molecular_function_item>peptide binding [GO:0042277]</go_molecular_function_item>
+          <go_molecular_function_item>protein dimerization activity [GO:0046983]</go_molecular_function_item>
+          <go_molecular_function_item>protein folding chaperone [GO:0044183]</go_molecular_function_item>
+          <go_molecular_function_item>protein homodimerization activity [GO:0042803]</go_molecular_function_item>
+          <go_molecular_function_item>protein kinase binding [GO:0019901]</go_molecular_function_item>
+          <go_molecular_function_item>protein kinase regulator activity [GO:0019887]</go_molecular_function_item>
+          <go_molecular_function_item>protein phosphatase activator activity [GO:0072542]</go_molecular_function_item>
+          <go_molecular_function_item>receptor ligand inhibitor activity [GO:0141069]</go_molecular_function_item>
+          <go_molecular_function_item>RNA binding [GO:0003723]</go_molecular_function_item>
+          <go_molecular_function_item>tau protein binding [GO:0048156]</go_molecular_function_item>
+          <go_molecular_function_item>TPR domain binding [GO:0030911]</go_molecular_function_item>
+          <go_molecular_function_item>ubiquitin protein ligase binding [GO:0031625]</go_molecular_function_item>
+          <go_molecular_function_item>unfolded protein binding [GO:0051082]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:21088</id>
+    <ensembl_gene_id>ENSG00000145284</ensembl_gene_id>
+    <hgnc_id>HGNC:21088</hgnc_id>
+    <symbol>SCD5</symbol>
+    <uniprot_ids>
+      <uniprot_id>Q86SK9</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1260.68723</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10416</id>
+    <ensembl_gene_id>ENSG00000177954</ensembl_gene_id>
+    <hgnc_id>HGNC:10416</hgnc_id>
+    <symbol>RPS27</symbol>
+    <uniprot_ids>
+      <uniprot_id>P42677</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1212.96033</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:12851</id>
+    <ensembl_gene_id>ENSG00000108953</ensembl_gene_id>
+    <hgnc_id>HGNC:12851</hgnc_id>
+    <symbol>YWHAE</symbol>
+    <uniprot_ids>
+      <uniprot_id>P62258</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1182.10692</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:9629</id>
+    <ensembl_gene_id>ENSG00000159335</ensembl_gene_id>
+    <hgnc_id>HGNC:9629</hgnc_id>
+    <symbol>PTMS</symbol>
+    <uniprot_ids>
+      <uniprot_id>P20962</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1179.84986</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P20962</uniprot_id>
+        <protein_name>Parathymosin</protein_name>
+        <protein_length>102</protein_length>
+        <function_cc>FUNCTION: Parathymosin may mediate immune function by blocking the effect of prothymosin alpha which confers resistance to certain opportunistic infections.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>histone binding [GO:0042393]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10364</id>
+    <ensembl_gene_id>ENSG00000148303</ensembl_gene_id>
+    <hgnc_id>HGNC:10364</hgnc_id>
+    <symbol>RPL7A</symbol>
+    <uniprot_ids>
+      <uniprot_id>P62424</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1174.10909</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10401</id>
+    <ensembl_gene_id>ENSG00000231500</ensembl_gene_id>
+    <hgnc_id>HGNC:10401</hgnc_id>
+    <symbol>RPS18</symbol>
+    <uniprot_ids>
+      <uniprot_id>P62269</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1163.4769099999999</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:11255</id>
+    <ensembl_gene_id>ENSG00000118785</ensembl_gene_id>
+    <hgnc_id>HGNC:11255</hgnc_id>
+    <symbol>SPP1</symbol>
+    <uniprot_ids>
+      <uniprot_id>P10451</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1142.88041</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7406</id>
+    <ensembl_gene_id>ENSG00000125148</ensembl_gene_id>
+    <hgnc_id>HGNC:7406</hgnc_id>
+    <symbol>MT2A</symbol>
+    <uniprot_ids>
+      <uniprot_id>P02795</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1125.40146</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P02795</uniprot_id>
+        <protein_name>Metallothionein-2 (MT-2) (Metallothionein-2A) (Metallothionein-II) (MT-II)</protein_name>
+        <protein_length>61</protein_length>
+        <function_cc>FUNCTION: Metallothioneins have a high content of cysteine residues that bind various heavy metals; these proteins are transcriptionally regulated by both heavy metals and glucocorticoids.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>metal ion binding [GO:0046872]</go_molecular_function_item>
+          <go_molecular_function_item>zinc ion binding [GO:0008270]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10377</id>
+    <ensembl_gene_id>ENSG00000177600</ensembl_gene_id>
+    <hgnc_id>HGNC:10377</hgnc_id>
+    <symbol>RPLP2</symbol>
+    <uniprot_ids>
+      <uniprot_id>P05387</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1090.25035</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:4461</id>
+    <ensembl_gene_id>ENSG00000046653</ensembl_gene_id>
+    <hgnc_id>HGNC:4461</hgnc_id>
+    <symbol>GPM6B</symbol>
+    <uniprot_ids>
+      <uniprot_id>Q13491</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1086.37209</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>Q13491</uniprot_id>
+        <protein_name>Neuronal membrane glycoprotein M6-b (M6b)</protein_name>
+        <protein_length>265</protein_length>
+        <function_cc>FUNCTION: May be involved in neural development. Involved in regulation of osteoblast function and bone formation. Involved in matrix vesicle release by osteoblasts; this function seems to involve maintenance of the actin cytoskeleton. May be involved in cellular trafficking of SERT and thereby in regulation of serotonin uptake. {ECO:0000269|PubMed:21638316}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>structural constituent of myelin sheath [GO:0019911]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10500</id>
+    <ensembl_gene_id>ENSG00000160307</ensembl_gene_id>
+    <hgnc_id>HGNC:10500</hgnc_id>
+    <symbol>S100B</symbol>
+    <uniprot_ids>
+      <uniprot_id>P04271</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1064.33664</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10304</id>
+    <ensembl_gene_id>ENSG00000142541</ensembl_gene_id>
+    <hgnc_id>HGNC:10304</hgnc_id>
+    <symbol>RPL13A</symbol>
+    <uniprot_ids>
+      <uniprot_id>P40429</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1028.56407</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10424</id>
+    <ensembl_gene_id>ENSG00000198034</ensembl_gene_id>
+    <hgnc_id>HGNC:10424</hgnc_id>
+    <symbol>RPS4X</symbol>
+    <uniprot_ids>
+      <uniprot_id>P62701</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>1006.24215</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:13388</id>
+    <ensembl_gene_id>ENSG00000166681</ensembl_gene_id>
+    <hgnc_id>HGNC:13388</hgnc_id>
+    <symbol>BEX3</symbol>
+    <uniprot_ids>
+      <uniprot_id>Q00994</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>995.82761</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>Q00994</uniprot_id>
+        <protein_name>Protein BEX3 (Brain-expressed X-linked protein 3) (Nerve growth factor receptor-associated protein 1) (Ovarian granulosa cell 13.0 kDa protein HGR74) (p75NTR-associated cell death executor)</protein_name>
+        <protein_length>111</protein_length>
+        <function_cc>FUNCTION: May be a signaling adapter molecule involved in NGFR/p75NTR-mediated apoptosis induced by NGF. Plays a role in zinc-triggered neuronal death. In absence of reductive stress, acts as a pseudosubstrate for the CRL2(FEM1B) complex: associates with FEM1B via zinc, thereby preventing association between FEM1B and its substrates. {ECO:0000250|UniProtKB:Q9WTZ9}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>cysteine-type endopeptidase activator activity involved in apoptotic process [GO:0008656]</go_molecular_function_item>
+          <go_molecular_function_item>identical protein binding [GO:0042802]</go_molecular_function_item>
+          <go_molecular_function_item>metal ion binding [GO:0046872]</go_molecular_function_item>
+          <go_molecular_function_item>molecular function inhibitor activity [GO:0140678]</go_molecular_function_item>
+          <go_molecular_function_item>nerve growth factor receptor binding [GO:0005163]</go_molecular_function_item>
+          <go_molecular_function_item>signaling receptor binding [GO:0005102]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:6759</id>
+    <ensembl_gene_id>ENSG00000277443</ensembl_gene_id>
+    <hgnc_id>HGNC:6759</hgnc_id>
+    <symbol>MARCKS</symbol>
+    <uniprot_ids>
+      <uniprot_id>P29966</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>995.0276</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P29966</uniprot_id>
+        <protein_name>Myristoylated alanine-rich C-kinase substrate (MARCKS) (Protein kinase C substrate, 80 kDa protein, light chain) (80K-L protein) (PKCSL)</protein_name>
+        <protein_length>332</protein_length>
+        <function_cc>FUNCTION: Membrane-associated protein that plays a role in the structural modulation of the actin cytoskeleton, chemotaxis, motility, cell adhesion, phagocytosis, and exocytosis through lipid sequestering and/or protein docking to membranes (PubMed:23704996, PubMed:36009319). Thus, exerts an influence on a plethora of physiological processes, such as embryonic development, tissue regeneration, neuronal plasticity, and inflammation. Sequesters phosphatidylinositol 4,5-bisphosphate (PIP2) at lipid rafts in the plasma membrane of quiescent cells, an action reversed by protein kinase C, ultimately inhibiting exocytosis (PubMed:23704996). During inflammation, promotes the migration and adhesion of inflammatory cells and the secretion of cytokines such as tumor necrosis factor (TNF), particularly in macrophages (PubMed:37949888). Plays an essential role in bacteria-induced intracellular reactive oxygen species (ROS) formation in the monocytic cell type. Participates in the regulation of neurite initiation and outgrowth by interacting with components of cellular machinery including CDC42 that regulates cell shape and process extension through modulation of the cytoskeleton (By similarity). Plays also a role in axon development by mediating docking and fusion of RAB10-positive vesicles with the plasma membrane (By similarity). {ECO:0000250|UniProtKB:P26645, ECO:0000250|UniProtKB:P30009, ECO:0000269|PubMed:23704996, ECO:0000269|PubMed:36009319, ECO:0000269|PubMed:37949888}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>actin filament binding [GO:0051015]</go_molecular_function_item>
+          <go_molecular_function_item>calmodulin binding [GO:0005516]</go_molecular_function_item>
+          <go_molecular_function_item>identical protein binding [GO:0042802]</go_molecular_function_item>
+          <go_molecular_function_item>protein kinase C binding [GO:0005080]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:333</id>
+    <ensembl_gene_id>ENSG00000135744</ensembl_gene_id>
+    <hgnc_id>HGNC:333</hgnc_id>
+    <symbol>AGT</symbol>
+    <uniprot_ids>
+      <uniprot_id>P01019</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>978.52919</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P01019</uniprot_id>
+        <protein_name>Angiotensinogen (Serpin A8) [Cleaved into: Angiotensin-1 (Angiotensin 1-10) (Angiotensin I) (Ang I)</protein_name>
+        <protein_length>476</protein_length>
+        <function_cc>FUNCTION: Essential component of the renin-angiotensin system (RAS), a potent regulator of blood pressure, body fluid and electrolyte homeostasis. {ECO:0000269|PubMed:10619573, ECO:0000269|PubMed:1132082, ECO:0000269|PubMed:17138938}.; FUNCTION: [Angiotensin-2]: Acts directly on vascular smooth muscle as a potent vasoconstrictor, affects cardiac contractility and heart rate through its action on the sympathetic nervous system, and alters renal sodium and water absorption through its ability to stimulate the zona glomerulosa cells of the adrenal cortex to synthesize and secrete aldosterone (PubMed:10619573, PubMed:17138938). Acts by binding to angiotensin receptors AGTR1 and AGTR2 (PubMed:1567413). Also binds the DEAR/FBXW7-AS1 receptor (By similarity). {ECO:0000250|UniProtKB:P01015, ECO:0000269|PubMed:10619573, ECO:0000269|PubMed:1567413, ECO:0000269|PubMed:17138938}.; FUNCTION: [Angiotensin-3]: Stimulates aldosterone release. {ECO:0000269|PubMed:1132082}.; FUNCTION: [Angiotensin 1-7]: Is a ligand for the G-protein coupled receptor MAS1 (By similarity). Has vasodilator and antidiuretic effects. Has an antithrombotic effect that involves MAS1-mediated release of nitric oxide from platelets (By similarity). {ECO:0000250|UniProtKB:P11859}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>growth factor activity [GO:0008083]</go_molecular_function_item>
+          <go_molecular_function_item>hormone activity [GO:0005179]</go_molecular_function_item>
+          <go_molecular_function_item>serine-type endopeptidase inhibitor activity [GO:0004867]</go_molecular_function_item>
+          <go_molecular_function_item>type 1 angiotensin receptor binding [GO:0031702]</go_molecular_function_item>
+          <go_molecular_function_item>type 2 angiotensin receptor binding [GO:0031703]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10371</id>
+    <ensembl_gene_id>ENSG00000089157</ensembl_gene_id>
+    <hgnc_id>HGNC:10371</hgnc_id>
+    <symbol>RPLP0</symbol>
+    <uniprot_ids>
+      <uniprot_id>P05388</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>963.20454</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:9355</id>
+    <ensembl_gene_id>ENSG00000126432</ensembl_gene_id>
+    <hgnc_id>HGNC:9355</hgnc_id>
+    <symbol>PRDX5</symbol>
+    <uniprot_ids>
+      <uniprot_id>P30044</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>959.52087</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P30044</uniprot_id>
+        <protein_name>Peroxiredoxin-5, mitochondrial (EC 1.11.1.24) (Alu corepressor 1) (Antioxidant enzyme B166) (AOEB166) (Liver tissue 2D-page spot 71B) (PLP) (Peroxiredoxin V) (Prx-V) (Peroxisomal antioxidant enzyme) (TPx type VI) (Thioredoxin peroxidase PMP20) (Thioredoxin-dependent peroxiredoxin 5)</protein_name>
+        <protein_length>214</protein_length>
+        <function_cc>FUNCTION: Thiol-specific peroxidase that catalyzes the reduction of hydrogen peroxide and organic hydroperoxides to water and alcohols, respectively. Plays a role in cell protection against oxidative stress by detoxifying peroxides and as sensor of hydrogen peroxide-mediated signaling events. {ECO:0000269|PubMed:10514471, ECO:0000269|PubMed:10521424, ECO:0000269|PubMed:10751410, ECO:0000269|PubMed:31740833}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>antioxidant activity [GO:0016209]</go_molecular_function_item>
+          <go_molecular_function_item>cysteine-type endopeptidase inhibitor activity involved in apoptotic process [GO:0043027]</go_molecular_function_item>
+          <go_molecular_function_item>identical protein binding [GO:0042802]</go_molecular_function_item>
+          <go_molecular_function_item>peroxidase activity [GO:0004601]</go_molecular_function_item>
+          <go_molecular_function_item>peroxynitrite reductase activity [GO:0072541]</go_molecular_function_item>
+          <go_molecular_function_item>RNA polymerase III transcription regulatory region sequence-specific DNA binding [GO:0001016]</go_molecular_function_item>
+          <go_molecular_function_item>signaling receptor binding [GO:0005102]</go_molecular_function_item>
+          <go_molecular_function_item>thioredoxin peroxidase activity [GO:0008379]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:9630</id>
+    <ensembl_gene_id>ENSG00000105894</ensembl_gene_id>
+    <hgnc_id>HGNC:9630</hgnc_id>
+    <symbol>PTN</symbol>
+    <uniprot_ids>
+      <uniprot_id>P21246</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>946.92832</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P21246</uniprot_id>
+        <protein_name>Pleiotrophin (PTN) (Heparin-binding brain mitogen) (HBBM) (Heparin-binding growth factor 8) (HBGF-8) (Heparin-binding growth-associated molecule) (HB-GAM) (Heparin-binding neurite outgrowth-promoting factor) (HBNF) (Heparin-binding neurite outgrowth-promoting factor 1) (HBNF-1) (Osteoblast-specific factor 1) (OSF-1)</protein_name>
+        <protein_length>168</protein_length>
+        <function_cc>FUNCTION: Secreted growth factor that mediates its signal through cell-surface proteoglycan and non-proteoglycan receptors (PubMed:11278720, PubMed:16814777, PubMed:19141530). Binds cell-surface proteoglycan receptor via their chondroitin sulfate (CS) groups (PubMed:26896299, PubMed:27445335). Thereby regulates many processes like cell proliferation, cell survival, cell growth, cell differentiation and cell migration in several tissues namely neuron and bone (PubMed:11278720, PubMed:1733956, PubMed:1768439, PubMed:19141530, PubMed:19442624, PubMed:27445335, PubMed:30667096). Also plays a role in synaptic plasticity and learning-related behavior by inhibiting long-term synaptic potentiation (By similarity). Binds PTPRZ1, leading to neutralization of the negative charges of the CS chains of PTPRZ1, inducing PTPRZ1 clustering, thereby causing the dimerization and inactivation of its phosphatase activity leading to increased tyrosine phosphorylation of each of the PTPRZ1 substrates like ALK, CTNNB1 or AFAP1L2 in order to activate the PI3K-AKT pathway (PubMed:10706604, PubMed:16814777, PubMed:17681947, PubMed:27445335, PubMed:30667096). Through PTPRZ1 binding controls oligodendrocyte precursor cell differentiation by enhancing the phosphorylation of AFAP1L2 in order to activate the PI3K-AKT pathway (PubMed:27445335, PubMed:30667096). Forms a complex with PTPRZ1 and integrin alpha-V/beta-3 (ITGAV:ITGB3) that stimulates endothelial cell migration through SRC dephosphorylation and activation that consequently leads to ITGB3 'Tyr-773' phosphorylation (PubMed:19141530). In adult hippocampus promotes dendritic arborization, spine development, and functional integration and connectivity of newborn granule neurons through ALK by activating AKT signaling pathway (By similarity). Binds GPC2 and chondroitin sulfate proteoglycans (CSPGs) at the neuron surface, leading to abrogation of binding between PTPRS and CSPGs and neurite outgrowth promotion (By similarity). Binds SDC3 and mediates bone formation by recruiting and attaching osteoblasts/osteoblast precursors to the sites for new bone deposition (By similarity). Binds ALK and promotes cell survival and cell proliferation through MAPK pathway activation (PubMed:11278720). Inhibits proliferation and enhances differentiation of neural stem cells by inhibiting FGF2-induced fibroblast growth factor receptor signaling pathway (By similarity). Mediates regulatory mechanisms in normal hemostasis and in hematopoietic regeneration and in maintaining the balance of myeloid and lymphoid regeneration (By similarity). In addition may play a role in the female reproductive system, auditory response and the progesterone-induced decidualization pathway (By similarity). {ECO:0000250|UniProtKB:P63089, ECO:0000250|UniProtKB:P63090, ECO:0000269|PubMed:10706604, ECO:0000269|PubMed:11278720, ECO:0000269|PubMed:16814777, ECO:0000269|PubMed:1733956, ECO:0000269|PubMed:17681947, ECO:0000269|PubMed:1768439, ECO:0000269|PubMed:19141530, ECO:0000269|PubMed:19442624, ECO:0000269|PubMed:26896299, ECO:0000269|PubMed:27445335, ECO:0000269|PubMed:30667096}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>carbohydrate binding [GO:0030246]</go_molecular_function_item>
+          <go_molecular_function_item>chondroitin sulfate binding [GO:0035374]</go_molecular_function_item>
+          <go_molecular_function_item>growth factor activity [GO:0008083]</go_molecular_function_item>
+          <go_molecular_function_item>heparin binding [GO:0008201]</go_molecular_function_item>
+          <go_molecular_function_item>integrin binding [GO:0005178]</go_molecular_function_item>
+          <go_molecular_function_item>molecular function activator activity [GO:0140677]</go_molecular_function_item>
+          <go_molecular_function_item>protein kinase binding [GO:0019901]</go_molecular_function_item>
+          <go_molecular_function_item>protein phosphatase inhibitor activity [GO:0004864]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10571</id>
+    <ensembl_gene_id>ENSG00000099194</ensembl_gene_id>
+    <hgnc_id>HGNC:10571</hgnc_id>
+    <symbol>SCD</symbol>
+    <uniprot_ids>
+      <uniprot_id>O00767</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>944.4987800000001</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:1932</id>
+    <ensembl_gene_id>ENSG00000133048</ensembl_gene_id>
+    <hgnc_id>HGNC:1932</hgnc_id>
+    <symbol>CHI3L1</symbol>
+    <uniprot_ids>
+      <uniprot_id>P36222</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>944.1902300000002</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:4947</id>
+    <ensembl_gene_id>ENSG00000204287</ensembl_gene_id>
+    <hgnc_id>HGNC:4947</hgnc_id>
+    <symbol>HLA-DRA</symbol>
+    <uniprot_ids>
+      <uniprot_id>P01903</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>936.7360500000001</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P01903</uniprot_id>
+        <protein_name>HLA class II histocompatibility antigen, DR alpha chain (MHC class II antigen DRA)</protein_name>
+        <protein_length>254</protein_length>
+        <function_cc>FUNCTION: An alpha chain of antigen-presenting major histocompatibility complex class II (MHCII) molecule. In complex with the beta chain HLA-DRB, displays antigenic peptides on professional antigen presenting cells (APCs) for recognition by alpha-beta T cell receptor (TCR) on HLA-DR-restricted CD4-positive T cells. This guides antigen-specific T-helper effector functions, both antibody-mediated immune response and macrophage activation, to ultimately eliminate the infectious agents and transformed cells (PubMed:15265931, PubMed:15322540, PubMed:17334368, PubMed:22327072, PubMed:24190431, PubMed:27591323, PubMed:29884618, PubMed:31495665, PubMed:8145819, PubMed:9075930). Typically presents extracellular peptide antigens of 10 to 30 amino acids that arise from proteolysis of endocytosed antigens in lysosomes (PubMed:8145819). In the tumor microenvironment, presents antigenic peptides that are primarily generated in tumor-resident APCs likely via phagocytosis of apoptotic tumor cells or macropinocytosis of secreted tumor proteins (PubMed:31495665). Presents peptides derived from intracellular proteins that are trapped in autolysosomes after macroautophagy, a mechanism especially relevant for T cell selection in the thymus and central immune tolerance (PubMed:17182262, PubMed:23783831). The selection of the immunodominant epitopes follows two processing modes: 'bind first, cut/trim later' for pathogen-derived antigenic peptides and 'cut first, bind later' for autoantigens/self-peptides (PubMed:25413013). The anchor residue at position 1 of the peptide N-terminus, usually a large hydrophobic residue, is essential for high affinity interaction with MHCII molecules (PubMed:8145819). {ECO:0000269|PubMed:15265931, ECO:0000269|PubMed:15322540, ECO:0000269|PubMed:17182262, ECO:0000269|PubMed:17334368, ECO:0000269|PubMed:22327072, ECO:0000269|PubMed:23783831, ECO:0000269|PubMed:24190431, ECO:0000269|PubMed:25413013, ECO:0000269|PubMed:27591323, ECO:0000269|PubMed:29884618, ECO:0000269|PubMed:31495665, ECO:0000269|PubMed:8145819, ECO:0000269|PubMed:9075930}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>MHC class II protein complex binding [GO:0023026]</go_molecular_function_item>
+          <go_molecular_function_item>MHC class II receptor activity [GO:0032395]</go_molecular_function_item>
+          <go_molecular_function_item>peptide antigen binding [GO:0042605]</go_molecular_function_item>
+          <go_molecular_function_item>polysaccharide binding [GO:0030247]</go_molecular_function_item>
+          <go_molecular_function_item>T cell receptor binding [GO:0042608]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:418</id>
+    <ensembl_gene_id>ENSG00000109107</ensembl_gene_id>
+    <hgnc_id>HGNC:418</hgnc_id>
+    <symbol>ALDOC</symbol>
+    <uniprot_ids>
+      <uniprot_id>P09972</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>920.7512300000001</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P09972</uniprot_id>
+        <protein_name>Fructose-bisphosphate aldolase C (EC 4.1.2.13) (Brain-type aldolase)</protein_name>
+        <protein_length>364</protein_length>
+        <function_cc></function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>cytoskeletal protein binding [GO:0008092]</go_molecular_function_item>
+          <go_molecular_function_item>fructose-bisphosphate aldolase activity [GO:0004332]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:9476</id>
+    <ensembl_gene_id>ENSG00000166033</ensembl_gene_id>
+    <hgnc_id>HGNC:9476</hgnc_id>
+    <symbol>HTRA1</symbol>
+    <uniprot_ids>
+      <uniprot_id>Q92743</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>914.11193</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>Q92743</uniprot_id>
+        <protein_name>Serine protease HTRA1 (EC 3.4.21.-) (High-temperature requirement A serine peptidase 1) (L56) (Serine protease 11)</protein_name>
+        <protein_length>480</protein_length>
+        <function_cc>FUNCTION: Serine protease with a variety of targets, including extracellular matrix proteins such as fibronectin. HTRA1-generated fibronectin fragments further induce synovial cells to up-regulate MMP1 and MMP3 production. May also degrade proteoglycans, such as aggrecan, decorin and fibromodulin. Through cleavage of proteoglycans, may release soluble FGF-glycosaminoglycan complexes that promote the range and intensity of FGF signals in the extracellular space. Regulates the availability of insulin-like growth factors (IGFs) by cleaving IGF-binding proteins. Inhibits signaling mediated by TGF-beta family members. This activity requires the integrity of the catalytic site, although it is unclear whether TGF-beta proteins are themselves degraded. By acting on TGF-beta signaling, may regulate many physiological processes, including retinal angiogenesis and neuronal survival and maturation during development. Intracellularly, degrades TSC2, leading to the activation of TSC2 downstream targets. {ECO:0000269|PubMed:16377621, ECO:0000269|PubMed:20671064, ECO:0000269|PubMed:9852107}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>growth factor binding [GO:0019838]</go_molecular_function_item>
+          <go_molecular_function_item>identical protein binding [GO:0042802]</go_molecular_function_item>
+          <go_molecular_function_item>molecular function activator activity [GO:0140677]</go_molecular_function_item>
+          <go_molecular_function_item>serine-type endopeptidase activity [GO:0004252]</go_molecular_function_item>
+          <go_molecular_function_item>serine-type peptidase activity [GO:0008236]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:620</id>
+    <ensembl_gene_id>ENSG00000142192</ensembl_gene_id>
+    <hgnc_id>HGNC:620</hgnc_id>
+    <symbol>APP</symbol>
+    <uniprot_ids>
+      <uniprot_id>P05067</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>881.9694999999999</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P05067</uniprot_id>
+        <protein_name>Amyloid-beta precursor protein (APP) (ABPP) (APPI) (Alzheimer disease amyloid A4 protein homolog) (Alzheimer disease amyloid protein) (Amyloid precursor protein) (Amyloid-beta (A4) precursor protein) (Amyloid-beta A4 protein) (Cerebral vascular amyloid peptide) (CVAP) (PreA4) (Protease nexin-II) (PN-II) [Cleaved into: N-APP</protein_name>
+        <protein_length>770</protein_length>
+        <function_cc>FUNCTION: Functions as a cell surface receptor and performs physiological functions on the surface of neurons relevant to neurite growth, neuronal adhesion and axonogenesis. Interaction between APP molecules on neighboring cells promotes synaptogenesis (PubMed:25122912). Involved in cell mobility and transcription regulation through protein-protein interactions. Can promote transcription activation through binding to APBB1-KAT5 and inhibits Notch signaling through interaction with Numb. Couples to apoptosis-inducing pathways such as those mediated by G(o) and JIP. Inhibits G(o) alpha ATPase activity (By similarity). Acts as a kinesin I membrane receptor, mediating the axonal transport of beta-secretase and presenilin 1 (By similarity). By acting as a kinesin I membrane receptor, plays a role in axonal anterograde transport of cargo towards synapses in axons (PubMed:17062754, PubMed:23011729). Involved in copper homeostasis/oxidative stress through copper ion reduction. In vitro, copper-metallated APP induces neuronal death directly or is potentiated through Cu(2+)-mediated low-density lipoprotein oxidation. Can regulate neurite outgrowth through binding to components of the extracellular matrix such as heparin and collagen I and IV. The splice isoforms that contain the BPTI domain possess protease inhibitor activity. Induces a AGER-dependent pathway that involves activation of p38 MAPK, resulting in internalization of amyloid-beta peptide and leading to mitochondrial dysfunction in cultured cortical neurons. Provides Cu(2+) ions for GPC1 which are required for release of nitric oxide (NO) and subsequent degradation of the heparan sulfate chains on GPC1. {ECO:0000250, ECO:0000250|UniProtKB:P12023, ECO:0000269|PubMed:17062754, ECO:0000269|PubMed:23011729, ECO:0000269|PubMed:25122912}.; FUNCTION: Amyloid-beta peptides are lipophilic metal chelators with metal-reducing activity. Bind transient metals such as copper, zinc and iron. In vitro, can reduce Cu(2+) and Fe(3+) to Cu(+) and Fe(2+), respectively. Amyloid-beta peptides bind to lipoproteins and apolipoproteins E and J in the CSF and to HDL particles in plasma, inhibiting metal-catalyzed oxidation of lipoproteins. Promotes both tau aggregation and TPK II-mediated phosphorylation. Interaction with overexpressed HADH2 leads to oxidative stress and neurotoxicity. Also binds GPC1 in lipid rafts.; FUNCTION: [Amyloid-beta protein 42]: More effective reductant than amyloid-beta protein 40. May activate mononuclear phagocytes in the brain and elicit inflammatory responses.; FUNCTION: Appicans elicit adhesion of neural cells to the extracellular matrix and may regulate neurite outgrowth in the brain. {ECO:0000250}.; FUNCTION: The gamma-CTF peptides as well as the caspase-cleaved peptides, including C31, are potent enhancers of neuronal apoptosis.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>DNA binding [GO:0003677]</go_molecular_function_item>
+          <go_molecular_function_item>enzyme binding [GO:0019899]</go_molecular_function_item>
+          <go_molecular_function_item>growth factor receptor binding [GO:0070851]</go_molecular_function_item>
+          <go_molecular_function_item>heparin binding [GO:0008201]</go_molecular_function_item>
+          <go_molecular_function_item>identical protein binding [GO:0042802]</go_molecular_function_item>
+          <go_molecular_function_item>peptidase activator activity [GO:0016504]</go_molecular_function_item>
+          <go_molecular_function_item>protein serine/threonine kinase binding [GO:0120283]</go_molecular_function_item>
+          <go_molecular_function_item>PTB domain binding [GO:0051425]</go_molecular_function_item>
+          <go_molecular_function_item>receptor ligand activity [GO:0048018]</go_molecular_function_item>
+          <go_molecular_function_item>serine-type endopeptidase inhibitor activity [GO:0004867]</go_molecular_function_item>
+          <go_molecular_function_item>signaling receptor activator activity [GO:0030546]</go_molecular_function_item>
+          <go_molecular_function_item>signaling receptor binding [GO:0005102]</go_molecular_function_item>
+          <go_molecular_function_item>transition metal ion binding [GO:0046914]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:14460</id>
+    <ensembl_gene_id>ENSG00000165795</ensembl_gene_id>
+    <hgnc_id>HGNC:14460</hgnc_id>
+    <symbol>NDRG2</symbol>
+    <uniprot_ids>
+      <uniprot_id>Q9UN36</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>864.64277</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>Q9UN36</uniprot_id>
+        <protein_name>Protein NDRG2 (N-myc downstream-regulated gene 2 protein) (Protein Syld709613)</protein_name>
+        <protein_length>371</protein_length>
+        <function_cc>FUNCTION: Contributes to the regulation of the Wnt signaling pathway. Down-regulates CTNNB1-mediated transcriptional activation of target genes, such as CCND1, and may thereby act as tumor suppressor. May be involved in dendritic cell and neuron differentiation. {ECO:0000269|PubMed:12845671, ECO:0000269|PubMed:16103061, ECO:0000269|PubMed:21247902}.</function_cc>
+        <go_molecular_function/>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10413</id>
+    <ensembl_gene_id>ENSG00000118181</ensembl_gene_id>
+    <hgnc_id>HGNC:10413</hgnc_id>
+    <symbol>RPS25</symbol>
+    <uniprot_ids>
+      <uniprot_id>P62851</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>854.34674</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:18254</id>
+    <ensembl_gene_id>ENSG00000144485</ensembl_gene_id>
+    <hgnc_id>HGNC:18254</hgnc_id>
+    <symbol>HES6</symbol>
+    <uniprot_ids>
+      <uniprot_id>Q96HZ4</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>844.8212</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>Q96HZ4</uniprot_id>
+        <protein_name>Transcription cofactor HES-6 (C-HAIRY1) (Class B basic helix-loop-helix protein 41) (bHLHb41) (Hairy and enhancer of split 6)</protein_name>
+        <protein_length>224</protein_length>
+        <function_cc>FUNCTION: Does not bind DNA itself but suppresses both HES1-mediated N box-dependent transcriptional repression and binding of HES1 to E box sequences. Also suppresses HES1-mediated inhibition of the heterodimer formed by ASCL1/MASH1 and TCF3/E47, allowing ASCL1 and TCF3 to up-regulate transcription in its presence. Promotes cell differentiation (By similarity). {ECO:0000250}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>DNA-binding transcription factor activity, RNA polymerase II-specific [GO:0000981]</go_molecular_function_item>
+          <go_molecular_function_item>DNA-binding transcription repressor activity, RNA polymerase II-specific [GO:0001227]</go_molecular_function_item>
+          <go_molecular_function_item>protein dimerization activity [GO:0046983]</go_molecular_function_item>
+          <go_molecular_function_item>RNA polymerase II cis-regulatory region sequence-specific DNA binding [GO:0000978]</go_molecular_function_item>
+          <go_molecular_function_item>RNA polymerase II-specific DNA-binding transcription factor binding [GO:0061629]</go_molecular_function_item>
+          <go_molecular_function_item>sequence-specific double-stranded DNA binding [GO:1990837]</go_molecular_function_item>
+          <go_molecular_function_item>transcription regulator inhibitor activity [GO:0140416]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10312</id>
+    <ensembl_gene_id>ENSG00000108298</ensembl_gene_id>
+    <hgnc_id>HGNC:10312</hgnc_id>
+    <symbol>RPL19</symbol>
+    <uniprot_ids>
+      <uniprot_id>P84098</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>843.18796</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:24549</id>
+    <ensembl_gene_id>ENSG00000179010</ensembl_gene_id>
+    <hgnc_id>HGNC:24549</hgnc_id>
+    <symbol>MRFAP1</symbol>
+    <uniprot_ids>
+      <uniprot_id>Q9Y605</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>836.9453900000001</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>Q9Y605</uniprot_id>
+        <protein_name>MORF4 family-associated protein 1 (Protein PGR1) (Protein associated with MRG of 14 kDa)</protein_name>
+        <protein_length>127</protein_length>
+        <function_cc></function_cc>
+        <go_molecular_function/>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:830</id>
+    <ensembl_gene_id>ENSG00000110955</ensembl_gene_id>
+    <hgnc_id>HGNC:830</hgnc_id>
+    <symbol>ATP5F1B</symbol>
+    <uniprot_ids>
+      <uniprot_id>P06576</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>833.88997</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P06576</uniprot_id>
+        <protein_name>ATP synthase F(1) complex subunit beta, mitochondrial (EC 7.1.2.2) (ATP synthase F1 subunit beta)</protein_name>
+        <protein_length>529</protein_length>
+        <function_cc>FUNCTION: Catalytic subunit beta, of the mitochondrial membrane ATP synthase complex (F(1)F(0) ATP synthase or Complex V) that produces ATP from ADP in the presence of a proton gradient across the membrane which is generated by electron transport complexes of the respiratory chain (Probable) (PubMed:37244256). ATP synthase complex consist of a soluble F(1) head domain - the catalytic core - and a membrane F(1) domain - the membrane proton channel (PubMed:37244256). These two domains are linked by a central stalk rotating inside the F(1) region and a stationary peripheral stalk (PubMed:37244256). During catalysis, ATP synthesis in the catalytic domain of F(1) is coupled via a rotary mechanism of the central stalk subunits to proton translocation (Probable). In vivo, can only synthesize ATP although its ATP hydrolase activity can be activated artificially in vitro (By similarity). With the subunit alpha (ATP5F1A), forms the catalytic core in the F(1) domain (PubMed:37244256). {ECO:0000250|UniProtKB:P19483, ECO:0000269|PubMed:37244256, ECO:0000305|PubMed:25168243, ECO:0000305|PubMed:36239646, ECO:0000305|PubMed:37244256}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>angiostatin binding [GO:0043532]</go_molecular_function_item>
+          <go_molecular_function_item>ATP binding [GO:0005524]</go_molecular_function_item>
+          <go_molecular_function_item>ATP hydrolysis activity [GO:0016887]</go_molecular_function_item>
+          <go_molecular_function_item>MHC class I protein binding [GO:0042288]</go_molecular_function_item>
+          <go_molecular_function_item>proton-transporting ATP synthase activity, rotational mechanism [GO:0046933]</go_molecular_function_item>
+          <go_molecular_function_item>proton-transporting ATPase activity, rotational mechanism [GO:0046961]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:5241</id>
+    <ensembl_gene_id>ENSG00000109971</ensembl_gene_id>
+    <hgnc_id>HGNC:5241</hgnc_id>
+    <symbol>HSPA8</symbol>
+    <uniprot_ids>
+      <uniprot_id>P11142</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>831.49868</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P11142</uniprot_id>
+        <protein_name>Heat shock cognate 71 kDa protein (EC 3.6.4.10) (Heat shock 70 kDa protein 8) (Heat shock protein family A member 8) (Lipopolysaccharide-associated protein 1) (LAP-1) (LPS-associated protein 1)</protein_name>
+        <protein_length>646</protein_length>
+        <function_cc>FUNCTION: Molecular chaperone implicated in a wide variety of cellular processes, including protection of the proteome from stress, folding and transport of newly synthesized polypeptides, chaperone-mediated autophagy, activation of proteolysis of misfolded proteins, formation and dissociation of protein complexes, and antigen presentation. Plays a pivotal role in the protein quality control system, ensuring the correct folding of proteins, the re-folding of misfolded proteins and controlling the targeting of proteins for subsequent degradation (PubMed:21148293, PubMed:21150129, PubMed:23018488, PubMed:24732912, PubMed:27916661, PubMed:2799391, PubMed:36586411). This is achieved through cycles of ATP binding, ATP hydrolysis and ADP release, mediated by co-chaperones (PubMed:12526792, PubMed:21148293, PubMed:21150129, PubMed:23018488, PubMed:24732912, PubMed:27916661). The co-chaperones have been shown to not only regulate different steps of the ATPase cycle of HSP70, but they also have an individual specificity such that one co-chaperone may promote folding of a substrate while another may promote degradation (PubMed:12526792, PubMed:21148293, PubMed:21150129, PubMed:23018488, PubMed:24732912, PubMed:27916661). The affinity of HSP70 for polypeptides is regulated by its nucleotide bound state. In the ATP-bound form, it has a low affinity for substrate proteins. However, upon hydrolysis of the ATP to ADP, it undergoes a conformational change that increases its affinity for substrate proteins. HSP70 goes through repeated cycles of ATP hydrolysis and nucleotide exchange, which permits cycles of substrate binding and release. The HSP70-associated co-chaperones are of three types: J-domain co-chaperones HSP40s (stimulate ATPase hydrolysis by HSP70), the nucleotide exchange factors (NEF) such as BAG1/2/3 (facilitate conversion of HSP70 from the ADP-bound to the ATP-bound state thereby promoting substrate release), and the TPR domain chaperones such as HOPX and STUB1 (PubMed:24121476, PubMed:24318877, PubMed:26865365, PubMed:27474739). Plays a critical role in mitochondrial import, delivers preproteins to the mitochondrial import receptor TOMM70 (PubMed:12526792). Acts as a repressor of transcriptional activation. Inhibits the transcriptional coactivator activity of CITED1 on Smad-mediated transcription. Component of the PRP19-CDC5L complex that forms an integral part of the spliceosome and is required for activating pre-mRNA splicing. May have a scaffolding role in the spliceosome assembly as it contacts all other components of the core complex. Binds bacterial lipopolysaccharide (LPS) and mediates LPS-induced inflammatory response, including TNF secretion by monocytes (PubMed:10722728, PubMed:11276205). Substrate recognition component in chaperone-mediated autophagy (CMA), a selective protein degradation process that mediates degradation of proteins with a -KFERQ motif: HSPA8/HSC70 specifically recognizes and binds cytosolic proteins bearing a -KFERQ motif and promotes their recruitment to the surface of the lysosome where they bind to lysosomal protein LAMP2 (PubMed:11559757, PubMed:2799391, PubMed:36586411). KFERQ motif-containing proteins are eventually transported into the lysosomal lumen where they are degraded (PubMed:11559757, PubMed:2799391, PubMed:36586411). In conjunction with LAMP2, facilitates MHC class II presentation of cytoplasmic antigens by guiding antigens to the lysosomal membrane for interaction with LAMP2 which then elicits MHC class II presentation of peptides to the cell membrane (PubMed:15894275). Participates in the ER-associated degradation (ERAD) quality control pathway in conjunction with J domain-containing co-chaperones and the E3 ligase STUB1 (PubMed:23990462). It is recruited to clathrin-coated vesicles through its interaction with DNAJC6 leading to activation of HSPA8/HSC70 ATPase activity and therefore uncoating of clathrin-coated vesicles (By similarity). {ECO:0000250|UniProtKB:P19120, ECO:0000269|PubMed:10722728, ECO:0000269|PubMed:11276205, ECO:0000269|PubMed:11559757, ECO:0000269|PubMed:12526792, ECO:0000269|PubMed:15894275, ECO:0000269|PubMed:21148293, ECO:0000269|PubMed:21150129, ECO:0000269|PubMed:23018488, ECO:0000269|PubMed:23990462, ECO:0000269|PubMed:24318877, ECO:0000269|PubMed:24732912, ECO:0000269|PubMed:27474739, ECO:0000269|PubMed:27916661, ECO:0000269|PubMed:2799391, ECO:0000269|PubMed:36586411, ECO:0000303|PubMed:24121476, ECO:0000303|PubMed:26865365}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>ATP binding [GO:0005524]</go_molecular_function_item>
+          <go_molecular_function_item>ATP hydrolysis activity [GO:0016887]</go_molecular_function_item>
+          <go_molecular_function_item>ATP-dependent protein disaggregase activity [GO:0140545]</go_molecular_function_item>
+          <go_molecular_function_item>ATP-dependent protein folding chaperone [GO:0140662]</go_molecular_function_item>
+          <go_molecular_function_item>C3HC4-type RING finger domain binding [GO:0055131]</go_molecular_function_item>
+          <go_molecular_function_item>cadherin binding [GO:0045296]</go_molecular_function_item>
+          <go_molecular_function_item>enzyme binding [GO:0019899]</go_molecular_function_item>
+          <go_molecular_function_item>G protein-coupled receptor binding [GO:0001664]</go_molecular_function_item>
+          <go_molecular_function_item>heat shock protein binding [GO:0031072]</go_molecular_function_item>
+          <go_molecular_function_item>MHC class II protein complex binding [GO:0023026]</go_molecular_function_item>
+          <go_molecular_function_item>protein carrier chaperone [GO:0140597]</go_molecular_function_item>
+          <go_molecular_function_item>protein folding chaperone [GO:0044183]</go_molecular_function_item>
+          <go_molecular_function_item>protein-folding chaperone binding [GO:0051087]</go_molecular_function_item>
+          <go_molecular_function_item>protein-macromolecule adaptor activity [GO:0030674]</go_molecular_function_item>
+          <go_molecular_function_item>receptor ligand activity [GO:0048018]</go_molecular_function_item>
+          <go_molecular_function_item>RNA binding [GO:0003723]</go_molecular_function_item>
+          <go_molecular_function_item>ubiquitin protein ligase binding [GO:0031625]</go_molecular_function_item>
+          <go_molecular_function_item>unfolded protein binding [GO:0051082]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10409</id>
+    <ensembl_gene_id>ENSG00000171858</ensembl_gene_id>
+    <hgnc_id>HGNC:10409</hgnc_id>
+    <symbol>RPS21</symbol>
+    <uniprot_ids>
+      <uniprot_id>P63220</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>820.96923</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:11203</id>
+    <ensembl_gene_id>ENSG00000005513</ensembl_gene_id>
+    <hgnc_id>HGNC:11203</hgnc_id>
+    <symbol>SOX8</symbol>
+    <uniprot_ids>
+      <uniprot_id>P57073</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>820.0720699999999</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10353</id>
+    <ensembl_gene_id>ENSG00000174444</ensembl_gene_id>
+    <hgnc_id>HGNC:10353</hgnc_id>
+    <symbol>RPL4</symbol>
+    <uniprot_ids>
+      <uniprot_id>P36578</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>815.89526</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:1036</id>
+    <ensembl_gene_id>ENSG00000133169</ensembl_gene_id>
+    <hgnc_id>HGNC:1036</hgnc_id>
+    <symbol>BEX1</symbol>
+    <uniprot_ids>
+      <uniprot_id>Q9HBH7</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>812.3787500000001</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>Q9HBH7</uniprot_id>
+        <protein_name>Protein BEX1 (Brain-expressed X-linked protein 1)</protein_name>
+        <protein_length>125</protein_length>
+        <function_cc>FUNCTION: Signaling adapter molecule involved in p75NTR/NGFR signaling. Plays a role in cell cycle progression and neuronal differentiation. Inhibits neuronal differentiation in response to nerve growth factor (NGF). May act as a link between the cell cycle and neurotrophic factor signaling, possibly by functioning as an upstream modulator of receptor signaling, coordinating biological responses to external signals with internal cellular states (By similarity). In absence of reductive stress, acts as a pseudosubstrate for the CRL2(FEM1B) complex: associates with FEM1B via zinc, thereby preventing association between FEM1B and its substrates (By similarity). {ECO:0000250|UniProtKB:Q3MKQ2, ECO:0000250|UniProtKB:Q9R224}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>metal ion binding [GO:0046872]</go_molecular_function_item>
+          <go_molecular_function_item>molecular function inhibitor activity [GO:0140678]</go_molecular_function_item>
+          <go_molecular_function_item>signaling adaptor activity [GO:0035591]</go_molecular_function_item>
+          <go_molecular_function_item>signaling receptor binding [GO:0005102]</go_molecular_function_item>
+          <go_molecular_function_item>transcription coactivator binding [GO:0001223]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:914</id>
+    <ensembl_gene_id>ENSG00000166710</ensembl_gene_id>
+    <hgnc_id>HGNC:914</hgnc_id>
+    <symbol>B2M</symbol>
+    <uniprot_ids>
+      <uniprot_id>P61769</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>800.28994</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P61769</uniprot_id>
+        <protein_name>Beta-2-microglobulin [Cleaved into: Beta-2-microglobulin form pI 5.3]</protein_name>
+        <protein_length>119</protein_length>
+        <function_cc>FUNCTION: Component of the class I major histocompatibility complex (MHC). Involved in the presentation of peptide antigens to the immune system. Exogenously applied M.tuberculosis EsxA or EsxA-EsxB (or EsxA expressed in host) binds B2M and decreases its export to the cell surface (total protein levels do not change), probably leading to defects in class I antigen presentation (PubMed:25356553). {ECO:0000269|PubMed:25356553}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>identical protein binding [GO:0042802]</go_molecular_function_item>
+          <go_molecular_function_item>MHC class II protein complex binding [GO:0023026]</go_molecular_function_item>
+          <go_molecular_function_item>peptide antigen binding [GO:0042605]</go_molecular_function_item>
+          <go_molecular_function_item>protein homodimerization activity [GO:0042803]</go_molecular_function_item>
+          <go_molecular_function_item>structural molecule activity [GO:0005198]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:668</id>
+    <ensembl_gene_id>ENSG00000143878</ensembl_gene_id>
+    <hgnc_id>HGNC:668</hgnc_id>
+    <symbol>RHOB</symbol>
+    <uniprot_ids>
+      <uniprot_id>P62745</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>794.28755</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:7408</id>
+    <ensembl_gene_id>ENSG00000087250</ensembl_gene_id>
+    <hgnc_id>HGNC:7408</hgnc_id>
+    <symbol>MT3</symbol>
+    <uniprot_ids>
+      <uniprot_id>P25713</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>779.1628</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P25713</uniprot_id>
+        <protein_name>Metallothionein-3 (MT-3) (GIFB) (GIF) (Growth inhibitory factor) (Metallothionein-III) (MT-III)</protein_name>
+        <protein_length>68</protein_length>
+        <function_cc>FUNCTION: Binds heavy metals. Contains three zinc and three copper atoms per polypeptide chain and only a negligible amount of cadmium. Inhibits survival and neurite formation of cortical neurons in vitro.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>antioxidant activity [GO:0016209]</go_molecular_function_item>
+          <go_molecular_function_item>cadmium ion binding [GO:0046870]</go_molecular_function_item>
+          <go_molecular_function_item>copper ion binding [GO:0005507]</go_molecular_function_item>
+          <go_molecular_function_item>metal ion binding [GO:0046872]</go_molecular_function_item>
+          <go_molecular_function_item>metal ion sequestering activity [GO:0140487]</go_molecular_function_item>
+          <go_molecular_function_item>protein kinase activator activity [GO:0030295]</go_molecular_function_item>
+          <go_molecular_function_item>zinc ion binding [GO:0008270]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10372</id>
+    <ensembl_gene_id>ENSG00000137818</ensembl_gene_id>
+    <hgnc_id>HGNC:10372</hgnc_id>
+    <symbol>RPLP1</symbol>
+    <uniprot_ids>
+      <uniprot_id>P05386</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>775.0101999999999</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:805</id>
+    <ensembl_gene_id>ENSG00000129244</ensembl_gene_id>
+    <hgnc_id>HGNC:805</hgnc_id>
+    <symbol>ATP1B2</symbol>
+    <uniprot_ids>
+      <uniprot_id>P14415</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>758.5357799999999</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P14415</uniprot_id>
+        <protein_name>Sodium/potassium-transporting ATPase subunit beta-2 (Adhesion molecule in glia) (AMOG) (Sodium/potassium-dependent ATPase subunit beta-2)</protein_name>
+        <protein_length>290</protein_length>
+        <function_cc>FUNCTION: This is the non-catalytic component of the active enzyme, which catalyzes the hydrolysis of ATP coupled with the exchange of Na(+) and K(+) ions across the plasma membrane. The exact function of the beta-2 subunit is not known.; FUNCTION: Mediates cell adhesion of neurons and astrocytes, and promotes neurite outgrowth. {ECO:0000250}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>ATPase activator activity [GO:0001671]</go_molecular_function_item>
+          <go_molecular_function_item>ATPase binding [GO:0051117]</go_molecular_function_item>
+          <go_molecular_function_item>protein heterodimerization activity [GO:0046982]</go_molecular_function_item>
+          <go_molecular_function_item>protein-macromolecule adaptor activity [GO:0030674]</go_molecular_function_item>
+          <go_molecular_function_item>transporter activator activity [GO:0141109]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10404</id>
+    <ensembl_gene_id>ENSG00000140988</ensembl_gene_id>
+    <hgnc_id>HGNC:10404</hgnc_id>
+    <symbol>RPS2</symbol>
+    <uniprot_ids>
+      <uniprot_id>P15880</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>758.2788</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10299</id>
+    <ensembl_gene_id>ENSG00000198755</ensembl_gene_id>
+    <hgnc_id>HGNC:10299</hgnc_id>
+    <symbol>RPL10A</symbol>
+    <uniprot_ids>
+      <uniprot_id>P62906</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>751.14095</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:2475</id>
+    <ensembl_gene_id>ENSG00000101439</ensembl_gene_id>
+    <hgnc_id>HGNC:2475</hgnc_id>
+    <symbol>CST3</symbol>
+    <uniprot_ids>
+      <uniprot_id>P01034</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>749.07079</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:20318</id>
+    <ensembl_gene_id>ENSG00000198732</ensembl_gene_id>
+    <hgnc_id>HGNC:20318</hgnc_id>
+    <symbol>SMOC1</symbol>
+    <uniprot_ids>
+      <uniprot_id>Q9H4F8</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>746.5076300000001</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:1697</id>
+    <ensembl_gene_id>ENSG00000019582</ensembl_gene_id>
+    <hgnc_id>HGNC:1697</hgnc_id>
+    <symbol>CD74</symbol>
+    <uniprot_ids>
+      <uniprot_id>P04233</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>740.66012</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:2569</id>
+    <ensembl_gene_id>ENSG00000134590</ensembl_gene_id>
+    <hgnc_id>HGNC:2569</hgnc_id>
+    <symbol>RTL8C</symbol>
+    <uniprot_ids>
+      <uniprot_id>A6ZKI3</uniprot_id>
+      <uniprot_id>O15255</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>738.2276300000001</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10303</id>
+    <ensembl_gene_id>ENSG00000167526</ensembl_gene_id>
+    <hgnc_id>HGNC:10303</hgnc_id>
+    <symbol>RPL13</symbol>
+    <uniprot_ids>
+      <uniprot_id>P26373</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>731.5749400000001</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:10441</id>
+    <ensembl_gene_id>ENSG00000142937</ensembl_gene_id>
+    <hgnc_id>HGNC:10441</hgnc_id>
+    <symbol>RPS8</symbol>
+    <uniprot_ids>
+      <uniprot_id>P62241</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>731.05084</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations/>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+  <result>
+    <id>HGNC:9685</id>
+    <ensembl_gene_id>ENSG00000106278</ensembl_gene_id>
+    <hgnc_id>HGNC:9685</hgnc_id>
+    <symbol>PTPRZ1</symbol>
+    <uniprot_ids>
+      <uniprot_id>P23471</uniprot_id>
+    </uniprot_ids>
+    <mean_tpm_unstranded>726.7810999999999</mean_tpm_unstranded>
+    <n_cases>10</n_cases>
+    <uniprot_annotations>
+      <uniprot_annotation>
+        <uniprot_id>P23471</uniprot_id>
+        <protein_name>Receptor-type tyrosine-protein phosphatase zeta (R-PTP-zeta) (EC 3.1.3.48) (Protein-tyrosine phosphatase receptor type Z polypeptide 1) (Protein-tyrosine phosphatase receptor type Z polypeptide 2) (R-PTP-zeta-2)</protein_name>
+        <protein_length>2315</protein_length>
+        <function_cc>FUNCTION: Protein tyrosine phosphatase that negatively regulates oligodendrocyte precursor proliferation in the embryonic spinal cord. Required for normal differentiation of the precursor cells into mature, fully myelinating oligodendrocytes. May play a role in protecting oligondendrocytes against apoptosis. May play a role in the establishment of contextual memory, probably via the dephosphorylation of proteins that are part of important signaling cascades (By similarity). {ECO:0000250}.</function_cc>
+        <go_molecular_function>
+          <go_molecular_function_item>integrin binding [GO:0005178]</go_molecular_function_item>
+          <go_molecular_function_item>protein tyrosine phosphatase activity [GO:0004725]</go_molecular_function_item>
+          <go_molecular_function_item>transmembrane receptor protein tyrosine phosphatase activity [GO:0005001]</go_molecular_function_item>
+        </go_molecular_function>
+      </uniprot_annotation>
+    </uniprot_annotations>
+    <project>
+      <disease_type>Brain Lower Grade Glioma</disease_type>
+      <primary_site>Brain</primary_site>
+      <project_id>TCGA-LGG</project_id>
+    </project>
+  </result>
+</results>
