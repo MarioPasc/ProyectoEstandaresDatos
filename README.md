@@ -62,6 +62,7 @@
   - [Quick Start](#quick-start)
   - [📥 Descargar Datos](#-descargar-datos)
   - [🗄️ Importar a JSON y MongoDB](#️-importar-a-json-y-mongodb)
+  - [🔍 Ejecución de Consultas](#-ejecución-de-consultas-y-reportes-t2)
   - [📊 Fuentes de Datos](#-fuentes-de-datos)
   - [🔧 Verificación](#-verificación)
   - [📖 Lectura](#-lectura)
