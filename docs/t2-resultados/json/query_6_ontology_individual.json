@@ -1,0 +1,547 @@
+[
+  {
+    "ontology_individual": {
+      "type": "bio:Gene",
+      "individual_iri": "http://example.org/biointegrate/gene/HGNC_7539",
+      "gene_properties": {
+        "bio:hgncId": "HGNC:7539",
+        "bio:geneSymbol": "MXRA5",
+        "bio:ensemblGeneId": "ENSG00000101825"
+      },
+      "protein_products": [
+        {
+          "type": "bio:Protein",
+          "individual_iri": "http://example.org/biointegrate/protein/Q9NR99",
+          "object_property": {
+            "bio:hasProteinProduct": "http://example.org/biointegrate/protein/Q9NR99"
+          },
+          "protein_properties": {
+            "bio:uniprotId": "Q9NR99",
+            "bio:proteinName": [
+              "Matrix-remodeling-associated protein 5 (Adhesion protein with leucine-rich repeats and immunoglobulin domains related to perlecan) (Adlican)"
+            ],
+            "bio:sequenceLength": 2828,
+            "bio:functionText": "FUNCTION: In kidney, has anti-inflammatory and anti-fibrotic properties by limiting the induction of chemokines, fibronectin and collagen expression in response to TGB1 and pro-inflammatory stimuli. {ECO:0000269|PubMed:27599751}."
+          },
+          "organism": {
+            "type": "bio:Organism",
+            "individual_iri": "http://example.org/biointegrate/organism/9606",
+            "object_property": {
+              "bio:hasOrganism": "http://example.org/biointegrate/organism/9606"
+            },
+            "organism_properties": {
+              "bio:taxonomyId": 9606,
+              "bio:scientificName": "Homo sapiens"
+            }
+          },
+          "go_terms": {
+            "molecular_function": [
+              {
+                "type": "bio:GOTerm",
+                "term": "extracellular matrix structural constituent [GO:0005201]",
+                "object_property": "bio:hasMolecularFunction"
+              }
+            ],
+            "biological_process": [
+              {
+                "type": "bio:GOTerm",
+                "term": "response to transforming growth factor beta [GO:0071559]",
+                "object_property": "bio:hasBiologicalProcess"
+              }
+            ],
+            "cellular_component": [
+              {
+                "type": "bio:GOTerm",
+                "term": "collagen-containing extracellular matrix [GO:0062023]",
+                "object_property": "bio:hasCellularComponent"
+              },
+              {
+                "type": "bio:GOTerm",
+                "term": "extracellular exosome [GO:0070062]",
+                "object_property": "bio:hasCellularComponent"
+              }
+            ]
+          }
+        }
+      ],
+      "expression_measurements": [
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d50e944a-3ce4-4632-a878-118499e143e3",
+          "measurement_properties": {
+            "bio:fileId": "7349fbd4-c919-45a5-8ed2-1f61b9fec87f",
+            "bio:unstrandedCount": 103.0,
+            "bio:strandedFirstCount": 51.0,
+            "bio:strandedSecondCount": 52.0,
+            "bio:tpmUnstranded": 0.6534,
+            "bio:fpkmUnstranded": 0.2088,
+            "bio:fpkmUqUnstranded": 0.21
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/d50e944a-3ce4-4632-a878-118499e143e3",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/d50e944a-3ce4-4632-a878-118499e143e3"
+            },
+            "case_properties": {},
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d209cffc-fe21-4ae7-b610-e5668ea84a3b",
+          "measurement_properties": {
+            "bio:fileId": "febf694d-811a-4fcd-b498-e9451fdc0d4e",
+            "bio:unstrandedCount": 110.0,
+            "bio:strandedFirstCount": 54.0,
+            "bio:strandedSecondCount": 56.0,
+            "bio:tpmUnstranded": 0.711,
+            "bio:fpkmUnstranded": 0.2141,
+            "bio:fpkmUqUnstranded": 0.2135
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/d209cffc-fe21-4ae7-b610-e5668ea84a3b",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/d209cffc-fe21-4ae7-b610-e5668ea84a3b"
+            },
+            "case_properties": {},
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e7fdf164-a85d-4ff5-9676-d2215ca35403",
+          "measurement_properties": {
+            "bio:fileId": "155b732b-3603-4035-94d4-57a81a23a0d1",
+            "bio:unstrandedCount": 1585.0,
+            "bio:strandedFirstCount": 783.0,
+            "bio:strandedSecondCount": 802.0,
+            "bio:tpmUnstranded": 10.9168,
+            "bio:fpkmUnstranded": 2.7979,
+            "bio:fpkmUqUnstranded": 2.8507
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/e7fdf164-a85d-4ff5-9676-d2215ca35403",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/e7fdf164-a85d-4ff5-9676-d2215ca35403"
+            },
+            "case_properties": {},
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_ec82a00f-3909-4781-8ae2-e54cbc1ac7ac",
+          "measurement_properties": {
+            "bio:fileId": "dff492f1-7fdc-4ff6-b868-c355cedd6cad",
+            "bio:unstrandedCount": 487.0,
+            "bio:strandedFirstCount": 252.0,
+            "bio:strandedSecondCount": 235.0,
+            "bio:tpmUnstranded": 2.4038,
+            "bio:fpkmUnstranded": 0.6835,
+            "bio:fpkmUqUnstranded": 0.7297
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/ec82a00f-3909-4781-8ae2-e54cbc1ac7ac",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/ec82a00f-3909-4781-8ae2-e54cbc1ac7ac"
+            },
+            "case_properties": {},
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_dadd7428-9e4d-4652-9469-ab521b88d529",
+          "measurement_properties": {
+            "bio:fileId": "f3f687a3-9619-4ab9-a5d1-35f31422b472",
+            "bio:unstrandedCount": 642.0,
+            "bio:strandedFirstCount": 305.0,
+            "bio:strandedSecondCount": 337.0,
+            "bio:tpmUnstranded": 3.5877,
+            "bio:fpkmUnstranded": 1.1097,
+            "bio:fpkmUqUnstranded": 1.2264
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/dadd7428-9e4d-4652-9469-ab521b88d529",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/dadd7428-9e4d-4652-9469-ab521b88d529"
+            },
+            "case_properties": {},
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a56c2083-33d5-4c98-b85f-3b68a3d80add",
+          "measurement_properties": {
+            "bio:fileId": "67bec45d-ed1e-41c5-9c61-4d7fb1592450",
+            "bio:unstrandedCount": 125.0,
+            "bio:strandedFirstCount": 61.0,
+            "bio:strandedSecondCount": 64.0,
+            "bio:tpmUnstranded": 0.8697,
+            "bio:fpkmUnstranded": 0.2672,
+            "bio:fpkmUqUnstranded": 0.2629
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/a56c2083-33d5-4c98-b85f-3b68a3d80add",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/a56c2083-33d5-4c98-b85f-3b68a3d80add"
+            },
+            "case_properties": {},
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_da13446a-c4dc-4d02-80c8-410273925ac4",
+          "measurement_properties": {
+            "bio:fileId": "dc944bdf-f066-4603-837d-fba14607a154",
+            "bio:unstrandedCount": 44.0,
+            "bio:strandedFirstCount": 21.0,
+            "bio:strandedSecondCount": 23.0,
+            "bio:tpmUnstranded": 0.3292,
+            "bio:fpkmUnstranded": 0.096,
+            "bio:fpkmUqUnstranded": 0.1019
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/da13446a-c4dc-4d02-80c8-410273925ac4",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/da13446a-c4dc-4d02-80c8-410273925ac4"
+            },
+            "case_properties": {},
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a5f851c5-6130-4ea1-9f86-be59331a92f7",
+          "measurement_properties": {
+            "bio:fileId": "106669c1-e20c-4ed8-863c-3ada529f58a4",
+            "bio:unstrandedCount": 687.0,
+            "bio:strandedFirstCount": 358.0,
+            "bio:strandedSecondCount": 329.0,
+            "bio:tpmUnstranded": 3.8733,
+            "bio:fpkmUnstranded": 1.1429,
+            "bio:fpkmUqUnstranded": 1.1088
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/a5f851c5-6130-4ea1-9f86-be59331a92f7",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/a5f851c5-6130-4ea1-9f86-be59331a92f7"
+            },
+            "case_properties": {},
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e6c55ba6-4c8a-4ea4-8dde-74d01915db02",
+          "measurement_properties": {
+            "bio:fileId": "7cdc56cf-2e0e-467e-8e96-5b2391309b7f",
+            "bio:unstrandedCount": 503.0,
+            "bio:strandedFirstCount": 231.0,
+            "bio:strandedSecondCount": 272.0,
+            "bio:tpmUnstranded": 3.2558,
+            "bio:fpkmUnstranded": 0.8082,
+            "bio:fpkmUqUnstranded": 0.8066
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/e6c55ba6-4c8a-4ea4-8dde-74d01915db02",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/e6c55ba6-4c8a-4ea4-8dde-74d01915db02"
+            },
+            "case_properties": {},
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d3d8987d-0a54-45f8-b9c9-17ec89fa864e",
+          "measurement_properties": {
+            "bio:fileId": "8fcc58b7-834f-43df-b0a5-375e59dc3bed",
+            "bio:unstrandedCount": 283.0,
+            "bio:strandedFirstCount": 156.0,
+            "bio:strandedSecondCount": 127.0,
+            "bio:tpmUnstranded": 1.467,
+            "bio:fpkmUnstranded": 0.4599,
+            "bio:fpkmUqUnstranded": 0.5104
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/d3d8987d-0a54-45f8-b9c9-17ec89fa864e",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/d3d8987d-0a54-45f8-b9c9-17ec89fa864e"
+            },
+            "case_properties": {},
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_41685c5a-a548-483a-8a20-305ad8d61771",
+          "measurement_properties": {
+            "bio:fileId": "444a2332-9e52-4cf8-94d9-07a8b829633e",
+            "bio:unstrandedCount": 2322.0,
+            "bio:strandedFirstCount": 0.0,
+            "bio:strandedSecondCount": 2322.0,
+            "bio:tpmUnstranded": 17.2932,
+            "bio:fpkmUnstranded": 5.7964,
+            "bio:fpkmUqUnstranded": 5.3349
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-GBM",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-GBM"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-GBM"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/41685c5a-a548-483a-8a20-305ad8d61771",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/41685c5a-a548-483a-8a20-305ad8d61771"
+            },
+            "case_properties": {},
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-GBM"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3f960d3b-a58c-43d0-a8a4-f3555b399c9d",
+          "measurement_properties": {
+            "bio:fileId": "99ff2016-a97a-4142-b70a-1bb59d6264e9",
+            "bio:unstrandedCount": 515.0,
+            "bio:strandedFirstCount": 1.0,
+            "bio:strandedSecondCount": 514.0,
+            "bio:tpmUnstranded": 1.9075,
+            "bio:fpkmUnstranded": 1.4039,
+            "bio:fpkmUqUnstranded": 1.2373
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-GBM",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-GBM"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-GBM"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/3f960d3b-a58c-43d0-a8a4-f3555b399c9d",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/3f960d3b-a58c-43d0-a8a4-f3555b399c9d"
+            },
+            "case_properties": {},
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-GBM"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6",
+          "measurement_properties": {
+            "bio:fileId": "d4649bc7-09d2-4d90-bafd-0bec72429b00",
+            "bio:unstrandedCount": 820.0,
+            "bio:strandedFirstCount": 0.0,
+            "bio:strandedSecondCount": 820.0,
+            "bio:tpmUnstranded": 4.5605,
+            "bio:fpkmUnstranded": 1.8201,
+            "bio:fpkmUqUnstranded": 1.77
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-GBM",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-GBM"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-GBM"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/3ed101b5-0007-4957-a25d-4cf43bde08b6",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/3ed101b5-0007-4957-a25d-4cf43bde08b6"
+            },
+            "case_properties": {},
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-GBM"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_407849a8-8447-4ede-a9d1-c1dfb535222e",
+          "measurement_properties": {
+            "bio:fileId": "afbd1975-263b-404b-a738-886bf25c0223",
+            "bio:unstrandedCount": 826.0,
+            "bio:strandedFirstCount": 2.0,
+            "bio:strandedSecondCount": 824.0,
+            "bio:tpmUnstranded": 3.0842,
+            "bio:fpkmUnstranded": 2.2771,
+            "bio:fpkmUqUnstranded": 2.1986
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-GBM",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-GBM"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-GBM"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/407849a8-8447-4ede-a9d1-c1dfb535222e",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/407849a8-8447-4ede-a9d1-c1dfb535222e"
+            },
+            "case_properties": {},
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-GBM"
+            }
+          }
+        }
+      ]
+    }
+  }
+]

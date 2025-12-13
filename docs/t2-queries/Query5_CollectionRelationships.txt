@@ -1,0 +1,170 @@
+{
+  "name": "query_5_collection_relationships",
+  "collection": "hgnc_genes",
+  "type": "aggregate",
+  "pipeline": [
+    {
+      "$match": {
+        "uniprot_ids": { "$exists": true, "$ne": [] }
+      }
+    },
+    {
+      "$limit": 5
+    },
+    {
+      "$lookup": {
+        "from": "uniprot_entries",
+        "localField": "uniprot_ids",
+        "foreignField": "_id",
+        "as": "linked_proteins"
+      }
+    },
+    {
+      "$addFields": {
+        "project_keys": { "$objectToArray": "$projects" }
+      }
+    },
+    {
+      "$addFields": {
+        "first_project": { "$arrayElemAt": [ "$project_keys", 0 ] }
+      }
+    },
+    {
+      "$addFields": {
+        "case_keys": {
+          "$cond": [
+            { "$ifNull": [ "$first_project.v.cases", false ] },
+            { "$objectToArray": "$first_project.v.cases" },
+            []
+          ]
+        }
+      }
+    },
+    {
+      "$addFields": {
+        "sample_case_id": { "$arrayElemAt": [ "$case_keys.k", 0 ] }
+      }
+    },
+    {
+      "$lookup": {
+        "from": "gdc_cases",
+        "let": {
+          "case_id_var": "$sample_case_id"
+        },
+        "pipeline": [
+          {
+            "$match": {
+              "$expr": { "$eq": [ "$case_id", "$$case_id_var" ] }
+            }
+          },
+          {
+            "$project": {
+              "_id": 0,
+              "case_id": 1,
+              "project_id": 1,
+              "disease_type": 1,
+              "primary_site": 1
+            }
+          }
+        ],
+        "as": "linked_case"
+      }
+    },
+    {
+      "$project": {
+        "_id": 0,
+        "gene_info": {
+          "hgnc_id": "$hgnc_id",
+          "symbol": "$symbol",
+          "ensembl_gene_id": "$ensembl_gene_id"
+        },
+        "relationship_hgnc_to_uniprot": {
+          "join_field_in_hgnc": "uniprot_ids",
+          "join_field_in_uniprot": "_id",
+          "hgnc_uniprot_ids": "$uniprot_ids",
+          "matched_proteins_count": { "$size": "$linked_proteins" },
+          "matched_protein_samples": {
+            "$map": {
+              "input": { "$slice": [ "$linked_proteins", 2 ] },
+              "as": "prot",
+              "in": {
+                "uniprot_id": "$$prot._id",
+                "protein_name": { "$arrayElemAt": [ "$$prot.protein.names", 0 ] },
+                "organism": "$$prot.organism.scientific_name"
+              }
+            }
+          }
+        },
+        "relationship_hgnc_to_gdc": {
+          "join_mechanism": "hgnc_genes.projects.{PROJECT_ID}.cases.{CASE_ID} -> gdc_cases.case_id",
+          "project_with_expression": "$first_project.k",
+          "sample_case_id": "$sample_case_id",
+          "linked_case_info": { "$arrayElemAt": [ "$linked_case", 0 ] }
+        }
+      }
+    },
+    {
+      "$facet": {
+        "relationship_examples": [
+          { "$limit": 5 }
+        ],
+        "relationship_summary": [
+          {
+            "$group": {
+              "_id": null,
+              "total_genes_with_uniprot_links": { "$sum": 1 },
+              "total_protein_matches": { "$sum": "$relationship_hgnc_to_uniprot.matched_proteins_count" },
+              "genes_with_gdc_case_links": {
+                "$sum": {
+                  "$cond": [
+                    { "$ne": [ "$relationship_hgnc_to_gdc.linked_case_info", null ] },
+                    1,
+                    0
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "$project": {
+        "collection_relationships": {
+          "description": {
+            "$literal": "This query demonstrates how the three main collections in estandares_db are interconnected"
+          },
+          "collections_involved": {
+            "$literal": ["hgnc_genes", "uniprot_entries", "gdc_cases"]
+          },
+          "relationship_1_hgnc_uniprot": {
+            "from_collection": { "$literal": "hgnc_genes" },
+            "to_collection": { "$literal": "uniprot_entries" },
+            "join_type": { "$literal": "one-to-many" },
+            "from_field": { "$literal": "uniprot_ids (array)" },
+            "to_field": { "$literal": "_id" },
+            "description": { "$literal": "Each gene can map to multiple UniProt protein entries via the uniprot_ids array" }
+          },
+          "relationship_2_hgnc_gdc": {
+            "from_collection": { "$literal": "hgnc_genes" },
+            "to_collection": { "$literal": "gdc_cases" },
+            "join_type": { "$literal": "many-to-many (via nested structure)" },
+            "from_field": { "$literal": "projects.{PROJECT_ID}.cases.{CASE_ID}" },
+            "to_field": { "$literal": "case_id" },
+            "description": { "$literal": "Expression data in hgnc_genes is organized by project and case, linking to clinical case data in gdc_cases" }
+          },
+          "relationship_3_uniprot_hgnc": {
+            "from_collection": { "$literal": "uniprot_entries" },
+            "to_collection": { "$literal": "hgnc_genes" },
+            "join_type": { "$literal": "many-to-one" },
+            "from_field": { "$literal": "gene.hgnc_ids or gene.ensembl_gene_ids" },
+            "to_field": { "$literal": "hgnc_id or ensembl_gene_id" },
+            "description": { "$literal": "UniProt entries contain gene identifiers that link back to HGNC gene records" }
+          }
+        },
+        "sample_data": { "$arrayElemAt": [ "$relationship_examples", 0 ] },
+        "statistics": { "$arrayElemAt": [ "$relationship_summary", 0 ] }
+      }
+    }
+  ]
+}

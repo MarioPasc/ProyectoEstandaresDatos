@@ -1,0 +1,1127 @@
+@prefix bio: <http://example.org/biointegrate/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bio:functionText a owl:DatatypeProperty ;
+    rdfs:label "function text"@en ;
+    rdfs:domain bio:Protein ;
+    rdfs:range xsd:string .
+
+bio:geneName a owl:DatatypeProperty ;
+    rdfs:label "gene name"@en ;
+    rdfs:domain bio:Gene ;
+    rdfs:range xsd:string .
+
+bio:hasBiologicalProcess a owl:ObjectProperty ;
+    rdfs:label "has biological process"@en ;
+    rdfs:domain bio:Protein ;
+    rdfs:range bio:GOTerm ;
+    rdfs:subPropertyOf bio:hasGoTerm ;
+    owl:inverseOf bio:isBiologicalProcessOf .
+
+bio:hasCellularComponent a owl:ObjectProperty ;
+    rdfs:label "has cellular component"@en ;
+    rdfs:domain bio:Protein ;
+    rdfs:range bio:GOTerm ;
+    rdfs:subPropertyOf bio:hasGoTerm ;
+    owl:inverseOf bio:isCellularComponentOf .
+
+bio:hasMolecularFunction a owl:ObjectProperty ;
+    rdfs:label "has molecular function"@en ;
+    rdfs:domain bio:Protein ;
+    rdfs:range bio:GOTerm ;
+    rdfs:subPropertyOf bio:hasGoTerm ;
+    owl:inverseOf bio:isMolecularFunctionOf .
+
+bio:locusGroup a owl:DatatypeProperty ;
+    rdfs:label "locus group"@en ;
+    rdfs:domain bio:Gene ;
+    rdfs:range xsd:string .
+
+bio:manchesterDefinition a owl:AnnotationProperty ;
+    rdfs:label "Manchester definition"@en ;
+    rdfs:comment "Human-readable Manchester class expression to paste into Protégé (EquivalentTo/SubClassOf)."@en .
+
+bio:proteinName a owl:DatatypeProperty ;
+    rdfs:label "protein name"@en ;
+    rdfs:domain bio:Protein ;
+    rdfs:range xsd:string .
+
+dc:source a owl:AnnotationProperty .
+
+<http://www.semanticweb.org/mpascual/ontologies/2025/11/biointegrate-ontology-reasoned> a owl:Ontology ;
+    rdfs:label "BioIntegrate: simplified HGNC–UniProt–GDC integration ontology"@en ;
+    dc:source "HGNC",
+        "NCI Genomic Data Commons (GDC/TCGA)",
+        "UniProt" .
+
+skos:exactMatch a owl:AnnotationProperty .
+
+bio:AnatomicalSite a owl:Class ;
+    rdfs:label "AnatomicalSite"@en ;
+    bio:manchesterDefinition "AnatomicalSite"@en ;
+    rdfs:comment "Optional bridge class for mapping primary_site labels to UBERON terms using skos:exactMatch to obo:UBERON_####### IRIs."@en ;
+    rdfs:subClassOf bio:BioEntity .
+
+bio:DiseaseTerm a owl:Class ;
+    rdfs:label "DiseaseTerm"@en ;
+    bio:manchesterDefinition "DiseaseTerm"@en ;
+    rdfs:comment "Optional bridge class for mapping disease_type labels to NCIt terms using skos:exactMatch to obo:NCIT_C####### IRIs."@en ;
+    rdfs:subClassOf bio:BioEntity .
+
+bio:caseInProject a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "case in project"@en ;
+    rdfs:domain bio:Case ;
+    rdfs:range bio:Project ;
+    owl:inverseOf bio:hasCase .
+
+bio:diseaseTypeLabel a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "disease type label"@en ;
+    rdfs:domain bio:Case ;
+    rdfs:range xsd:string .
+
+bio:ensemblGeneId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Ensembl gene ID"@en ;
+    rdfs:domain bio:Gene ;
+    rdfs:range xsd:string .
+
+bio:fileId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "file UUID"@en ;
+    rdfs:domain bio:ExpressionMeasurement ;
+    rdfs:range xsd:string .
+
+bio:fpkmUnstranded a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "FPKM (unstranded)"@en ;
+    rdfs:domain bio:ExpressionMeasurement ;
+    rdfs:range xsd:decimal .
+
+bio:fpkmUqUnstranded a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "FPKM-UQ (unstranded)"@en ;
+    rdfs:domain bio:ExpressionMeasurement ;
+    rdfs:range xsd:decimal .
+
+bio:geneSymbol a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "gene symbol"@en ;
+    rdfs:domain bio:Gene ;
+    rdfs:range xsd:string .
+
+bio:goAspect a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "GO aspect"@en ;
+    rdfs:comment "Use one of: MF, BP, CC."@en ;
+    rdfs:domain bio:GOTerm ;
+    rdfs:range xsd:string .
+
+bio:goLabel a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "GO label"@en ;
+    rdfs:domain bio:GOTerm ;
+    rdfs:range xsd:string .
+
+<http://example.org/biointegrate/goterm/GO_0005201> a bio:BioEntity,
+        bio:GOTerm,
+        owl:NamedIndividual ;
+    bio:goAspect "MF" ;
+    bio:goId "GO:0005201" ;
+    bio:goLabel "extracellular matrix structural constituent" .
+
+<http://example.org/biointegrate/goterm/GO_0062023> a bio:BioEntity,
+        bio:GOTerm,
+        owl:NamedIndividual ;
+    bio:goAspect "CC" ;
+    bio:goId "GO:0062023" ;
+    bio:goLabel "collagen-containing extracellular matrix" .
+
+<http://example.org/biointegrate/goterm/GO_0070062> a bio:BioEntity,
+        bio:GOTerm,
+        owl:NamedIndividual ;
+    bio:goAspect "CC" ;
+    bio:goId "GO:0070062" ;
+    bio:goLabel "extracellular exosome" .
+
+<http://example.org/biointegrate/goterm/GO_0071559> a bio:BioEntity,
+        bio:GOTerm,
+        owl:NamedIndividual ;
+    bio:goAspect "BP" ;
+    bio:goId "GO:0071559" ;
+    bio:goLabel "response to transforming growth factor beta" .
+
+bio:hasCaseMeasurement a owl:ObjectProperty ;
+    rdfs:label "has case measurement"@en ;
+    rdfs:domain bio:Case ;
+    rdfs:range bio:ExpressionMeasurement ;
+    rdfs:subPropertyOf bio:hasExpressionMeasurement ;
+    owl:inverseOf bio:measuredCase .
+
+bio:hasGeneMeasurement a owl:ObjectProperty ;
+    rdfs:label "has gene measurement"@en ;
+    rdfs:domain bio:Gene ;
+    rdfs:range bio:ExpressionMeasurement ;
+    rdfs:subPropertyOf bio:hasExpressionMeasurement ;
+    owl:inverseOf bio:measuredGene .
+
+bio:hasOrganism a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has organism"@en ;
+    rdfs:domain bio:Protein ;
+    rdfs:range bio:Organism ;
+    owl:inverseOf bio:isOrganismOf .
+
+bio:hasProjectMeasurement a owl:ObjectProperty ;
+    rdfs:label "has project measurement"@en ;
+    rdfs:domain bio:Project ;
+    rdfs:range bio:ExpressionMeasurement ;
+    rdfs:subPropertyOf bio:hasExpressionMeasurement ;
+    owl:inverseOf bio:measuredProject .
+
+bio:hasProteinProduct a owl:ObjectProperty ;
+    rdfs:label "has protein product"@en ;
+    rdfs:domain bio:Gene ;
+    rdfs:range bio:Protein ;
+    owl:inverseOf bio:proteinProductOf .
+
+bio:isBiologicalProcessOf a owl:ObjectProperty ;
+    rdfs:label "is biological process of"@en ;
+    rdfs:domain bio:GOTerm ;
+    rdfs:range bio:Protein ;
+    rdfs:subPropertyOf bio:isGoTermOfProtein .
+
+bio:isCellularComponentOf a owl:ObjectProperty ;
+    rdfs:label "is cellular component of"@en ;
+    rdfs:domain bio:GOTerm ;
+    rdfs:range bio:Protein ;
+    rdfs:subPropertyOf bio:isGoTermOfProtein .
+
+bio:isMolecularFunctionOf a owl:ObjectProperty ;
+    rdfs:label "is molecular function of"@en ;
+    rdfs:domain bio:GOTerm ;
+    rdfs:range bio:Protein ;
+    rdfs:subPropertyOf bio:isGoTermOfProtein .
+
+bio:isOrganismOf a owl:ObjectProperty ;
+    rdfs:label "is organism of"@en ;
+    rdfs:domain bio:Organism ;
+    rdfs:range bio:Protein .
+
+<http://example.org/biointegrate/organism/9606> a bio:BioEntity,
+        bio:Organism,
+        owl:NamedIndividual ;
+    bio:scientificName "Homo sapiens" ;
+    bio:taxonomyId 9606 .
+
+bio:primarySiteLabel a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "primary site label"@en ;
+    rdfs:domain bio:Case ;
+    rdfs:range xsd:string .
+
+<http://example.org/biointegrate/protein/Q9NR99> a bio:BioEntity,
+        bio:Protein,
+        owl:NamedIndividual ;
+    bio:functionText "FUNCTION: In kidney, has anti-inflammatory and anti-fibrotic properties by limiting the induction of chemokines, fibronectin and collagen expression in response to TGB1 and pro-inflammatory stimuli. {ECO:0000269|PubMed:27599751}." ;
+    bio:hasBiologicalProcess <http://example.org/biointegrate/goterm/GO_0071559> ;
+    bio:hasCellularComponent <http://example.org/biointegrate/goterm/GO_0062023>,
+        <http://example.org/biointegrate/goterm/GO_0070062> ;
+    bio:hasMolecularFunction <http://example.org/biointegrate/goterm/GO_0005201> ;
+    bio:hasOrganism <http://example.org/biointegrate/organism/9606> ;
+    bio:proteinName "Matrix-remodeling-associated protein 5 (Adhesion protein with leucine-rich repeats and immunoglobulin domains related to perlecan) (Adlican)" ;
+    bio:proteinProductOf <http://example.org/biointegrate/gene/HGNC_7539> ;
+    bio:sequenceLength 2828 ;
+    bio:uniprotId "Q9NR99" .
+
+bio:scientificName a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "scientific name"@en ;
+    rdfs:domain bio:Organism ;
+    rdfs:range xsd:string .
+
+bio:sequenceLength a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "sequence length"@en ;
+    rdfs:domain bio:Protein ;
+    rdfs:range xsd:integer .
+
+bio:strandedFirstCount a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "stranded first count"@en ;
+    rdfs:domain bio:ExpressionMeasurement ;
+    rdfs:range xsd:decimal .
+
+bio:strandedSecondCount a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "stranded second count"@en ;
+    rdfs:domain bio:ExpressionMeasurement ;
+    rdfs:range xsd:decimal .
+
+bio:tpmUnstranded a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "TPM (unstranded)"@en ;
+    rdfs:domain bio:ExpressionMeasurement ;
+    rdfs:range xsd:decimal .
+
+bio:unstrandedCount a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "unstranded count"@en ;
+    rdfs:domain bio:ExpressionMeasurement ;
+    rdfs:range xsd:decimal .
+
+bio:caseId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "case ID"@en ;
+    rdfs:domain bio:Case ;
+    rdfs:range xsd:string .
+
+bio:goId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "GO ID"@en ;
+    rdfs:domain bio:GOTerm ;
+    rdfs:range xsd:string .
+
+bio:hasCase a owl:ObjectProperty ;
+    rdfs:label "has case"@en ;
+    rdfs:domain bio:Project ;
+    rdfs:range bio:Case .
+
+bio:hgncId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "HGNC ID"@en ;
+    rdfs:domain bio:Gene ;
+    rdfs:range xsd:string .
+
+bio:projectId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "project ID"@en ;
+    rdfs:domain bio:Project ;
+    rdfs:range xsd:string .
+
+bio:proteinProductOf a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "protein product of"@en ;
+    rdfs:domain bio:Protein ;
+    rdfs:range bio:Gene .
+
+bio:taxonomyId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "NCBI taxonomy ID"@en ;
+    rdfs:domain bio:Organism ;
+    rdfs:range xsd:integer .
+
+bio:uniprotId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "UniProt ID"@en ;
+    rdfs:domain bio:Protein ;
+    rdfs:range xsd:string .
+
+<http://example.org/biointegrate/case/3ed101b5-0007-4957-a25d-4cf43bde08b6> a bio:BioEntity,
+        bio:Case,
+        owl:NamedIndividual ;
+    bio:caseId "3ed101b5-0007-4957-a25d-4cf43bde08b6" ;
+    bio:caseInProject <http://example.org/biointegrate/project/TCGA-GBM> ;
+    bio:hasCaseMeasurement <http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6> .
+
+<http://example.org/biointegrate/case/3f960d3b-a58c-43d0-a8a4-f3555b399c9d> a bio:BioEntity,
+        bio:Case,
+        owl:NamedIndividual ;
+    bio:caseId "3f960d3b-a58c-43d0-a8a4-f3555b399c9d" ;
+    bio:caseInProject <http://example.org/biointegrate/project/TCGA-GBM> ;
+    bio:hasCaseMeasurement <http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_3f960d3b-a58c-43d0-a8a4-f3555b399c9d>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3f960d3b-a58c-43d0-a8a4-f3555b399c9d> .
+
+<http://example.org/biointegrate/case/407849a8-8447-4ede-a9d1-c1dfb535222e> a bio:BioEntity,
+        bio:Case,
+        owl:NamedIndividual ;
+    bio:caseId "407849a8-8447-4ede-a9d1-c1dfb535222e" ;
+    bio:caseInProject <http://example.org/biointegrate/project/TCGA-GBM> ;
+    bio:hasCaseMeasurement <http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_407849a8-8447-4ede-a9d1-c1dfb535222e>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_407849a8-8447-4ede-a9d1-c1dfb535222e> .
+
+<http://example.org/biointegrate/case/41685c5a-a548-483a-8a20-305ad8d61771> a bio:BioEntity,
+        bio:Case,
+        owl:NamedIndividual ;
+    bio:caseId "41685c5a-a548-483a-8a20-305ad8d61771" ;
+    bio:caseInProject <http://example.org/biointegrate/project/TCGA-GBM> ;
+    bio:hasCaseMeasurement <http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_41685c5a-a548-483a-8a20-305ad8d61771>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_41685c5a-a548-483a-8a20-305ad8d61771> .
+
+<http://example.org/biointegrate/case/a56c2083-33d5-4c98-b85f-3b68a3d80add> a bio:BioEntity,
+        bio:Case,
+        owl:NamedIndividual ;
+    bio:caseId "a56c2083-33d5-4c98-b85f-3b68a3d80add" ;
+    bio:caseInProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:hasCaseMeasurement <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_a56c2083-33d5-4c98-b85f-3b68a3d80add>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a56c2083-33d5-4c98-b85f-3b68a3d80add> .
+
+<http://example.org/biointegrate/case/a5f851c5-6130-4ea1-9f86-be59331a92f7> a bio:BioEntity,
+        bio:Case,
+        owl:NamedIndividual ;
+    bio:caseId "a5f851c5-6130-4ea1-9f86-be59331a92f7" ;
+    bio:caseInProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:hasCaseMeasurement <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_a5f851c5-6130-4ea1-9f86-be59331a92f7>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a5f851c5-6130-4ea1-9f86-be59331a92f7> .
+
+<http://example.org/biointegrate/case/d209cffc-fe21-4ae7-b610-e5668ea84a3b> a bio:BioEntity,
+        bio:Case,
+        owl:NamedIndividual ;
+    bio:caseId "d209cffc-fe21-4ae7-b610-e5668ea84a3b" ;
+    bio:caseInProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:hasCaseMeasurement <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d209cffc-fe21-4ae7-b610-e5668ea84a3b>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d209cffc-fe21-4ae7-b610-e5668ea84a3b> .
+
+<http://example.org/biointegrate/case/d3d8987d-0a54-45f8-b9c9-17ec89fa864e> a bio:BioEntity,
+        bio:Case,
+        owl:NamedIndividual ;
+    bio:caseId "d3d8987d-0a54-45f8-b9c9-17ec89fa864e" ;
+    bio:caseInProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:hasCaseMeasurement <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d3d8987d-0a54-45f8-b9c9-17ec89fa864e>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d3d8987d-0a54-45f8-b9c9-17ec89fa864e> .
+
+<http://example.org/biointegrate/case/d50e944a-3ce4-4632-a878-118499e143e3> a bio:BioEntity,
+        bio:Case,
+        owl:NamedIndividual ;
+    bio:caseId "d50e944a-3ce4-4632-a878-118499e143e3" ;
+    bio:caseInProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:hasCaseMeasurement <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d50e944a-3ce4-4632-a878-118499e143e3>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d50e944a-3ce4-4632-a878-118499e143e3> .
+
+<http://example.org/biointegrate/case/da13446a-c4dc-4d02-80c8-410273925ac4> a bio:BioEntity,
+        bio:Case,
+        owl:NamedIndividual ;
+    bio:caseId "da13446a-c4dc-4d02-80c8-410273925ac4" ;
+    bio:caseInProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:hasCaseMeasurement <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_da13446a-c4dc-4d02-80c8-410273925ac4>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_da13446a-c4dc-4d02-80c8-410273925ac4> .
+
+<http://example.org/biointegrate/case/dadd7428-9e4d-4652-9469-ab521b88d529> a bio:BioEntity,
+        bio:Case,
+        owl:NamedIndividual ;
+    bio:caseId "dadd7428-9e4d-4652-9469-ab521b88d529" ;
+    bio:caseInProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:hasCaseMeasurement <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_dadd7428-9e4d-4652-9469-ab521b88d529>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_dadd7428-9e4d-4652-9469-ab521b88d529> .
+
+<http://example.org/biointegrate/case/e6c55ba6-4c8a-4ea4-8dde-74d01915db02> a bio:BioEntity,
+        bio:Case,
+        owl:NamedIndividual ;
+    bio:caseId "e6c55ba6-4c8a-4ea4-8dde-74d01915db02" ;
+    bio:caseInProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:hasCaseMeasurement <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_e6c55ba6-4c8a-4ea4-8dde-74d01915db02>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e6c55ba6-4c8a-4ea4-8dde-74d01915db02> .
+
+<http://example.org/biointegrate/case/e7fdf164-a85d-4ff5-9676-d2215ca35403> a bio:BioEntity,
+        bio:Case,
+        owl:NamedIndividual ;
+    bio:caseId "e7fdf164-a85d-4ff5-9676-d2215ca35403" ;
+    bio:caseInProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:hasCaseMeasurement <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_e7fdf164-a85d-4ff5-9676-d2215ca35403>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e7fdf164-a85d-4ff5-9676-d2215ca35403> .
+
+<http://example.org/biointegrate/case/ec82a00f-3909-4781-8ae2-e54cbc1ac7ac> a bio:BioEntity,
+        bio:Case,
+        owl:NamedIndividual ;
+    bio:caseId "ec82a00f-3909-4781-8ae2-e54cbc1ac7ac" ;
+    bio:caseInProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:hasCaseMeasurement <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_ec82a00f-3909-4781-8ae2-e54cbc1ac7ac>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_ec82a00f-3909-4781-8ae2-e54cbc1ac7ac> .
+
+<http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6> a bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "d4649bc7-09d2-4d90-bafd-0bec72429b00"^^xsd:string ;
+    bio:fpkmUnstranded 0.0 ;
+    bio:fpkmUqUnstranded 0.0 ;
+    bio:measuredCase <http://example.org/biointegrate/case/3ed101b5-0007-4957-a25d-4cf43bde08b6> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_1607> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-GBM> ;
+    bio:strandedFirstCount 0.0 ;
+    bio:strandedSecondCount 0.0 ;
+    bio:tpmUnstranded 0.0 ;
+    bio:unstrandedCount 0.0 .
+
+<http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_3f960d3b-a58c-43d0-a8a4-f3555b399c9d> a bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "99ff2016-a97a-4142-b70a-1bb59d6264e9"^^xsd:string ;
+    bio:fpkmUnstranded 0.0184 ;
+    bio:fpkmUqUnstranded 0.0163 ;
+    bio:measuredCase <http://example.org/biointegrate/case/3f960d3b-a58c-43d0-a8a4-f3555b399c9d> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_1607> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-GBM> ;
+    bio:strandedFirstCount 0.0 ;
+    bio:strandedSecondCount 3.0 ;
+    bio:tpmUnstranded 0.0251 ;
+    bio:unstrandedCount 3.0 .
+
+<http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_407849a8-8447-4ede-a9d1-c1dfb535222e> a bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "afbd1975-263b-404b-a738-886bf25c0223"^^xsd:string ;
+    bio:fpkmUnstranded 0.0062 ;
+    bio:fpkmUqUnstranded 0.006 ;
+    bio:measuredCase <http://example.org/biointegrate/case/407849a8-8447-4ede-a9d1-c1dfb535222e> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_1607> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-GBM> ;
+    bio:strandedFirstCount 1.0 ;
+    bio:strandedSecondCount 0.0 ;
+    bio:tpmUnstranded 0.0084 ;
+    bio:unstrandedCount 1.0 .
+
+<http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_41685c5a-a548-483a-8a20-305ad8d61771> a bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "444a2332-9e52-4cf8-94d9-07a8b829633e"^^xsd:string ;
+    bio:fpkmUnstranded 0.0169 ;
+    bio:fpkmUqUnstranded 0.0155 ;
+    bio:measuredCase <http://example.org/biointegrate/case/41685c5a-a548-483a-8a20-305ad8d61771> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_1607> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-GBM> ;
+    bio:strandedFirstCount 1.0 ;
+    bio:strandedSecondCount 2.0 ;
+    bio:tpmUnstranded 0.0504 ;
+    bio:unstrandedCount 3.0 .
+
+<http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_a56c2083-33d5-4c98-b85f-3b68a3d80add> a bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "67bec45d-ed1e-41c5-9c61-4d7fb1592450"^^xsd:string ;
+    bio:fpkmUnstranded 0.0048 ;
+    bio:fpkmUqUnstranded 0.0047 ;
+    bio:measuredCase <http://example.org/biointegrate/case/a56c2083-33d5-4c98-b85f-3b68a3d80add> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_1607> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 1.0 ;
+    bio:strandedSecondCount 0.0 ;
+    bio:tpmUnstranded 0.0157 ;
+    bio:unstrandedCount 1.0 .
+
+<http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_a5f851c5-6130-4ea1-9f86-be59331a92f7> a bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "106669c1-e20c-4ed8-863c-3ada529f58a4"^^xsd:string ;
+    bio:fpkmUnstranded 0.0 ;
+    bio:fpkmUqUnstranded 0.0 ;
+    bio:measuredCase <http://example.org/biointegrate/case/a5f851c5-6130-4ea1-9f86-be59331a92f7> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_1607> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 0.0 ;
+    bio:strandedSecondCount 0.0 ;
+    bio:tpmUnstranded 0.0 ;
+    bio:unstrandedCount 0.0 .
+
+<http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d209cffc-fe21-4ae7-b610-e5668ea84a3b> a bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "febf694d-811a-4fcd-b498-e9451fdc0d4e"^^xsd:string ;
+    bio:fpkmUnstranded 0.0 ;
+    bio:fpkmUqUnstranded 0.0 ;
+    bio:measuredCase <http://example.org/biointegrate/case/d209cffc-fe21-4ae7-b610-e5668ea84a3b> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_1607> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 0.0 ;
+    bio:strandedSecondCount 0.0 ;
+    bio:tpmUnstranded 0.0 ;
+    bio:unstrandedCount 0.0 .
+
+<http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d3d8987d-0a54-45f8-b9c9-17ec89fa864e> a bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "8fcc58b7-834f-43df-b0a5-375e59dc3bed"^^xsd:string ;
+    bio:fpkmUnstranded 0.0037 ;
+    bio:fpkmUqUnstranded 0.0041 ;
+    bio:measuredCase <http://example.org/biointegrate/case/d3d8987d-0a54-45f8-b9c9-17ec89fa864e> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_1607> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 1.0 ;
+    bio:strandedSecondCount 0.0 ;
+    bio:tpmUnstranded 0.0117 ;
+    bio:unstrandedCount 1.0 .
+
+<http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d50e944a-3ce4-4632-a878-118499e143e3> a bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "7349fbd4-c919-45a5-8ed2-1f61b9fec87f"^^xsd:string ;
+    bio:fpkmUnstranded 0.0 ;
+    bio:fpkmUqUnstranded 0.0 ;
+    bio:measuredCase <http://example.org/biointegrate/case/d50e944a-3ce4-4632-a878-118499e143e3> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_1607> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 0.0 ;
+    bio:strandedSecondCount 0.0 ;
+    bio:tpmUnstranded 0.0 ;
+    bio:unstrandedCount 0.0 .
+
+<http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_da13446a-c4dc-4d02-80c8-410273925ac4> a bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "dc944bdf-f066-4603-837d-fba14607a154"^^xsd:string ;
+    bio:fpkmUnstranded 0.0 ;
+    bio:fpkmUqUnstranded 0.0 ;
+    bio:measuredCase <http://example.org/biointegrate/case/da13446a-c4dc-4d02-80c8-410273925ac4> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_1607> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 0.0 ;
+    bio:strandedSecondCount 0.0 ;
+    bio:tpmUnstranded 0.0 ;
+    bio:unstrandedCount 0.0 .
+
+<http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_dadd7428-9e4d-4652-9469-ab521b88d529> a bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "f3f687a3-9619-4ab9-a5d1-35f31422b472"^^xsd:string ;
+    bio:fpkmUnstranded 0.0 ;
+    bio:fpkmUqUnstranded 0.0 ;
+    bio:measuredCase <http://example.org/biointegrate/case/dadd7428-9e4d-4652-9469-ab521b88d529> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_1607> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 0.0 ;
+    bio:strandedSecondCount 0.0 ;
+    bio:tpmUnstranded 0.0 ;
+    bio:unstrandedCount 0.0 .
+
+<http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_e6c55ba6-4c8a-4ea4-8dde-74d01915db02> a bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "7cdc56cf-2e0e-467e-8e96-5b2391309b7f"^^xsd:string ;
+    bio:fpkmUnstranded 0.0 ;
+    bio:fpkmUqUnstranded 0.0 ;
+    bio:measuredCase <http://example.org/biointegrate/case/e6c55ba6-4c8a-4ea4-8dde-74d01915db02> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_1607> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 0.0 ;
+    bio:strandedSecondCount 0.0 ;
+    bio:tpmUnstranded 0.0 ;
+    bio:unstrandedCount 0.0 .
+
+<http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_e7fdf164-a85d-4ff5-9676-d2215ca35403> a bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "155b732b-3603-4035-94d4-57a81a23a0d1"^^xsd:string ;
+    bio:fpkmUnstranded 0.0 ;
+    bio:fpkmUqUnstranded 0.0 ;
+    bio:measuredCase <http://example.org/biointegrate/case/e7fdf164-a85d-4ff5-9676-d2215ca35403> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_1607> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 0.0 ;
+    bio:strandedSecondCount 0.0 ;
+    bio:tpmUnstranded 0.0 ;
+    bio:unstrandedCount 0.0 .
+
+<http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_ec82a00f-3909-4781-8ae2-e54cbc1ac7ac> a bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "dff492f1-7fdc-4ff6-b868-c355cedd6cad"^^xsd:string ;
+    bio:fpkmUnstranded 0.0032 ;
+    bio:fpkmUqUnstranded 0.0034 ;
+    bio:measuredCase <http://example.org/biointegrate/case/ec82a00f-3909-4781-8ae2-e54cbc1ac7ac> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_1607> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 1.0 ;
+    bio:strandedSecondCount 0.0 ;
+    bio:tpmUnstranded 0.0111 ;
+    bio:unstrandedCount 1.0 .
+
+<http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6> a bio:BioEntity,
+        bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "d4649bc7-09d2-4d90-bafd-0bec72429b00" ;
+    bio:fpkmUnstranded 1.8201 ;
+    bio:fpkmUqUnstranded 1.77 ;
+    bio:measuredCase <http://example.org/biointegrate/case/3ed101b5-0007-4957-a25d-4cf43bde08b6> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_7539> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-GBM> ;
+    bio:strandedFirstCount 0.0 ;
+    bio:strandedSecondCount 820.0 ;
+    bio:tpmUnstranded 4.5605 ;
+    bio:unstrandedCount 820.0 .
+
+<http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3f960d3b-a58c-43d0-a8a4-f3555b399c9d> a bio:BioEntity,
+        bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "99ff2016-a97a-4142-b70a-1bb59d6264e9" ;
+    bio:fpkmUnstranded 1.4039 ;
+    bio:fpkmUqUnstranded 1.2373 ;
+    bio:measuredCase <http://example.org/biointegrate/case/3f960d3b-a58c-43d0-a8a4-f3555b399c9d> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_7539> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-GBM> ;
+    bio:strandedFirstCount 1.0 ;
+    bio:strandedSecondCount 514.0 ;
+    bio:tpmUnstranded 1.9075 ;
+    bio:unstrandedCount 515.0 .
+
+<http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_407849a8-8447-4ede-a9d1-c1dfb535222e> a bio:BioEntity,
+        bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "afbd1975-263b-404b-a738-886bf25c0223" ;
+    bio:fpkmUnstranded 2.2771 ;
+    bio:fpkmUqUnstranded 2.1986 ;
+    bio:measuredCase <http://example.org/biointegrate/case/407849a8-8447-4ede-a9d1-c1dfb535222e> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_7539> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-GBM> ;
+    bio:strandedFirstCount 2.0 ;
+    bio:strandedSecondCount 824.0 ;
+    bio:tpmUnstranded 3.0842 ;
+    bio:unstrandedCount 826.0 .
+
+<http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_41685c5a-a548-483a-8a20-305ad8d61771> a bio:BioEntity,
+        bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "444a2332-9e52-4cf8-94d9-07a8b829633e" ;
+    bio:fpkmUnstranded 5.7964 ;
+    bio:fpkmUqUnstranded 5.3349 ;
+    bio:measuredCase <http://example.org/biointegrate/case/41685c5a-a548-483a-8a20-305ad8d61771> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_7539> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-GBM> ;
+    bio:strandedFirstCount 0.0 ;
+    bio:strandedSecondCount 2322.0 ;
+    bio:tpmUnstranded 17.2932 ;
+    bio:unstrandedCount 2322.0 .
+
+<http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a56c2083-33d5-4c98-b85f-3b68a3d80add> a bio:BioEntity,
+        bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "67bec45d-ed1e-41c5-9c61-4d7fb1592450" ;
+    bio:fpkmUnstranded 0.2672 ;
+    bio:fpkmUqUnstranded 0.2629 ;
+    bio:measuredCase <http://example.org/biointegrate/case/a56c2083-33d5-4c98-b85f-3b68a3d80add> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_7539> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 61.0 ;
+    bio:strandedSecondCount 64.0 ;
+    bio:tpmUnstranded 0.8697 ;
+    bio:unstrandedCount 125.0 .
+
+<http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a5f851c5-6130-4ea1-9f86-be59331a92f7> a bio:BioEntity,
+        bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "106669c1-e20c-4ed8-863c-3ada529f58a4" ;
+    bio:fpkmUnstranded 1.1429 ;
+    bio:fpkmUqUnstranded 1.1088 ;
+    bio:measuredCase <http://example.org/biointegrate/case/a5f851c5-6130-4ea1-9f86-be59331a92f7> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_7539> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 358.0 ;
+    bio:strandedSecondCount 329.0 ;
+    bio:tpmUnstranded 3.8733 ;
+    bio:unstrandedCount 687.0 .
+
+<http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d209cffc-fe21-4ae7-b610-e5668ea84a3b> a bio:BioEntity,
+        bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "febf694d-811a-4fcd-b498-e9451fdc0d4e" ;
+    bio:fpkmUnstranded 0.2141 ;
+    bio:fpkmUqUnstranded 0.2135 ;
+    bio:measuredCase <http://example.org/biointegrate/case/d209cffc-fe21-4ae7-b610-e5668ea84a3b> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_7539> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 54.0 ;
+    bio:strandedSecondCount 56.0 ;
+    bio:tpmUnstranded 0.711 ;
+    bio:unstrandedCount 110.0 .
+
+<http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d3d8987d-0a54-45f8-b9c9-17ec89fa864e> a bio:BioEntity,
+        bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "8fcc58b7-834f-43df-b0a5-375e59dc3bed" ;
+    bio:fpkmUnstranded 0.4599 ;
+    bio:fpkmUqUnstranded 0.5104 ;
+    bio:measuredCase <http://example.org/biointegrate/case/d3d8987d-0a54-45f8-b9c9-17ec89fa864e> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_7539> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 156.0 ;
+    bio:strandedSecondCount 127.0 ;
+    bio:tpmUnstranded 1.467 ;
+    bio:unstrandedCount 283.0 .
+
+<http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d50e944a-3ce4-4632-a878-118499e143e3> a bio:BioEntity,
+        bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "7349fbd4-c919-45a5-8ed2-1f61b9fec87f" ;
+    bio:fpkmUnstranded 0.2088 ;
+    bio:fpkmUqUnstranded 0.21 ;
+    bio:measuredCase <http://example.org/biointegrate/case/d50e944a-3ce4-4632-a878-118499e143e3> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_7539> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 51.0 ;
+    bio:strandedSecondCount 52.0 ;
+    bio:tpmUnstranded 0.6534 ;
+    bio:unstrandedCount 103.0 .
+
+<http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_da13446a-c4dc-4d02-80c8-410273925ac4> a bio:BioEntity,
+        bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "dc944bdf-f066-4603-837d-fba14607a154" ;
+    bio:fpkmUnstranded 0.096 ;
+    bio:fpkmUqUnstranded 0.1019 ;
+    bio:measuredCase <http://example.org/biointegrate/case/da13446a-c4dc-4d02-80c8-410273925ac4> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_7539> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 21.0 ;
+    bio:strandedSecondCount 23.0 ;
+    bio:tpmUnstranded 0.3292 ;
+    bio:unstrandedCount 44.0 .
+
+<http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_dadd7428-9e4d-4652-9469-ab521b88d529> a bio:BioEntity,
+        bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "f3f687a3-9619-4ab9-a5d1-35f31422b472" ;
+    bio:fpkmUnstranded 1.1097 ;
+    bio:fpkmUqUnstranded 1.2264 ;
+    bio:measuredCase <http://example.org/biointegrate/case/dadd7428-9e4d-4652-9469-ab521b88d529> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_7539> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 305.0 ;
+    bio:strandedSecondCount 337.0 ;
+    bio:tpmUnstranded 3.5877 ;
+    bio:unstrandedCount 642.0 .
+
+<http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e6c55ba6-4c8a-4ea4-8dde-74d01915db02> a bio:BioEntity,
+        bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "7cdc56cf-2e0e-467e-8e96-5b2391309b7f" ;
+    bio:fpkmUnstranded 0.8082 ;
+    bio:fpkmUqUnstranded 0.8066 ;
+    bio:measuredCase <http://example.org/biointegrate/case/e6c55ba6-4c8a-4ea4-8dde-74d01915db02> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_7539> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 231.0 ;
+    bio:strandedSecondCount 272.0 ;
+    bio:tpmUnstranded 3.2558 ;
+    bio:unstrandedCount 503.0 .
+
+<http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e7fdf164-a85d-4ff5-9676-d2215ca35403> a bio:BioEntity,
+        bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "155b732b-3603-4035-94d4-57a81a23a0d1" ;
+    bio:fpkmUnstranded 2.7979 ;
+    bio:fpkmUqUnstranded 2.8507 ;
+    bio:measuredCase <http://example.org/biointegrate/case/e7fdf164-a85d-4ff5-9676-d2215ca35403> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_7539> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 783.0 ;
+    bio:strandedSecondCount 802.0 ;
+    bio:tpmUnstranded 10.9168 ;
+    bio:unstrandedCount 1585.0 .
+
+<http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_ec82a00f-3909-4781-8ae2-e54cbc1ac7ac> a bio:BioEntity,
+        bio:ExpressionMeasurement,
+        owl:NamedIndividual ;
+    bio:fileId "dff492f1-7fdc-4ff6-b868-c355cedd6cad" ;
+    bio:fpkmUnstranded 0.6835 ;
+    bio:fpkmUqUnstranded 0.7297 ;
+    bio:measuredCase <http://example.org/biointegrate/case/ec82a00f-3909-4781-8ae2-e54cbc1ac7ac> ;
+    bio:measuredGene <http://example.org/biointegrate/gene/HGNC_7539> ;
+    bio:measuredProject <http://example.org/biointegrate/project/TCGA-LGG> ;
+    bio:strandedFirstCount 252.0 ;
+    bio:strandedSecondCount 235.0 ;
+    bio:tpmUnstranded 2.4038 ;
+    bio:unstrandedCount 487.0 .
+
+bio:hasExpressionMeasurement a owl:ObjectProperty ;
+    rdfs:label "has expression measurement"@en ;
+    rdfs:domain bio:BioEntity ;
+    rdfs:range bio:ExpressionMeasurement .
+
+bio:measuredCase a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "measured case"@en ;
+    rdfs:domain bio:ExpressionMeasurement ;
+    rdfs:range bio:Case .
+
+bio:measuredGene a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "measured gene"@en ;
+    rdfs:domain bio:ExpressionMeasurement ;
+    rdfs:range bio:Gene .
+
+bio:measuredProject a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "measured project"@en ;
+    rdfs:domain bio:ExpressionMeasurement ;
+    rdfs:range bio:Project .
+
+bio:hasGoTerm a owl:ObjectProperty ;
+    rdfs:label "has GO term"@en ;
+    rdfs:domain bio:Protein ;
+    rdfs:range bio:GOTerm ;
+    owl:inverseOf bio:isGoTermOfProtein .
+
+bio:isGoTermOfProtein a owl:ObjectProperty ;
+    rdfs:label "is GO term of protein"@en ;
+    rdfs:domain bio:GOTerm ;
+    rdfs:range bio:Protein .
+
+bio:Organism a owl:Class ;
+    rdfs:label "Organism"@en ;
+    bio:manchesterDefinition "Organism SubClassOf (taxonomyId exactly 1 xsd:integer) and (scientificName max 1 xsd:string)"@en ;
+    dc:source "UniProt" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:integer ;
+            owl:onProperty bio:taxonomyId ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty bio:scientificName ],
+        bio:BioEntity ;
+    owl:hasKey ( bio:taxonomyId ) .
+
+bio:Project a owl:Class ;
+    rdfs:label "Project"@en ;
+    bio:manchesterDefinition "Project SubClassOf (projectId exactly 1 xsd:string)"@en ;
+    dc:source "GDC/TCGA" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom bio:ExpressionMeasurement ;
+            owl:onProperty bio:hasProjectMeasurement ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty bio:projectId ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom bio:Case ;
+            owl:onProperty bio:hasCase ],
+        bio:BioEntity ;
+    owl:hasKey ( bio:projectId ) .
+
+<http://example.org/biointegrate/project/TCGA-GBM> a bio:BioEntity,
+        bio:Project,
+        owl:NamedIndividual ;
+    bio:hasCase <http://example.org/biointegrate/case/3ed101b5-0007-4957-a25d-4cf43bde08b6>,
+        <http://example.org/biointegrate/case/3f960d3b-a58c-43d0-a8a4-f3555b399c9d>,
+        <http://example.org/biointegrate/case/407849a8-8447-4ede-a9d1-c1dfb535222e>,
+        <http://example.org/biointegrate/case/41685c5a-a548-483a-8a20-305ad8d61771> ;
+    bio:hasProjectMeasurement <http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_3f960d3b-a58c-43d0-a8a4-f3555b399c9d>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_407849a8-8447-4ede-a9d1-c1dfb535222e>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_41685c5a-a548-483a-8a20-305ad8d61771>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3f960d3b-a58c-43d0-a8a4-f3555b399c9d>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_407849a8-8447-4ede-a9d1-c1dfb535222e>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_41685c5a-a548-483a-8a20-305ad8d61771> ;
+    bio:projectId "TCGA-GBM" .
+
+bio:Gene a owl:Class ;
+    rdfs:label "Gene"@en ;
+    bio:manchesterDefinition "Gene SubClassOf (hgncId exactly 1 xsd:string) and (geneSymbol exactly 1 xsd:string) and (ensemblGeneId max 1 xsd:string)"@en ;
+    dc:source "HGNC" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty bio:geneSymbol ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom bio:ExpressionMeasurement ;
+            owl:onProperty bio:hasGeneMeasurement ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom bio:Protein ;
+            owl:onProperty bio:hasProteinProduct ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty bio:hgncId ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty bio:ensemblGeneId ],
+        bio:BioEntity ;
+    owl:hasKey ( bio:hgncId ) ;
+    skos:exactMatch <http://purl.obolibrary.org/obo/SO_0000704> .
+
+<http://example.org/biointegrate/gene/HGNC_1607> a bio:Gene,
+        owl:NamedIndividual ;
+    bio:ensemblGeneId "ENSG00000112486"^^xsd:string ;
+    bio:geneSymbol "CCR6"^^xsd:string ;
+    bio:hasGeneMeasurement <http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_3f960d3b-a58c-43d0-a8a4-f3555b399c9d>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_407849a8-8447-4ede-a9d1-c1dfb535222e>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_41685c5a-a548-483a-8a20-305ad8d61771>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_a56c2083-33d5-4c98-b85f-3b68a3d80add>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_a5f851c5-6130-4ea1-9f86-be59331a92f7>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d209cffc-fe21-4ae7-b610-e5668ea84a3b>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d3d8987d-0a54-45f8-b9c9-17ec89fa864e>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d50e944a-3ce4-4632-a878-118499e143e3>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_da13446a-c4dc-4d02-80c8-410273925ac4>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_dadd7428-9e4d-4652-9469-ab521b88d529>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_e6c55ba6-4c8a-4ea4-8dde-74d01915db02>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_e7fdf164-a85d-4ff5-9676-d2215ca35403>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_ec82a00f-3909-4781-8ae2-e54cbc1ac7ac> ;
+    bio:hgncId "HGNC:1607"^^xsd:string .
+
+<http://example.org/biointegrate/gene/HGNC_7539> a bio:BioEntity,
+        bio:Gene,
+        owl:NamedIndividual ;
+    bio:ensemblGeneId "ENSG00000101825" ;
+    bio:geneSymbol "MXRA5" ;
+    bio:hasGeneMeasurement <http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3f960d3b-a58c-43d0-a8a4-f3555b399c9d>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_407849a8-8447-4ede-a9d1-c1dfb535222e>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_41685c5a-a548-483a-8a20-305ad8d61771>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a56c2083-33d5-4c98-b85f-3b68a3d80add>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a5f851c5-6130-4ea1-9f86-be59331a92f7>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d209cffc-fe21-4ae7-b610-e5668ea84a3b>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d3d8987d-0a54-45f8-b9c9-17ec89fa864e>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d50e944a-3ce4-4632-a878-118499e143e3>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_da13446a-c4dc-4d02-80c8-410273925ac4>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_dadd7428-9e4d-4652-9469-ab521b88d529>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e6c55ba6-4c8a-4ea4-8dde-74d01915db02>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e7fdf164-a85d-4ff5-9676-d2215ca35403>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_ec82a00f-3909-4781-8ae2-e54cbc1ac7ac> ;
+    bio:hasProteinProduct <http://example.org/biointegrate/protein/Q9NR99> ;
+    bio:hgncId "HGNC:7539" .
+
+bio:GOTerm a owl:Class ;
+    rdfs:label "GO Term"@en ;
+    bio:manchesterDefinition "GOTerm SubClassOf (goId exactly 1 xsd:string) and (goAspect max 1 xsd:string)"@en ;
+    dc:source "Gene Ontology (via UniProt annotations)" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty bio:goLabel ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty bio:goAspect ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty bio:goId ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        bio:BioEntity ;
+    owl:hasKey ( bio:goId ) .
+
+bio:Protein a owl:Class ;
+    rdfs:label "Protein"@en ;
+    bio:manchesterDefinition "Protein SubClassOf (uniprotId exactly 1 xsd:string) and (hasOrganism exactly 1 Organism) and (proteinProductOf max 1 Gene)"@en ;
+    dc:source "UniProt" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onDataRange xsd:integer ;
+            owl:onProperty bio:sequenceLength ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty bio:uniprotId ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass bio:Organism ;
+            owl:onProperty bio:hasOrganism ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom bio:GOTerm ;
+            owl:onProperty bio:hasGoTerm ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onClass bio:Gene ;
+            owl:onProperty bio:proteinProductOf ],
+        bio:BioEntity ;
+    owl:hasKey ( bio:uniprotId ) ;
+    skos:exactMatch <https://purl.uniprot.org/core/Protein> .
+
+bio:Case a owl:Class ;
+    rdfs:label "Case"@en ;
+    bio:manchesterDefinition "Case SubClassOf (caseId exactly 1 xsd:string) and (caseInProject exactly 1 Project)"@en ;
+    dc:source "GDC/TCGA" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom bio:ExpressionMeasurement ;
+            owl:onProperty bio:hasCaseMeasurement ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty bio:diseaseTypeLabel ],
+        [ a owl:Restriction ;
+            owl:onClass bio:Project ;
+            owl:onProperty bio:caseInProject ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty bio:primarySiteLabel ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty bio:caseId ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        bio:BioEntity ;
+    owl:hasKey ( bio:caseId ) .
+
+<http://example.org/biointegrate/project/TCGA-LGG> a bio:BioEntity,
+        bio:Project,
+        owl:NamedIndividual ;
+    bio:hasCase <http://example.org/biointegrate/case/a56c2083-33d5-4c98-b85f-3b68a3d80add>,
+        <http://example.org/biointegrate/case/a5f851c5-6130-4ea1-9f86-be59331a92f7>,
+        <http://example.org/biointegrate/case/d209cffc-fe21-4ae7-b610-e5668ea84a3b>,
+        <http://example.org/biointegrate/case/d3d8987d-0a54-45f8-b9c9-17ec89fa864e>,
+        <http://example.org/biointegrate/case/d50e944a-3ce4-4632-a878-118499e143e3>,
+        <http://example.org/biointegrate/case/da13446a-c4dc-4d02-80c8-410273925ac4>,
+        <http://example.org/biointegrate/case/dadd7428-9e4d-4652-9469-ab521b88d529>,
+        <http://example.org/biointegrate/case/e6c55ba6-4c8a-4ea4-8dde-74d01915db02>,
+        <http://example.org/biointegrate/case/e7fdf164-a85d-4ff5-9676-d2215ca35403>,
+        <http://example.org/biointegrate/case/ec82a00f-3909-4781-8ae2-e54cbc1ac7ac> ;
+    bio:hasProjectMeasurement <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_a56c2083-33d5-4c98-b85f-3b68a3d80add>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_a5f851c5-6130-4ea1-9f86-be59331a92f7>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d209cffc-fe21-4ae7-b610-e5668ea84a3b>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d3d8987d-0a54-45f8-b9c9-17ec89fa864e>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d50e944a-3ce4-4632-a878-118499e143e3>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_da13446a-c4dc-4d02-80c8-410273925ac4>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_dadd7428-9e4d-4652-9469-ab521b88d529>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_e6c55ba6-4c8a-4ea4-8dde-74d01915db02>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_e7fdf164-a85d-4ff5-9676-d2215ca35403>,
+        <http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_ec82a00f-3909-4781-8ae2-e54cbc1ac7ac>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a56c2083-33d5-4c98-b85f-3b68a3d80add>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a5f851c5-6130-4ea1-9f86-be59331a92f7>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d209cffc-fe21-4ae7-b610-e5668ea84a3b>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d3d8987d-0a54-45f8-b9c9-17ec89fa864e>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d50e944a-3ce4-4632-a878-118499e143e3>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_da13446a-c4dc-4d02-80c8-410273925ac4>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_dadd7428-9e4d-4652-9469-ab521b88d529>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e6c55ba6-4c8a-4ea4-8dde-74d01915db02>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e7fdf164-a85d-4ff5-9676-d2215ca35403>,
+        <http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_ec82a00f-3909-4781-8ae2-e54cbc1ac7ac> ;
+    bio:projectId "TCGA-LGG" .
+
+bio:ExpressionMeasurement a owl:Class ;
+    rdfs:label "ExpressionMeasurement"@en ;
+    bio:manchesterDefinition "ExpressionMeasurement SubClassOf (measuredGene exactly 1 Gene) and (measuredCase exactly 1 Case) and (measuredProject exactly 1 Project)"@en ;
+    dc:source "GDC/TCGA" ;
+    rdfs:comment "Reified RNA-seq expression values for one gene in one case within one project."@en ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onDataRange xsd:decimal ;
+            owl:onProperty bio:strandedSecondCount ],
+        [ a owl:Restriction ;
+            owl:onClass bio:Case ;
+            owl:onProperty bio:measuredCase ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onDataRange xsd:decimal ;
+            owl:onProperty bio:fpkmUqUnstranded ],
+        [ a owl:Restriction ;
+            owl:onClass bio:Gene ;
+            owl:onProperty bio:measuredGene ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onDataRange xsd:decimal ;
+            owl:onProperty bio:tpmUnstranded ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty bio:fileId ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onDataRange xsd:decimal ;
+            owl:onProperty bio:fpkmUnstranded ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onDataRange xsd:decimal ;
+            owl:onProperty bio:strandedFirstCount ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onDataRange xsd:decimal ;
+            owl:onProperty bio:unstrandedCount ],
+        [ a owl:Restriction ;
+            owl:onClass bio:Project ;
+            owl:onProperty bio:measuredProject ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        bio:BioEntity ;
+    owl:hasKey ( bio:measuredCase bio:measuredGene bio:measuredProject ) .
+
+bio:BioEntity a owl:Class ;
+    rdfs:label "BioEntity"@en .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( bio:AnatomicalSite bio:Case bio:DiseaseTerm bio:ExpressionMeasurement bio:GOTerm bio:Gene bio:Organism bio:Project bio:Protein ) .
+

@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<results>
+  <result>
+    <collection_relationships>
+      <description>This query demonstrates how the three main collections in estandares_db are interconnected</description>
+      <collections_involved>
+        <collections_involved_item>hgnc_genes</collections_involved_item>
+        <collections_involved_item>uniprot_entries</collections_involved_item>
+        <collections_involved_item>gdc_cases</collections_involved_item>
+      </collections_involved>
+      <relationship_1_hgnc_uniprot>
+        <from_collection>hgnc_genes</from_collection>
+        <to_collection>uniprot_entries</to_collection>
+        <join_type>one-to-many</join_type>
+        <from_field>uniprot_ids (array)</from_field>
+        <to_field>_id</to_field>
+        <description>Each gene can map to multiple UniProt protein entries via the uniprot_ids array</description>
+      </relationship_1_hgnc_uniprot>
+      <relationship_2_hgnc_gdc>
+        <from_collection>hgnc_genes</from_collection>
+        <to_collection>gdc_cases</to_collection>
+        <join_type>many-to-many (via nested structure)</join_type>
+        <from_field>projects.{PROJECT_ID}.cases.{CASE_ID}</from_field>
+        <to_field>case_id</to_field>
+        <description>Expression data in hgnc_genes is organized by project and case, linking to clinical case data in gdc_cases</description>
+      </relationship_2_hgnc_gdc>
+      <relationship_3_uniprot_hgnc>
+        <from_collection>uniprot_entries</from_collection>
+        <to_collection>hgnc_genes</to_collection>
+        <join_type>many-to-one</join_type>
+        <from_field>gene.hgnc_ids or gene.ensembl_gene_ids</from_field>
+        <to_field>hgnc_id or ensembl_gene_id</to_field>
+        <description>UniProt entries contain gene identifiers that link back to HGNC gene records</description>
+      </relationship_3_uniprot_hgnc>
+    </collection_relationships>
+    <sample_data>
+      <gene_info>
+        <hgnc_id>HGNC:5</hgnc_id>
+        <symbol>A1BG</symbol>
+        <ensembl_gene_id>ENSG00000121410</ensembl_gene_id>
+      </gene_info>
+      <relationship_hgnc_to_uniprot>
+        <join_field_in_hgnc>uniprot_ids</join_field_in_hgnc>
+        <join_field_in_uniprot>_id</join_field_in_uniprot>
+        <hgnc_uniprot_ids>
+          <hgnc_uniprot_id>P04217</hgnc_uniprot_id>
+        </hgnc_uniprot_ids>
+        <matched_proteins_count>1</matched_proteins_count>
+        <matched_protein_samples>
+          <matched_protein_sample>
+            <uniprot_id>P04217</uniprot_id>
+            <protein_name>Alpha-1B-glycoprotein (Alpha-1-B glycoprotein)</protein_name>
+          </matched_protein_sample>
+        </matched_protein_samples>
+      </relationship_hgnc_to_uniprot>
+      <relationship_hgnc_to_gdc>
+        <join_mechanism>hgnc_genes.projects.{PROJECT_ID}.cases.{CASE_ID} -&gt; gdc_cases.case_id</join_mechanism>
+        <project_with_expression>TCGA-LGG</project_with_expression>
+        <sample_case_id>d50e944a-3ce4-4632-a878-118499e143e3</sample_case_id>
+      </relationship_hgnc_to_gdc>
+    </sample_data>
+    <statistics>
+      <id is_null="true"/>
+      <total_genes_with_uniprot_links>5</total_genes_with_uniprot_links>
+      <total_protein_matches>5</total_protein_matches>
+      <genes_with_gdc_case_links>5</genes_with_gdc_case_links>
+    </statistics>
+  </result>
+</results>

@@ -1,0 +1,562 @@
+[
+  {
+    "ontology_individual": {
+      "type": "bio:Gene",
+      "individual_iri": "http://example.org/biointegrate/gene/HGNC_1607",
+      "gene_properties": {
+        "bio:hgncId": "HGNC:1607",
+        "bio:geneSymbol": "CCR6",
+        "bio:ensemblGeneId": "ENSG00000112486"
+      },
+      "protein_products": [],
+      "expression_measurements": [
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d50e944a-3ce4-4632-a878-118499e143e3",
+          "measurement_properties": {
+            "bio:fileId": "7349fbd4-c919-45a5-8ed2-1f61b9fec87f",
+            "bio:unstrandedCount": 0.0,
+            "bio:strandedFirstCount": 0.0,
+            "bio:strandedSecondCount": 0.0,
+            "bio:tpmUnstranded": 0.0,
+            "bio:fpkmUnstranded": 0.0,
+            "bio:fpkmUqUnstranded": 0.0
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/d50e944a-3ce4-4632-a878-118499e143e3",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/d50e944a-3ce4-4632-a878-118499e143e3"
+            },
+            "case_properties": {
+              "bio:caseId": "d50e944a-3ce4-4632-a878-118499e143e3",
+              "bio:projectId": "TCGA-LGG",
+              "bio:diseaseTypeLabel": "Brain Lower Grade Glioma",
+              "bio:primarySiteLabel": "Brain"
+            },
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d209cffc-fe21-4ae7-b610-e5668ea84a3b",
+          "measurement_properties": {
+            "bio:fileId": "febf694d-811a-4fcd-b498-e9451fdc0d4e",
+            "bio:unstrandedCount": 0.0,
+            "bio:strandedFirstCount": 0.0,
+            "bio:strandedSecondCount": 0.0,
+            "bio:tpmUnstranded": 0.0,
+            "bio:fpkmUnstranded": 0.0,
+            "bio:fpkmUqUnstranded": 0.0
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/d209cffc-fe21-4ae7-b610-e5668ea84a3b",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/d209cffc-fe21-4ae7-b610-e5668ea84a3b"
+            },
+            "case_properties": {
+              "bio:caseId": "d209cffc-fe21-4ae7-b610-e5668ea84a3b",
+              "bio:projectId": "TCGA-LGG",
+              "bio:diseaseTypeLabel": "Brain Lower Grade Glioma",
+              "bio:primarySiteLabel": "Brain"
+            },
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_e7fdf164-a85d-4ff5-9676-d2215ca35403",
+          "measurement_properties": {
+            "bio:fileId": "155b732b-3603-4035-94d4-57a81a23a0d1",
+            "bio:unstrandedCount": 0.0,
+            "bio:strandedFirstCount": 0.0,
+            "bio:strandedSecondCount": 0.0,
+            "bio:tpmUnstranded": 0.0,
+            "bio:fpkmUnstranded": 0.0,
+            "bio:fpkmUqUnstranded": 0.0
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/e7fdf164-a85d-4ff5-9676-d2215ca35403",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/e7fdf164-a85d-4ff5-9676-d2215ca35403"
+            },
+            "case_properties": {
+              "bio:caseId": "e7fdf164-a85d-4ff5-9676-d2215ca35403",
+              "bio:projectId": "TCGA-LGG",
+              "bio:diseaseTypeLabel": "Brain Lower Grade Glioma",
+              "bio:primarySiteLabel": "Brain"
+            },
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_ec82a00f-3909-4781-8ae2-e54cbc1ac7ac",
+          "measurement_properties": {
+            "bio:fileId": "dff492f1-7fdc-4ff6-b868-c355cedd6cad",
+            "bio:unstrandedCount": 1.0,
+            "bio:strandedFirstCount": 1.0,
+            "bio:strandedSecondCount": 0.0,
+            "bio:tpmUnstranded": 0.0111,
+            "bio:fpkmUnstranded": 0.0032,
+            "bio:fpkmUqUnstranded": 0.0034
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/ec82a00f-3909-4781-8ae2-e54cbc1ac7ac",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/ec82a00f-3909-4781-8ae2-e54cbc1ac7ac"
+            },
+            "case_properties": {
+              "bio:caseId": "ec82a00f-3909-4781-8ae2-e54cbc1ac7ac",
+              "bio:projectId": "TCGA-LGG",
+              "bio:diseaseTypeLabel": "Brain Lower Grade Glioma",
+              "bio:primarySiteLabel": "Brain"
+            },
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_dadd7428-9e4d-4652-9469-ab521b88d529",
+          "measurement_properties": {
+            "bio:fileId": "f3f687a3-9619-4ab9-a5d1-35f31422b472",
+            "bio:unstrandedCount": 0.0,
+            "bio:strandedFirstCount": 0.0,
+            "bio:strandedSecondCount": 0.0,
+            "bio:tpmUnstranded": 0.0,
+            "bio:fpkmUnstranded": 0.0,
+            "bio:fpkmUqUnstranded": 0.0
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/dadd7428-9e4d-4652-9469-ab521b88d529",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/dadd7428-9e4d-4652-9469-ab521b88d529"
+            },
+            "case_properties": {
+              "bio:caseId": "dadd7428-9e4d-4652-9469-ab521b88d529",
+              "bio:projectId": "TCGA-LGG",
+              "bio:diseaseTypeLabel": "Brain Lower Grade Glioma",
+              "bio:primarySiteLabel": "Brain"
+            },
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_a56c2083-33d5-4c98-b85f-3b68a3d80add",
+          "measurement_properties": {
+            "bio:fileId": "67bec45d-ed1e-41c5-9c61-4d7fb1592450",
+            "bio:unstrandedCount": 1.0,
+            "bio:strandedFirstCount": 1.0,
+            "bio:strandedSecondCount": 0.0,
+            "bio:tpmUnstranded": 0.0157,
+            "bio:fpkmUnstranded": 0.0048,
+            "bio:fpkmUqUnstranded": 0.0047
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/a56c2083-33d5-4c98-b85f-3b68a3d80add",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/a56c2083-33d5-4c98-b85f-3b68a3d80add"
+            },
+            "case_properties": {
+              "bio:caseId": "a56c2083-33d5-4c98-b85f-3b68a3d80add",
+              "bio:projectId": "TCGA-LGG",
+              "bio:diseaseTypeLabel": "Brain Lower Grade Glioma",
+              "bio:primarySiteLabel": "Brain"
+            },
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_da13446a-c4dc-4d02-80c8-410273925ac4",
+          "measurement_properties": {
+            "bio:fileId": "dc944bdf-f066-4603-837d-fba14607a154",
+            "bio:unstrandedCount": 0.0,
+            "bio:strandedFirstCount": 0.0,
+            "bio:strandedSecondCount": 0.0,
+            "bio:tpmUnstranded": 0.0,
+            "bio:fpkmUnstranded": 0.0,
+            "bio:fpkmUqUnstranded": 0.0
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/da13446a-c4dc-4d02-80c8-410273925ac4",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/da13446a-c4dc-4d02-80c8-410273925ac4"
+            },
+            "case_properties": {
+              "bio:caseId": "da13446a-c4dc-4d02-80c8-410273925ac4",
+              "bio:projectId": "TCGA-LGG",
+              "bio:diseaseTypeLabel": "Brain Lower Grade Glioma",
+              "bio:primarySiteLabel": "Brain"
+            },
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_a5f851c5-6130-4ea1-9f86-be59331a92f7",
+          "measurement_properties": {
+            "bio:fileId": "106669c1-e20c-4ed8-863c-3ada529f58a4",
+            "bio:unstrandedCount": 0.0,
+            "bio:strandedFirstCount": 0.0,
+            "bio:strandedSecondCount": 0.0,
+            "bio:tpmUnstranded": 0.0,
+            "bio:fpkmUnstranded": 0.0,
+            "bio:fpkmUqUnstranded": 0.0
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/a5f851c5-6130-4ea1-9f86-be59331a92f7",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/a5f851c5-6130-4ea1-9f86-be59331a92f7"
+            },
+            "case_properties": {
+              "bio:caseId": "a5f851c5-6130-4ea1-9f86-be59331a92f7",
+              "bio:projectId": "TCGA-LGG",
+              "bio:diseaseTypeLabel": "Brain Lower Grade Glioma",
+              "bio:primarySiteLabel": "Brain"
+            },
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_e6c55ba6-4c8a-4ea4-8dde-74d01915db02",
+          "measurement_properties": {
+            "bio:fileId": "7cdc56cf-2e0e-467e-8e96-5b2391309b7f",
+            "bio:unstrandedCount": 0.0,
+            "bio:strandedFirstCount": 0.0,
+            "bio:strandedSecondCount": 0.0,
+            "bio:tpmUnstranded": 0.0,
+            "bio:fpkmUnstranded": 0.0,
+            "bio:fpkmUqUnstranded": 0.0
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/e6c55ba6-4c8a-4ea4-8dde-74d01915db02",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/e6c55ba6-4c8a-4ea4-8dde-74d01915db02"
+            },
+            "case_properties": {
+              "bio:caseId": "e6c55ba6-4c8a-4ea4-8dde-74d01915db02",
+              "bio:projectId": "TCGA-LGG",
+              "bio:diseaseTypeLabel": "Brain Lower Grade Glioma",
+              "bio:primarySiteLabel": "Brain"
+            },
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d3d8987d-0a54-45f8-b9c9-17ec89fa864e",
+          "measurement_properties": {
+            "bio:fileId": "8fcc58b7-834f-43df-b0a5-375e59dc3bed",
+            "bio:unstrandedCount": 1.0,
+            "bio:strandedFirstCount": 1.0,
+            "bio:strandedSecondCount": 0.0,
+            "bio:tpmUnstranded": 0.0117,
+            "bio:fpkmUnstranded": 0.0037,
+            "bio:fpkmUqUnstranded": 0.0041
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-LGG",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-LGG"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/d3d8987d-0a54-45f8-b9c9-17ec89fa864e",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/d3d8987d-0a54-45f8-b9c9-17ec89fa864e"
+            },
+            "case_properties": {
+              "bio:caseId": "d3d8987d-0a54-45f8-b9c9-17ec89fa864e",
+              "bio:projectId": "TCGA-LGG",
+              "bio:diseaseTypeLabel": "Brain Lower Grade Glioma",
+              "bio:primarySiteLabel": "Brain"
+            },
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-LGG"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_41685c5a-a548-483a-8a20-305ad8d61771",
+          "measurement_properties": {
+            "bio:fileId": "444a2332-9e52-4cf8-94d9-07a8b829633e",
+            "bio:unstrandedCount": 3.0,
+            "bio:strandedFirstCount": 1.0,
+            "bio:strandedSecondCount": 2.0,
+            "bio:tpmUnstranded": 0.0504,
+            "bio:fpkmUnstranded": 0.0169,
+            "bio:fpkmUqUnstranded": 0.0155
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-GBM",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-GBM"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-GBM"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/41685c5a-a548-483a-8a20-305ad8d61771",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/41685c5a-a548-483a-8a20-305ad8d61771"
+            },
+            "case_properties": {
+              "bio:caseId": "41685c5a-a548-483a-8a20-305ad8d61771",
+              "bio:projectId": "TCGA-GBM",
+              "bio:diseaseTypeLabel": "Glioblastoma",
+              "bio:primarySiteLabel": "Brain"
+            },
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-GBM"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_3f960d3b-a58c-43d0-a8a4-f3555b399c9d",
+          "measurement_properties": {
+            "bio:fileId": "99ff2016-a97a-4142-b70a-1bb59d6264e9",
+            "bio:unstrandedCount": 3.0,
+            "bio:strandedFirstCount": 0.0,
+            "bio:strandedSecondCount": 3.0,
+            "bio:tpmUnstranded": 0.0251,
+            "bio:fpkmUnstranded": 0.0184,
+            "bio:fpkmUqUnstranded": 0.0163
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-GBM",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-GBM"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-GBM"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/3f960d3b-a58c-43d0-a8a4-f3555b399c9d",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/3f960d3b-a58c-43d0-a8a4-f3555b399c9d"
+            },
+            "case_properties": {
+              "bio:caseId": "3f960d3b-a58c-43d0-a8a4-f3555b399c9d",
+              "bio:projectId": "TCGA-GBM",
+              "bio:diseaseTypeLabel": "Glioblastoma",
+              "bio:primarySiteLabel": "Brain"
+            },
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-GBM"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6",
+          "measurement_properties": {
+            "bio:fileId": "d4649bc7-09d2-4d90-bafd-0bec72429b00",
+            "bio:unstrandedCount": 0.0,
+            "bio:strandedFirstCount": 0.0,
+            "bio:strandedSecondCount": 0.0,
+            "bio:tpmUnstranded": 0.0,
+            "bio:fpkmUnstranded": 0.0,
+            "bio:fpkmUqUnstranded": 0.0
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-GBM",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-GBM"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-GBM"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/3ed101b5-0007-4957-a25d-4cf43bde08b6",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/3ed101b5-0007-4957-a25d-4cf43bde08b6"
+            },
+            "case_properties": {
+              "bio:caseId": "3ed101b5-0007-4957-a25d-4cf43bde08b6",
+              "bio:projectId": "TCGA-GBM",
+              "bio:diseaseTypeLabel": "Glioblastoma",
+              "bio:primarySiteLabel": "Brain"
+            },
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-GBM"
+            }
+          }
+        },
+        {
+          "type": "bio:ExpressionMeasurement",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_407849a8-8447-4ede-a9d1-c1dfb535222e",
+          "measurement_properties": {
+            "bio:fileId": "afbd1975-263b-404b-a738-886bf25c0223",
+            "bio:unstrandedCount": 1.0,
+            "bio:strandedFirstCount": 1.0,
+            "bio:strandedSecondCount": 0.0,
+            "bio:tpmUnstranded": 0.0084,
+            "bio:fpkmUnstranded": 0.0062,
+            "bio:fpkmUqUnstranded": 0.006
+          },
+          "project": {
+            "type": "bio:Project",
+            "individual_iri": "http://example.org/biointegrate/project/TCGA-GBM",
+            "object_property": {
+              "bio:inProject": "http://example.org/biointegrate/project/TCGA-GBM"
+            },
+            "project_properties": {
+              "bio:projectId": "TCGA-GBM"
+            }
+          },
+          "case": {
+            "type": "bio:Case",
+            "individual_iri": "http://example.org/biointegrate/case/407849a8-8447-4ede-a9d1-c1dfb535222e",
+            "object_property": {
+              "bio:forCase": "http://example.org/biointegrate/case/407849a8-8447-4ede-a9d1-c1dfb535222e"
+            },
+            "case_properties": {
+              "bio:caseId": "407849a8-8447-4ede-a9d1-c1dfb535222e",
+              "bio:projectId": "TCGA-GBM",
+              "bio:diseaseTypeLabel": "Glioblastoma",
+              "bio:primarySiteLabel": "Brain"
+            },
+            "case_to_project": {
+              "bio:caseInProject": "http://example.org/biointegrate/project/TCGA-GBM"
+            }
+          }
+        }
+      ]
+    }
+  }
+]

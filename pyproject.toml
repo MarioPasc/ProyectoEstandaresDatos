@@ -42,7 +42,8 @@ dependencies = [
     "pyyaml",
     "pymongo",
     "pandas",
-    "lxml"
+    "lxml",
+    "rdflib>=7.0.0"
 ]
 
 [project.urls]
@@ -60,6 +61,7 @@ biointegrate-import-hgnc = "biointegrate.db.hgnc_config:main"
 biointegrate-import-all = "biointegrate.db.import_all_mongo:main"
 biointegrate-pipeline = "biointegrate.cli.pipeline:main"
 biointegrate-execute-queries = "biointegrate.cli.queries:main"
+biointegrate-populate-ontology = "ontology.scripts.json_to_owl:main"
 
 
 [tool.setuptools]
@@ -71,7 +73,9 @@ packages = [
     "biointegrate.db",
     "biointegrate.utils",
     "biointegrate.quality",
-    "biointegrate.queries"
+    "biointegrate.queries",
+    "ontology",
+    "ontology.scripts"
 ]
 [tool.setuptools.package-data]
 biointegrate = ["py.typed"]
