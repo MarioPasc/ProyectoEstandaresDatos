@@ -506,14 +506,37 @@ def load_json_files(file_paths: List[str]) -> List[Dict[str, Any]]:
     return all_individuals
 
 
+def detect_ontology_format(filepath: str) -> str:
+    """Detect the format of an ontology file based on content."""
+    with open(filepath, 'r', encoding='utf-8') as f:
+        first_line = f.readline().strip()
+    
+    # RDF/XML starts with XML declaration or <rdf:RDF
+    if first_line.startswith('<?xml') or first_line.startswith('<rdf:RDF'):
+        return 'xml'
+    # Turtle files typically start with @prefix or @base
+    elif first_line.startswith('@prefix') or first_line.startswith('@base'):
+        return 'turtle'
+    # N3 is similar to Turtle
+    elif first_line.startswith('#') or ':' in first_line:
+        return 'turtle'
+    else:
+        # Default to xml for .owl files, turtle otherwise
+        return 'xml' if filepath.endswith('.owl') else 'turtle'
+
+
 def main():
     """Main entry point."""
     args = parse_args()
     
-    # Load base ontology
+    # Load base ontology with auto-detected format
     print(f"Loading ontology from: {args.ontology}")
     graph = Graph()
-    graph.parse(args.ontology, format='turtle')
+    
+    # Auto-detect format
+    ont_format = detect_ontology_format(args.ontology)
+    print(f"Detected format: {ont_format}")
+    graph.parse(args.ontology, format=ont_format)
     
     # Bind namespaces
     graph.bind('bio', BIO)

@@ -1,19 +1,30 @@
 ```bash
-# First run: start from base ontology
-biointegrate-populate-ontology \
-    --input result1.json \
-    --ontology ontology/assets/biointegrate.owl \
-    --output ontology/assets/biointegrate_populated.owl
+# Execute from project root: /home/mpascual/research/code/ProyectoEstandaresDatos
 
-# Second run: use the populated ontology as input AND output
-biointegrate-populate-ontology \
-    --input result2.json \
-    --ontology ontology/assets/biointegrate_populated.owl \
-    --output ontology/assets/biointegrate_populated.owl
+# Step 1: Execute Query6 to generate ontology individual JSON
+biointegrate-execute-queries \
+    --config config/queries/mario_queries.yaml \
+    --queries docs/t2-queries/Query6_OntologyIndividual.txt \
+    --output-dir docs/t2-resultados
 
-# Third run: keeps accumulating
+# Step 2: Populate the reasoned ontology with the query results
 biointegrate-populate-ontology \
-    --input result3.json \
+    --input docs/t2-resultados/query_6_ontology_individual.json \
+    --ontology ontology/assets/biointegrate-ontology-reasoned.owl \
+    --output ontology/assets/biointegrate_populated.owl
+```
+
+To accumulate more individuals (run Query6 multiple times for different genes):
+
+```bash
+# Subsequent runs: use populated ontology as both input and output
+biointegrate-execute-queries \
+    --config config/queries/mario_queries.yaml \
+    --queries docs/t2-queries/Query6_OntologyIndividual.txt \
+    --output-dir docs/t2-resultados
+
+biointegrate-populate-ontology \
+    --input docs/t2-resultados/query_6_ontology_individual.json \
     --ontology ontology/assets/biointegrate_populated.owl \
     --output ontology/assets/biointegrate_populated.owl
 ```

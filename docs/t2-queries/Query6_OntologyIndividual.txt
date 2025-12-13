@@ -52,25 +52,26 @@
     {
       "$lookup": {
         "from": "gdc_cases",
-        "let": { "case_id_var": "$case_id" },
-        "pipeline": [
-          {
-            "$match": {
-              "$expr": { "$eq": ["$case_id", "$$case_id_var"] }
-            }
-          },
-          {
-            "$project": {
-              "_id": 0,
-              "case_id": 1,
-              "project_id": 1,
-              "disease_type": 1,
-              "primary_site": 1,
-              "demographic": 1
+        "localField": "project_id",
+        "foreignField": "_id",
+        "as": "project_metadata"
+      }
+    },
+    {
+      "$addFields": {
+        "case_metadata_from_project": {
+          "$let": {
+            "vars": {
+              "proj_meta": { "$arrayElemAt": ["$project_metadata", 0] }
+            },
+            "in": {
+              "case_id": "$case_id",
+              "project_id": "$$proj_meta.project_id",
+              "disease_type": "$$proj_meta.disease_type",
+              "primary_site": "$$proj_meta.primary_site"
             }
           }
-        ],
-        "as": "case_data"
+        }
       }
     },
     {
@@ -98,7 +99,7 @@
             "tpm_unstranded": "$expression_data.tpm_unstranded",
             "fpkm_unstranded": "$expression_data.fpkm_unstranded",
             "fpkm_uq_unstranded": "$expression_data.fpkm_uq_unstranded",
-            "case_metadata": { "$arrayElemAt": ["$case_data", 0] }
+            "case_metadata": "$case_metadata_from_project"
           }
         }
       }
