@@ -1,0 +1,132 @@
+{
+  "name": "query_4_database_schema",
+  "collection": "hgnc_genes",
+  "type": "aggregate",
+  "pipeline": [
+    {
+      "$limit": 1
+    },
+    {
+      "$project": {
+        "_id": 0,
+        "collection_name": { "$literal": "hgnc_genes" },
+        "description": { "$literal": "Gene nomenclature from HGNC with expression data from GDC projects" },
+        "sample_fields": {
+          "hgnc_id": "$hgnc_id",
+          "symbol": "$symbol",
+          "name": "$name",
+          "ensembl_gene_id": "$ensembl_gene_id",
+          "uniprot_ids": "$uniprot_ids",
+          "locus_group": "$locus_group",
+          "projects_sample": {
+            "$arrayElemAt": [
+              { "$objectToArray": "$projects" },
+              0
+            ]
+          }
+        },
+        "key_fields_for_joins": {
+          "$literal": [
+            "hgnc_id (primary key)",
+            "ensembl_gene_id (links to other genomic databases)",
+            "uniprot_ids (links to uniprot_entries collection)",
+            "projects.{PROJECT_ID}.cases.{CASE_ID} (links to gdc_cases via case_id)"
+          ]
+        }
+      }
+    },
+    {
+      "$unionWith": {
+        "coll": "uniprot_entries",
+        "pipeline": [
+          {
+            "$limit": 1
+          },
+          {
+            "$project": {
+              "_id": 0,
+              "collection_name": { "$literal": "uniprot_entries" },
+              "description": { "$literal": "Protein information from UniProt with annotations and GO terms" },
+              "sample_fields": {
+                "uniprot_id": "$_id",
+                "organism": "$organism",
+                "protein": {
+                  "names": "$protein.names",
+                  "length": "$protein.length",
+                  "function_cc": { "$substrCP": [ { "$ifNull": [ "$protein.function_cc", "" ] }, 0, 200 ] }
+                },
+                "go_terms": {
+                  "molecular_function_sample": { "$arrayElemAt": [ "$go_terms.molecular_function", 0 ] },
+                  "biological_process_sample": { "$arrayElemAt": [ "$go_terms.biological_process", 0 ] },
+                  "cellular_component_sample": { "$arrayElemAt": [ "$go_terms.cellular_component", 0 ] }
+                },
+                "gene": "$gene"
+              },
+              "key_fields_for_joins": {
+                "$literal": [
+                  "_id / uniprot_id (primary key, links to hgnc_genes.uniprot_ids)",
+                  "gene.hgnc_ids (links to hgnc_genes.hgnc_id)",
+                  "gene.ensembl_gene_ids (links to hgnc_genes.ensembl_gene_id)"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "$unionWith": {
+        "coll": "gdc_cases",
+        "pipeline": [
+          {
+            "$limit": 1
+          },
+          {
+            "$project": {
+              "_id": 0,
+              "collection_name": { "$literal": "gdc_cases" },
+              "description": { "$literal": "Clinical case metadata from GDC/TCGA cancer projects" },
+              "sample_fields": {
+                "case_id": "$case_id",
+                "project_id": "$project_id",
+                "disease_type": "$disease_type",
+                "primary_site": "$primary_site",
+                "demographic": "$demographic",
+                "diagnoses_sample": { "$arrayElemAt": [ "$diagnoses", 0 ] }
+              },
+              "key_fields_for_joins": {
+                "$literal": [
+                  "case_id (primary key, links to hgnc_genes.projects.{PROJECT}.cases.{CASE_ID})",
+                  "project_id (links to hgnc_genes.projects.{PROJECT_ID})"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "$group": {
+        "_id": null,
+        "database_schema": {
+          "$push": {
+            "collection": "$collection_name",
+            "description": "$description",
+            "sample_fields": "$sample_fields",
+            "join_keys": "$key_fields_for_joins"
+          }
+        }
+      }
+    },
+    {
+      "$project": {
+        "_id": 0,
+        "schema_overview": {
+          "database_name": { "$literal": "estandares_db" },
+          "total_collections": { "$size": "$database_schema" },
+          "collections": "$database_schema"
+        }
+      }
+    }
+  ]
+}

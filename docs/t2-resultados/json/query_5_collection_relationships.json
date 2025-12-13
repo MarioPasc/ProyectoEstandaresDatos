@@ -1,0 +1,68 @@
+[
+  {
+    "collection_relationships": {
+      "description": "This query demonstrates how the three main collections in estandares_db are interconnected",
+      "collections_involved": [
+        "hgnc_genes",
+        "uniprot_entries",
+        "gdc_cases"
+      ],
+      "relationship_1_hgnc_uniprot": {
+        "from_collection": "hgnc_genes",
+        "to_collection": "uniprot_entries",
+        "join_type": "one-to-many",
+        "from_field": "uniprot_ids (array)",
+        "to_field": "_id",
+        "description": "Each gene can map to multiple UniProt protein entries via the uniprot_ids array"
+      },
+      "relationship_2_hgnc_gdc": {
+        "from_collection": "hgnc_genes",
+        "to_collection": "gdc_cases",
+        "join_type": "many-to-many (via nested structure)",
+        "from_field": "projects.{PROJECT_ID}.cases.{CASE_ID}",
+        "to_field": "case_id",
+        "description": "Expression data in hgnc_genes is organized by project and case, linking to clinical case data in gdc_cases"
+      },
+      "relationship_3_uniprot_hgnc": {
+        "from_collection": "uniprot_entries",
+        "to_collection": "hgnc_genes",
+        "join_type": "many-to-one",
+        "from_field": "gene.hgnc_ids or gene.ensembl_gene_ids",
+        "to_field": "hgnc_id or ensembl_gene_id",
+        "description": "UniProt entries contain gene identifiers that link back to HGNC gene records"
+      }
+    },
+    "sample_data": {
+      "gene_info": {
+        "hgnc_id": "HGNC:5",
+        "symbol": "A1BG",
+        "ensembl_gene_id": "ENSG00000121410"
+      },
+      "relationship_hgnc_to_uniprot": {
+        "join_field_in_hgnc": "uniprot_ids",
+        "join_field_in_uniprot": "_id",
+        "hgnc_uniprot_ids": [
+          "P04217"
+        ],
+        "matched_proteins_count": 1,
+        "matched_protein_samples": [
+          {
+            "uniprot_id": "P04217",
+            "protein_name": "Alpha-1B-glycoprotein (Alpha-1-B glycoprotein)"
+          }
+        ]
+      },
+      "relationship_hgnc_to_gdc": {
+        "join_mechanism": "hgnc_genes.projects.{PROJECT_ID}.cases.{CASE_ID} -> gdc_cases.case_id",
+        "project_with_expression": "TCGA-LGG",
+        "sample_case_id": "d50e944a-3ce4-4632-a878-118499e143e3"
+      }
+    },
+    "statistics": {
+      "_id": null,
+      "total_genes_with_uniprot_links": 5,
+      "total_protein_matches": 5,
+      "genes_with_gdc_case_links": 5
+    }
+  }
+]

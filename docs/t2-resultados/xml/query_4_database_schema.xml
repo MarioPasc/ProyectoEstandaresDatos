@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<results>
+  <result>
+    <schema_overview>
+      <database_name>estandares_db</database_name>
+      <total_collections>3</total_collections>
+      <collections>
+        <collection>
+          <collection>hgnc_genes</collection>
+          <description>Gene nomenclature from HGNC with expression data from GDC projects</description>
+          <sample_fields>
+            <hgnc_id>HGNC:5</hgnc_id>
+            <symbol>A1BG</symbol>
+            <ensembl_gene_id>ENSG00000121410</ensembl_gene_id>
+            <uniprot_ids>
+              <uniprot_id>P04217</uniprot_id>
+            </uniprot_ids>
+            <projects_sample>
+              <k>TCGA-LGG</k>
+              <v>
+                <n_cases>10</n_cases>
+                <cases>
+                  <d50e944a-3ce4-4632-a878-118499e143e3>
+                    <file_id>7349fbd4-c919-45a5-8ed2-1f61b9fec87f</file_id>
+                    <unstranded>28.0</unstranded>
+                    <stranded_first>20.0</stranded_first>
+                    <stranded_second>18.0</stranded_second>
+                    <tpm_unstranded>0.4355</tpm_unstranded>
+                    <fpkm_unstranded>0.1392</fpkm_unstranded>
+                    <fpkm_uq_unstranded>0.14</fpkm_uq_unstranded>
+                  </d50e944a-3ce4-4632-a878-118499e143e3>
+                  <d209cffc-fe21-4ae7-b610-e5668ea84a3b>
+                    <file_id>febf694d-811a-4fcd-b498-e9451fdc0d4e</file_id>
+                    <unstranded>49.0</unstranded>
+                    <stranded_first>38.0</stranded_first>
+                    <stranded_second>38.0</stranded_second>
+                    <tpm_unstranded>0.7764</tpm_unstranded>
+                    <fpkm_unstranded>0.2338</fpkm_unstranded>
+                    <fpkm_uq_unstranded>0.2332</fpkm_uq_unstranded>
+                  </d209cffc-fe21-4ae7-b610-e5668ea84a3b>
+                  <e7fdf164-a85d-4ff5-9676-d2215ca35403>
+                    <file_id>155b732b-3603-4035-94d4-57a81a23a0d1</file_id>
+                    <unstranded>6.0</unstranded>
+                    <stranded_first>7.0</stranded_first>
+                    <stranded_second>5.0</stranded_second>
+                    <tpm_unstranded>0.1013</tpm_unstranded>
+                    <fpkm_unstranded>0.026</fpkm_unstranded>
+                    <fpkm_uq_unstranded>0.0265</fpkm_uq_unstranded>
+                  </e7fdf164-a85d-4ff5-9676-d2215ca35403>
+                  <ec82a00f-3909-4781-8ae2-e54cbc1ac7ac>
+                    <file_id>dff492f1-7fdc-4ff6-b868-c355cedd6cad</file_id>
+                    <unstranded>33.0</unstranded>
+                    <stranded_first>26.0</stranded_first>
+                    <stranded_second>19.0</stranded_second>
+                    <tpm_unstranded>0.3993</tpm_unstranded>
+                    <fpkm_unstranded>0.1135</fpkm_unstranded>
+                    <fpkm_uq_unstranded>0.1212</fpkm_uq_unstranded>
+                  </ec82a00f-3909-4781-8ae2-e54cbc1ac7ac>
+                  <dadd7428-9e4d-4652-9469-ab521b88d529>
+                    <file_id>f3f687a3-9619-4ab9-a5d1-35f31422b472</file_id>
+                    <unstranded>24.0</unstranded>
+                    <stranded_first>14.0</stranded_first>
+                    <stranded_second>21.0</stranded_second>
+                    <tpm_unstranded>0.3288</tpm_unstranded>
+                    <fpkm_unstranded>0.1017</fpkm_unstranded>
+                    <fpkm_uq_unstranded>0.1124</fpkm_uq_unstranded>
+                  </dadd7428-9e4d-4652-9469-ab521b88d529>
+                  <a56c2083-33d5-4c98-b85f-3b68a3d80add>
+                    <file_id>67bec45d-ed1e-41c5-9c61-4d7fb1592450</file_id>
+                    <unstranded>53.0</unstranded>
+                    <stranded_first>37.0</stranded_first>
+                    <stranded_second>34.0</stranded_second>
+                    <tpm_unstranded>0.9041</tpm_unstranded>
+                    <fpkm_unstranded>0.2778</fpkm_unstranded>
+                    <fpkm_uq_unstranded>0.2732</fpkm_uq_unstranded>
+                  </a56c2083-33d5-4c98-b85f-3b68a3d80add>
+                  <da13446a-c4dc-4d02-80c8-410273925ac4>
+                    <file_id>dc944bdf-f066-4603-837d-fba14607a154</file_id>
+                    <unstranded>3.0</unstranded>
+                    <stranded_first>3.0</stranded_first>
+                    <stranded_second>1.0</stranded_second>
+                    <tpm_unstranded>0.055</tpm_unstranded>
+                    <fpkm_unstranded>0.016</fpkm_unstranded>
+                    <fpkm_uq_unstranded>0.017</fpkm_uq_unstranded>
+                  </da13446a-c4dc-4d02-80c8-410273925ac4>
+                  <a5f851c5-6130-4ea1-9f86-be59331a92f7>
+                    <file_id>106669c1-e20c-4ed8-863c-3ada529f58a4</file_id>
+                    <unstranded>7.0</unstranded>
+                    <stranded_first>3.0</stranded_first>
+                    <stranded_second>14.0</stranded_second>
+                    <tpm_unstranded>0.0968</tpm_unstranded>
+                    <fpkm_unstranded>0.0285</fpkm_unstranded>
+                    <fpkm_uq_unstranded>0.0277</fpkm_uq_unstranded>
+                  </a5f851c5-6130-4ea1-9f86-be59331a92f7>
+                  <e6c55ba6-4c8a-4ea4-8dde-74d01915db02>
+                    <file_id>7cdc56cf-2e0e-467e-8e96-5b2391309b7f</file_id>
+                    <unstranded>4.0</unstranded>
+                    <stranded_first>4.0</stranded_first>
+                    <stranded_second>5.0</stranded_second>
+                    <tpm_unstranded>0.0635</tpm_unstranded>
+                    <fpkm_unstranded>0.0158</fpkm_unstranded>
+                    <fpkm_uq_unstranded>0.0157</fpkm_uq_unstranded>
+                  </e6c55ba6-4c8a-4ea4-8dde-74d01915db02>
+                  <d3d8987d-0a54-45f8-b9c9-17ec89fa864e>
+                    <file_id>8fcc58b7-834f-43df-b0a5-375e59dc3bed</file_id>
+                    <unstranded>16.0</unstranded>
+                    <stranded_first>13.0</stranded_first>
+                    <stranded_second>18.0</stranded_second>
+                    <tpm_unstranded>0.2033</tpm_unstranded>
+                    <fpkm_unstranded>0.0637</fpkm_unstranded>
+                    <fpkm_uq_unstranded>0.0707</fpkm_uq_unstranded>
+                  </d3d8987d-0a54-45f8-b9c9-17ec89fa864e>
+                </cases>
+              </v>
+            </projects_sample>
+          </sample_fields>
+          <join_keys>
+            <join_key>hgnc_id (primary key)</join_key>
+            <join_key>ensembl_gene_id (links to other genomic databases)</join_key>
+            <join_key>uniprot_ids (links to uniprot_entries collection)</join_key>
+            <join_key>projects.{PROJECT_ID}.cases.{CASE_ID} (links to gdc_cases via case_id)</join_key>
+          </join_keys>
+        </collection>
+        <collection>
+          <collection>uniprot_entries</collection>
+          <description>Protein information from UniProt with annotations and GO terms</description>
+          <sample_fields>
+            <uniprot_id>A0A024RBG1</uniprot_id>
+            <organism>
+              <taxonomy_id>9606</taxonomy_id>
+              <name>Homo sapiens</name>
+            </organism>
+            <protein>
+              <names>
+                <name>Diphosphoinositol polyphosphate phosphohydrolase NUDT4B (DIPP-2B) (EC 3.6.1.52) (Nucleoside diphosphate-linked moiety X motif 4B) (Nudix motif 4B) (Nudix hydrolase 4B)</name>
+              </names>
+              <length>181</length>
+              <function_cc>FUNCTION: Cleaves a beta-phosphate from the diphosphate groups in PP-InsP5 (diphosphoinositol pentakisphosphate), PP-InsP4 and [PP]2-InsP4 (bisdiphosphoinositol tetrakisphosphate), suggesting that it </function_cc>
+            </protein>
+            <go_terms>
+              <molecular_function_sample>bis(5'-adenosyl)-hexaphosphatase activity [GO:0034431]</molecular_function_sample>
+              <biological_process_sample>adenosine 5'-(hexahydrogen pentaphosphate) catabolic process [GO:1901911]</biological_process_sample>
+              <cellular_component_sample>cytoplasm [GO:0005737]</cellular_component_sample>
+            </go_terms>
+            <gene>
+              <primary_symbol>NUDT4B</primary_symbol>
+              <synonyms>
+                <synonym>NUDT4B</synonym>
+              </synonyms>
+              <hgnc_ids>
+                <hgnc_id>HGNC:18012</hgnc_id>
+              </hgnc_ids>
+              <ensembl_gene_ids>
+                <ensembl_gene_id>ENSG00000177144</ensembl_gene_id>
+              </ensembl_gene_ids>
+            </gene>
+          </sample_fields>
+          <join_keys>
+            <join_key>_id / uniprot_id (primary key, links to hgnc_genes.uniprot_ids)</join_key>
+            <join_key>gene.hgnc_ids (links to hgnc_genes.hgnc_id)</join_key>
+            <join_key>gene.ensembl_gene_ids (links to hgnc_genes.ensembl_gene_id)</join_key>
+          </join_keys>
+        </collection>
+        <collection>
+          <collection>gdc_cases</collection>
+          <description>Clinical case metadata from GDC/TCGA cancer projects</description>
+          <sample_fields>
+            <project_id>TCGA-LGG</project_id>
+            <disease_type>Brain Lower Grade Glioma</disease_type>
+            <primary_site>Brain</primary_site>
+            <diagnoses_sample is_null="true"/>
+          </sample_fields>
+          <join_keys>
+            <join_key>case_id (primary key, links to hgnc_genes.projects.{PROJECT}.cases.{CASE_ID})</join_key>
+            <join_key>project_id (links to hgnc_genes.projects.{PROJECT_ID})</join_key>
+          </join_keys>
+        </collection>
+      </collections>
+    </schema_overview>
+  </result>
+</results>
