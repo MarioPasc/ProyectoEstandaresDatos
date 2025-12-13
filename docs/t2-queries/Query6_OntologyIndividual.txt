@@ -1,0 +1,303 @@
+{
+  "name": "query_6_ontology_individual",
+  "collection": "hgnc_genes",
+  "type": "aggregate",
+  "pipeline": [
+    {
+      "$match": {
+        "uniprot_ids": { "$exists": true, "$ne": [] },
+        "projects": { "$exists": true }
+      }
+    },
+    {
+      "$sample": { "size": 1 }
+    },
+    {
+      "$lookup": {
+        "from": "uniprot_entries",
+        "localField": "uniprot_ids",
+        "foreignField": "_id",
+        "as": "protein_data"
+      }
+    },
+    {
+      "$addFields": {
+        "project_entries": { "$objectToArray": "$projects" }
+      }
+    },
+    {
+      "$unwind": {
+        "path": "$project_entries",
+        "preserveNullAndEmptyArrays": false
+      }
+    },
+    {
+      "$addFields": {
+        "project_id": "$project_entries.k",
+        "project_cases": { "$objectToArray": "$project_entries.v.cases" }
+      }
+    },
+    {
+      "$unwind": {
+        "path": "$project_cases",
+        "preserveNullAndEmptyArrays": false
+      }
+    },
+    {
+      "$addFields": {
+        "case_id": "$project_cases.k",
+        "expression_data": "$project_cases.v"
+      }
+    },
+    {
+      "$lookup": {
+        "from": "gdc_cases",
+        "let": { "case_id_var": "$case_id" },
+        "pipeline": [
+          {
+            "$match": {
+              "$expr": { "$eq": ["$case_id", "$$case_id_var"] }
+            }
+          },
+          {
+            "$project": {
+              "_id": 0,
+              "case_id": 1,
+              "project_id": 1,
+              "disease_type": 1,
+              "primary_site": 1,
+              "demographic": 1
+            }
+          }
+        ],
+        "as": "case_data"
+      }
+    },
+    {
+      "$group": {
+        "_id": "$_id",
+        "gene_data": {
+          "$first": {
+            "hgnc_id": "$hgnc_id",
+            "symbol": "$symbol",
+            "name": "$name",
+            "ensembl_gene_id": "$ensembl_gene_id",
+            "locus_group": "$locus_group",
+            "uniprot_ids": "$uniprot_ids"
+          }
+        },
+        "protein_products": { "$first": "$protein_data" },
+        "expression_measurements": {
+          "$push": {
+            "project_id": "$project_id",
+            "case_id": "$case_id",
+            "file_id": "$expression_data.file_id",
+            "unstranded": "$expression_data.unstranded",
+            "stranded_first": "$expression_data.stranded_first",
+            "stranded_second": "$expression_data.stranded_second",
+            "tpm_unstranded": "$expression_data.tpm_unstranded",
+            "fpkm_unstranded": "$expression_data.fpkm_unstranded",
+            "fpkm_uq_unstranded": "$expression_data.fpkm_uq_unstranded",
+            "case_metadata": { "$arrayElemAt": ["$case_data", 0] }
+          }
+        }
+      }
+    },
+    {
+      "$project": {
+        "_id": 0,
+        "ontology_individual": {
+          "type": "bio:Gene",
+          "individual_iri": {
+            "$concat": [
+              "http://example.org/biointegrate/gene/",
+              { "$replaceAll": { "input": "$gene_data.hgnc_id", "find": ":", "replacement": "_" } }
+            ]
+          },
+          "gene_properties": {
+            "bio:hgncId": "$gene_data.hgnc_id",
+            "bio:geneSymbol": "$gene_data.symbol",
+            "bio:geneName": "$gene_data.name",
+            "bio:ensemblGeneId": "$gene_data.ensembl_gene_id",
+            "bio:locusGroup": "$gene_data.locus_group"
+          },
+          "protein_products": {
+            "$map": {
+              "input": "$protein_products",
+              "as": "protein",
+              "in": {
+                "type": "bio:Protein",
+                "individual_iri": {
+                  "$concat": [
+                    "http://example.org/biointegrate/protein/",
+                    "$$protein._id"
+                  ]
+                },
+                "object_property": {
+                  "bio:hasProteinProduct": {
+                    "$concat": [
+                      "http://example.org/biointegrate/protein/",
+                      "$$protein._id"
+                    ]
+                  }
+                },
+                "protein_properties": {
+                  "bio:uniprotId": "$$protein._id",
+                  "bio:proteinName": "$$protein.protein.names",
+                  "bio:sequenceLength": "$$protein.protein.length",
+                  "bio:functionText": {
+                    "$cond": [
+                      { "$ifNull": ["$$protein.protein.function_cc", false] },
+                      { "$substrCP": ["$$protein.protein.function_cc", 0, 500] },
+                      null
+                    ]
+                  }
+                },
+                "organism": {
+                  "type": "bio:Organism",
+                  "individual_iri": {
+                    "$concat": [
+                      "http://example.org/biointegrate/organism/",
+                      { "$toString": "$$protein.organism.taxonomy_id" }
+                    ]
+                  },
+                  "object_property": {
+                    "bio:hasOrganism": {
+                      "$concat": [
+                        "http://example.org/biointegrate/organism/",
+                        { "$toString": "$$protein.organism.taxonomy_id" }
+                      ]
+                    }
+                  },
+                  "organism_properties": {
+                    "bio:taxonomyId": "$$protein.organism.taxonomy_id",
+                    "bio:scientificName": {
+                      "$ifNull": [
+                        "$$protein.organism.scientific_name",
+                        "$$protein.organism.name"
+                      ]
+                    }
+                  }
+                },
+                "go_terms": {
+                  "molecular_function": {
+                    "$map": {
+                      "input": { "$ifNull": ["$$protein.go_terms.molecular_function", []] },
+                      "as": "go_mf",
+                      "in": {
+                        "type": "bio:GOTerm",
+                        "term": "$$go_mf",
+                        "object_property": "bio:hasMolecularFunction"
+                      }
+                    }
+                  },
+                  "biological_process": {
+                    "$map": {
+                      "input": { "$ifNull": ["$$protein.go_terms.biological_process", []] },
+                      "as": "go_bp",
+                      "in": {
+                        "type": "bio:GOTerm",
+                        "term": "$$go_bp",
+                        "object_property": "bio:hasBiologicalProcess"
+                      }
+                    }
+                  },
+                  "cellular_component": {
+                    "$map": {
+                      "input": { "$ifNull": ["$$protein.go_terms.cellular_component", []] },
+                      "as": "go_cc",
+                      "in": {
+                        "type": "bio:GOTerm",
+                        "term": "$$go_cc",
+                        "object_property": "bio:hasCellularComponent"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "expression_measurements": {
+            "$map": {
+              "input": "$expression_measurements",
+              "as": "expr",
+              "in": {
+                "type": "bio:ExpressionMeasurement",
+                "individual_iri": {
+                  "$concat": [
+                    "http://example.org/biointegrate/expression/",
+                    { "$replaceAll": { "input": "$gene_data.hgnc_id", "find": ":", "replacement": "_" } },
+                    "_",
+                    "$$expr.project_id",
+                    "_",
+                    "$$expr.case_id"
+                  ]
+                },
+                "measurement_properties": {
+                  "bio:fileId": "$$expr.file_id",
+                  "bio:unstrandedCount": "$$expr.unstranded",
+                  "bio:strandedFirstCount": "$$expr.stranded_first",
+                  "bio:strandedSecondCount": "$$expr.stranded_second",
+                  "bio:tpmUnstranded": "$$expr.tpm_unstranded",
+                  "bio:fpkmUnstranded": "$$expr.fpkm_unstranded",
+                  "bio:fpkmUqUnstranded": "$$expr.fpkm_uq_unstranded"
+                },
+                "project": {
+                  "type": "bio:Project",
+                  "individual_iri": {
+                    "$concat": [
+                      "http://example.org/biointegrate/project/",
+                      "$$expr.project_id"
+                    ]
+                  },
+                  "object_property": {
+                    "bio:inProject": {
+                      "$concat": [
+                        "http://example.org/biointegrate/project/",
+                        "$$expr.project_id"
+                      ]
+                    }
+                  },
+                  "project_properties": {
+                    "bio:projectId": "$$expr.project_id"
+                  }
+                },
+                "case": {
+                  "type": "bio:Case",
+                  "individual_iri": {
+                    "$concat": [
+                      "http://example.org/biointegrate/case/",
+                      "$$expr.case_id"
+                    ]
+                  },
+                  "object_property": {
+                    "bio:forCase": {
+                      "$concat": [
+                        "http://example.org/biointegrate/case/",
+                        "$$expr.case_id"
+                      ]
+                    }
+                  },
+                  "case_properties": {
+                    "bio:caseId": "$$expr.case_metadata.case_id",
+                    "bio:projectId": "$$expr.case_metadata.project_id",
+                    "bio:diseaseTypeLabel": "$$expr.case_metadata.disease_type",
+                    "bio:primarySiteLabel": "$$expr.case_metadata.primary_site"
+                  },
+                  "case_to_project": {
+                    "bio:caseInProject": {
+                      "$concat": [
+                        "http://example.org/biointegrate/project/",
+                        "$$expr.project_id"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
