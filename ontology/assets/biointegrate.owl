@@ -1,0 +1,682 @@
+@prefix : <http://example.org/biointegrate/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix up: <https://purl.uniprot.org/core/> .
+@prefix bio: <http://example.org/biointegrate/> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@base <http://example.org/biointegrate/> .
+
+<http://example.org/biointegrate/> rdf:type owl:Ontology ;
+                                    owl:versionIRI <http://example.org/biointegrate/2025-12-13/biointegrate.owl> ;
+                                    dc:source "HGNC" ,
+                                              "NCI Genomic Data Commons (GDC/TCGA)" ,
+                                              "UniProt" ;
+                                    rdfs:label "BioIntegrate: simplified HGNC–UniProt–GDC integration ontology"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://example.org/biointegrate/manchesterDefinition
+bio:manchesterDefinition rdf:type owl:AnnotationProperty ;
+                         rdfs:comment "Human-readable Manchester class expression to paste into Protégé (EquivalentTo/SubClassOf)."@en ;
+                         rdfs:label "Manchester definition"@en .
+
+
+###  http://purl.org/dc/elements/1.1/source
+dc:source rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#exactMatch
+skos:exactMatch rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://example.org/biointegrate/caseInProject
+bio:caseInProject rdf:type owl:ObjectProperty ;
+                  owl:inverseOf bio:hasCase ;
+                  rdf:type owl:FunctionalProperty ;
+                  rdfs:domain bio:Case ;
+                  rdfs:range bio:Project ;
+                  rdfs:label "case in project"@en .
+
+
+###  http://example.org/biointegrate/hasBiologicalProcess
+bio:hasBiologicalProcess rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf bio:hasGoTerm ;
+                         owl:inverseOf bio:isBiologicalProcessOf ;
+                         rdfs:domain bio:Protein ;
+                         rdfs:range bio:GOTerm ;
+                         rdfs:label "has biological process"@en .
+
+
+###  http://example.org/biointegrate/hasCase
+bio:hasCase rdf:type owl:ObjectProperty ;
+            rdfs:domain bio:Project ;
+            rdfs:range bio:Case ;
+            rdfs:label "has case"@en .
+
+
+###  http://example.org/biointegrate/hasCaseMeasurement
+bio:hasCaseMeasurement rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf bio:hasExpressionMeasurement ;
+                       owl:inverseOf bio:measuredCase ;
+                       rdfs:domain bio:Case ;
+                       rdfs:range bio:ExpressionMeasurement ;
+                       rdfs:label "has case measurement"@en .
+
+
+###  http://example.org/biointegrate/hasCellularComponent
+bio:hasCellularComponent rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf bio:hasGoTerm ;
+                         owl:inverseOf bio:isCellularComponentOf ;
+                         rdfs:domain bio:Protein ;
+                         rdfs:range bio:GOTerm ;
+                         rdfs:label "has cellular component"@en .
+
+
+###  http://example.org/biointegrate/hasExpressionMeasurement
+bio:hasExpressionMeasurement rdf:type owl:ObjectProperty ;
+                             rdfs:domain bio:BioEntity ;
+                             rdfs:range bio:ExpressionMeasurement ;
+                             rdfs:label "has expression measurement"@en .
+
+
+###  http://example.org/biointegrate/hasGeneMeasurement
+bio:hasGeneMeasurement rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf bio:hasExpressionMeasurement ;
+                       owl:inverseOf bio:measuredGene ;
+                       rdfs:domain bio:Gene ;
+                       rdfs:range bio:ExpressionMeasurement ;
+                       rdfs:label "has gene measurement"@en .
+
+
+###  http://example.org/biointegrate/hasGoTerm
+bio:hasGoTerm rdf:type owl:ObjectProperty ;
+              owl:inverseOf bio:isGoTermOfProtein ;
+              rdfs:domain bio:Protein ;
+              rdfs:range bio:GOTerm ;
+              rdfs:label "has GO term"@en .
+
+
+###  http://example.org/biointegrate/hasMolecularFunction
+bio:hasMolecularFunction rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf bio:hasGoTerm ;
+                         owl:inverseOf bio:isMolecularFunctionOf ;
+                         rdfs:domain bio:Protein ;
+                         rdfs:range bio:GOTerm ;
+                         rdfs:label "has molecular function"@en .
+
+
+###  http://example.org/biointegrate/hasOrganism
+bio:hasOrganism rdf:type owl:ObjectProperty ;
+                owl:inverseOf bio:isOrganismOf ;
+                rdf:type owl:FunctionalProperty ;
+                rdfs:domain bio:Protein ;
+                rdfs:range bio:Organism ;
+                rdfs:label "has organism"@en .
+
+
+###  http://example.org/biointegrate/hasProjectMeasurement
+bio:hasProjectMeasurement rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf bio:hasExpressionMeasurement ;
+                          owl:inverseOf bio:measuredProject ;
+                          rdfs:domain bio:Project ;
+                          rdfs:range bio:ExpressionMeasurement ;
+                          rdfs:label "has project measurement"@en .
+
+
+###  http://example.org/biointegrate/hasProteinProduct
+bio:hasProteinProduct rdf:type owl:ObjectProperty ;
+                      owl:inverseOf bio:proteinProductOf ;
+                      rdfs:domain bio:Gene ;
+                      rdfs:range bio:Protein ;
+                      rdfs:label "has protein product"@en .
+
+
+###  http://example.org/biointegrate/isBiologicalProcessOf
+bio:isBiologicalProcessOf rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf bio:isGoTermOfProtein ;
+                          rdfs:domain bio:GOTerm ;
+                          rdfs:range bio:Protein ;
+                          rdfs:label "is biological process of"@en .
+
+
+###  http://example.org/biointegrate/isCellularComponentOf
+bio:isCellularComponentOf rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf bio:isGoTermOfProtein ;
+                          rdfs:domain bio:GOTerm ;
+                          rdfs:range bio:Protein ;
+                          rdfs:label "is cellular component of"@en .
+
+
+###  http://example.org/biointegrate/isGoTermOfProtein
+bio:isGoTermOfProtein rdf:type owl:ObjectProperty ;
+                      rdfs:domain bio:GOTerm ;
+                      rdfs:range bio:Protein ;
+                      rdfs:label "is GO term of protein"@en .
+
+
+###  http://example.org/biointegrate/isMolecularFunctionOf
+bio:isMolecularFunctionOf rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf bio:isGoTermOfProtein ;
+                          rdfs:domain bio:GOTerm ;
+                          rdfs:range bio:Protein ;
+                          rdfs:label "is molecular function of"@en .
+
+
+###  http://example.org/biointegrate/isOrganismOf
+bio:isOrganismOf rdf:type owl:ObjectProperty ;
+                 rdfs:domain bio:Organism ;
+                 rdfs:range bio:Protein ;
+                 rdfs:label "is organism of"@en .
+
+
+###  http://example.org/biointegrate/measuredCase
+bio:measuredCase rdf:type owl:ObjectProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:domain bio:ExpressionMeasurement ;
+                 rdfs:range bio:Case ;
+                 rdfs:label "measured case"@en .
+
+
+###  http://example.org/biointegrate/measuredGene
+bio:measuredGene rdf:type owl:ObjectProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:domain bio:ExpressionMeasurement ;
+                 rdfs:range bio:Gene ;
+                 rdfs:label "measured gene"@en .
+
+
+###  http://example.org/biointegrate/measuredProject
+bio:measuredProject rdf:type owl:ObjectProperty ,
+                             owl:FunctionalProperty ;
+                    rdfs:domain bio:ExpressionMeasurement ;
+                    rdfs:range bio:Project ;
+                    rdfs:label "measured project"@en .
+
+
+###  http://example.org/biointegrate/proteinProductOf
+bio:proteinProductOf rdf:type owl:ObjectProperty ,
+                              owl:FunctionalProperty ;
+                     rdfs:domain bio:Protein ;
+                     rdfs:range bio:Gene ;
+                     rdfs:label "protein product of"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://example.org/biointegrate/caseId
+bio:caseId rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain bio:Case ;
+           rdfs:range xsd:string ;
+           rdfs:label "case ID"@en .
+
+
+###  http://example.org/biointegrate/diseaseTypeLabel
+bio:diseaseTypeLabel rdf:type owl:DatatypeProperty ;
+                     rdfs:domain bio:Case ;
+                     rdfs:range xsd:string ;
+                     rdfs:label "disease type label"@en .
+
+
+###  http://example.org/biointegrate/ensemblGeneId
+bio:ensemblGeneId rdf:type owl:DatatypeProperty ,
+                           owl:FunctionalProperty ;
+                  rdfs:domain bio:Gene ;
+                  rdfs:range xsd:string ;
+                  rdfs:label "Ensembl gene ID"@en .
+
+
+###  http://example.org/biointegrate/fileId
+bio:fileId rdf:type owl:DatatypeProperty ;
+           rdfs:domain bio:ExpressionMeasurement ;
+           rdfs:range xsd:string ;
+           rdfs:label "file UUID"@en .
+
+
+###  http://example.org/biointegrate/fpkmUnstranded
+bio:fpkmUnstranded rdf:type owl:DatatypeProperty ;
+                   rdfs:domain bio:ExpressionMeasurement ;
+                   rdfs:range xsd:decimal ;
+                   rdfs:label "FPKM (unstranded)"@en .
+
+
+###  http://example.org/biointegrate/fpkmUqUnstranded
+bio:fpkmUqUnstranded rdf:type owl:DatatypeProperty ;
+                     rdfs:domain bio:ExpressionMeasurement ;
+                     rdfs:range xsd:decimal ;
+                     rdfs:label "FPKM-UQ (unstranded)"@en .
+
+
+###  http://example.org/biointegrate/functionText
+bio:functionText rdf:type owl:DatatypeProperty ;
+                 rdfs:domain bio:Protein ;
+                 rdfs:range xsd:string ;
+                 rdfs:label "function text"@en .
+
+
+###  http://example.org/biointegrate/geneName
+bio:geneName rdf:type owl:DatatypeProperty ;
+             rdfs:domain bio:Gene ;
+             rdfs:range xsd:string ;
+             rdfs:label "gene name"@en .
+
+
+###  http://example.org/biointegrate/geneSymbol
+bio:geneSymbol rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain bio:Gene ;
+               rdfs:range xsd:string ;
+               rdfs:label "gene symbol"@en .
+
+
+###  http://example.org/biointegrate/goAspect
+bio:goAspect rdf:type owl:DatatypeProperty ;
+             rdfs:domain bio:GOTerm ;
+             rdfs:range xsd:string ;
+             rdfs:comment "Use one of: MF, BP, CC."@en ;
+             rdfs:label "GO aspect"@en .
+
+
+###  http://example.org/biointegrate/goId
+bio:goId rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:domain bio:GOTerm ;
+         rdfs:range xsd:string ;
+         rdfs:label "GO ID"@en .
+
+
+###  http://example.org/biointegrate/goLabel
+bio:goLabel rdf:type owl:DatatypeProperty ;
+            rdfs:domain bio:GOTerm ;
+            rdfs:range xsd:string ;
+            rdfs:label "GO label"@en .
+
+
+###  http://example.org/biointegrate/hgncId
+bio:hgncId rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain bio:Gene ;
+           rdfs:range xsd:string ;
+           rdfs:label "HGNC ID"@en .
+
+
+###  http://example.org/biointegrate/locusGroup
+bio:locusGroup rdf:type owl:DatatypeProperty ;
+               rdfs:domain bio:Gene ;
+               rdfs:range xsd:string ;
+               rdfs:label "locus group"@en .
+
+
+###  http://example.org/biointegrate/primarySiteLabel
+bio:primarySiteLabel rdf:type owl:DatatypeProperty ;
+                     rdfs:domain bio:Case ;
+                     rdfs:range xsd:string ;
+                     rdfs:label "primary site label"@en .
+
+
+###  http://example.org/biointegrate/projectId
+bio:projectId rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain bio:Project ;
+              rdfs:range xsd:string ;
+              rdfs:label "project ID"@en .
+
+
+###  http://example.org/biointegrate/proteinName
+bio:proteinName rdf:type owl:DatatypeProperty ;
+                rdfs:domain bio:Protein ;
+                rdfs:range xsd:string ;
+                rdfs:label "protein name"@en .
+
+
+###  http://example.org/biointegrate/scientificName
+bio:scientificName rdf:type owl:DatatypeProperty ;
+                   rdfs:domain bio:Organism ;
+                   rdfs:range xsd:string ;
+                   rdfs:label "scientific name"@en .
+
+
+###  http://example.org/biointegrate/sequenceLength
+bio:sequenceLength rdf:type owl:DatatypeProperty ,
+                            owl:FunctionalProperty ;
+                   rdfs:domain bio:Protein ;
+                   rdfs:range xsd:integer ;
+                   rdfs:label "sequence length"@en .
+
+
+###  http://example.org/biointegrate/strandedFirstCount
+bio:strandedFirstCount rdf:type owl:DatatypeProperty ;
+                       rdfs:domain bio:ExpressionMeasurement ;
+                       rdfs:range xsd:decimal ;
+                       rdfs:label "stranded first count"@en .
+
+
+###  http://example.org/biointegrate/strandedSecondCount
+bio:strandedSecondCount rdf:type owl:DatatypeProperty ;
+                        rdfs:domain bio:ExpressionMeasurement ;
+                        rdfs:range xsd:decimal ;
+                        rdfs:label "stranded second count"@en .
+
+
+###  http://example.org/biointegrate/taxonomyId
+bio:taxonomyId rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain bio:Organism ;
+               rdfs:range xsd:integer ;
+               rdfs:label "NCBI taxonomy ID"@en .
+
+
+###  http://example.org/biointegrate/tpmUnstranded
+bio:tpmUnstranded rdf:type owl:DatatypeProperty ;
+                  rdfs:domain bio:ExpressionMeasurement ;
+                  rdfs:range xsd:decimal ;
+                  rdfs:label "TPM (unstranded)"@en .
+
+
+###  http://example.org/biointegrate/uniprotId
+bio:uniprotId rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain bio:Protein ;
+              rdfs:range xsd:string ;
+              rdfs:label "UniProt ID"@en .
+
+
+###  http://example.org/biointegrate/unstrandedCount
+bio:unstrandedCount rdf:type owl:DatatypeProperty ;
+                    rdfs:domain bio:ExpressionMeasurement ;
+                    rdfs:range xsd:decimal ;
+                    rdfs:label "unstranded count"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://example.org/biointegrate/AnatomicalSite
+bio:AnatomicalSite rdf:type owl:Class ;
+                   rdfs:subClassOf bio:BioEntity ;
+                   bio:manchesterDefinition "AnatomicalSite"@en ;
+                   rdfs:comment "Optional bridge class for mapping primary_site labels to UBERON terms using skos:exactMatch to obo:UBERON_####### IRIs."@en ;
+                   rdfs:label "AnatomicalSite"@en .
+
+
+###  http://example.org/biointegrate/BioEntity
+bio:BioEntity rdf:type owl:Class ;
+              rdfs:label "BioEntity"@en .
+
+
+###  http://example.org/biointegrate/Case
+bio:Case rdf:type owl:Class ;
+         rdfs:subClassOf bio:BioEntity ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty bio:hasCaseMeasurement ;
+                           owl:allValuesFrom bio:ExpressionMeasurement
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty bio:caseInProject ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onClass bio:Project
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty bio:caseId ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:string
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty bio:diseaseTypeLabel ;
+                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:string
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty bio:primarySiteLabel ;
+                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:string
+                         ] ;
+         owl:hasKey ( bio:caseId
+                    ) ;
+         bio:manchesterDefinition "Case SubClassOf (caseId exactly 1 xsd:string) and (caseInProject exactly 1 Project)"@en ;
+         dc:source "GDC/TCGA" ;
+         rdfs:label "Case"@en .
+
+
+###  http://example.org/biointegrate/DiseaseTerm
+bio:DiseaseTerm rdf:type owl:Class ;
+                rdfs:subClassOf bio:BioEntity ;
+                bio:manchesterDefinition "DiseaseTerm"@en ;
+                rdfs:comment "Optional bridge class for mapping disease_type labels to NCIt terms using skos:exactMatch to obo:NCIT_C####### IRIs."@en ;
+                rdfs:label "DiseaseTerm"@en .
+
+
+###  http://example.org/biointegrate/ExpressionMeasurement
+bio:ExpressionMeasurement rdf:type owl:Class ;
+                          rdfs:subClassOf bio:BioEntity ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bio:measuredCase ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass bio:Case
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bio:measuredGene ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass bio:Gene
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bio:measuredProject ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass bio:Project
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bio:fileId ;
+                                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onDataRange xsd:string
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bio:fpkmUnstranded ;
+                                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onDataRange xsd:decimal
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bio:fpkmUqUnstranded ;
+                                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onDataRange xsd:decimal
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bio:strandedFirstCount ;
+                                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onDataRange xsd:decimal
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bio:strandedSecondCount ;
+                                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onDataRange xsd:decimal
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bio:tpmUnstranded ;
+                                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onDataRange xsd:decimal
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bio:unstrandedCount ;
+                                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onDataRange xsd:decimal
+                                          ] ;
+                          owl:hasKey ( bio:measuredCase
+                                       bio:measuredGene
+                                       bio:measuredProject
+                                     ) ;
+                          bio:manchesterDefinition "ExpressionMeasurement SubClassOf (measuredGene exactly 1 Gene) and (measuredCase exactly 1 Case) and (measuredProject exactly 1 Project)"@en ;
+                          dc:source "GDC/TCGA" ;
+                          rdfs:comment "Reified RNA-seq expression values for one gene in one case within one project."@en ;
+                          rdfs:label "ExpressionMeasurement"@en .
+
+
+###  http://example.org/biointegrate/GOTerm
+bio:GOTerm rdf:type owl:Class ;
+           rdfs:subClassOf bio:BioEntity ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty bio:goId ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange xsd:string
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty bio:goAspect ;
+                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange xsd:string
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty bio:goLabel ;
+                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange xsd:string
+                           ] ;
+           owl:hasKey ( bio:goId
+                      ) ;
+           bio:manchesterDefinition "GOTerm SubClassOf (goId exactly 1 xsd:string) and (goAspect max 1 xsd:string)"@en ;
+           dc:source "Gene Ontology (via UniProt annotations)" ;
+           rdfs:label "GO Term"@en .
+
+
+###  http://example.org/biointegrate/Gene
+bio:Gene rdf:type owl:Class ;
+         rdfs:subClassOf bio:BioEntity ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty bio:hasGeneMeasurement ;
+                           owl:allValuesFrom bio:ExpressionMeasurement
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty bio:hasProteinProduct ;
+                           owl:allValuesFrom bio:Protein
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty bio:geneSymbol ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:string
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty bio:hgncId ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:string
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty bio:ensemblGeneId ;
+                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:string
+                         ] ;
+         owl:hasKey ( bio:hgncId
+                    ) ;
+         bio:manchesterDefinition "Gene SubClassOf (hgncId exactly 1 xsd:string) and (geneSymbol exactly 1 xsd:string) and (ensemblGeneId max 1 xsd:string)"@en ;
+         dc:source "HGNC" ;
+         rdfs:label "Gene"@en ;
+         skos:exactMatch obo:SO_0000704 .
+
+
+###  http://example.org/biointegrate/Organism
+bio:Organism rdf:type owl:Class ;
+             rdfs:subClassOf bio:BioEntity ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty bio:taxonomyId ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onDataRange xsd:integer
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty bio:scientificName ;
+                               owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onDataRange xsd:string
+                             ] ;
+             owl:hasKey ( bio:taxonomyId
+                        ) ;
+             bio:manchesterDefinition "Organism SubClassOf (taxonomyId exactly 1 xsd:integer) and (scientificName max 1 xsd:string)"@en ;
+             dc:source "UniProt" ;
+             rdfs:label "Organism"@en .
+
+
+###  http://example.org/biointegrate/Project
+bio:Project rdf:type owl:Class ;
+            rdfs:subClassOf bio:BioEntity ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty bio:hasCase ;
+                              owl:allValuesFrom bio:Case
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty bio:hasProjectMeasurement ;
+                              owl:allValuesFrom bio:ExpressionMeasurement
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty bio:projectId ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:string
+                            ] ;
+            owl:hasKey ( bio:projectId
+                       ) ;
+            bio:manchesterDefinition "Project SubClassOf (projectId exactly 1 xsd:string)"@en ;
+            dc:source "GDC/TCGA" ;
+            rdfs:label "Project"@en .
+
+
+###  http://example.org/biointegrate/Protein
+bio:Protein rdf:type owl:Class ;
+            rdfs:subClassOf bio:BioEntity ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty bio:hasGoTerm ;
+                              owl:allValuesFrom bio:GOTerm
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty bio:hasOrganism ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onClass bio:Organism
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty bio:proteinProductOf ;
+                              owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onClass bio:Gene
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty bio:uniprotId ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty bio:sequenceLength ;
+                              owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:integer
+                            ] ;
+            owl:hasKey ( bio:uniprotId
+                       ) ;
+            bio:manchesterDefinition "Protein SubClassOf (uniprotId exactly 1 xsd:string) and (hasOrganism exactly 1 Organism) and (proteinProductOf max 1 Gene)"@en ;
+            dc:source "UniProt" ;
+            rdfs:label "Protein"@en ;
+            skos:exactMatch up:Protein .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( bio:AnatomicalSite
+                bio:Case
+                bio:DiseaseTerm
+                bio:ExpressionMeasurement
+                bio:GOTerm
+                bio:Gene
+                bio:Organism
+                bio:Project
+                bio:Protein
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
