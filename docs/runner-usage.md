@@ -172,17 +172,17 @@ Resumen humano legible con una tabla:
 
 Salida típica:
 
-<out>/
-index.json
-index.md
-<query_slug_1>/
-result.csv
-result.json
-<query_slug_2>/
-result.json
-<query_slug_3>/
-result.ttl
-summary.json
+results/rdflib-sparql/
+  index.json
+  index.md
+  <query_slug_1>/
+    result.csv
+    result.json
+  <query_slug_2>/
+    result.json
+  <query_slug_3>/
+    result.ttl
+    summary.json
 
 ---
 
