@@ -172,18 +172,17 @@ Resumen humano legible con una tabla:
 
 Salida típica:
 
+```text
 results/rdflib-sparql/
-  index.json
-  index.md
-  <query_slug_1>/
-    result.csv
-    result.json
-  <query_slug_2>/
-    result.json
-  <query_slug_3>/
-    result.ttl
-    summary.json
-
+├── index.json             # Metadatos técnicos y tiempos
+├── index.md               # Resumen visual en tabla
+├── consulta_01/           # Carpeta para la primera consulta
+│   ├── result.csv
+│   └── result.json
+└── consulta_02_graph/     # Carpeta para CONSTRUCT/DESCRIBE
+│   ├── result.ttl
+│   └── summary.json
+``` 
 ---
 
 ## 8) Limitaciones conocidas
@@ -199,5 +198,5 @@ results/rdflib-sparql/
 Ejecutar pack con export a CSV+JSON y resumen:
 
 ```bash
-python tools/run_sparql.py --format csv --format json --verbose
+python tools/run_sparql.py --ttl data/export.ttl --queries ./queries --format csv --format json --verbose
 ```
