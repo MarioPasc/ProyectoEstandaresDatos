@@ -32,8 +32,8 @@ def execute_task_t3():
     # Crear carpeta de resultados
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     
-    # Procesar consultas de la 2 a la 6
-    for i in range(2, 7):
+    # Procesar consultas de la 1 a la 6
+    for i in range(1, 7):
         query_file = f"q0{i}.rq"
         query_path = QUERIES_DIR / query_file
         
