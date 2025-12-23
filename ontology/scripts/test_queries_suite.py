@@ -4,7 +4,7 @@ from pathlib import Path
 # Configuración de rutas
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 # Asegúrate de que el nombre del archivo coincida con el que generaste
-TTL_FILE = ROOT_DIR / "data" / "rdf" / "export.ttl" 
+TTL_FILE = ROOT_DIR / "data" / "rdf" / "biointegrate_data_overlay.ttl" 
 
 def run_test_suite():
     if not TTL_FILE.exists():
