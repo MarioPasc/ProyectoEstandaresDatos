@@ -48,39 +48,32 @@ def mongo_to_rdf_forced():
                 if "unstranded" in expr:
                     g.add((meas_uri, BI.unstrandedCount, Literal(expr["unstranded"], datatype=XSD.decimal)))
 
-    print("--- 3. Mapeando Proteínas (Garantía de paridad con OWL) ---")
-    target_id = "Q9NR99"
-    # Intentamos buscarla en MongoDB
-    prot_doc = db["uniprot_entries"].find_one({"uniprot_id": target_id})
+    print("--- 3. Mapeando Proteínas (Inclusión Dirigida) ---")
+    # Buscamos específicamente la proteína de 'remodeling'
+    target_prot = db["uniprot_entries"].find_one({"uniprot_id": "Q9NR99"})
+    # Y el resto de la muestra habitual
+    other_prots = list(db["uniprot_entries"].find().limit(2000))
     
-    if prot_doc:
-        print(f"✓ Encontrada {target_id} en MongoDB. Mapeando desde base de datos...")
-    else:
-        print(f"⚠️ {target_id} NO encontrada en Mongo (solo hay 2000 docs). Creando manual para paridad.")
-        # Creamos el individuo manualmente con los datos que activan la Q4
-        protein_uri = URIRef(BI[target_id])
+    # Combinamos asegurando que no haya duplicados
+    prot_list = other_prots
+    if target_prot and not any(p['uniprot_id'] == "Q9NR99" for p in other_prots):
+        prot_list.append(target_prot)
+
+    for prot_doc in prot_list:
+        u_id = prot_doc["uniprot_id"]
+        protein_uri = URIRef(BI[u_id])
         g.add((protein_uri, RDF.type, BI.Protein))
         g.add((protein_uri, RDF.type, BI.BioEntity))
-        g.add((protein_uri, BI.uniprotId, Literal(target_id)))
-        g.add((protein_uri, BI.proteinName, Literal("Matrix-remodeling-associated protein 5")))
+        g.add((protein_uri, BI.uniprotId, Literal(u_id)))
+        
+        # Mapeamos todos los nombres
+        names = prot_doc.get("protein", {}).get("names", [])
+        for name in names:
+            g.add((protein_uri, BI.proteinName, Literal(name)))
 
-    # Continuar con el resto de la muestra (limitada a 2000 según tu Compass)
-    for other_doc in db["uniprot_entries"].find().limit(2000):
-        u_id = other_doc["uniprot_id"]
-        if u_id == target_id: continue # Evitar duplicados
-        
-        p_uri = URIRef(BI[u_id])
-        g.add((p_uri, RDF.type, BI.Protein))
-        g.add((p_uri, RDF.type, BI.BioEntity))
-        g.add((p_uri, BI.uniprotId, Literal(u_id)))
-        
-        # Mapeo de nombres desde el array de la DB
-        for name in other_doc.get("protein", {}).get("names", []):
-            g.add((p_uri, BI.proteinName, Literal(name)))
-            
-        # Vínculo con genes existentes en el grafo
-        for h_id in other_doc.get("gene", {}).get("hgnc_ids", []):
-            g.add((URIRef(BI[h_id.replace(":", "_")]), BI.hasProteinProduct, p_uri))
+        # Enlace con Genes
+        for h_id in prot_doc.get("gene", {}).get("hgnc_ids", []):
+            g.add((URIRef(BI[h_id.replace(":", "_")]), BI.hasProteinProduct, protein_uri))
 
     output_path = ROOT_DIR / "data" / "rdf" / "export.ttl"
     g.serialize(destination=str(output_path), format="turtle")
