@@ -22,12 +22,31 @@ Funciones principales:
 
 ### 2.1 Carga del grafo
 - Lee el fichero Turtle de entrada.
-- Parseo con RDFlib (`Graph().parse(..., format="turtle")`).
+- Parseo con RDFlib usando **autodetección de formato** (`guess_format`): permite cargar .ttl y también `.owl/.rdf` (RDF/XML) si se proporcionan como entrada. Si no se detecta, usa `turtle`.
 - Si el TTL no existe o no se puede parsear, el script finaliza con error.
 
 Además, extrae:
 - **Número total de triples** del grafo (para el manifiesto de ejecución).
 - **Prefijos** disponibles en el `namespace_manager` del grafo.
+
+#### 2.1.1 Capa de compatibilidad
+
+- Opcionalmente, el runner puede aplicar una **capa de compatibilidad en memoria** para que el pack de queries funcione aunque el `export.ttl` no contenga explícitamente `bi:Project/bi:Case` o use predicados en la dirección inversa.
+
+- Esta capa **NO modifica** el TTL en disco ni los .rq. Solo añade triples al grafo cargado antes de ejecutar las consultas.
+
+- Se activa con `--compat {off|auto|on}`:
+  - `auto` (por defecto): aplica solo si detecta que faltan Projects/Cases/enlaces esperados.
+  - `on`: fuerza la compat.
+  -`off`: desactiva la compat.
+
+- Qué materializa (mínimo)
+  - `rdf:type` para `bi:Project` y `bi:Case`
+  - literales `bi:projectId` y `bi:caseId`
+  - enlaces `bi:hasCase`, `bi:caseInProject` y `bi:hasCaseMeasurement`
+  - tipado `bi:BioEntity` para entidades usadas en q06
+
+- Cómo lo deriva: a partir de `bi:measuredCase` y/o del patrón de la IRI de medición (`.../expression/{gene}_{projectId}_{caseId}`).
 
 ### 2.2 Descubrimiento de consultas
 - Busca ficheros `*.rq` en el directorio indicado.
@@ -135,6 +154,7 @@ Incluye metadata y un listado de reportes por consulta, por ejemplo:
   - `rows`, `cols`
   - `outputs` (rutas de ficheros generados)
   - `error` (si falla)
+- Si `--compat` está activo, `triple_count` refleja el grafo **tras** aplicar la compatibilidad (puede ser mayor que el TTL original).
 
 ### 4.2 `index.md`
 Resumen humano legible con una tabla:
@@ -165,6 +185,8 @@ Resumen humano legible con una tabla:
 - `--fail-fast`: aborta al primer fallo
 - `--dry-run`: no escribe ficheros (pero ejecuta y mide)
 - `--verbose`: más logging
+- `--compat`: `off|auto|on`
+    - `auto` aplica una capa en memoria para alinear el grafo sin tocar ni TTL ni queries.
 
 ---
 
@@ -198,5 +220,5 @@ results/rdflib-sparql/
 Ejecutar pack con export a CSV+JSON y resumen:
 
 ```bash
-python tools/run_sparql.py --ttl data/export.ttl --queries ./queries --format csv --format json --verbose
+python tools/run_sparql.py --ttl data/export.ttl --queries ./queries --out results/rdflib-sparql --format csv --format json --verbose --compat auto
 ```
