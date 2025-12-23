@@ -24,7 +24,7 @@ def run_test_suite():
                     bi:caseId ?caseId ;
                     bi:caseInProject ?project .
               ?project bi:projectId ?projectId .
-              FILTER(?projectId = "TCGA-LGG")
+              FILTER(?projectId = "TCGA-GBM")
             } LIMIT 5
         """,
         "Q3 (Métricas > 1000)": """
@@ -42,10 +42,10 @@ def run_test_suite():
         "Q4 (Búsqueda 'remodeling')": """
             PREFIX bi: <http://example.org/biointegrate/>
             SELECT ?uniprotId ?proteinName WHERE {
-              ?protein a bi:Protein ;
-                       bi:uniprotId ?uniprotId ;
-                       bi:proteinName ?proteinName .
-              FILTER(regex(?proteinName, "alpha", "i"))
+                ?protein a bi:Protein ;
+                    bi:uniprotId ?uniprotId ;
+                    bi:proteinName ?proteinName .
+            FILTER(regex(str(?proteinName), "remodeling", "i"))
             } LIMIT 5
         """,
         "Q5 (Join Semántico G-P-C)": """
