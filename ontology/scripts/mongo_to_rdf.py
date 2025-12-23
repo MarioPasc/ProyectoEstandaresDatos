@@ -3,6 +3,7 @@ from rdflib import Graph, Literal, RDF, URIRef, Namespace
 from rdflib.namespace import XSD
 from pathlib import Path
 
+# Configuración de Namespaces
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 BI = Namespace("http://example.org/biointegrate/")
 
@@ -12,69 +13,92 @@ def mongo_to_rdf():
     g = Graph()
     g.bind("bi", BI)
 
-    print("--- Iniciando Población (Corrección de Colecciones) ---")
+    print("--- Iniciando Población del Grafo ---")
 
-    # A. Proyectos y Casos (Corregido a gdc_cases)
-    print("Mapeando desde gdc_cases...")
-    proyectos_procesados = set()
+    # A. Proyectos y Casos (gdc_cases)
+    # Según image_bba2ee.png, cada documento es un proyecto con un array 'cases'
+    print("Procesando colección 'gdc_cases'...")
+    p_count, c_count = 0, 0
     
-    # Buscamos en la colección real que aparece en tu Compass
-    for case_doc in db["gdc_cases"].find():
-        c_id = case_doc.get('case_id')
-        # Buscamos el project_id (normalmente dentro de 'project' o en la raíz)
-        p_id = case_doc.get('project', {}).get('project_id') or case_doc.get('project_id')
+    for project_doc in db["gdc_cases"].find():
+        p_id = project_doc.get("project_id")
+        if not p_id: continue
         
-        if not c_id or not p_id: continue
+        project_uri = URIRef(BI[p_id])
+        g.add((project_uri, RDF.type, BI.Project))
+        g.add((project_uri, RDF.type, BI.BioEntity))
+        g.add((project_uri, BI.projectId, Literal(p_id, datatype=XSD.string)))
+        p_count += 1
+        
+        # Entramos en el array de casos
+        for case_data in project_doc.get("cases", []):
+            c_id = case_data.get("case_id")
+            if not c_id: continue
+            
+            case_uri = URIRef(BI[c_id])
+            g.add((case_uri, RDF.type, BI.Case))
+            g.add((case_uri, RDF.type, BI.BioEntity))
+            g.add((case_uri, BI.caseId, Literal(c_id, datatype=XSD.string)))
+            
+            # Relación necesaria para la Q2
+            g.add((project_uri, BI.hasCase, case_uri))
+            c_count += 1
 
-        case_uri = URIRef(BI[f"case/{c_id}"])
-        project_uri = URIRef(BI[f"project/{p_id}"])
-
-        # 1. Crear el Proyecto (Clase bi:Project)
-        if p_id not in proyectos_procesados:
-            g.add((project_uri, RDF.type, BI.BioEntity))
-            g.add((project_uri, RDF.type, BI.Project))
-            g.add((project_uri, BI.projectId, Literal(p_id, datatype=XSD.string)))
-            proyectos_procesados.add(p_id)
-
-        # 2. Crear el Caso (Clase bi:Case)
-        g.add((case_uri, RDF.type, BI.BioEntity))
-        g.add((case_uri, RDF.type, BI.Case))
-        g.add((case_uri, BI.caseId, Literal(c_id, datatype=XSD.string)))
-        g.add((case_uri, BI.caseInProject, project_uri))
+    print(f"✓ Mapeados {p_count} Proyectos y {c_count} Casos.")
 
     # B. Genes y Mediciones (hgnc_genes)
-    print("Mapeando Genes y Mediciones...")
+    print("Procesando colección 'hgnc_genes'...")
+    g_count, m_count = 0, 0
     for gene_doc in db["hgnc_genes"].find():
-        h_raw = gene_doc["hgnc_id"]
-        h_clean = h_raw.replace(":", "_")
-        gene_uri = URIRef(BI[f"gene/{h_clean}"])
+        h_id = gene_doc["hgnc_id"].replace(":", "_")
+        gene_uri = URIRef(BI[h_id])
         
-        g.add((gene_uri, RDF.type, BI.BioEntity))
         g.add((gene_uri, RDF.type, BI.Gene))
+        g.add((gene_uri, RDF.type, BI.BioEntity))
         g.add((gene_uri, BI.geneSymbol, Literal(gene_doc["symbol"], datatype=XSD.string)))
+        g_count += 1
 
-        for p_id, p_data in gene_doc.get("projects", {}).items():
-            for c_id, expr in p_data.get("cases", {}).items():
-                meas_uri = URIRef(BI[f"expression/{h_clean}_{p_id}_{c_id}"])
-                g.add((meas_uri, RDF.type, BI.BioEntity))
+        for proj_id, proj_data in gene_doc.get("projects", {}).items():
+            for case_id, expr in proj_data.get("cases", {}).items():
+                # IRI similar a la vista en Protégé (image_baba55.jpg)
+                meas_id = f"{h_id}_{proj_id}_{case_id}"
+                meas_uri = URIRef(BI[meas_id])
+                case_uri = URIRef(BI[case_id])
+                
                 g.add((meas_uri, RDF.type, BI.ExpressionMeasurement))
+                g.add((meas_uri, RDF.type, BI.BioEntity))
                 g.add((meas_uri, BI.measuredGene, gene_uri))
-                g.add((meas_uri, BI.measuredCase, URIRef(BI[f"case/{c_id}"])))
+                g.add((meas_uri, BI.measuredCase, case_uri))
+                
+                # Relación necesaria para la Q5
+                g.add((case_uri, BI.hasCaseMeasurement, meas_uri))
+                
                 if "unstranded" in expr:
                     g.add((meas_uri, BI.unstrandedCount, Literal(expr["unstranded"], datatype=XSD.decimal)))
+                m_count += 1
+
+    print(f"✓ Mapeados {g_count} Genes y {m_count} Mediciones.")
 
     # C. Proteínas (uniprot_entries)
-    print("Mapeando Proteínas...")
+    print("Procesando colección 'uniprot_entries'...")
     for prot_doc in db["uniprot_entries"].find():
-        u_uri = URIRef(BI[f"protein/{prot_doc['uniprot_id']}"])
-        g.add((u_uri, RDF.type, BI.BioEntity))
-        g.add((u_uri, RDF.type, BI.Protein))
-        g.add((u_uri, BI.uniprotId, Literal(prot_doc['uniprot_id'], datatype=XSD.string)))
+        u_id = prot_doc["uniprot_id"]
+        protein_uri = URIRef(BI[u_id])
+        g.add((protein_uri, RDF.type, BI.Protein))
+        g.add((protein_uri, RDF.type, BI.BioEntity))
+        g.add((protein_uri, BI.uniprotId, Literal(u_id, datatype=XSD.string)))
+        
+        if "protein" in prot_doc and "names" in prot_doc["protein"]:
+            g.add((protein_uri, BI.proteinName, Literal(prot_doc["protein"]["names"][0], datatype=XSD.string)))
 
-    # Guardar Grafo
+        if "gene" in prot_doc and "hgnc_ids" in prot_doc["gene"]:
+            for h_id in prot_doc["gene"]["hgnc_ids"]:
+                g.add((URIRef(BI[h_id.replace(":", "_")]), BI.hasProteinProduct, protein_uri))
+
+    # Guardar
     output_path = ROOT_DIR / "data" / "rdf" / "export.ttl"
     g.serialize(destination=str(output_path), format="turtle")
-    print(f"✓ ÉXITO: {len(g)} tripletas generadas.")
+    print(f"\n Grafo generado con éxito en: {output_path}")
 
 if __name__ == "__main__":
     mongo_to_rdf()
