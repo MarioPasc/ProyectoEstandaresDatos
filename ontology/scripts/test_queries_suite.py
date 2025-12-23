@@ -24,7 +24,7 @@ def run_test_suite():
                     bi:caseId ?caseId ;
                     bi:caseInProject ?project .
               ?project bi:projectId ?projectId .
-              FILTER(?projectId = "TCGA-GBM")
+              FILTER(?projectId = "TCGA-LGG")
             } LIMIT 5
         """,
         "Q3 (Métricas > 1000)": """
@@ -45,7 +45,7 @@ def run_test_suite():
               ?protein a bi:Protein ;
                        bi:uniprotId ?uniprotId ;
                        bi:proteinName ?proteinName .
-              FILTER(regex(?proteinName, "remodeling", "i"))
+              FILTER(regex(?proteinName, "alpha", "i"))
             } LIMIT 5
         """,
         "Q5 (Join Semántico G-P-C)": """
