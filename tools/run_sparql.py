@@ -27,8 +27,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
-from rdflib import Graph
+from rdflib import Graph, Literal, Namespace, RDF, URIRef
 from rdflib.query import Result as RdflibResult
+from rdflib.namespace import XSD
+from rdflib.util import guess_format
+
 
 try:
     import rdflib  # type: ignore
@@ -70,6 +73,7 @@ class RunConfig:
     fail_fast: bool
     dry_run: bool
     verbose: bool
+    compat: str
 
 
 @dataclass
@@ -274,10 +278,160 @@ def load_graph(ttl_path: Path) -> Graph:
         raise ConfigError(f"No existe el TTL de entrada: {ttl_path}")
     g = Graph()
     try:
-        g.parse(str(ttl_path), format="turtle")
+        fmt = guess_format(str(ttl_path)) or "turtle"
+        g.parse(str(ttl_path), format=fmt)
     except Exception as e:
         raise RunnerError(f"Error cargando TTL {ttl_path}: {e}") from e
     return g
+
+
+def _has_any(graph: Graph, s: Any = None, p: Any = None, o: Any = None) -> bool:
+    return next(graph.triples((s, p, o)), None) is not None
+
+
+def apply_issue6_compat(graph: Graph, mode: str, verbose: bool) -> Dict[str, int]:
+    """
+    Compat layer (in-memory): NO modifica TTL ni .rq.
+    Materializa lo mínimo para que el pack Issue-6 funcione sobre export.ttl:
+      - bi:Project/bi:projectId
+      - bi:Case/bi:caseId
+      - bi:hasCase (Project -> Case)
+      - bi:hasCaseMeasurement (Case -> Measurement)
+      - bi:BioEntity typing (para q06)
+    Deriva projectId/caseId desde IRIs de medición: expression/{gene}_{projectId}_{caseId}
+    y/o desde bi:measuredCase.
+    """
+    if mode == "off":
+        return {"applied": 0}
+
+    BI = Namespace("http://example.org/biointegrate/")
+
+    has_projects = _has_any(graph, None, RDF.type, BI.Project) or _has_any(graph, None, BI.projectId, None)
+    has_cases = _has_any(graph, None, RDF.type, BI.Case) or _has_any(graph, None, BI.caseId, None)
+    has_has_case = _has_any(graph, None, BI.hasCase, None)
+    has_has_case_meas = _has_any(graph, None, BI.hasCaseMeasurement, None)
+    has_bioentity = _has_any(graph, None, RDF.type, BI.BioEntity)
+    has_expr = _has_any(graph, None, RDF.type, BI.ExpressionMeasurement)
+
+    # auto: solo aplica si parece necesario
+    if mode == "auto" and (has_projects and has_cases and has_has_case and has_has_case_meas and has_bioentity):
+        return {"applied": 0}
+    if not has_expr:
+        return {"applied": 0}
+
+    t0 = time.perf_counter()
+    start_len = len(graph)
+
+    created_projects = 0
+    created_cases = 0
+    added_has_case = 0
+    added_case_in_project = 0
+    added_has_case_meas = 0
+    added_bioentity = 0
+
+    seen_projects = set()
+    seen_cases = set()
+    case_to_project: Dict[URIRef, URIRef] = {}
+
+    def _ensure_project(project_id: str) -> URIRef:
+        nonlocal created_projects, added_bioentity
+        project_uri = URIRef(BI[f"project/{project_id}"])
+        if project_uri not in seen_projects:
+            seen_projects.add(project_uri)
+            graph.add((project_uri, RDF.type, BI.Project))
+            # Añadimos literal plain y xsd:string para evitar líos de igualdad en rdflib
+            graph.add((project_uri, BI.projectId, Literal(project_id)))
+            graph.add((project_uri, BI.projectId, Literal(project_id, datatype=XSD.string)))
+            graph.add((project_uri, RDF.type, BI.BioEntity))
+            created_projects += 1
+            added_bioentity += 1
+        return project_uri
+
+    def _ensure_case(case_uri: URIRef) -> URIRef:
+        nonlocal created_cases, added_bioentity
+        case_id = str(case_uri).rsplit("/", 1)[-1]
+        if case_uri not in seen_cases:
+            seen_cases.add(case_uri)
+            graph.add((case_uri, RDF.type, BI.Case))
+            graph.add((case_uri, BI.caseId, Literal(case_id)))
+            graph.add((case_uri, BI.caseId, Literal(case_id, datatype=XSD.string)))
+            graph.add((case_uri, RDF.type, BI.BioEntity))
+            created_cases += 1
+            added_bioentity += 1
+        return case_uri
+
+    # Recorre mediciones: deriva Project/Case + enlaces
+    meas_i = 0
+    for meas_uri in graph.subjects(RDF.type, BI.ExpressionMeasurement):
+        meas_i += 1
+        if verbose and meas_i % 50000 == 0:
+            logging.info("compat_progress measurements=%d", meas_i)
+
+        # (para q06)
+        graph.add((meas_uri, RDF.type, BI.BioEntity))
+
+        # Case desde measuredCase (preferible)
+        case_obj = graph.value(meas_uri, BI.measuredCase)
+        if isinstance(case_obj, URIRef):
+            case_uri = case_obj
+        else:
+            # fallback: último token del ID de medición
+            tail = str(meas_uri).rsplit("/", 1)[-1]
+            try:
+                _, case_id_tail = tail.rsplit("_", 1)
+                case_uri = URIRef(BI[f"case/{case_id_tail}"])
+            except Exception:
+                continue
+
+        case_uri = _ensure_case(case_uri)
+
+        # Project desde IRI de medición: .../{gene}_{projectId}_{caseId}
+        tail = str(meas_uri).rsplit("/", 1)[-1]
+        project_id = None
+        try:
+            left, _ = tail.rsplit("_", 1)
+            _, project_id = left.rsplit("_", 1)
+        except Exception:
+            project_id = None
+
+        if project_id:
+            project_uri = _ensure_project(project_id)
+
+            prev = case_to_project.get(case_uri)
+            if prev is None:
+                case_to_project[case_uri] = project_uri
+                graph.add((project_uri, BI.hasCase, case_uri))
+                graph.add((case_uri, BI.caseInProject, project_uri))
+                added_has_case += 1
+                added_case_in_project += 1
+            elif prev != project_uri and verbose:
+                logging.warning("compat_conflict case=%s project_prev=%s project_new=%s", case_uri, prev, project_uri)
+
+        # Inversa para q05
+        graph.add((case_uri, BI.hasCaseMeasurement, meas_uri))
+        added_has_case_meas += 1
+
+    # Genes y proteínas como BioEntity (q06)
+    for ent_type in (BI.Gene, BI.Protein):
+        for ent in graph.subjects(RDF.type, ent_type):
+            graph.add((ent, RDF.type, BI.BioEntity))
+            added_bioentity += 1
+
+    end_len = len(graph)
+    duration_ms = int(round((time.perf_counter() - t0) * 1000))
+
+    return {
+        "applied": 1,
+        "duration_ms": duration_ms,
+        "added_triples": max(0, end_len - start_len),
+        "created_projects": created_projects,
+        "created_cases": created_cases,
+        "added_hasCase": added_has_case,
+        "added_caseInProject": added_case_in_project,
+        "added_hasCaseMeasurement": added_has_case_meas,
+        "added_bioentity_typed": added_bioentity,
+    }
+
 
 
 def run_one_query(
@@ -409,6 +563,7 @@ def build_manifest(cfg: RunConfig, reports: List[QueryReport], graph: Graph) -> 
         "query_count": len(reports),
         "triple_count": int(len(graph)),
         "reports": [asdict(r) for r in reports],
+        "compat": {"mode": cfg.compat},
     }
 
 
@@ -458,6 +613,12 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> RunConfig:
         default=None,
         help="Fichero opcional con líneas PREFIX ... para inyectar (p.ej., queries/prefixes.sparql).",
     )
+    p.add_argument(
+    "--compat",
+    choices=["off", "auto", "on"],
+    default="auto",
+    help="Compat en memoria (no toca TTL ni .rq). auto=solo si faltan Projects/Cases; on=forzar; off=desactivar.",
+    )
     p.add_argument("--recursive", action="store_true", help="Buscar *.rq recursivamente.")
     p.add_argument(
         "--format",
@@ -492,6 +653,7 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> RunConfig:
         fail_fast=bool(args.fail_fast),
         dry_run=bool(args.dry_run),
         verbose=bool(args.verbose),
+        compat=str(args.compat),
     )
 
 
@@ -502,6 +664,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     logging.info("ttl=%s queries=%s out=%s dry_run=%s", cfg.paths.ttl_path, cfg.paths.queries_dir, cfg.paths.out_dir, cfg.dry_run)
 
     g = load_graph(cfg.paths.ttl_path)
+
+    compat_report = apply_issue6_compat(g, mode=cfg.compat, verbose=cfg.verbose)
+    logging.info("compat_applied=%s", compat_report.get("applied", 0))
+    if compat_report.get("applied"):
+        logging.info("compat_report=%s", compat_report)
+
 
     # Build prefixes: from graph + optional prefixes file
     extra_prefixes: Optional[Dict[str, str]] = None
