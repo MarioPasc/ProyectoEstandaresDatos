@@ -76,6 +76,7 @@ def mongo_to_rdf_forced():
             g.add((URIRef(BI[h_id.replace(":", "_")]), BI.hasProteinProduct, protein_uri))
 
     output_path = ROOT_DIR / "data" / "rdf" / "export.ttl"
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     g.serialize(destination=str(output_path), format="turtle")
     print(f"✓ Grafo generado con inclusión garantizada de Q9NR99.")
 
