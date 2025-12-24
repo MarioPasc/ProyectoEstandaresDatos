@@ -1,0 +1,16 @@
+#Muestra la trazabilidad integral entre el identificador del caso clínico, el gen expresado y el producto proteico identificado:
+
+PREFIX bi: <http://example.org/biointegrate/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT ?caseId ?geneSymbol ?uniprotId WHERE {
+  ?case a bi:Case ;
+        bi:caseId ?caseId ;
+        bi:hasCaseMeasurement ?meas .
+  ?meas bi:measuredGene ?gene .
+  ?gene bi:geneSymbol ?geneSymbol ;
+        bi:hasProteinProduct ?protein .
+  ?protein bi:uniprotId ?uniprotId .
+}
+LIMIT 10

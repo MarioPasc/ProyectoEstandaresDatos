@@ -2,25 +2,105 @@
   {
     "ontology_individual": {
       "type": "bio:Gene",
-      "individual_iri": "http://example.org/biointegrate/gene/HGNC_1607",
+      "individual_iri": "http://example.org/biointegrate/gene/HGNC_8049",
       "gene_properties": {
-        "bio:hgncId": "HGNC:1607",
-        "bio:geneSymbol": "CCR6",
-        "bio:ensemblGeneId": "ENSG00000112486"
+        "bio:hgncId": "HGNC:8049",
+        "bio:geneSymbol": "NUDT2",
+        "bio:ensemblGeneId": "ENSG00000164978"
       },
-      "protein_products": [],
+      "protein_products": [
+        {
+          "type": "bio:Protein",
+          "individual_iri": "http://example.org/biointegrate/protein/P50583",
+          "object_property": {
+            "bio:hasProteinProduct": "http://example.org/biointegrate/protein/P50583"
+          },
+          "protein_properties": {
+            "bio:uniprotId": "P50583",
+            "bio:proteinName": [
+              "Bis(5'-nucleosyl)-tetraphosphatase [asymmetrical] (EC 3.6.1.17) (Diadenosine 5',5'''-P1,P4-tetraphosphate asymmetrical hydrolase) (Ap4A hydrolase) (Ap4Aase) (Diadenosine tetraphosphatase) (Nucleoside diphosphate-linked moiety X motif 2) (Nudix motif 2)"
+            ],
+            "bio:sequenceLength": 147,
+            "bio:functionText": "FUNCTION: Catalyzes the asymmetric hydrolysis of diadenosine 5',5'''-P1,P4-tetraphosphate (Ap4A) to yield AMP and ATP (By similarity). Exhibits decapping activity towards FAD-capped RNAs and dpCoA-capped RNAs in vitro (By similarity). {ECO:0000250|UniProtKB:P50584, ECO:0000250|UniProtKB:P56380}."
+          },
+          "organism": {
+            "type": "bio:Organism",
+            "individual_iri": "http://example.org/biointegrate/organism/9606",
+            "object_property": {
+              "bio:hasOrganism": "http://example.org/biointegrate/organism/9606"
+            },
+            "organism_properties": {
+              "bio:taxonomyId": 9606,
+              "bio:scientificName": "Homo sapiens"
+            }
+          },
+          "go_terms": {
+            "molecular_function": [
+              {
+                "type": "bio:GOTerm",
+                "term": "bis(5'-nucleosyl)-tetraphosphatase (asymmetrical) activity [GO:0004081]",
+                "object_property": "bio:hasMolecularFunction"
+              },
+              {
+                "type": "bio:GOTerm",
+                "term": "bis(5'-nucleosyl)-tetraphosphatase (symmetrical) activity [GO:0008803]",
+                "object_property": "bio:hasMolecularFunction"
+              },
+              {
+                "type": "bio:GOTerm",
+                "term": "GTP binding [GO:0005525]",
+                "object_property": "bio:hasMolecularFunction"
+              }
+            ],
+            "biological_process": [
+              {
+                "type": "bio:GOTerm",
+                "term": "AMP biosynthetic process [GO:0006167]",
+                "object_property": "bio:hasBiologicalProcess"
+              },
+              {
+                "type": "bio:GOTerm",
+                "term": "apoptotic process [GO:0006915]",
+                "object_property": "bio:hasBiologicalProcess"
+              },
+              {
+                "type": "bio:GOTerm",
+                "term": "ATP biosynthetic process [GO:0006754]",
+                "object_property": "bio:hasBiologicalProcess"
+              },
+              {
+                "type": "bio:GOTerm",
+                "term": "cellular response to oxidative stress [GO:0034599]",
+                "object_property": "bio:hasBiologicalProcess"
+              },
+              {
+                "type": "bio:GOTerm",
+                "term": "nucleobase-containing compound metabolic process [GO:0006139]",
+                "object_property": "bio:hasBiologicalProcess"
+              }
+            ],
+            "cellular_component": [
+              {
+                "type": "bio:GOTerm",
+                "term": "mitochondrial matrix [GO:0005759]",
+                "object_property": "bio:hasCellularComponent"
+              }
+            ]
+          }
+        }
+      ],
       "expression_measurements": [
         {
           "type": "bio:ExpressionMeasurement",
-          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d50e944a-3ce4-4632-a878-118499e143e3",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_8049_TCGA-LGG_d50e944a-3ce4-4632-a878-118499e143e3",
           "measurement_properties": {
             "bio:fileId": "7349fbd4-c919-45a5-8ed2-1f61b9fec87f",
-            "bio:unstrandedCount": 0.0,
-            "bio:strandedFirstCount": 0.0,
-            "bio:strandedSecondCount": 0.0,
-            "bio:tpmUnstranded": 0.0,
-            "bio:fpkmUnstranded": 0.0,
-            "bio:fpkmUqUnstranded": 0.0
+            "bio:unstrandedCount": 655.0,
+            "bio:strandedFirstCount": 351.0,
+            "bio:strandedSecondCount": 304.0,
+            "bio:tpmUnstranded": 37.9659,
+            "bio:fpkmUnstranded": 12.1338,
+            "bio:fpkmUqUnstranded": 12.2021
           },
           "project": {
             "type": "bio:Project",
@@ -51,15 +131,15 @@
         },
         {
           "type": "bio:ExpressionMeasurement",
-          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d209cffc-fe21-4ae7-b610-e5668ea84a3b",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_8049_TCGA-LGG_d209cffc-fe21-4ae7-b610-e5668ea84a3b",
           "measurement_properties": {
             "bio:fileId": "febf694d-811a-4fcd-b498-e9451fdc0d4e",
-            "bio:unstrandedCount": 0.0,
-            "bio:strandedFirstCount": 0.0,
-            "bio:strandedSecondCount": 0.0,
-            "bio:tpmUnstranded": 0.0,
-            "bio:fpkmUnstranded": 0.0,
-            "bio:fpkmUqUnstranded": 0.0
+            "bio:unstrandedCount": 1010.0,
+            "bio:strandedFirstCount": 508.0,
+            "bio:strandedSecondCount": 502.0,
+            "bio:tpmUnstranded": 59.6451,
+            "bio:fpkmUnstranded": 17.9583,
+            "bio:fpkmUqUnstranded": 17.9111
           },
           "project": {
             "type": "bio:Project",
@@ -90,15 +170,15 @@
         },
         {
           "type": "bio:ExpressionMeasurement",
-          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_e7fdf164-a85d-4ff5-9676-d2215ca35403",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_8049_TCGA-LGG_e7fdf164-a85d-4ff5-9676-d2215ca35403",
           "measurement_properties": {
             "bio:fileId": "155b732b-3603-4035-94d4-57a81a23a0d1",
-            "bio:unstrandedCount": 0.0,
-            "bio:strandedFirstCount": 0.0,
-            "bio:strandedSecondCount": 0.0,
-            "bio:tpmUnstranded": 0.0,
-            "bio:fpkmUnstranded": 0.0,
-            "bio:fpkmUqUnstranded": 0.0
+            "bio:unstrandedCount": 1057.0,
+            "bio:strandedFirstCount": 519.0,
+            "bio:strandedSecondCount": 538.0,
+            "bio:tpmUnstranded": 66.519,
+            "bio:fpkmUnstranded": 17.048,
+            "bio:fpkmUqUnstranded": 17.3703
           },
           "project": {
             "type": "bio:Project",
@@ -129,15 +209,15 @@
         },
         {
           "type": "bio:ExpressionMeasurement",
-          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_ec82a00f-3909-4781-8ae2-e54cbc1ac7ac",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_8049_TCGA-LGG_ec82a00f-3909-4781-8ae2-e54cbc1ac7ac",
           "measurement_properties": {
             "bio:fileId": "dff492f1-7fdc-4ff6-b868-c355cedd6cad",
-            "bio:unstrandedCount": 1.0,
-            "bio:strandedFirstCount": 1.0,
-            "bio:strandedSecondCount": 0.0,
-            "bio:tpmUnstranded": 0.0111,
-            "bio:fpkmUnstranded": 0.0032,
-            "bio:fpkmUqUnstranded": 0.0034
+            "bio:unstrandedCount": 1311.0,
+            "bio:strandedFirstCount": 671.0,
+            "bio:strandedSecondCount": 640.0,
+            "bio:tpmUnstranded": 59.1262,
+            "bio:fpkmUnstranded": 16.8116,
+            "bio:fpkmUqUnstranded": 17.9489
           },
           "project": {
             "type": "bio:Project",
@@ -168,15 +248,15 @@
         },
         {
           "type": "bio:ExpressionMeasurement",
-          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_dadd7428-9e4d-4652-9469-ab521b88d529",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_8049_TCGA-LGG_dadd7428-9e4d-4652-9469-ab521b88d529",
           "measurement_properties": {
             "bio:fileId": "f3f687a3-9619-4ab9-a5d1-35f31422b472",
-            "bio:unstrandedCount": 0.0,
-            "bio:strandedFirstCount": 0.0,
-            "bio:strandedSecondCount": 0.0,
-            "bio:tpmUnstranded": 0.0,
-            "bio:fpkmUnstranded": 0.0,
-            "bio:fpkmUqUnstranded": 0.0
+            "bio:unstrandedCount": 1014.0,
+            "bio:strandedFirstCount": 515.0,
+            "bio:strandedSecondCount": 499.0,
+            "bio:tpmUnstranded": 51.7753,
+            "bio:fpkmUnstranded": 16.0147,
+            "bio:fpkmUqUnstranded": 17.6984
           },
           "project": {
             "type": "bio:Project",
@@ -207,15 +287,15 @@
         },
         {
           "type": "bio:ExpressionMeasurement",
-          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_a56c2083-33d5-4c98-b85f-3b68a3d80add",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_8049_TCGA-LGG_a56c2083-33d5-4c98-b85f-3b68a3d80add",
           "measurement_properties": {
             "bio:fileId": "67bec45d-ed1e-41c5-9c61-4d7fb1592450",
-            "bio:unstrandedCount": 1.0,
-            "bio:strandedFirstCount": 1.0,
-            "bio:strandedSecondCount": 0.0,
-            "bio:tpmUnstranded": 0.0157,
-            "bio:fpkmUnstranded": 0.0048,
-            "bio:fpkmUqUnstranded": 0.0047
+            "bio:unstrandedCount": 872.0,
+            "bio:strandedFirstCount": 423.0,
+            "bio:strandedSecondCount": 449.0,
+            "bio:tpmUnstranded": 55.4356,
+            "bio:fpkmUnstranded": 17.0335,
+            "bio:fpkmUqUnstranded": 16.7545
           },
           "project": {
             "type": "bio:Project",
@@ -246,15 +326,15 @@
         },
         {
           "type": "bio:ExpressionMeasurement",
-          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_da13446a-c4dc-4d02-80c8-410273925ac4",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_8049_TCGA-LGG_da13446a-c4dc-4d02-80c8-410273925ac4",
           "measurement_properties": {
             "bio:fileId": "dc944bdf-f066-4603-837d-fba14607a154",
-            "bio:unstrandedCount": 0.0,
-            "bio:strandedFirstCount": 0.0,
-            "bio:strandedSecondCount": 0.0,
-            "bio:tpmUnstranded": 0.0,
-            "bio:fpkmUnstranded": 0.0,
-            "bio:fpkmUqUnstranded": 0.0
+            "bio:unstrandedCount": 3808.0,
+            "bio:strandedFirstCount": 1858.0,
+            "bio:strandedSecondCount": 1950.0,
+            "bio:tpmUnstranded": 260.2901,
+            "bio:fpkmUnstranded": 75.9141,
+            "bio:fpkmUqUnstranded": 80.5707
           },
           "project": {
             "type": "bio:Project",
@@ -285,15 +365,15 @@
         },
         {
           "type": "bio:ExpressionMeasurement",
-          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_a5f851c5-6130-4ea1-9f86-be59331a92f7",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_8049_TCGA-LGG_a5f851c5-6130-4ea1-9f86-be59331a92f7",
           "measurement_properties": {
             "bio:fileId": "106669c1-e20c-4ed8-863c-3ada529f58a4",
-            "bio:unstrandedCount": 0.0,
-            "bio:strandedFirstCount": 0.0,
-            "bio:strandedSecondCount": 0.0,
-            "bio:tpmUnstranded": 0.0,
-            "bio:fpkmUnstranded": 0.0,
-            "bio:fpkmUqUnstranded": 0.0
+            "bio:unstrandedCount": 1166.0,
+            "bio:strandedFirstCount": 594.0,
+            "bio:strandedSecondCount": 573.0,
+            "bio:tpmUnstranded": 60.0651,
+            "bio:fpkmUnstranded": 17.7237,
+            "bio:fpkmUqUnstranded": 17.1955
           },
           "project": {
             "type": "bio:Project",
@@ -324,15 +404,15 @@
         },
         {
           "type": "bio:ExpressionMeasurement",
-          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_e6c55ba6-4c8a-4ea4-8dde-74d01915db02",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_8049_TCGA-LGG_e6c55ba6-4c8a-4ea4-8dde-74d01915db02",
           "measurement_properties": {
             "bio:fileId": "7cdc56cf-2e0e-467e-8e96-5b2391309b7f",
-            "bio:unstrandedCount": 0.0,
-            "bio:strandedFirstCount": 0.0,
-            "bio:strandedSecondCount": 0.0,
-            "bio:tpmUnstranded": 0.0,
-            "bio:fpkmUnstranded": 0.0,
-            "bio:fpkmUqUnstranded": 0.0
+            "bio:unstrandedCount": 1714.0,
+            "bio:strandedFirstCount": 842.0,
+            "bio:strandedSecondCount": 872.0,
+            "bio:tpmUnstranded": 101.3674,
+            "bio:fpkmUnstranded": 25.1625,
+            "bio:fpkmUqUnstranded": 25.1145
           },
           "project": {
             "type": "bio:Project",
@@ -363,15 +443,15 @@
         },
         {
           "type": "bio:ExpressionMeasurement",
-          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-LGG_d3d8987d-0a54-45f8-b9c9-17ec89fa864e",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_8049_TCGA-LGG_d3d8987d-0a54-45f8-b9c9-17ec89fa864e",
           "measurement_properties": {
             "bio:fileId": "8fcc58b7-834f-43df-b0a5-375e59dc3bed",
-            "bio:unstrandedCount": 1.0,
-            "bio:strandedFirstCount": 1.0,
-            "bio:strandedSecondCount": 0.0,
-            "bio:tpmUnstranded": 0.0117,
-            "bio:fpkmUnstranded": 0.0037,
-            "bio:fpkmUqUnstranded": 0.0041
+            "bio:unstrandedCount": 2210.0,
+            "bio:strandedFirstCount": 1113.0,
+            "bio:strandedSecondCount": 1102.0,
+            "bio:tpmUnstranded": 104.6775,
+            "bio:fpkmUnstranded": 32.8137,
+            "bio:fpkmUqUnstranded": 36.4159
           },
           "project": {
             "type": "bio:Project",
@@ -402,15 +482,15 @@
         },
         {
           "type": "bio:ExpressionMeasurement",
-          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_41685c5a-a548-483a-8a20-305ad8d61771",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_8049_TCGA-GBM_41685c5a-a548-483a-8a20-305ad8d61771",
           "measurement_properties": {
             "bio:fileId": "444a2332-9e52-4cf8-94d9-07a8b829633e",
-            "bio:unstrandedCount": 3.0,
-            "bio:strandedFirstCount": 1.0,
-            "bio:strandedSecondCount": 2.0,
-            "bio:tpmUnstranded": 0.0504,
-            "bio:fpkmUnstranded": 0.0169,
-            "bio:fpkmUqUnstranded": 0.0155
+            "bio:unstrandedCount": 384.0,
+            "bio:strandedFirstCount": 13.0,
+            "bio:strandedSecondCount": 371.0,
+            "bio:tpmUnstranded": 26.1306,
+            "bio:fpkmUnstranded": 8.7586,
+            "bio:fpkmUqUnstranded": 8.0612
           },
           "project": {
             "type": "bio:Project",
@@ -441,15 +521,15 @@
         },
         {
           "type": "bio:ExpressionMeasurement",
-          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_3f960d3b-a58c-43d0-a8a4-f3555b399c9d",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_8049_TCGA-GBM_3f960d3b-a58c-43d0-a8a4-f3555b399c9d",
           "measurement_properties": {
             "bio:fileId": "99ff2016-a97a-4142-b70a-1bb59d6264e9",
-            "bio:unstrandedCount": 3.0,
-            "bio:strandedFirstCount": 0.0,
-            "bio:strandedSecondCount": 3.0,
-            "bio:tpmUnstranded": 0.0251,
-            "bio:fpkmUnstranded": 0.0184,
-            "bio:fpkmUqUnstranded": 0.0163
+            "bio:unstrandedCount": 1749.0,
+            "bio:strandedFirstCount": 3.0,
+            "bio:strandedSecondCount": 1746.0,
+            "bio:tpmUnstranded": 59.1899,
+            "bio:fpkmUnstranded": 43.563,
+            "bio:fpkmUqUnstranded": 38.395
           },
           "project": {
             "type": "bio:Project",
@@ -480,15 +560,15 @@
         },
         {
           "type": "bio:ExpressionMeasurement",
-          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_8049_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6",
           "measurement_properties": {
             "bio:fileId": "d4649bc7-09d2-4d90-bafd-0bec72429b00",
-            "bio:unstrandedCount": 0.0,
-            "bio:strandedFirstCount": 0.0,
-            "bio:strandedSecondCount": 0.0,
-            "bio:tpmUnstranded": 0.0,
-            "bio:fpkmUnstranded": 0.0,
-            "bio:fpkmUqUnstranded": 0.0
+            "bio:unstrandedCount": 659.0,
+            "bio:strandedFirstCount": 6.0,
+            "bio:strandedSecondCount": 653.0,
+            "bio:tpmUnstranded": 33.4877,
+            "bio:fpkmUnstranded": 13.3653,
+            "bio:fpkmUqUnstranded": 12.9972
           },
           "project": {
             "type": "bio:Project",
@@ -519,15 +599,15 @@
         },
         {
           "type": "bio:ExpressionMeasurement",
-          "individual_iri": "http://example.org/biointegrate/expression/HGNC_1607_TCGA-GBM_407849a8-8447-4ede-a9d1-c1dfb535222e",
+          "individual_iri": "http://example.org/biointegrate/expression/HGNC_8049_TCGA-GBM_407849a8-8447-4ede-a9d1-c1dfb535222e",
           "measurement_properties": {
             "bio:fileId": "afbd1975-263b-404b-a738-886bf25c0223",
-            "bio:unstrandedCount": 1.0,
-            "bio:strandedFirstCount": 1.0,
-            "bio:strandedSecondCount": 0.0,
-            "bio:tpmUnstranded": 0.0084,
-            "bio:fpkmUnstranded": 0.0062,
-            "bio:fpkmUqUnstranded": 0.006
+            "bio:unstrandedCount": 475.0,
+            "bio:strandedFirstCount": 6.0,
+            "bio:strandedSecondCount": 471.0,
+            "bio:tpmUnstranded": 16.2056,
+            "bio:fpkmUnstranded": 11.9646,
+            "bio:fpkmUqUnstranded": 11.5524
           },
           "project": {
             "type": "bio:Project",

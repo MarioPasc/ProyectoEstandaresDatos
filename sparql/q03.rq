@@ -1,0 +1,15 @@
+#Muestra aquellos casos y símbolos de genes que presentan una medida de expresión (unstranded count) superior a 1000, ordenados de mayor a menor nivel de expresión:
+
+PREFIX bi: <http://example.org/biointegrate/>
+
+SELECT ?caseId ?geneSymbol ?count WHERE {
+  ?meas a bi:ExpressionMeasurement ;
+        bi:unstrandedCount ?count ;
+        bi:measuredCase ?case ;
+        bi:measuredGene ?gene .
+  ?case bi:caseId ?caseId .
+  ?gene bi:geneSymbol ?geneSymbol .
+  FILTER(?count > 1000)
+}
+ORDER BY DESC(?count)
+

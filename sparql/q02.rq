@@ -1,0 +1,11 @@
+#Muestra todos los identificadores de casos clínicos (case ID) que pertenecen específicamente al proyecto "TCGA-GBM":
+
+PREFIX bi: <http://example.org/biointegrate/>
+
+SELECT ?projectId ?caseId WHERE {
+  ?project a bi:Project ;
+           bi:projectId ?projectId ;
+           bi:hasCase ?case .
+  ?case bi:caseId ?caseId .
+  FILTER(?projectId = "TCGA-GBM")
+}
