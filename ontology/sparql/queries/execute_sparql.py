@@ -1,62 +1,95 @@
 import rdflib
 import csv
+import argparse
+import logging
+import sys
 from pathlib import Path
 
-# 1. Detectar la raíz subiendo un nivel desde la carpeta 'sparql'
-# Si el script está en .../ProyectoEstandaresDatos/sparql, ROOT es .../ProyectoEstandaresDatos
-ROOT_DIR = Path(__file__).resolve().parent.parent
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[logging.StreamHandler(sys.stdout)]
+)
+logger = logging.getLogger(__name__)
 
-# 2. Rutas relativas corregidas
-OWL_FILE = ROOT_DIR / "ontology" / "assets" / "biointegrate-ontology-reasoned.owl"
-QUERIES_DIR = ROOT_DIR / "sparql"
-OUTPUT_DIR = ROOT_DIR / "results" / "sparql"
+def parse_args():
+    parser = argparse.ArgumentParser(description="Execute SPARQL queries against an OWL ontology.")
+    
+    parser.add_argument(
+        "--owl-file",
+        type=Path,
+        default=Path("ontology/data/owl/biointegrate-ontology-reasoned.owl"),
+        help="Path to the OWL ontology file."
+    )
+    parser.add_argument(
+        "--queries-dir",
+        type=Path,
+        default=Path("ontology/sparql/queries"),
+        help="Directory containing SPARQL queries."
+    )
+    parser.add_argument(
+        "--results-dir",
+        type=Path,
+        default=Path("ontology/sparql/results"),
+        help="Directory to save results."
+    )
+    
+    return parser.parse_args()
 
-def execute_task_t3():
-    # Validación de existencia del OWL
-    if not OWL_FILE.exists():
-        print(f"Error: No se encuentra el archivo OWL en: {OWL_FILE}")
-        print(f"Por favor, verifica que la carpeta 'ontology/assets' existe en la raíz.")
+def execute_sparql_queries(owl_file, queries_dir, output_dir):
+    # Validation
+    if not owl_file.exists():
+        logger.error(f"OWL file not found at: {owl_file}")
+        logger.info("Please verify the path to the ontology file.")
         return
 
-    print(f"--- Iniciando ejecución de consultas SPARQL ---")
-    print(f"Archivo OWL detectado: {OWL_FILE.name}")
+    logger.info("--- Starting SPARQL queries execution ---")
+    logger.info(f"OWL File: {owl_file}")
+    logger.info(f"Queries Dir: {queries_dir}")
+    logger.info(f"Output Dir: {output_dir}")
     
     g = rdflib.Graph()
     try:
-        g.parse(str(OWL_FILE), format="xml")
-        print("✓ Ontología cargada correctamente en memoria.")
+        logger.info(f"Loading ontology from {owl_file.name}...")
+        g.parse(str(owl_file), format="xml")
+        logger.info("✓ Ontology loaded successfully into memory.")
     except Exception as e:
-        print(f"✗ Error cargando el OWL: {e}")
+        logger.error(f"✗ Error loading OWL: {e}")
         return
 
-    # Crear carpeta de resultados
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    # Create results directory
+    output_dir.mkdir(parents=True, exist_ok=True)
     
-    # Procesar consultas de la 1 a la 6
+    # Process queries 1 to 6
     for i in range(1, 7):
         query_file = f"q0{i}.rq"
-        query_path = QUERIES_DIR / query_file
+        query_path = queries_dir / query_file
         
         if query_path.exists():
-            print(f"Ejecutando {query_file}...")
-            with open(query_path, 'r', encoding='utf-8') as f:
-                query_str = f.read()
-            
+            logger.info(f"Executing {query_file}...")
             try:
+                with open(query_path, 'r', encoding='utf-8') as f:
+                    query_str = f.read()
+                
                 results = g.query(query_str)
                 
-                output_file = OUTPUT_DIR / f"q0{i}_results.csv"
+                output_file = output_dir / f"q0{i}_results.csv"
                 with open(output_file, 'w', newline='', encoding='utf-8') as f_out:
                     writer = csv.writer(f_out)
-                    writer.writerow([str(v) for v in results.vars])
-                    for row in results:
-                        writer.writerow([str(v) for v in row])
+                    if results.vars:
+                        writer.writerow([str(v) for v in results.vars])
+                        for row in results:
+                            writer.writerow([str(v) for v in row])
+                    else:
+                        pass
                 
-                print(f"   ✓ Éxito. Guardado en: results/sparql/{output_file.name}")
+                logger.info(f"   ✓ Success. Saved to: {output_file}")
             except Exception as e:
-                print(f"   ✗ Error en {query_file}: {e}")
+                logger.error(f"   ✗ Error in {query_file}: {e}")
         else:
-            print(f"⚠ Aviso: No se encontró {query_file} en la carpeta sparql/")
+            logger.warning(f"⚠ Warning: {query_file} not found in {queries_dir}")
 
 if __name__ == "__main__":
-    execute_task_t3()
+    args = parse_args()
+    execute_sparql_queries(args.owl_file, args.queries_dir, args.results_dir)

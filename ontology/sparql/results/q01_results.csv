@@ -1,0 +1,5 @@
+geneSymbol,uniprotId,goId,goLabel
+MXRA5,Q9NR99,GO:0071559,response to transforming growth factor beta
+MXRA5,Q9NR99,GO:0062023,collagen-containing extracellular matrix
+MXRA5,Q9NR99,GO:0070062,extracellular exosome
+MXRA5,Q9NR99,GO:0005201,extracellular matrix structural constituent
