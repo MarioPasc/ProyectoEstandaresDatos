@@ -4,8 +4,12 @@ PREFIX bi: <http://example.org/biointegrate/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT ?entidad ?clase_especifica WHERE {
-  ?entidad rdf:type bi:BioEntity .
+  # En el TTL sin inferencia, no existe el tipo explícito bi:BioEntity.
+  # Buscamos cualquier entidad que tenga un tipo definido en nuestro namespace 'bi:'
   ?entidad rdf:type ?clase_especifica .
+  
+  FILTER(STRSTARTS(STR(?clase_especifica), STR(bi:)))
   FILTER(?clase_especifica != bi:BioEntity)
   FILTER(?clase_especifica != <http://www.w3.org/2002/07/owl#NamedIndividual>)
 }
+

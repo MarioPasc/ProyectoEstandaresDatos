@@ -6,7 +6,9 @@ WHERE {
 
   ?gene rdf:type bi:Gene .
   ?gene bi:geneSymbol ?geneSymbol .
-  ?gene bi:hasProteinProduct ?protein .
+  
+  # In the TTL data, the link is defined from Protein to Gene
+  ?protein bi:proteinProductOf ?gene .
 
   ?protein rdf:type bi:Protein .
   ?protein bi:uniprotId ?uniprotId .
