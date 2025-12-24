@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Reporte BioIntegrate</title>
+<style>
+      body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f8f9fa; color: #333; }
+      h1 { text-align: center; color: #2c3e50; margin-bottom: 20px; }
+      .summary { text-align: center; margin-bottom: 30px; font-style: italic; color: #666; }
+      
+      table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 40px; }
+      th, td { padding: 12px 15px; border-bottom: 1px solid #ddd; }
+      th { background-color: #f1f1f1; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; text-align: left; }
+      tr:hover { background-color: #f9f9f9; }
+      
+      .tag { display: inline-block; background: #e3f2fd; color: #0d47a1; padding: 2px 6px; border-radius: 4px; font-size: 10px; margin: 1px; border: 1px solid #bbdefb; }
+      .meta { font-size: 11px; color: #7f8c8d; display: block; margin-top: 2px; }
+      .val-mono { font-family: 'Consolas', monospace; font-weight: bold; color: #2c3e50; }
+
+      /* ESTILOS QUERY 2 (Waterfall) */
+      .chart-cell { width: 400px; position: relative; border-left: 1px dashed #ccc; border-right: 1px dashed #ccc; }
+      .axis-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background-color: #333; z-index: 10; opacity: 0.3; }
+      .bar-wrapper { display: flex; align-items: center; height: 18px; width: 100%; }
+      .bar-pos { height: 100%; background-color: #e74c3c; margin-left: 50%; border-radius: 0 3px 3px 0; transition: width 0.3s ease; }
+      .bar-neg { height: 100%; background-color: #27ae60; margin-right: 50%; margin-left: auto; border-radius: 3px 0 0 3px; transition: width 0.3s ease; }
+      .val-text { font-family: 'Consolas', monospace; font-size: 11px; text-align: right; }
+    </style>
+</head>
+<body>
+<h1>Genes con Alta Expresión en LGG (&gt;500 TPM)</h1>
+<p class="summary">Listado de genes altamente expresados y su correspondencia en UniProt.</p>
+<table>
+<thead><tr>
+<th>Gen (HGNC)</th>
+<th>Identificadores</th>
+<th style="text-align:right">TPM Medio</th>
+<th>Anotación Funcional (UniProt)</th>
+</tr></thead>
+<tbody><tr>
+<td>
+<div style="font-size:16px; font-weight:bold; color:#2c3e50;"></div>
+<span class="meta"></span>
+</td>
+<td>
+<div class="meta">Ensembl: <strong style="color:#333"></strong>
+</div>
+<div class="meta">UniProt IDs: 0</div>
+</td>
+<td style="text-align:right">
+<div class="val-mono" style="font-size:15px; color:#27ae60;">NaN</div>
+<span class="meta">Transcripts Per Million</span>
+</td>
+<td></td>
+</tr></tbody>
+</table>
+</body>
+</html>

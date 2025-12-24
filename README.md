@@ -62,6 +62,7 @@
   - [Quick Start](#quick-start)
   - [📥 Descargar Datos](#-descargar-datos)
   - [🗄️ Importar a JSON y MongoDB](#️-importar-a-json-y-mongodb)
+  - [🔍 Ejecución de Consultas](#-ejecución-de-consultas-y-reportes-t2)
   - [📊 Fuentes de Datos](#-fuentes-de-datos)
   - [🔧 Verificación](#-verificación)
   - [📖 Lectura](#-lectura)
@@ -247,6 +248,38 @@ Tras la ejecución exitosa, se generarán archivos JSON:
 > - Los archivos JSON se generan incluso con `--no-insert`
 > - La importación a MongoDB requiere tener MongoDB en ejecución
 > - Los tres importadores (GDC, HGNC, UniProt) se ejecutan en secuencia
+
+<!-- TOC --><a name="-ejecución-de-consultas-y-reportes-t2"></a>
+## 🔍 Ejecución de Consultas y Reportes (T2)
+
+El proyecto incluye un CLI dedicado para ejecutar consultas complejas sobre MongoDB y generar reportes transformados (JSON → XML → HTML).
+
+### Comando Principal
+
+```bash
+biointegrate-execute-queries \
+  --config config/queries/mario_queries.yaml \
+  --queries docs/t2-queries/Query2Completa.txt,docs/t2-queries/Query1_LGG_UniProt.txt,docs/t2-queries/Query3_MembraneCancerCoverage.txt \
+  --output-dir docs/t2-resultados \
+  --xslt docs/xslt/biointegrate_report.xslt
+```
+
+### Flujo de Trabajo
+
+1.  **Carga de Configuración**: Lee credenciales de MongoDB desde el YAML.
+2.  **Ejecución**: Procesa los ficheros de consulta (`.txt`) contra la base de datos.
+3.  **Transformación (T2)**:
+    *   Guarda resultados crudos en `json/`.
+    *   Convierte a XML en `xml/`.
+    *   Aplica XSLT para generar reportes visuales en `html/`.
+
+### Consultas Incluidas
+
+*   **Query 1 (LGG UniProt)**: Proteómica dirigida para Glioma de Bajo Grado.
+*   **Query 2 (Completa)**: Integración multi-ómica (Clínica + Genómica + Proteómica).
+*   **Query 3 (Cobertura)**: Análisis de disponibilidad de datos para proteínas de membrana en cáncer.
+
+Para más detalles técnicos, consulta la [Guía de Lectura del CLI](docs/reports/guia_lectura_queries_cli.html).
 
 <!-- TOC --><a name="-fuentes-de-datos"></a>
 ## 📊 Fuentes de Datos

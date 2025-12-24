@@ -1,0 +1,10 @@
+#Muestra el ID de UniProt y el nombre de aquellas proteínas cuya descripción funcional contenga el término "remodeling":
+
+PREFIX bi: <http://example.org/biointegrate/>
+
+SELECT ?uniprotId ?proteinName WHERE {
+  ?protein a bi:Protein ;
+           bi:uniprotId ?uniprotId ;
+           bi:proteinName ?proteinName .
+  FILTER(regex(?proteinName, "remodeling", "i"))
+}

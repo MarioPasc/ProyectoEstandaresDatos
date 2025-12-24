@@ -1,0 +1,1576 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/mpascual/ontologies/2025/11/biointegrate-ontology-reasoned#"
+     xml:base="http://www.semanticweb.org/mpascual/ontologies/2025/11/biointegrate-ontology-reasoned"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:biointegrate="http://example.org/biointegrate/">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/mpascual/ontologies/2025/11/biointegrate-ontology-reasoned">
+        <dc:source>HGNC</dc:source>
+        <dc:source>NCI Genomic Data Commons (GDC/TCGA)</dc:source>
+        <dc:source>UniProt</dc:source>
+        <rdfs:label xml:lang="en">BioIntegrate: simplified HGNC–UniProt–GDC integration ontology</rdfs:label>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://example.org/biointegrate/manchesterDefinition -->
+
+    <owl:AnnotationProperty rdf:about="http://example.org/biointegrate/manchesterDefinition">
+        <rdfs:comment xml:lang="en">Human-readable Manchester class expression to paste into Protégé (EquivalentTo/SubClassOf).</rdfs:comment>
+        <rdfs:label xml:lang="en">Manchester definition</rdfs:label>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/source -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/source"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#exactMatch -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#exactMatch"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://example.org/biointegrate/caseInProject -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/caseInProject">
+        <owl:inverseOf rdf:resource="http://example.org/biointegrate/hasCase"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Case"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/Project"/>
+        <rdfs:label xml:lang="en">case in project</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/hasBiologicalProcess -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/hasBiologicalProcess">
+        <rdfs:subPropertyOf rdf:resource="http://example.org/biointegrate/hasGoTerm"/>
+        <owl:inverseOf rdf:resource="http://example.org/biointegrate/isBiologicalProcessOf"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Protein"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/GOTerm"/>
+        <rdfs:label xml:lang="en">has biological process</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/hasCase -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/hasCase">
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Project"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/Case"/>
+        <rdfs:label xml:lang="en">has case</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/hasCaseMeasurement -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/hasCaseMeasurement">
+        <rdfs:subPropertyOf rdf:resource="http://example.org/biointegrate/hasExpressionMeasurement"/>
+        <owl:inverseOf rdf:resource="http://example.org/biointegrate/measuredCase"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Case"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <rdfs:label xml:lang="en">has case measurement</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/hasCellularComponent -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/hasCellularComponent">
+        <rdfs:subPropertyOf rdf:resource="http://example.org/biointegrate/hasGoTerm"/>
+        <owl:inverseOf rdf:resource="http://example.org/biointegrate/isCellularComponentOf"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Protein"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/GOTerm"/>
+        <rdfs:label xml:lang="en">has cellular component</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/hasExpressionMeasurement -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/hasExpressionMeasurement">
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <rdfs:label xml:lang="en">has expression measurement</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/hasGeneMeasurement -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/hasGeneMeasurement">
+        <rdfs:subPropertyOf rdf:resource="http://example.org/biointegrate/hasExpressionMeasurement"/>
+        <owl:inverseOf rdf:resource="http://example.org/biointegrate/measuredGene"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Gene"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <rdfs:label xml:lang="en">has gene measurement</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/hasGoTerm -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/hasGoTerm">
+        <owl:inverseOf rdf:resource="http://example.org/biointegrate/isGoTermOfProtein"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Protein"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/GOTerm"/>
+        <rdfs:label xml:lang="en">has GO term</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/hasMolecularFunction -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/hasMolecularFunction">
+        <rdfs:subPropertyOf rdf:resource="http://example.org/biointegrate/hasGoTerm"/>
+        <owl:inverseOf rdf:resource="http://example.org/biointegrate/isMolecularFunctionOf"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Protein"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/GOTerm"/>
+        <rdfs:label xml:lang="en">has molecular function</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/hasOrganism -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/hasOrganism">
+        <owl:inverseOf rdf:resource="http://example.org/biointegrate/isOrganismOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Protein"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/Organism"/>
+        <rdfs:label xml:lang="en">has organism</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/hasProjectMeasurement -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/hasProjectMeasurement">
+        <rdfs:subPropertyOf rdf:resource="http://example.org/biointegrate/hasExpressionMeasurement"/>
+        <owl:inverseOf rdf:resource="http://example.org/biointegrate/measuredProject"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Project"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <rdfs:label xml:lang="en">has project measurement</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/hasProteinProduct -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/hasProteinProduct">
+        <owl:inverseOf rdf:resource="http://example.org/biointegrate/proteinProductOf"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Gene"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/Protein"/>
+        <rdfs:label xml:lang="en">has protein product</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/isBiologicalProcessOf -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/isBiologicalProcessOf">
+        <rdfs:subPropertyOf rdf:resource="http://example.org/biointegrate/isGoTermOfProtein"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/GOTerm"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/Protein"/>
+        <rdfs:label xml:lang="en">is biological process of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/isCellularComponentOf -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/isCellularComponentOf">
+        <rdfs:subPropertyOf rdf:resource="http://example.org/biointegrate/isGoTermOfProtein"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/GOTerm"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/Protein"/>
+        <rdfs:label xml:lang="en">is cellular component of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/isGoTermOfProtein -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/isGoTermOfProtein">
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/GOTerm"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/Protein"/>
+        <rdfs:label xml:lang="en">is GO term of protein</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/isMolecularFunctionOf -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/isMolecularFunctionOf">
+        <rdfs:subPropertyOf rdf:resource="http://example.org/biointegrate/isGoTermOfProtein"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/GOTerm"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/Protein"/>
+        <rdfs:label xml:lang="en">is molecular function of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/isOrganismOf -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/isOrganismOf">
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Organism"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/Protein"/>
+        <rdfs:label xml:lang="en">is organism of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/measuredCase -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/measuredCase">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/Case"/>
+        <rdfs:label xml:lang="en">measured case</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/measuredGene -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/measuredGene">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/Gene"/>
+        <rdfs:label xml:lang="en">measured gene</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/measuredProject -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/measuredProject">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/Project"/>
+        <rdfs:label xml:lang="en">measured project</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/proteinProductOf -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/biointegrate/proteinProductOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Protein"/>
+        <rdfs:range rdf:resource="http://example.org/biointegrate/Gene"/>
+        <rdfs:label xml:lang="en">protein product of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://example.org/biointegrate/caseId -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/caseId">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Case"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">case ID</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/diseaseTypeLabel -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/diseaseTypeLabel">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Case"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">disease type label</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/ensemblGeneId -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/ensemblGeneId">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Gene"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">Ensembl gene ID</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/fileId -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/fileId">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">file UUID</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/fpkmUnstranded -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/fpkmUnstranded">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:label xml:lang="en">FPKM (unstranded)</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/fpkmUqUnstranded -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/fpkmUqUnstranded">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:label xml:lang="en">FPKM-UQ (unstranded)</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/functionText -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/functionText">
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Protein"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">function text</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/geneName -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/geneName">
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Gene"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">gene name</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/geneSymbol -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/geneSymbol">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Gene"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">gene symbol</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/goAspect -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/goAspect">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/GOTerm"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Use one of: MF, BP, CC.</rdfs:comment>
+        <rdfs:label xml:lang="en">GO aspect</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/goId -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/goId">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/GOTerm"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">GO ID</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/goLabel -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/goLabel">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/GOTerm"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">GO label</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/hgncId -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/hgncId">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Gene"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">HGNC ID</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/locusGroup -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/locusGroup">
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Gene"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">locus group</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/primarySiteLabel -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/primarySiteLabel">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Case"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">primary site label</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/projectId -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/projectId">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Project"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">project ID</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/proteinName -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/proteinName">
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Protein"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">protein name</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/scientificName -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/scientificName">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Organism"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">scientific name</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/sequenceLength -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/sequenceLength">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Protein"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:label xml:lang="en">sequence length</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/strandedFirstCount -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/strandedFirstCount">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:label xml:lang="en">stranded first count</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/strandedSecondCount -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/strandedSecondCount">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:label xml:lang="en">stranded second count</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/taxonomyId -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/taxonomyId">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Organism"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:label xml:lang="en">NCBI taxonomy ID</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/tpmUnstranded -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/tpmUnstranded">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:label xml:lang="en">TPM (unstranded)</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/uniprotId -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/uniprotId">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/Protein"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">UniProt ID</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://example.org/biointegrate/unstrandedCount -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/biointegrate/unstrandedCount">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:label xml:lang="en">unstranded count</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://example.org/biointegrate/AnatomicalSite -->
+
+    <owl:Class rdf:about="http://example.org/biointegrate/AnatomicalSite">
+        <rdfs:subClassOf rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <biointegrate:manchesterDefinition xml:lang="en">AnatomicalSite</biointegrate:manchesterDefinition>
+        <rdfs:comment xml:lang="en">Optional bridge class for mapping primary_site labels to UBERON terms using skos:exactMatch to obo:UBERON_####### IRIs.</rdfs:comment>
+        <rdfs:label xml:lang="en">AnatomicalSite</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/biointegrate/BioEntity -->
+
+    <owl:Class rdf:about="http://example.org/biointegrate/BioEntity">
+        <rdfs:label xml:lang="en">BioEntity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/biointegrate/Case -->
+
+    <owl:Class rdf:about="http://example.org/biointegrate/Case">
+        <rdfs:subClassOf rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/hasCaseMeasurement"/>
+                <owl:allValuesFrom rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/caseInProject"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://example.org/biointegrate/Project"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/caseId"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/diseaseTypeLabel"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/primarySiteLabel"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:hasKey rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://example.org/biointegrate/caseId"/>
+        </owl:hasKey>
+        <biointegrate:manchesterDefinition xml:lang="en">Case SubClassOf (caseId exactly 1 xsd:string) and (caseInProject exactly 1 Project)</biointegrate:manchesterDefinition>
+        <dc:source>GDC/TCGA</dc:source>
+        <rdfs:label xml:lang="en">Case</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/biointegrate/DiseaseTerm -->
+
+    <owl:Class rdf:about="http://example.org/biointegrate/DiseaseTerm">
+        <rdfs:subClassOf rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <biointegrate:manchesterDefinition xml:lang="en">DiseaseTerm</biointegrate:manchesterDefinition>
+        <rdfs:comment xml:lang="en">Optional bridge class for mapping disease_type labels to NCIt terms using skos:exactMatch to obo:NCIT_C####### IRIs.</rdfs:comment>
+        <rdfs:label xml:lang="en">DiseaseTerm</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/biointegrate/ExpressionMeasurement -->
+
+    <owl:Class rdf:about="http://example.org/biointegrate/ExpressionMeasurement">
+        <rdfs:subClassOf rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/measuredCase"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://example.org/biointegrate/Case"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/measuredGene"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://example.org/biointegrate/Gene"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/measuredProject"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://example.org/biointegrate/Project"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/fileId"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/fpkmUnstranded"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/fpkmUqUnstranded"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/strandedFirstCount"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/strandedSecondCount"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/tpmUnstranded"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/unstrandedCount"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:hasKey rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://example.org/biointegrate/measuredCase"/>
+            <rdf:Description rdf:about="http://example.org/biointegrate/measuredGene"/>
+            <rdf:Description rdf:about="http://example.org/biointegrate/measuredProject"/>
+        </owl:hasKey>
+        <biointegrate:manchesterDefinition xml:lang="en">ExpressionMeasurement SubClassOf (measuredGene exactly 1 Gene) and (measuredCase exactly 1 Case) and (measuredProject exactly 1 Project)</biointegrate:manchesterDefinition>
+        <dc:source>GDC/TCGA</dc:source>
+        <rdfs:comment xml:lang="en">Reified RNA-seq expression values for one gene in one case within one project.</rdfs:comment>
+        <rdfs:label xml:lang="en">ExpressionMeasurement</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/biointegrate/GOTerm -->
+
+    <owl:Class rdf:about="http://example.org/biointegrate/GOTerm">
+        <rdfs:subClassOf rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/goId"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/goAspect"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/goLabel"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:hasKey rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://example.org/biointegrate/goId"/>
+        </owl:hasKey>
+        <biointegrate:manchesterDefinition xml:lang="en">GOTerm SubClassOf (goId exactly 1 xsd:string) and (goAspect max 1 xsd:string)</biointegrate:manchesterDefinition>
+        <dc:source>Gene Ontology (via UniProt annotations)</dc:source>
+        <rdfs:label xml:lang="en">GO Term</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/biointegrate/Gene -->
+
+    <owl:Class rdf:about="http://example.org/biointegrate/Gene">
+        <rdfs:subClassOf rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/hasGeneMeasurement"/>
+                <owl:allValuesFrom rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/hasProteinProduct"/>
+                <owl:allValuesFrom rdf:resource="http://example.org/biointegrate/Protein"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/geneSymbol"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/hgncId"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/ensemblGeneId"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:hasKey rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://example.org/biointegrate/hgncId"/>
+        </owl:hasKey>
+        <biointegrate:manchesterDefinition xml:lang="en">Gene SubClassOf (hgncId exactly 1 xsd:string) and (geneSymbol exactly 1 xsd:string) and (ensemblGeneId max 1 xsd:string)</biointegrate:manchesterDefinition>
+        <dc:source>HGNC</dc:source>
+        <rdfs:label xml:lang="en">Gene</rdfs:label>
+        <skos:exactMatch rdf:resource="http://purl.obolibrary.org/obo/SO_0000704"/>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/biointegrate/Organism -->
+
+    <owl:Class rdf:about="http://example.org/biointegrate/Organism">
+        <rdfs:subClassOf rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/taxonomyId"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/scientificName"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:hasKey rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://example.org/biointegrate/taxonomyId"/>
+        </owl:hasKey>
+        <biointegrate:manchesterDefinition xml:lang="en">Organism SubClassOf (taxonomyId exactly 1 xsd:integer) and (scientificName max 1 xsd:string)</biointegrate:manchesterDefinition>
+        <dc:source>UniProt</dc:source>
+        <rdfs:label xml:lang="en">Organism</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/biointegrate/Project -->
+
+    <owl:Class rdf:about="http://example.org/biointegrate/Project">
+        <rdfs:subClassOf rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/hasCase"/>
+                <owl:allValuesFrom rdf:resource="http://example.org/biointegrate/Case"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/hasProjectMeasurement"/>
+                <owl:allValuesFrom rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/projectId"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:hasKey rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://example.org/biointegrate/projectId"/>
+        </owl:hasKey>
+        <biointegrate:manchesterDefinition xml:lang="en">Project SubClassOf (projectId exactly 1 xsd:string)</biointegrate:manchesterDefinition>
+        <dc:source>GDC/TCGA</dc:source>
+        <rdfs:label xml:lang="en">Project</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://example.org/biointegrate/Protein -->
+
+    <owl:Class rdf:about="http://example.org/biointegrate/Protein">
+        <rdfs:subClassOf rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/hasGoTerm"/>
+                <owl:allValuesFrom rdf:resource="http://example.org/biointegrate/GOTerm"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/hasOrganism"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://example.org/biointegrate/Organism"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/proteinProductOf"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://example.org/biointegrate/Gene"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/uniprotId"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://example.org/biointegrate/sequenceLength"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:hasKey rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://example.org/biointegrate/uniprotId"/>
+        </owl:hasKey>
+        <biointegrate:manchesterDefinition xml:lang="en">Protein SubClassOf (uniprotId exactly 1 xsd:string) and (hasOrganism exactly 1 Organism) and (proteinProductOf max 1 Gene)</biointegrate:manchesterDefinition>
+        <dc:source>UniProt</dc:source>
+        <rdfs:label xml:lang="en">Protein</rdfs:label>
+        <skos:exactMatch rdf:resource="https://purl.uniprot.org/core/Protein"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://example.org/biointegrate/case/a56c2083-33d5-4c98-b85f-3b68a3d80add -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/case/a56c2083-33d5-4c98-b85f-3b68a3d80add">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Case"/>
+        <biointegrate:caseInProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:hasCaseMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a56c2083-33d5-4c98-b85f-3b68a3d80add"/>
+        <biointegrate:caseId>a56c2083-33d5-4c98-b85f-3b68a3d80add</biointegrate:caseId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/case/a5f851c5-6130-4ea1-9f86-be59331a92f7 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/case/a5f851c5-6130-4ea1-9f86-be59331a92f7">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Case"/>
+        <biointegrate:caseInProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:hasCaseMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a5f851c5-6130-4ea1-9f86-be59331a92f7"/>
+        <biointegrate:caseId>a5f851c5-6130-4ea1-9f86-be59331a92f7</biointegrate:caseId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/case/d209cffc-fe21-4ae7-b610-e5668ea84a3b -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/case/d209cffc-fe21-4ae7-b610-e5668ea84a3b">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Case"/>
+        <biointegrate:caseInProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:hasCaseMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d209cffc-fe21-4ae7-b610-e5668ea84a3b"/>
+        <biointegrate:caseId>d209cffc-fe21-4ae7-b610-e5668ea84a3b</biointegrate:caseId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/case/d3d8987d-0a54-45f8-b9c9-17ec89fa864e -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/case/d3d8987d-0a54-45f8-b9c9-17ec89fa864e">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Case"/>
+        <biointegrate:caseInProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:hasCaseMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d3d8987d-0a54-45f8-b9c9-17ec89fa864e"/>
+        <biointegrate:caseId>d3d8987d-0a54-45f8-b9c9-17ec89fa864e</biointegrate:caseId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/case/d50e944a-3ce4-4632-a878-118499e143e3 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/case/d50e944a-3ce4-4632-a878-118499e143e3">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Case"/>
+        <biointegrate:caseInProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:hasCaseMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d50e944a-3ce4-4632-a878-118499e143e3"/>
+        <biointegrate:caseId>d50e944a-3ce4-4632-a878-118499e143e3</biointegrate:caseId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/case/da13446a-c4dc-4d02-80c8-410273925ac4 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/case/da13446a-c4dc-4d02-80c8-410273925ac4">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Case"/>
+        <biointegrate:caseInProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:hasCaseMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_da13446a-c4dc-4d02-80c8-410273925ac4"/>
+        <biointegrate:caseId>da13446a-c4dc-4d02-80c8-410273925ac4</biointegrate:caseId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/case/dadd7428-9e4d-4652-9469-ab521b88d529 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/case/dadd7428-9e4d-4652-9469-ab521b88d529">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Case"/>
+        <biointegrate:caseInProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:hasCaseMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_dadd7428-9e4d-4652-9469-ab521b88d529"/>
+        <biointegrate:caseId>dadd7428-9e4d-4652-9469-ab521b88d529</biointegrate:caseId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/case/e6c55ba6-4c8a-4ea4-8dde-74d01915db02 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/case/e6c55ba6-4c8a-4ea4-8dde-74d01915db02">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Case"/>
+        <biointegrate:caseInProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:hasCaseMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e6c55ba6-4c8a-4ea4-8dde-74d01915db02"/>
+        <biointegrate:caseId>e6c55ba6-4c8a-4ea4-8dde-74d01915db02</biointegrate:caseId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/case/e7fdf164-a85d-4ff5-9676-d2215ca35403 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/case/e7fdf164-a85d-4ff5-9676-d2215ca35403">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Case"/>
+        <biointegrate:caseInProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:hasCaseMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e7fdf164-a85d-4ff5-9676-d2215ca35403"/>
+        <biointegrate:caseId>e7fdf164-a85d-4ff5-9676-d2215ca35403</biointegrate:caseId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/case/ec82a00f-3909-4781-8ae2-e54cbc1ac7ac -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/case/ec82a00f-3909-4781-8ae2-e54cbc1ac7ac">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Case"/>
+        <biointegrate:caseInProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:hasCaseMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_ec82a00f-3909-4781-8ae2-e54cbc1ac7ac"/>
+        <biointegrate:caseId>ec82a00f-3909-4781-8ae2-e54cbc1ac7ac</biointegrate:caseId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/case/3ed101b5-0007-4957-a25d-4cf43bde08b6 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/case/3ed101b5-0007-4957-a25d-4cf43bde08b6">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Case"/>
+        <biointegrate:caseInProject rdf:resource="http://example.org/biointegrate/project/TCGA-GBM"/>
+        <biointegrate:hasCaseMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6"/>
+        <biointegrate:caseId>3ed101b5-0007-4957-a25d-4cf43bde08b6</biointegrate:caseId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/case/3f960d3b-a58c-43d0-a8a4-f3555b399c9d -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/case/3f960d3b-a58c-43d0-a8a4-f3555b399c9d">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Case"/>
+        <biointegrate:caseInProject rdf:resource="http://example.org/biointegrate/project/TCGA-GBM"/>
+        <biointegrate:hasCaseMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3f960d3b-a58c-43d0-a8a4-f3555b399c9d"/>
+        <biointegrate:caseId>3f960d3b-a58c-43d0-a8a4-f3555b399c9d</biointegrate:caseId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/case/407849a8-8447-4ede-a9d1-c1dfb535222e -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/case/407849a8-8447-4ede-a9d1-c1dfb535222e">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Case"/>
+        <biointegrate:caseInProject rdf:resource="http://example.org/biointegrate/project/TCGA-GBM"/>
+        <biointegrate:hasCaseMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_407849a8-8447-4ede-a9d1-c1dfb535222e"/>
+        <biointegrate:caseId>407849a8-8447-4ede-a9d1-c1dfb535222e</biointegrate:caseId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/case/41685c5a-a548-483a-8a20-305ad8d61771 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/case/41685c5a-a548-483a-8a20-305ad8d61771">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Case"/>
+        <biointegrate:caseInProject rdf:resource="http://example.org/biointegrate/project/TCGA-GBM"/>
+        <biointegrate:hasCaseMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_41685c5a-a548-483a-8a20-305ad8d61771"/>
+        <biointegrate:caseId>41685c5a-a548-483a-8a20-305ad8d61771</biointegrate:caseId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <biointegrate:measuredCase rdf:resource="http://example.org/biointegrate/case/3ed101b5-0007-4957-a25d-4cf43bde08b6"/>
+        <biointegrate:measuredGene rdf:resource="http://example.org/biointegrate/gene/HGNC_7539"/>
+        <biointegrate:measuredProject rdf:resource="http://example.org/biointegrate/project/TCGA-GBM"/>
+        <biointegrate:fileId>d4649bc7-09d2-4d90-bafd-0bec72429b00</biointegrate:fileId>
+        <biointegrate:fpkmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.8201</biointegrate:fpkmUnstranded>
+        <biointegrate:fpkmUqUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.77</biointegrate:fpkmUqUnstranded>
+        <biointegrate:strandedFirstCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</biointegrate:strandedFirstCount>
+        <biointegrate:strandedSecondCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">820.0</biointegrate:strandedSecondCount>
+        <biointegrate:tpmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4.5605</biointegrate:tpmUnstranded>
+        <biointegrate:unstrandedCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">820.0</biointegrate:unstrandedCount>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3f960d3b-a58c-43d0-a8a4-f3555b399c9d -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3f960d3b-a58c-43d0-a8a4-f3555b399c9d">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <biointegrate:measuredCase rdf:resource="http://example.org/biointegrate/case/3f960d3b-a58c-43d0-a8a4-f3555b399c9d"/>
+        <biointegrate:measuredGene rdf:resource="http://example.org/biointegrate/gene/HGNC_7539"/>
+        <biointegrate:measuredProject rdf:resource="http://example.org/biointegrate/project/TCGA-GBM"/>
+        <biointegrate:fileId>99ff2016-a97a-4142-b70a-1bb59d6264e9</biointegrate:fileId>
+        <biointegrate:fpkmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.4039</biointegrate:fpkmUnstranded>
+        <biointegrate:fpkmUqUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.2373</biointegrate:fpkmUqUnstranded>
+        <biointegrate:strandedFirstCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</biointegrate:strandedFirstCount>
+        <biointegrate:strandedSecondCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">514.0</biointegrate:strandedSecondCount>
+        <biointegrate:tpmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.9075</biointegrate:tpmUnstranded>
+        <biointegrate:unstrandedCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">515.0</biointegrate:unstrandedCount>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_407849a8-8447-4ede-a9d1-c1dfb535222e -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_407849a8-8447-4ede-a9d1-c1dfb535222e">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <biointegrate:measuredCase rdf:resource="http://example.org/biointegrate/case/407849a8-8447-4ede-a9d1-c1dfb535222e"/>
+        <biointegrate:measuredGene rdf:resource="http://example.org/biointegrate/gene/HGNC_7539"/>
+        <biointegrate:measuredProject rdf:resource="http://example.org/biointegrate/project/TCGA-GBM"/>
+        <biointegrate:fileId>afbd1975-263b-404b-a738-886bf25c0223</biointegrate:fileId>
+        <biointegrate:fpkmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.2771</biointegrate:fpkmUnstranded>
+        <biointegrate:fpkmUqUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.1986</biointegrate:fpkmUqUnstranded>
+        <biointegrate:strandedFirstCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.0</biointegrate:strandedFirstCount>
+        <biointegrate:strandedSecondCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">824.0</biointegrate:strandedSecondCount>
+        <biointegrate:tpmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.0842</biointegrate:tpmUnstranded>
+        <biointegrate:unstrandedCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">826.0</biointegrate:unstrandedCount>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_41685c5a-a548-483a-8a20-305ad8d61771 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_41685c5a-a548-483a-8a20-305ad8d61771">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <biointegrate:measuredCase rdf:resource="http://example.org/biointegrate/case/41685c5a-a548-483a-8a20-305ad8d61771"/>
+        <biointegrate:measuredGene rdf:resource="http://example.org/biointegrate/gene/HGNC_7539"/>
+        <biointegrate:measuredProject rdf:resource="http://example.org/biointegrate/project/TCGA-GBM"/>
+        <biointegrate:fileId>444a2332-9e52-4cf8-94d9-07a8b829633e</biointegrate:fileId>
+        <biointegrate:fpkmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5.7964</biointegrate:fpkmUnstranded>
+        <biointegrate:fpkmUqUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5.3349</biointegrate:fpkmUqUnstranded>
+        <biointegrate:strandedFirstCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</biointegrate:strandedFirstCount>
+        <biointegrate:strandedSecondCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2322.0</biointegrate:strandedSecondCount>
+        <biointegrate:tpmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">17.2932</biointegrate:tpmUnstranded>
+        <biointegrate:unstrandedCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2322.0</biointegrate:unstrandedCount>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a56c2083-33d5-4c98-b85f-3b68a3d80add -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a56c2083-33d5-4c98-b85f-3b68a3d80add">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <biointegrate:measuredCase rdf:resource="http://example.org/biointegrate/case/a56c2083-33d5-4c98-b85f-3b68a3d80add"/>
+        <biointegrate:measuredGene rdf:resource="http://example.org/biointegrate/gene/HGNC_7539"/>
+        <biointegrate:measuredProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:fileId>67bec45d-ed1e-41c5-9c61-4d7fb1592450</biointegrate:fileId>
+        <biointegrate:fpkmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.2672</biointegrate:fpkmUnstranded>
+        <biointegrate:fpkmUqUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.2629</biointegrate:fpkmUqUnstranded>
+        <biointegrate:strandedFirstCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">61.0</biointegrate:strandedFirstCount>
+        <biointegrate:strandedSecondCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">64.0</biointegrate:strandedSecondCount>
+        <biointegrate:tpmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.8697</biointegrate:tpmUnstranded>
+        <biointegrate:unstrandedCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">125.0</biointegrate:unstrandedCount>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a5f851c5-6130-4ea1-9f86-be59331a92f7 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a5f851c5-6130-4ea1-9f86-be59331a92f7">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <biointegrate:measuredCase rdf:resource="http://example.org/biointegrate/case/a5f851c5-6130-4ea1-9f86-be59331a92f7"/>
+        <biointegrate:measuredGene rdf:resource="http://example.org/biointegrate/gene/HGNC_7539"/>
+        <biointegrate:measuredProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:fileId>106669c1-e20c-4ed8-863c-3ada529f58a4</biointegrate:fileId>
+        <biointegrate:fpkmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.1429</biointegrate:fpkmUnstranded>
+        <biointegrate:fpkmUqUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.1088</biointegrate:fpkmUqUnstranded>
+        <biointegrate:strandedFirstCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">358.0</biointegrate:strandedFirstCount>
+        <biointegrate:strandedSecondCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">329.0</biointegrate:strandedSecondCount>
+        <biointegrate:tpmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.8733</biointegrate:tpmUnstranded>
+        <biointegrate:unstrandedCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">687.0</biointegrate:unstrandedCount>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d209cffc-fe21-4ae7-b610-e5668ea84a3b -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d209cffc-fe21-4ae7-b610-e5668ea84a3b">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <biointegrate:measuredCase rdf:resource="http://example.org/biointegrate/case/d209cffc-fe21-4ae7-b610-e5668ea84a3b"/>
+        <biointegrate:measuredGene rdf:resource="http://example.org/biointegrate/gene/HGNC_7539"/>
+        <biointegrate:measuredProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:fileId>febf694d-811a-4fcd-b498-e9451fdc0d4e</biointegrate:fileId>
+        <biointegrate:fpkmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.2141</biointegrate:fpkmUnstranded>
+        <biointegrate:fpkmUqUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.2135</biointegrate:fpkmUqUnstranded>
+        <biointegrate:strandedFirstCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">54.0</biointegrate:strandedFirstCount>
+        <biointegrate:strandedSecondCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">56.0</biointegrate:strandedSecondCount>
+        <biointegrate:tpmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.711</biointegrate:tpmUnstranded>
+        <biointegrate:unstrandedCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">110.0</biointegrate:unstrandedCount>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d3d8987d-0a54-45f8-b9c9-17ec89fa864e -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d3d8987d-0a54-45f8-b9c9-17ec89fa864e">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <biointegrate:measuredCase rdf:resource="http://example.org/biointegrate/case/d3d8987d-0a54-45f8-b9c9-17ec89fa864e"/>
+        <biointegrate:measuredGene rdf:resource="http://example.org/biointegrate/gene/HGNC_7539"/>
+        <biointegrate:measuredProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:fileId>8fcc58b7-834f-43df-b0a5-375e59dc3bed</biointegrate:fileId>
+        <biointegrate:fpkmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.4599</biointegrate:fpkmUnstranded>
+        <biointegrate:fpkmUqUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.5104</biointegrate:fpkmUqUnstranded>
+        <biointegrate:strandedFirstCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">156.0</biointegrate:strandedFirstCount>
+        <biointegrate:strandedSecondCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">127.0</biointegrate:strandedSecondCount>
+        <biointegrate:tpmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.467</biointegrate:tpmUnstranded>
+        <biointegrate:unstrandedCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">283.0</biointegrate:unstrandedCount>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d50e944a-3ce4-4632-a878-118499e143e3 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d50e944a-3ce4-4632-a878-118499e143e3">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <biointegrate:measuredCase rdf:resource="http://example.org/biointegrate/case/d50e944a-3ce4-4632-a878-118499e143e3"/>
+        <biointegrate:measuredGene rdf:resource="http://example.org/biointegrate/gene/HGNC_7539"/>
+        <biointegrate:measuredProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:fileId>7349fbd4-c919-45a5-8ed2-1f61b9fec87f</biointegrate:fileId>
+        <biointegrate:fpkmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.2088</biointegrate:fpkmUnstranded>
+        <biointegrate:fpkmUqUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.21</biointegrate:fpkmUqUnstranded>
+        <biointegrate:strandedFirstCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">51.0</biointegrate:strandedFirstCount>
+        <biointegrate:strandedSecondCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">52.0</biointegrate:strandedSecondCount>
+        <biointegrate:tpmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6534</biointegrate:tpmUnstranded>
+        <biointegrate:unstrandedCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">103.0</biointegrate:unstrandedCount>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_da13446a-c4dc-4d02-80c8-410273925ac4 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_da13446a-c4dc-4d02-80c8-410273925ac4">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <biointegrate:measuredCase rdf:resource="http://example.org/biointegrate/case/da13446a-c4dc-4d02-80c8-410273925ac4"/>
+        <biointegrate:measuredGene rdf:resource="http://example.org/biointegrate/gene/HGNC_7539"/>
+        <biointegrate:measuredProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:fileId>dc944bdf-f066-4603-837d-fba14607a154</biointegrate:fileId>
+        <biointegrate:fpkmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.096</biointegrate:fpkmUnstranded>
+        <biointegrate:fpkmUqUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.1019</biointegrate:fpkmUqUnstranded>
+        <biointegrate:strandedFirstCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21.0</biointegrate:strandedFirstCount>
+        <biointegrate:strandedSecondCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">23.0</biointegrate:strandedSecondCount>
+        <biointegrate:tpmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.3292</biointegrate:tpmUnstranded>
+        <biointegrate:unstrandedCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">44.0</biointegrate:unstrandedCount>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_dadd7428-9e4d-4652-9469-ab521b88d529 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_dadd7428-9e4d-4652-9469-ab521b88d529">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <biointegrate:measuredCase rdf:resource="http://example.org/biointegrate/case/dadd7428-9e4d-4652-9469-ab521b88d529"/>
+        <biointegrate:measuredGene rdf:resource="http://example.org/biointegrate/gene/HGNC_7539"/>
+        <biointegrate:measuredProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:fileId>f3f687a3-9619-4ab9-a5d1-35f31422b472</biointegrate:fileId>
+        <biointegrate:fpkmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.1097</biointegrate:fpkmUnstranded>
+        <biointegrate:fpkmUqUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.2264</biointegrate:fpkmUqUnstranded>
+        <biointegrate:strandedFirstCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">305.0</biointegrate:strandedFirstCount>
+        <biointegrate:strandedSecondCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">337.0</biointegrate:strandedSecondCount>
+        <biointegrate:tpmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.5877</biointegrate:tpmUnstranded>
+        <biointegrate:unstrandedCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">642.0</biointegrate:unstrandedCount>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e6c55ba6-4c8a-4ea4-8dde-74d01915db02 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e6c55ba6-4c8a-4ea4-8dde-74d01915db02">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <biointegrate:measuredCase rdf:resource="http://example.org/biointegrate/case/e6c55ba6-4c8a-4ea4-8dde-74d01915db02"/>
+        <biointegrate:measuredGene rdf:resource="http://example.org/biointegrate/gene/HGNC_7539"/>
+        <biointegrate:measuredProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:fileId>7cdc56cf-2e0e-467e-8e96-5b2391309b7f</biointegrate:fileId>
+        <biointegrate:fpkmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.8082</biointegrate:fpkmUnstranded>
+        <biointegrate:fpkmUqUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.8066</biointegrate:fpkmUqUnstranded>
+        <biointegrate:strandedFirstCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">231.0</biointegrate:strandedFirstCount>
+        <biointegrate:strandedSecondCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">272.0</biointegrate:strandedSecondCount>
+        <biointegrate:tpmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.2558</biointegrate:tpmUnstranded>
+        <biointegrate:unstrandedCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">503.0</biointegrate:unstrandedCount>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e7fdf164-a85d-4ff5-9676-d2215ca35403 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e7fdf164-a85d-4ff5-9676-d2215ca35403">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <biointegrate:measuredCase rdf:resource="http://example.org/biointegrate/case/e7fdf164-a85d-4ff5-9676-d2215ca35403"/>
+        <biointegrate:measuredGene rdf:resource="http://example.org/biointegrate/gene/HGNC_7539"/>
+        <biointegrate:measuredProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:fileId>155b732b-3603-4035-94d4-57a81a23a0d1</biointegrate:fileId>
+        <biointegrate:fpkmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.7979</biointegrate:fpkmUnstranded>
+        <biointegrate:fpkmUqUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.8507</biointegrate:fpkmUqUnstranded>
+        <biointegrate:strandedFirstCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">783.0</biointegrate:strandedFirstCount>
+        <biointegrate:strandedSecondCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">802.0</biointegrate:strandedSecondCount>
+        <biointegrate:tpmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">10.9168</biointegrate:tpmUnstranded>
+        <biointegrate:unstrandedCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1585.0</biointegrate:unstrandedCount>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_ec82a00f-3909-4781-8ae2-e54cbc1ac7ac -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_ec82a00f-3909-4781-8ae2-e54cbc1ac7ac">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/ExpressionMeasurement"/>
+        <biointegrate:measuredCase rdf:resource="http://example.org/biointegrate/case/ec82a00f-3909-4781-8ae2-e54cbc1ac7ac"/>
+        <biointegrate:measuredGene rdf:resource="http://example.org/biointegrate/gene/HGNC_7539"/>
+        <biointegrate:measuredProject rdf:resource="http://example.org/biointegrate/project/TCGA-LGG"/>
+        <biointegrate:fileId>dff492f1-7fdc-4ff6-b868-c355cedd6cad</biointegrate:fileId>
+        <biointegrate:fpkmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6835</biointegrate:fpkmUnstranded>
+        <biointegrate:fpkmUqUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7297</biointegrate:fpkmUqUnstranded>
+        <biointegrate:strandedFirstCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">252.0</biointegrate:strandedFirstCount>
+        <biointegrate:strandedSecondCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">235.0</biointegrate:strandedSecondCount>
+        <biointegrate:tpmUnstranded rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.4038</biointegrate:tpmUnstranded>
+        <biointegrate:unstrandedCount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">487.0</biointegrate:unstrandedCount>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/gene/HGNC_7539 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/gene/HGNC_7539">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Gene"/>
+        <biointegrate:hasGeneMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6"/>
+        <biointegrate:hasGeneMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3f960d3b-a58c-43d0-a8a4-f3555b399c9d"/>
+        <biointegrate:hasGeneMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_407849a8-8447-4ede-a9d1-c1dfb535222e"/>
+        <biointegrate:hasGeneMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_41685c5a-a548-483a-8a20-305ad8d61771"/>
+        <biointegrate:hasGeneMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a56c2083-33d5-4c98-b85f-3b68a3d80add"/>
+        <biointegrate:hasGeneMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a5f851c5-6130-4ea1-9f86-be59331a92f7"/>
+        <biointegrate:hasGeneMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d209cffc-fe21-4ae7-b610-e5668ea84a3b"/>
+        <biointegrate:hasGeneMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d3d8987d-0a54-45f8-b9c9-17ec89fa864e"/>
+        <biointegrate:hasGeneMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d50e944a-3ce4-4632-a878-118499e143e3"/>
+        <biointegrate:hasGeneMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_da13446a-c4dc-4d02-80c8-410273925ac4"/>
+        <biointegrate:hasGeneMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_dadd7428-9e4d-4652-9469-ab521b88d529"/>
+        <biointegrate:hasGeneMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e6c55ba6-4c8a-4ea4-8dde-74d01915db02"/>
+        <biointegrate:hasGeneMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e7fdf164-a85d-4ff5-9676-d2215ca35403"/>
+        <biointegrate:hasGeneMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_ec82a00f-3909-4781-8ae2-e54cbc1ac7ac"/>
+        <biointegrate:hasProteinProduct rdf:resource="http://example.org/biointegrate/protein/Q9NR99"/>
+        <biointegrate:ensemblGeneId>ENSG00000101825</biointegrate:ensemblGeneId>
+        <biointegrate:geneSymbol>MXRA5</biointegrate:geneSymbol>
+        <biointegrate:hgncId>HGNC:7539</biointegrate:hgncId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/goterm/GO_0005201 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/goterm/GO_0005201">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/GOTerm"/>
+        <biointegrate:goAspect>MF</biointegrate:goAspect>
+        <biointegrate:goId>GO:0005201</biointegrate:goId>
+        <biointegrate:goLabel>extracellular matrix structural constituent</biointegrate:goLabel>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/goterm/GO_0062023 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/goterm/GO_0062023">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/GOTerm"/>
+        <biointegrate:goAspect>CC</biointegrate:goAspect>
+        <biointegrate:goId>GO:0062023</biointegrate:goId>
+        <biointegrate:goLabel>collagen-containing extracellular matrix</biointegrate:goLabel>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/goterm/GO_0070062 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/goterm/GO_0070062">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/GOTerm"/>
+        <biointegrate:goAspect>CC</biointegrate:goAspect>
+        <biointegrate:goId>GO:0070062</biointegrate:goId>
+        <biointegrate:goLabel>extracellular exosome</biointegrate:goLabel>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/goterm/GO_0071559 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/goterm/GO_0071559">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/GOTerm"/>
+        <biointegrate:goAspect>BP</biointegrate:goAspect>
+        <biointegrate:goId>GO:0071559</biointegrate:goId>
+        <biointegrate:goLabel>response to transforming growth factor beta</biointegrate:goLabel>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/organism/9606 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/organism/9606">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Organism"/>
+        <biointegrate:scientificName>Homo sapiens</biointegrate:scientificName>
+        <biointegrate:taxonomyId rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9606</biointegrate:taxonomyId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/project/TCGA-GBM -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/project/TCGA-GBM">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Project"/>
+        <biointegrate:hasCase rdf:resource="http://example.org/biointegrate/case/3ed101b5-0007-4957-a25d-4cf43bde08b6"/>
+        <biointegrate:hasCase rdf:resource="http://example.org/biointegrate/case/3f960d3b-a58c-43d0-a8a4-f3555b399c9d"/>
+        <biointegrate:hasCase rdf:resource="http://example.org/biointegrate/case/407849a8-8447-4ede-a9d1-c1dfb535222e"/>
+        <biointegrate:hasCase rdf:resource="http://example.org/biointegrate/case/41685c5a-a548-483a-8a20-305ad8d61771"/>
+        <biointegrate:hasProjectMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6"/>
+        <biointegrate:hasProjectMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_3f960d3b-a58c-43d0-a8a4-f3555b399c9d"/>
+        <biointegrate:hasProjectMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_407849a8-8447-4ede-a9d1-c1dfb535222e"/>
+        <biointegrate:hasProjectMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-GBM_41685c5a-a548-483a-8a20-305ad8d61771"/>
+        <biointegrate:projectId>TCGA-GBM</biointegrate:projectId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/project/TCGA-LGG -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/project/TCGA-LGG">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Project"/>
+        <biointegrate:hasCase rdf:resource="http://example.org/biointegrate/case/a56c2083-33d5-4c98-b85f-3b68a3d80add"/>
+        <biointegrate:hasCase rdf:resource="http://example.org/biointegrate/case/a5f851c5-6130-4ea1-9f86-be59331a92f7"/>
+        <biointegrate:hasCase rdf:resource="http://example.org/biointegrate/case/d209cffc-fe21-4ae7-b610-e5668ea84a3b"/>
+        <biointegrate:hasCase rdf:resource="http://example.org/biointegrate/case/d3d8987d-0a54-45f8-b9c9-17ec89fa864e"/>
+        <biointegrate:hasCase rdf:resource="http://example.org/biointegrate/case/d50e944a-3ce4-4632-a878-118499e143e3"/>
+        <biointegrate:hasCase rdf:resource="http://example.org/biointegrate/case/da13446a-c4dc-4d02-80c8-410273925ac4"/>
+        <biointegrate:hasCase rdf:resource="http://example.org/biointegrate/case/dadd7428-9e4d-4652-9469-ab521b88d529"/>
+        <biointegrate:hasCase rdf:resource="http://example.org/biointegrate/case/e6c55ba6-4c8a-4ea4-8dde-74d01915db02"/>
+        <biointegrate:hasCase rdf:resource="http://example.org/biointegrate/case/e7fdf164-a85d-4ff5-9676-d2215ca35403"/>
+        <biointegrate:hasCase rdf:resource="http://example.org/biointegrate/case/ec82a00f-3909-4781-8ae2-e54cbc1ac7ac"/>
+        <biointegrate:hasProjectMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a56c2083-33d5-4c98-b85f-3b68a3d80add"/>
+        <biointegrate:hasProjectMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_a5f851c5-6130-4ea1-9f86-be59331a92f7"/>
+        <biointegrate:hasProjectMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d209cffc-fe21-4ae7-b610-e5668ea84a3b"/>
+        <biointegrate:hasProjectMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d3d8987d-0a54-45f8-b9c9-17ec89fa864e"/>
+        <biointegrate:hasProjectMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_d50e944a-3ce4-4632-a878-118499e143e3"/>
+        <biointegrate:hasProjectMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_da13446a-c4dc-4d02-80c8-410273925ac4"/>
+        <biointegrate:hasProjectMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_dadd7428-9e4d-4652-9469-ab521b88d529"/>
+        <biointegrate:hasProjectMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e6c55ba6-4c8a-4ea4-8dde-74d01915db02"/>
+        <biointegrate:hasProjectMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_e7fdf164-a85d-4ff5-9676-d2215ca35403"/>
+        <biointegrate:hasProjectMeasurement rdf:resource="http://example.org/biointegrate/expression/HGNC_7539_TCGA-LGG_ec82a00f-3909-4781-8ae2-e54cbc1ac7ac"/>
+        <biointegrate:projectId>TCGA-LGG</biointegrate:projectId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.org/biointegrate/protein/Q9NR99 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/biointegrate/protein/Q9NR99">
+        <rdf:type rdf:resource="http://example.org/biointegrate/BioEntity"/>
+        <rdf:type rdf:resource="http://example.org/biointegrate/Protein"/>
+        <biointegrate:hasBiologicalProcess rdf:resource="http://example.org/biointegrate/goterm/GO_0071559"/>
+        <biointegrate:hasCellularComponent rdf:resource="http://example.org/biointegrate/goterm/GO_0062023"/>
+        <biointegrate:hasCellularComponent rdf:resource="http://example.org/biointegrate/goterm/GO_0070062"/>
+        <biointegrate:hasMolecularFunction rdf:resource="http://example.org/biointegrate/goterm/GO_0005201"/>
+        <biointegrate:hasOrganism rdf:resource="http://example.org/biointegrate/organism/9606"/>
+        <biointegrate:proteinProductOf rdf:resource="http://example.org/biointegrate/gene/HGNC_7539"/>
+        <biointegrate:functionText>FUNCTION: In kidney, has anti-inflammatory and anti-fibrotic properties by limiting the induction of chemokines, fibronectin and collagen expression in response to TGB1 and pro-inflammatory stimuli. {ECO:0000269|PubMed:27599751}.</biointegrate:functionText>
+        <biointegrate:proteinName>Matrix-remodeling-associated protein 5 (Adhesion protein with leucine-rich repeats and immunoglobulin domains related to perlecan) (Adlican)</biointegrate:proteinName>
+        <biointegrate:sequenceLength rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2828</biointegrate:sequenceLength>
+        <biointegrate:uniprotId>Q9NR99</biointegrate:uniprotId>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://example.org/biointegrate/AnatomicalSite"/>
+            <rdf:Description rdf:about="http://example.org/biointegrate/Case"/>
+            <rdf:Description rdf:about="http://example.org/biointegrate/DiseaseTerm"/>
+            <rdf:Description rdf:about="http://example.org/biointegrate/ExpressionMeasurement"/>
+            <rdf:Description rdf:about="http://example.org/biointegrate/GOTerm"/>
+            <rdf:Description rdf:about="http://example.org/biointegrate/Gene"/>
+            <rdf:Description rdf:about="http://example.org/biointegrate/Organism"/>
+            <rdf:Description rdf:about="http://example.org/biointegrate/Project"/>
+            <rdf:Description rdf:about="http://example.org/biointegrate/Protein"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+

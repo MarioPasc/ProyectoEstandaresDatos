@@ -1,0 +1,11 @@
+#Muestra todas las entidades biológicas del sistema junto con su clasificación específica, excluyendo la clase genérica raíz:
+
+PREFIX bi: <http://example.org/biointegrate/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?entidad ?clase_especifica WHERE {
+  ?entidad rdf:type bi:BioEntity .
+  ?entidad rdf:type ?clase_especifica .
+  FILTER(?clase_especifica != bi:BioEntity)
+  FILTER(?clase_especifica != <http://www.w3.org/2002/07/owl#NamedIndividual>)
+}
