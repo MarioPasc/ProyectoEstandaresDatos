@@ -52,7 +52,13 @@ def execute_sparql_queries(owl_file, queries_dir, output_dir):
     g = rdflib.Graph()
     try:
         logger.info(f"Loading ontology from {owl_file.name}...")
-        g.parse(str(owl_file), format="xml")
+        try:
+            g.parse(str(owl_file), format="xml")
+        except Exception as e_xml:
+            logger.warning(f"RDF/XML parsing failed ({e_xml}). Attempting Turtle...")
+            g = rdflib.Graph()  # Reset graph
+            g.parse(str(owl_file), format="turtle")
+            
         logger.info("✓ Ontology loaded successfully into memory.")
     except Exception as e:
         logger.error(f"✗ Error loading OWL: {e}")
