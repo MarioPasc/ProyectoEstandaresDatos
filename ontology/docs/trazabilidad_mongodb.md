@@ -41,12 +41,12 @@ This table is “complete” for the **migrated subset** (the part you will actu
 
 
 
-[1]: https://obofoundry.org/id-policy.html?utm_source=chatgpt.com "OBO Foundry Identifier Policy"
-[2]: https://obofoundry.org/ontology/go.html?utm_source=chatgpt.com "Gene ontology"
-[3]: https://purl.obolibrary.org/obo/ncit/releases/2024-05-07/ncit.owl?utm_source=chatgpt.com "http://purl.obolibrary.org/obo/ncit/releases/2024-..."
-[4]: https://obofoundry.org/ontology/uberon.html?utm_source=chatgpt.com "Uberon multi-species anatomy ontology"
-[5]: https://obofoundry.org/ontology/ncit.html?utm_source=chatgpt.com "NCI Thesaurus OBO Edition"
-[6]: https://obofoundry.org/ontology/obi.html?utm_source=chatgpt.com "OBI (Ontology for Biomedical Investigations)"
-[7]: https://www.uniprot.org/help/rdf?utm_source=chatgpt.com "rdf in UniProt help search"
-[8]: https://www.genenames.org/data/gene-symbol-report/?utm_source=chatgpt.com "Symbol report for A1BG"
-[9]: https://docs.cancergenomicscloud.org/docs/tcga-metadata?utm_source=chatgpt.com "TCGA metadata - The CGC Knowledge Center"
+[1]: https://obofoundry.org/id-policy.html "OBO Foundry Identifier Policy"
+[2]: https://obofoundry.org/ontology/go.html "Gene ontology"
+[3]: https://purl.obolibrary.org/obo/ncit/releases/2024-05-07/ncit.owl "http://purl.obolibrary.org/obo/ncit/releases/2024-..."
+[4]: https://obofoundry.org/ontology/uberon.html "Uberon multi-species anatomy ontology"
+[5]: https://obofoundry.org/ontology/ncit.html "NCI Thesaurus OBO Edition"
+[6]: https://obofoundry.org/ontology/obi.html "OBI (Ontology for Biomedical Investigations)"
+[7]: https://www.uniprot.org/help/rdf "rdf in UniProt help search"
+[8]: https://www.genenames.org/data/gene-symbol-report/ "Symbol report for A1BG"
+[9]: https://docs.cancergenomicscloud.org/docs/tcga-metadata "TCGA metadata - The CGC Knowledge Center"
