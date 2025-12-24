@@ -6,7 +6,7 @@ from typing import Dict, Set, Any, List
 
 import pymongo
 from rdflib import Graph, Literal, RDF, URIRef, Namespace
-from rdflib.namespace import XSD
+from rdflib.namespace import XSD, OWL
 
 # Configure logging
 logging.basicConfig(
@@ -164,6 +164,7 @@ def generate_coherent_ttl(data: Dict[str, List[Any]], ids_map: Dict[str, Set[str
     logger.info("Generating RDF Graph...")
     g = Graph()
     g.bind("bio", BI)
+    g.bind("owl", OWL)
 
     # Helper to create URIs matching the OWL pattern
     def make_uri(entity_type, entity_id):
@@ -175,7 +176,9 @@ def generate_coherent_ttl(data: Dict[str, List[Any]], ids_map: Dict[str, Set[str
         "cases": 0,
         "genes": 0,
         "measurements": 0,
-        "proteins": 0
+        "proteins": 0,
+        "organisms": 0,
+        "goterms": 0
     }
 
     # 1. Process Projects and Cases
@@ -186,6 +189,7 @@ def generate_coherent_ttl(data: Dict[str, List[Any]], ids_map: Dict[str, Set[str
             
         project_uri = make_uri("project", p_id)
         g.add((project_uri, RDF.type, BI.Project))
+        g.add((project_uri, RDF.type, OWL.NamedIndividual))
         g.add((project_uri, BI.projectId, Literal(p_id)))
         counts["projects"] += 1
         
@@ -195,6 +199,7 @@ def generate_coherent_ttl(data: Dict[str, List[Any]], ids_map: Dict[str, Set[str
             if c_id in ids_map["cases"]:
                 case_uri = make_uri("case", c_id)
                 g.add((case_uri, RDF.type, BI.Case))
+                g.add((case_uri, RDF.type, OWL.NamedIndividual))
                 g.add((case_uri, BI.caseId, Literal(c_id)))
                 counts["cases"] += 1
                 
@@ -215,6 +220,7 @@ def generate_coherent_ttl(data: Dict[str, List[Any]], ids_map: Dict[str, Set[str
         
         gene_uri = make_uri("gene", h_id_sanitized)
         g.add((gene_uri, RDF.type, BI.Gene))
+        g.add((gene_uri, RDF.type, OWL.NamedIndividual))
         g.add((gene_uri, BI.hgncId, Literal(h_id_original))) # Keep original ID as literal
         g.add((gene_uri, BI.geneSymbol, Literal(gene_doc.get("symbol", ""))))
         counts["genes"] += 1
@@ -242,6 +248,7 @@ def generate_coherent_ttl(data: Dict[str, List[Any]], ids_map: Dict[str, Set[str
                 meas_uri = make_uri("expression", meas_id)
                 
                 g.add((meas_uri, RDF.type, BI.ExpressionMeasurement))
+                g.add((meas_uri, RDF.type, OWL.NamedIndividual))
                 g.add((meas_uri, BI.measuredGene, gene_uri))
                 g.add((meas_uri, BI.measuredCase, make_uri("case", c_id)))
                 g.add((meas_uri, BI.measuredProject, make_uri("project", p_id)))
@@ -274,6 +281,7 @@ def generate_coherent_ttl(data: Dict[str, List[Any]], ids_map: Dict[str, Set[str
         protein_uri = make_uri("protein", u_id)
         
         g.add((protein_uri, RDF.type, BI.Protein))
+        g.add((protein_uri, RDF.type, OWL.NamedIndividual))
         g.add((protein_uri, BI.uniprotId, Literal(u_id)))
         counts["proteins"] += 1
         
@@ -300,11 +308,33 @@ def generate_coherent_ttl(data: Dict[str, List[Any]], ids_map: Dict[str, Set[str
                 g.add((gene_uri, BI.hasProteinProduct, protein_uri))
                 g.add((protein_uri, BI.proteinProductOf, gene_uri))
 
+        # Process Organism
+        organism_data = prot_doc.get("organism", {})
+        if organism_data:
+            tax_id = organism_data.get("taxonomy_id")
+            if tax_id:
+                org_uri = make_uri("organism", str(tax_id))
+                
+                # Add Organism entity if not exists
+                if (org_uri, RDF.type, BI.Organism) not in g:
+                    g.add((org_uri, RDF.type, BI.Organism))
+                    g.add((org_uri, RDF.type, OWL.NamedIndividual))
+                    g.add((org_uri, BI.taxonomyId, Literal(tax_id, datatype=XSD.integer)))
+                    
+                    sci_name = organism_data.get("scientific_name") or organism_data.get("name")
+                    if sci_name:
+                        g.add((org_uri, BI.scientificName, Literal(sci_name)))
+                    
+                    counts["organisms"] += 1
+                
+                # Link Protein to Organism
+                g.add((protein_uri, BI.hasOrganism, org_uri))
+
         # Process GO Terms
         go_terms = prot_doc.get("go_terms", {})
         
         # Helper to add GO term
-        def add_go_term(term_entry, predicate):
+        def add_go_term(term_entry, predicate, aspect_code):
             # term_entry can be a string "Label [GO:ID]" or a dict
             term_str = term_entry.get("term") if isinstance(term_entry, dict) else term_entry
             if not term_str:
@@ -322,31 +352,37 @@ def generate_coherent_ttl(data: Dict[str, List[Any]], ids_map: Dict[str, Set[str
             go_uri = make_uri("goterm", go_id)
             
             # Add GO Term entity if not exists (rdflib handles duplicates in graph)
-            g.add((go_uri, RDF.type, BI.GOTerm))
-            g.add((go_uri, BI.goId, Literal(f"GO:{go_id_numeric}")))
-            
-            # Extract label
-            label_match = re.match(r'^(.+?)\s*\[GO:\d+\]$', term_str)
-            if label_match:
-                g.add((go_uri, BI.goLabel, Literal(label_match.group(1).strip())))
+            if (go_uri, RDF.type, BI.GOTerm) not in g:
+                g.add((go_uri, RDF.type, BI.GOTerm))
+                g.add((go_uri, RDF.type, OWL.NamedIndividual))
+                g.add((go_uri, BI.goId, Literal(f"GO:{go_id_numeric}")))
+                g.add((go_uri, BI.goAspect, Literal(aspect_code)))
+                
+                # Extract label
+                label_match = re.match(r'^(.+?)\s*\[GO:\d+\]$', term_str)
+                if label_match:
+                    g.add((go_uri, BI.goLabel, Literal(label_match.group(1).strip())))
+                
+                counts["goterms"] += 1
             
             # Link Protein to GO Term
             g.add((protein_uri, predicate, go_uri))
 
         # Molecular Function
         for item in go_terms.get("molecular_function", []):
-            add_go_term(item, BI.hasMolecularFunction)
+            add_go_term(item, BI.hasMolecularFunction, "MF")
             
         # Biological Process
         for item in go_terms.get("biological_process", []):
-            add_go_term(item, BI.hasBiologicalProcess)
+            add_go_term(item, BI.hasBiologicalProcess, "BP")
             
         # Cellular Component
         for item in go_terms.get("cellular_component", []):
-            add_go_term(item, BI.hasCellularComponent)
+            add_go_term(item, BI.hasCellularComponent, "CC")
 
     logger.info(f"Generated TTL Graph with: {counts['projects']} Projects, {counts['cases']} Cases, "
-                f"{counts['genes']} Genes, {counts['proteins']} Proteins, {counts['measurements']} Measurements.")
+                f"{counts['genes']} Genes, {counts['proteins']} Proteins, {counts['measurements']} Measurements, "
+                f"{counts['organisms']} Organisms, {counts['goterms']} GO Terms.")
     return g
 
 def validate_coherence(ids_map: Dict[str, Set[str]], graph: Graph):
