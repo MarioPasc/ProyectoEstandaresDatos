@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioIntegrate: Ontología y Grafo de Conocimiento</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #007bff;
+            --accent-hover: #0056b3;
+            --light-bg: #f8f9fa;
+            --text-color: #333;
+            --code-bg: #f1f3f5;
+            --border-color: #e9ecef;
+            --schema-node-bg: #e3f2fd;
+            --schema-border: #90caf9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+        }
+
+        /* Header Styling */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-top: 0.5rem;
+            font-weight: 300;
+        }
+
+        .github-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s;
+        }
+
+        .github-link:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-left: 5px solid var(--accent-color);
+            padding-left: 1rem;
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            margin-top: 2rem;
+            font-size: 1.4rem;
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        /* Code and Links */
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+
+        .file-link {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #d63384;
+            border: 1px solid #e2e6ea;
+        }
+        
+        .file-link i {
+            margin-right: 5px;
+            color: #6c757d;
+        }
+
+        .file-link:hover {
+            background-color: #e2e6ea;
+            text-decoration: none;
+            color: #c2185b;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Query Cards */
+        .query-card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: transform 0.2s;
+        }
+
+        .query-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+        }
+
+        .badge {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.3em 0.6em;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* Schemas Visuals */
+        .schema-container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: var(--light-bg);
+            border-radius: 6px;
+            border: 1px dashed #ccc;
+        }
+
+        .schema-node {
+            background-color: white;
+            border: 2px solid var(--schema-border);
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .schema-arrow {
+            margin: 0 10px;
+            color: #777;
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .schema-arrow span {
+            font-size: 0.75rem;
+            font-family: monospace;
+            color: #d63384;
+            margin-bottom: -5px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            background-color: var(--light-bg);
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Proyecto BioIntegrate</h1>
+    <p>Estándares de Datos e Integración de Datos</p>
+    <p style="font-size: 1rem; font-weight: normal;">Grado en Ingeniería de la Salud</p>
+    
+    <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos" target="_blank" class="github-link">
+        <i class="fab fa-github"></i> Ver Código en GitHub
+    </a>
+</header>
+
+<div class="container">
+
+    <section id="intro">
+<h2>1. Diseño de la Ontología y Estructura</h2>
+        <p>
+            Este README ha sido generado con la ayuda de <bold>Gemini-3 en modo Pro</bold> para documentar el proceso de diseño, población y consulta de la ontología desarrollada en el proyecto BioIntegrate. Sin embargo, ha sido revisado y editado manualmente por el equipo.
+        </p>
+
+        <p>
+            Hemos diseñado una ontología en <strong>Protégé</strong> que modela fielmente la complejidad de los datos biomédicos almacenados en nuestra base de datos MongoDB. La ontología captura las relaciones semánticas entre genes, proteínas, casos clínicos y medidas de expresión.
+        </p>
+        
+        <div class="highlight-box">
+            <strong>Mapping de Campos:</strong> A continuación se describen las principales propiedades de datos (Data Properties) y de objeto (Object Properties) definidas en el fichero <code>.owl</code>, basándonos en la trazabilidad de los datos originales.
+        </div>
+
+<table>
+    <thead>
+        <tr>
+            <th>MongoDB Path</th>
+            <th>OWL Entity</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>hgnc_genes.hgnc_id</code></td>
+            <td><code>bio:hgncId</code></td>
+            <td>HGNC stable identifier</td>
+        </tr>
+        <tr>
+            <td><code>hgnc_genes.symbol</code></td>
+            <td><code>bio:geneSymbol</code></td>
+            <td>HGNC gene symbol</td>
+        </tr>
+        <tr>
+            <td><code>hgnc_genes.name</code></td>
+            <td><code>bio:geneName</code></td>
+            <td>Optional human-readable name</td>
+        </tr>
+        <tr>
+            <td><code>hgnc_genes.ensembl_gene_id</code></td>
+            <td><code>bio:ensemblGeneId</code></td>
+            <td>Join key to UniProt gene block</td>
+        </tr>
+        <tr>
+            <td><code>hgnc_genes.locus_group</code></td>
+            <td><code>bio:locusGroup</code></td>
+            <td>Kept because it’s interpretable and useful for filters</td>
+        </tr>
+        <tr>
+            <td><code>hgnc_genes.uniprot_ids[]</code></td>
+            <td><code>bio:hasProteinProduct</code></td>
+            <td>One-to-many HGNC→UniProt</td>
+        </tr>
+        <tr>
+            <td><code>uniprot_entries._id</code></td>
+            <td><code>bio:uniprotId</code></td>
+            <td>Primary key of UniProt entry</td>
+        </tr>
+        <tr>
+            <td><code>uniprot_entries.organism.taxonomy_id</code></td>
+            <td><code>bio:taxonomyId</code></td>
+            <td>NCBI taxon</td>
+        </tr>
+        <tr>
+            <td><code>uniprot_entries.organism.name</code></td>
+            <td><code>bio:scientificName</code></td>
+            <td>Store as literal for display</td>
+        </tr>
+        <tr>
+            <td><code>uniprot_entries.organism</code></td>
+            <td><code>bio:hasOrganism</code></td>
+            <td>Normalizes the organism block</td>
+        </tr>
+        <tr>
+            <td><code>uniprot_entries.protein.names[]</code></td>
+            <td><code>bio:proteinName</code></td>
+            <td>Keep multi-valued (synonyms)</td>
+        </tr>
+        <tr>
+            <td><code>uniprot_entries.protein.length</code></td>
+            <td><code>bio:sequenceLength</code></td>
+            <td>Useful for QC/filters</td>
+        </tr>
+        <tr>
+            <td><code>uniprot_entries.protein.function_cc</code></td>
+            <td><code>bio:functionText</code></td>
+            <td>Optional; keep truncated text only</td>
+        </tr>
+        <tr>
+            <td><code>uniprot_entries.go_terms.molecular_function[]</code></td>
+            <td><code>bio:hasMolecularFunction</code></td>
+            <td>GO MF linking</td>
+        </tr>
+        <tr>
+            <td><code>uniprot_entries.go_terms.biological_process[]</code></td>
+            <td><code>bio:hasBiologicalProcess</code></td>
+            <td>GO BP linking</td>
+        </tr>
+        <tr>
+            <td><code>uniprot_entries.go_terms.cellular_component[]</code></td>
+            <td><code>bio:hasCellularComponent</code></td>
+            <td>GO CC linking</td>
+        </tr>
+        <tr>
+            <td><code>uniprot_entries.gene.hgnc_ids[]</code></td>
+            <td><code>bio:proteinProductOf</code></td>
+            <td>Many-to-one UniProt→HGNC</td>
+        </tr>
+        <tr>
+            <td><code>gdc_cases.case_id</code></td>
+            <td><code>bio:caseId</code></td>
+            <td>UUID-like key</td>
+        </tr>
+        <tr>
+            <td><code>gdc_cases.project_id</code></td>
+            <td><code>bio:projectId</code></td>
+            <td>Case belongs to one project</td>
+        </tr>
+        <tr>
+            <td><code>gdc_cases.disease_type</code></td>
+            <td><code>bio:diseaseTypeLabel</code></td>
+            <td>Can be aligned to NCIt later</td>
+        </tr>
+        <tr>
+            <td><code>gdc_cases.primary_site</code></td>
+            <td><code>bio:primarySiteLabel</code></td>
+            <td>Can be aligned to UBERON later</td>
+        </tr>
+        <tr>
+            <td><code>hgnc_genes.projects.{PROJECT_ID}</code></td>
+            <td><code>bio:Project</code></td>
+            <td>Use <code>{PROJECT_ID}</code> as <code>bio:projectId</code></td>
+        </tr>
+        <tr>
+            <td><code>hgnc_genes.projects.{P}.cases.{CASE_ID}</code></td>
+            <td><code>bio:hasCase</code></td>
+            <td>Nested join to <code>gdc_cases.case_id</code></td>
+        </tr>
+        <tr>
+            <td><code>...cases.{C}.file_id</code></td>
+            <td><code>bio:fileId</code></td>
+            <td>File UUID</td>
+        </tr>
+        <tr>
+            <td><code>...cases.{C}.unstranded</code></td>
+            <td><code>bio:unstrandedCount</code></td>
+            <td>Raw count/abundance</td>
+        </tr>
+        <tr>
+            <td><code>...cases.{C}.tpm_unstranded</code></td>
+            <td><code>bio:tpmUnstranded</code></td>
+            <td>TPM (query-friendly)</td>
+        </tr>
+    </tbody>
+</table>
+    </section>
+
+    <section id="population">
+        <h2>2. Estrategia de Población: MongoDB Aggregation</h2>
+        
+        <p>
+            Para la población de la ontología, hemos optado por un enfoque <strong>data-driven</strong> en lugar de manual. Dado el volumen de datos, la inserción manual es inviable y propensa a errores.
+        </p>
+
+        <h3>Paso 1: Pre-procesamiento en Base de Datos (Query 6)</h3>
+        <p>
+            En lugar de extraer datos crudos y procesarlos con Python, diseñamos una consulta de agregación compleja en MongoDB (<em>Query 6</em>) que realiza el trabajo pesado. Esta consulta realiza múltiples <code>$lookup</code> y <code>$unwind</code> para aplanar la estructura jerárquica de los documentos JSON originales.
+        </p>
+        <p>
+            Lo más relevante es el uso de la etapa <code>$project</code> final en la query. Aquí, <strong>renombramos y estructuramos los campos para que coincidan exactamente con las propiedades de la ontología</strong> (ej. mapeando <code>hgnc_id</code> a <code>bio:hgncId</code> o creando las URIs de los individuos).
+        </p>
+
+        <h3>Paso 2: Inserción Automatizada</h3>
+        <p>
+            El script <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/ontology/owl/json_to_owl.py" target="_blank" class="file-link"><i class="fab fa-python"></i> json_to_owl.py</a> toma este JSON "semánticamente preparado" y utiliza <code>rdflib</code> para insertar los individuos en el grafo OWL.
+        </p>
+        <ul>
+            <li>Carga la ontología base <code>biointegrate.owl</code>.</li>
+            <li>Itera sobre el JSON generado por la Query 6.</li>
+            <li>Inserta tripletas asegurando tipos de datos correctos (<code>xsd:decimal</code> para conteos de expresión, <code>xsd:integer</code> para taxonomías).</li>
+            <li>Guarda el resultado en <code>biointegrate-ontology-reasoned.owl</code> tras aplicar el razonador Pellet para inferir jerarquías implícitas.</li>
+        </ul>
+    </section>
+
+    <section id="sparql">
+        <h2>3. Consultas SPARQL y Esquemas de Recorrido</h2>
+        <p>
+            Las siguientes consultas se ejecutan mediante el script <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/ontology/sparql/queries/execute_sparql.py" target="_blank" class="file-link"><i class="fab fa-python"></i> execute_sparql.py</a>. Cubren aspectos estructurales, clínicos y de integración.
+        </p>
+
+        <div class="query-card">
+            <span class="badge">Consulta 1</span> <strong>Integración Genómica-Proteómica</strong>
+            <p>Obtiene genes, sus proteínas asociadas y términos GO. Cruza dominios de conocimiento.</p>
+            
+            <div class="schema-container">
+                <div class="schema-node">Gene</div>
+                <div class="schema-arrow"><span>hasProteinProduct</span><i class="fas fa-arrow-right"></i></div>
+                <div class="schema-node">Protein</div>
+                <div class="schema-arrow"><span>hasBiologicalProcess</span><i class="fas fa-arrow-right"></i></div>
+                <div class="schema-node">GOTerm</div>
+            </div>
+        </div>
+
+        <div class="query-card">
+            <span class="badge">Consulta 2</span> <strong>Filtrado de Cohortes (TCGA-GBM)</strong>
+            <p>Selecciona casos clínicos pertenecientes específicamente al proyecto de Glioblastoma Multiforme.</p>
+            
+            <div class="schema-container">
+                <div class="schema-node">Project (TCGA-GBM)</div>
+                <div class="schema-arrow"><span>hasCase</span><i class="fas fa-arrow-right"></i></div>
+                <div class="schema-node">Case</div>
+                <div class="schema-arrow"><span>caseId</span><i class="fas fa-arrow-right"></i></div>
+                <div class="schema-node">Literal (ID)</div>
+            </div>
+        </div>
+
+        <div class="query-card">
+            <span class="badge">Consulta 3</span> <strong>Biomarcadores de Alta Expresión</strong>
+            <p>Detecta genes con expresión > 1000. Fundamental para identificar oncogenes.</p>
+            
+            <div class="schema-container">
+                <div class="schema-node">Measurement</div>
+                <div class="schema-arrow"><span>measuredGene</span><i class="fas fa-arrow-right"></i></div>
+                <div class="schema-node">Gene</div>
+                <div class="schema-arrow" style="margin-left: 20px;"><span>measuredCase</span><i class="fas fa-arrow-left"></i></div>
+                <div class="schema-node">Case</div>
+            </div>
+        </div>
+
+        <div class="query-card">
+            <span class="badge">Consulta 4</span> <strong>Búsqueda Semántica (Regex)</strong>
+            <p>Busca proteínas cuya descripción funcional contenga "remodeling".</p>
+            
+            <div class="schema-container">
+                <div class="schema-node">Protein</div>
+                <div class="schema-arrow"><span>proteinName</span><i class="fas fa-arrow-right"></i></div>
+                <div class="schema-node">Literal</div>
+                <div class="schema-arrow"><span>FILTER regex()</span><i class="fas fa-filter"></i></div>
+                <div class="schema-node">Result</div>
+            </div>
+        </div>
+
+        <div class="query-card">
+            <span class="badge">Consulta 5</span> <strong>Trazabilidad Completa (Bedside-to-Bench)</strong>
+            <p>La consulta más compleja: conecta al paciente con la molécula específica.</p>
+            
+            <div class="schema-container">
+                <div class="schema-node">Case</div>
+                <div class="schema-arrow"><span>hasMeasurement</span><i class="fas fa-arrow-right"></i></div>
+                <div class="schema-node">Expr. Meas.</div>
+                <div class="schema-arrow"><span>measuredGene</span><i class="fas fa-arrow-right"></i></div>
+                <div class="schema-node">Gene</div>
+                <div class="schema-arrow"><span>hasProtein</span><i class="fas fa-arrow-right"></i></div>
+                <div class="schema-node">Protein</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="challenge">
+        <h2>4. Reto: Generación de TTL desde MongoDB</h2>
+        <p>
+            El reto consistía en generar un grafo RDF (Turtle) directamente desde la base de datos. Para ello, desarrollamos el script <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/ontology/rdf/generator/mongo_to_ttl_owl_coherent.py" target="_blank" class="file-link"><i class="fab fa-python"></i> mongo_to_ttl_owl_coherent.py</a>.
+        </p>
+        
+        <h3>Desafíos Técnicos Resueltos</h3>
+        <ul>
+            <li>
+                <strong>Coherencia Bidireccional:</strong> El script no vuelca la base de datos a ciegas. Primero parsea el archivo OWL para extraer los IDs de los individuos que existen en la ontología. Luego, consulta MongoDB <em>solo</em> para esos IDs. Esto garantiza que el grafo RDF (TTL) generado sea un "gemelo enriquecido" de la ontología, sin datos huérfanos.
+            </li>
+            <li>
+                <strong>Manejo de URIs:</strong> Implementamos una función <code>make_uri</code> robusta que sanea los identificadores (ej. reemplazando <code>:</code> por <code>_</code> en IDs HGNC) para asegurar que las URIs en el TTL sean sintácticamente válidas y coincidan con las esperadas por SPARQL.
+            </li>
+            <li>
+                <strong>Tipado Estricto (XSD):</strong> Al generar las tripletas RDF con <code>rdflib</code>, forzamos los tipos de datos XML Schema. Por ejemplo, los valores de TPM (Transcripts Per Million) se serializan explícitamente como <code>xsd:decimal</code> para permitir operaciones de comparación numérica (mayor que, menor que) en las consultas SPARQL posteriores.
+            </li>
+        </ul>
+
+        <p>
+            Finalmente, validamos el grafo ejecutando las consultas originales sobre el TTL mediante el script <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/ontology/rdf/queries/execute_sparql_on_ttl.py" target="_blank" class="file-link"><i class="fab fa-python"></i> execute_sparql_on_ttl.py</a> y generamos una visualización gráfica interactiva con <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos/blob/main/ontology/rdf/results/visualize_ttl_html.py" target="_blank" class="file-link"><i class="fab fa-python"></i> visualize_ttl_html.py</a>.
+        </p>
+    </section>
+
+</div>
+
+<footer>
+    <p>Estándares de Datos e Integración de Datos | Grado en Ingeniería de la Salud</p>
+    <p>&copy; 2025 Equipo BioIntegrate - <a href="https://github.com/MarioPasc/ProyectoEstandaresDatos">Repositorio GitHub</a></p>
+</footer>
+
+</body>
+</html>

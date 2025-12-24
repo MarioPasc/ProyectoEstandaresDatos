@@ -1,0 +1,97 @@
+PREFIX bi: <http://example.org/biointegrate/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT DISTINCT ?geneSymbol ?uniprotId ?goId ?goLabel
+WHERE {
+
+  ?gene rdf:type bi:Gene .
+  ?gene bi:geneSymbol ?geneSymbol .
+  
+  # In the TTL data, the link is defined from Protein to Gene
+  ?protein bi:proteinProductOf ?gene .
+
+  ?protein rdf:type bi:Protein .
+  ?protein bi:uniprotId ?uniprotId .
+  
+  { ?protein bi:hasBiologicalProcess ?goTerm . }
+  UNION
+  { ?protein bi:hasCellularComponent ?goTerm . }
+  UNION
+  { ?protein bi:hasMolecularFunction ?goTerm . }
+
+  ?goTerm bi:goId ?goId .
+  ?goTerm bi:goLabel ?goLabel .
+
+  FILTER(STR(?geneSymbol) = "MXRA5")
+}
+
+#Muestra todos los identificadores de casos clínicos (case ID) que pertenecen específicamente al proyecto "TCGA-GBM":
+
+PREFIX bi: <http://example.org/biointegrate/>
+
+SELECT ?projectId ?caseId WHERE {
+  ?project a bi:Project ;
+           bi:projectId ?projectId ;
+           bi:hasCase ?case .
+  ?case bi:caseId ?caseId .
+  FILTER(?projectId = "TCGA-GBM")
+}
+
+#Muestra aquellos casos y símbolos de genes que presentan una medida de expresión (unstranded count) superior a 1000, ordenados de mayor a menor nivel de expresión:
+
+PREFIX bi: <http://example.org/biointegrate/>
+
+SELECT ?caseId ?geneSymbol ?count WHERE {
+  ?meas a bi:ExpressionMeasurement ;
+        bi:unstrandedCount ?count ;
+        bi:measuredCase ?case ;
+        bi:measuredGene ?gene .
+  ?case bi:caseId ?caseId .
+  ?gene bi:geneSymbol ?geneSymbol .
+  FILTER(?count > 1000)
+}
+ORDER BY DESC(?count)
+
+#Muestra el ID de UniProt y el nombre de aquellas proteínas cuya descripción funcional contenga el término "remodeling":
+
+PREFIX bi: <http://example.org/biointegrate/>
+
+SELECT ?uniprotId ?proteinName WHERE {
+  ?protein a bi:Protein ;
+           bi:uniprotId ?uniprotId ;
+           bi:proteinName ?proteinName .
+  FILTER(regex(?proteinName, "remodeling", "i"))
+}
+
+#Muestra la trazabilidad integral entre el identificador del caso clínico, el gen expresado y el producto proteico identificado:
+
+PREFIX bi: <http://example.org/biointegrate/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT ?caseId ?geneSymbol ?uniprotId WHERE {
+  ?case a bi:Case ;
+        bi:caseId ?caseId ;
+        bi:hasCaseMeasurement ?meas .
+  ?meas bi:measuredGene ?gene .
+  ?gene bi:geneSymbol ?geneSymbol ;
+        bi:hasProteinProduct ?protein .
+  ?protein bi:uniprotId ?uniprotId .
+}
+LIMIT 10
+
+#Muestra todas las entidades biológicas del sistema junto con su clasificación específica, excluyendo la clase genérica raíz:
+
+PREFIX bi: <http://example.org/biointegrate/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?entidad ?clase_especifica WHERE {
+  # En el TTL sin inferencia, no existe el tipo explícito bi:BioEntity.
+  # Buscamos cualquier entidad que tenga un tipo definido en nuestro namespace 'bi:'
+  ?entidad rdf:type ?clase_especifica .
+  
+  FILTER(STRSTARTS(STR(?clase_especifica), STR(bi:)))
+  FILTER(?clase_especifica != bi:BioEntity)
+  FILTER(?clase_especifica != <http://www.w3.org/2002/07/owl#NamedIndividual>)
+}
+
