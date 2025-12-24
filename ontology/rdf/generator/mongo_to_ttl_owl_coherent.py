@@ -300,6 +300,51 @@ def generate_coherent_ttl(data: Dict[str, List[Any]], ids_map: Dict[str, Set[str
                 g.add((gene_uri, BI.hasProteinProduct, protein_uri))
                 g.add((protein_uri, BI.proteinProductOf, gene_uri))
 
+        # Process GO Terms
+        go_terms = prot_doc.get("go_terms", {})
+        
+        # Helper to add GO term
+        def add_go_term(term_entry, predicate):
+            # term_entry can be a string "Label [GO:ID]" or a dict
+            term_str = term_entry.get("term") if isinstance(term_entry, dict) else term_entry
+            if not term_str:
+                return
+
+            # Extract ID and Label
+            # Expected format: "cytoplasm [GO:0005737]"
+            import re
+            match = re.search(r'\[GO:(\d+)\]', term_str)
+            if not match:
+                return
+            
+            go_id_numeric = match.group(1)
+            go_id = f"GO_{go_id_numeric}"
+            go_uri = make_uri("goterm", go_id)
+            
+            # Add GO Term entity if not exists (rdflib handles duplicates in graph)
+            g.add((go_uri, RDF.type, BI.GOTerm))
+            g.add((go_uri, BI.goId, Literal(f"GO:{go_id_numeric}")))
+            
+            # Extract label
+            label_match = re.match(r'^(.+?)\s*\[GO:\d+\]$', term_str)
+            if label_match:
+                g.add((go_uri, BI.goLabel, Literal(label_match.group(1).strip())))
+            
+            # Link Protein to GO Term
+            g.add((protein_uri, predicate, go_uri))
+
+        # Molecular Function
+        for item in go_terms.get("molecular_function", []):
+            add_go_term(item, BI.hasMolecularFunction)
+            
+        # Biological Process
+        for item in go_terms.get("biological_process", []):
+            add_go_term(item, BI.hasBiologicalProcess)
+            
+        # Cellular Component
+        for item in go_terms.get("cellular_component", []):
+            add_go_term(item, BI.hasCellularComponent)
+
     logger.info(f"Generated TTL Graph with: {counts['projects']} Projects, {counts['cases']} Cases, "
                 f"{counts['genes']} Genes, {counts['proteins']} Proteins, {counts['measurements']} Measurements.")
     return g

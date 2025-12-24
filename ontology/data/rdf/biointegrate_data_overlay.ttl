@@ -1,8 +1,893 @@
 @prefix bio: <http://example.org/biointegrate/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<http://example.org/biointegrate/goterm/GO_0000278> a bio:GOTerm ;
+    bio:goId "GO:0000278" ;
+    bio:goLabel "mitotic cell cycle" .
+
+<http://example.org/biointegrate/goterm/GO_0000463> a bio:GOTerm ;
+    bio:goId "GO:0000463" ;
+    bio:goLabel "maturation of LSU-rRNA from tricistronic rRNA transcript (SSU-rRNA, 5.8S rRNA, LSU-rRNA)" .
+
+<http://example.org/biointegrate/goterm/GO_0000466> a bio:GOTerm ;
+    bio:goId "GO:0000466" ;
+    bio:goLabel "maturation of 5.8S rRNA from tricistronic rRNA transcript (SSU-rRNA, 5.8S rRNA, LSU-rRNA)" .
+
+<http://example.org/biointegrate/goterm/GO_0000785> a bio:GOTerm ;
+    bio:goId "GO:0000785" ;
+    bio:goLabel "chromatin" .
+
+<http://example.org/biointegrate/goterm/GO_0000922> a bio:GOTerm ;
+    bio:goId "GO:0000922" ;
+    bio:goLabel "spindle pole" .
+
+<http://example.org/biointegrate/goterm/GO_0001501> a bio:GOTerm ;
+    bio:goId "GO:0001501" ;
+    bio:goLabel "skeletal system development" .
+
+<http://example.org/biointegrate/goterm/GO_0001510> a bio:GOTerm ;
+    bio:goId "GO:0001510" ;
+    bio:goLabel "RNA methylation" .
+
+<http://example.org/biointegrate/goterm/GO_0001649> a bio:GOTerm ;
+    bio:goId "GO:0001649" ;
+    bio:goLabel "osteoblast differentiation" .
+
+<http://example.org/biointegrate/goterm/GO_0001658> a bio:GOTerm ;
+    bio:goId "GO:0001658" ;
+    bio:goLabel "branching involved in ureteric bud morphogenesis" .
+
+<http://example.org/biointegrate/goterm/GO_0001666> a bio:GOTerm ;
+    bio:goId "GO:0001666" ;
+    bio:goLabel "response to hypoxia" .
+
+<http://example.org/biointegrate/goterm/GO_0001701> a bio:GOTerm ;
+    bio:goId "GO:0001701" ;
+    bio:goLabel "in utero embryonic development" .
+
+<http://example.org/biointegrate/goterm/GO_0001837> a bio:GOTerm ;
+    bio:goId "GO:0001837" ;
+    bio:goLabel "epithelial to mesenchymal transition" .
+
+<http://example.org/biointegrate/goterm/GO_0001934> a bio:GOTerm ;
+    bio:goId "GO:0001934" ;
+    bio:goLabel "positive regulation of protein phosphorylation" .
+
+<http://example.org/biointegrate/goterm/GO_0002062> a bio:GOTerm ;
+    bio:goId "GO:0002062" ;
+    bio:goLabel "chondrocyte differentiation" .
+
+<http://example.org/biointegrate/goterm/GO_0003129> a bio:GOTerm ;
+    bio:goId "GO:0003129" ;
+    bio:goLabel "heart induction" .
+
+<http://example.org/biointegrate/goterm/GO_0003133> a bio:GOTerm ;
+    bio:goId "GO:0003133" ;
+    bio:goLabel "endodermal-mesodermal cell signaling" .
+
+<http://example.org/biointegrate/goterm/GO_0003176> a bio:GOTerm ;
+    bio:goId "GO:0003176" ;
+    bio:goLabel "aortic valve development" .
+
+<http://example.org/biointegrate/goterm/GO_0003181> a bio:GOTerm ;
+    bio:goId "GO:0003181" ;
+    bio:goLabel "atrioventricular valve morphogenesis" .
+
+<http://example.org/biointegrate/goterm/GO_0003203> a bio:GOTerm ;
+    bio:goId "GO:0003203" ;
+    bio:goLabel "endocardial cushion morphogenesis" .
+
+<http://example.org/biointegrate/goterm/GO_0003210> a bio:GOTerm ;
+    bio:goId "GO:0003210" ;
+    bio:goLabel "cardiac atrium formation" .
+
+<http://example.org/biointegrate/goterm/GO_0003272> a bio:GOTerm ;
+    bio:goId "GO:0003272" ;
+    bio:goLabel "endocardial cushion formation" .
+
+<http://example.org/biointegrate/goterm/GO_0003331> a bio:GOTerm ;
+    bio:goId "GO:0003331" ;
+    bio:goLabel "positive regulation of extracellular matrix constituent secretion" .
+
+<http://example.org/biointegrate/goterm/GO_0003677> a bio:GOTerm ;
+    bio:goId "GO:0003677" ;
+    bio:goLabel "DNA binding" .
+
+<http://example.org/biointegrate/goterm/GO_0003682> a bio:GOTerm ;
+    bio:goId "GO:0003682" ;
+    bio:goLabel "chromatin binding" .
+
+<http://example.org/biointegrate/goterm/GO_0003684> a bio:GOTerm ;
+    bio:goId "GO:0003684" ;
+    bio:goLabel "damaged DNA binding" .
+
+<http://example.org/biointegrate/goterm/GO_0003723> a bio:GOTerm ;
+    bio:goId "GO:0003723" ;
+    bio:goLabel "RNA binding" .
+
+<http://example.org/biointegrate/goterm/GO_0003777> a bio:GOTerm ;
+    bio:goId "GO:0003777" ;
+    bio:goLabel "microtubule motor activity" .
+
+<http://example.org/biointegrate/goterm/GO_0003779> a bio:GOTerm ;
+    bio:goId "GO:0003779" ;
+    bio:goLabel "actin binding" .
+
+<http://example.org/biointegrate/goterm/GO_0003905> a bio:GOTerm ;
+    bio:goId "GO:0003905" ;
+    bio:goLabel "alkylbase DNA N-glycosylase activity" .
+
+<http://example.org/biointegrate/goterm/GO_0004032> a bio:GOTerm ;
+    bio:goId "GO:0004032" ;
+    bio:goLabel "aldose reductase (NADPH) activity" .
+
+<http://example.org/biointegrate/goterm/GO_0004303> a bio:GOTerm ;
+    bio:goId "GO:0004303" ;
+    bio:goLabel "estradiol 17-beta-dehydrogenase [NAD(P)+] activity" .
+
+<http://example.org/biointegrate/goterm/GO_0004842> a bio:GOTerm ;
+    bio:goId "GO:0004842" ;
+    bio:goLabel "ubiquitin-protein transferase activity" .
+
+<http://example.org/biointegrate/goterm/GO_0004862> a bio:GOTerm ;
+    bio:goId "GO:0004862" ;
+    bio:goLabel "cAMP-dependent protein kinase inhibitor activity" .
+
+<http://example.org/biointegrate/goterm/GO_0005102> a bio:GOTerm ;
+    bio:goId "GO:0005102" ;
+    bio:goLabel "signaling receptor binding" .
+
+<http://example.org/biointegrate/goterm/GO_0005125> a bio:GOTerm ;
+    bio:goId "GO:0005125" ;
+    bio:goLabel "cytokine activity" .
+
+<http://example.org/biointegrate/goterm/GO_0005201> a bio:GOTerm ;
+    bio:goId "GO:0005201" ;
+    bio:goLabel "extracellular matrix structural constituent" .
+
+<http://example.org/biointegrate/goterm/GO_0005496> a bio:GOTerm ;
+    bio:goId "GO:0005496" ;
+    bio:goLabel "steroid binding" .
+
+<http://example.org/biointegrate/goterm/GO_0005524> a bio:GOTerm ;
+    bio:goId "GO:0005524" ;
+    bio:goLabel "ATP binding" .
+
+<http://example.org/biointegrate/goterm/GO_0005576> a bio:GOTerm ;
+    bio:goId "GO:0005576" ;
+    bio:goLabel "extracellular region" .
+
+<http://example.org/biointegrate/goterm/GO_0005615> a bio:GOTerm ;
+    bio:goId "GO:0005615" ;
+    bio:goLabel "extracellular space" .
+
+<http://example.org/biointegrate/goterm/GO_0005694> a bio:GOTerm ;
+    bio:goId "GO:0005694" ;
+    bio:goLabel "chromosome" .
+
+<http://example.org/biointegrate/goterm/GO_0005730> a bio:GOTerm ;
+    bio:goId "GO:0005730" ;
+    bio:goLabel "nucleolus" .
+
+<http://example.org/biointegrate/goterm/GO_0005737> a bio:GOTerm ;
+    bio:goId "GO:0005737" ;
+    bio:goLabel "cytoplasm" .
+
+<http://example.org/biointegrate/goterm/GO_0005739> a bio:GOTerm ;
+    bio:goId "GO:0005739" ;
+    bio:goLabel "mitochondrion" .
+
+<http://example.org/biointegrate/goterm/GO_0005794> a bio:GOTerm ;
+    bio:goId "GO:0005794" ;
+    bio:goLabel "Golgi apparatus" .
+
+<http://example.org/biointegrate/goterm/GO_0005819> a bio:GOTerm ;
+    bio:goId "GO:0005819" ;
+    bio:goLabel "spindle" .
+
+<http://example.org/biointegrate/goterm/GO_0005871> a bio:GOTerm ;
+    bio:goId "GO:0005871" ;
+    bio:goLabel "kinesin complex" .
+
+<http://example.org/biointegrate/goterm/GO_0005881> a bio:GOTerm ;
+    bio:goId "GO:0005881" ;
+    bio:goLabel "cytoplasmic microtubule" .
+
+<http://example.org/biointegrate/goterm/GO_0005884> a bio:GOTerm ;
+    bio:goId "GO:0005884" ;
+    bio:goLabel "actin filament" .
+
+<http://example.org/biointegrate/goterm/GO_0006029> a bio:GOTerm ;
+    bio:goId "GO:0006029" ;
+    bio:goLabel "proteoglycan metabolic process" .
+
+<http://example.org/biointegrate/goterm/GO_0006275> a bio:GOTerm ;
+    bio:goId "GO:0006275" ;
+    bio:goLabel "regulation of DNA replication" .
+
+<http://example.org/biointegrate/goterm/GO_0006284> a bio:GOTerm ;
+    bio:goId "GO:0006284" ;
+    bio:goLabel "base-excision repair" .
+
+<http://example.org/biointegrate/goterm/GO_0006307> a bio:GOTerm ;
+    bio:goId "GO:0006307" ;
+    bio:goLabel "DNA alkylation repair" .
+
+<http://example.org/biointegrate/goterm/GO_0006355> a bio:GOTerm ;
+    bio:goId "GO:0006355" ;
+    bio:goLabel "regulation of DNA-templated transcription" .
+
+<http://example.org/biointegrate/goterm/GO_0006366> a bio:GOTerm ;
+    bio:goId "GO:0006366" ;
+    bio:goLabel "transcription by RNA polymerase II" .
+
+<http://example.org/biointegrate/goterm/GO_0006513> a bio:GOTerm ;
+    bio:goId "GO:0006513" ;
+    bio:goLabel "protein monoubiquitination" .
+
+<http://example.org/biointegrate/goterm/GO_0006693> a bio:GOTerm ;
+    bio:goId "GO:0006693" ;
+    bio:goLabel "prostaglandin metabolic process" .
+
+<http://example.org/biointegrate/goterm/GO_0006954> a bio:GOTerm ;
+    bio:goId "GO:0006954" ;
+    bio:goLabel "inflammatory response" .
+
+<http://example.org/biointegrate/goterm/GO_0007018> a bio:GOTerm ;
+    bio:goId "GO:0007018" ;
+    bio:goLabel "microtubule-based movement" .
+
+<http://example.org/biointegrate/goterm/GO_0007051> a bio:GOTerm ;
+    bio:goId "GO:0007051" ;
+    bio:goLabel "spindle organization" .
+
+<http://example.org/biointegrate/goterm/GO_0007052> a bio:GOTerm ;
+    bio:goId "GO:0007052" ;
+    bio:goLabel "mitotic spindle organization" .
+
+<http://example.org/biointegrate/goterm/GO_0007100> a bio:GOTerm ;
+    bio:goId "GO:0007100" ;
+    bio:goLabel "mitotic centrosome separation" .
+
+<http://example.org/biointegrate/goterm/GO_0007186> a bio:GOTerm ;
+    bio:goId "GO:0007186" ;
+    bio:goLabel "G protein-coupled receptor signaling pathway" .
+
+<http://example.org/biointegrate/goterm/GO_0007219> a bio:GOTerm ;
+    bio:goId "GO:0007219" ;
+    bio:goLabel "Notch signaling pathway" .
+
+<http://example.org/biointegrate/goterm/GO_0007267> a bio:GOTerm ;
+    bio:goId "GO:0007267" ;
+    bio:goLabel "cell-cell signaling" .
+
+<http://example.org/biointegrate/goterm/GO_0007507> a bio:GOTerm ;
+    bio:goId "GO:0007507" ;
+    bio:goLabel "heart development" .
+
+<http://example.org/biointegrate/goterm/GO_0007586> a bio:GOTerm ;
+    bio:goId "GO:0007586" ;
+    bio:goLabel "digestion" .
+
+<http://example.org/biointegrate/goterm/GO_0008083> a bio:GOTerm ;
+    bio:goId "GO:0008083" ;
+    bio:goLabel "growth factor activity" .
+
+<http://example.org/biointegrate/goterm/GO_0008202> a bio:GOTerm ;
+    bio:goId "GO:0008202" ;
+    bio:goLabel "steroid metabolic process" .
+
+<http://example.org/biointegrate/goterm/GO_0008270> a bio:GOTerm ;
+    bio:goId "GO:0008270" ;
+    bio:goLabel "zinc ion binding" .
+
+<http://example.org/biointegrate/goterm/GO_0008285> a bio:GOTerm ;
+    bio:goId "GO:0008285" ;
+    bio:goLabel "negative regulation of cell population proliferation" .
+
+<http://example.org/biointegrate/goterm/GO_0008574> a bio:GOTerm ;
+    bio:goId "GO:0008574" ;
+    bio:goLabel "plus-end-directed microtubule motor activity" .
+
+<http://example.org/biointegrate/goterm/GO_0008650> a bio:GOTerm ;
+    bio:goId "GO:0008650" ;
+    bio:goLabel "rRNA (uridine-2'-O-)-methyltransferase activity" .
+
+<http://example.org/biointegrate/goterm/GO_0009617> a bio:GOTerm ;
+    bio:goId "GO:0009617" ;
+    bio:goLabel "response to bacterium" .
+
+<http://example.org/biointegrate/goterm/GO_0009887> a bio:GOTerm ;
+    bio:goId "GO:0009887" ;
+    bio:goLabel "animal organ morphogenesis" .
+
+<http://example.org/biointegrate/goterm/GO_0009986> a bio:GOTerm ;
+    bio:goId "GO:0009986" ;
+    bio:goLabel "cell surface" .
+
+<http://example.org/biointegrate/goterm/GO_0010389> a bio:GOTerm ;
+    bio:goId "GO:0010389" ;
+    bio:goLabel "regulation of G2/M transition of mitotic cell cycle" .
+
+<http://example.org/biointegrate/goterm/GO_0010628> a bio:GOTerm ;
+    bio:goId "GO:0010628" ;
+    bio:goLabel "positive regulation of gene expression" .
+
+<http://example.org/biointegrate/goterm/GO_0010629> a bio:GOTerm ;
+    bio:goId "GO:0010629" ;
+    bio:goLabel "negative regulation of gene expression" .
+
+<http://example.org/biointegrate/goterm/GO_0010718> a bio:GOTerm ;
+    bio:goId "GO:0010718" ;
+    bio:goLabel "positive regulation of epithelial to mesenchymal transition" .
+
+<http://example.org/biointegrate/goterm/GO_0010894> a bio:GOTerm ;
+    bio:goId "GO:0010894" ;
+    bio:goLabel "negative regulation of steroid biosynthetic process" .
+
+<http://example.org/biointegrate/goterm/GO_0010922> a bio:GOTerm ;
+    bio:goId "GO:0010922" ;
+    bio:goLabel "positive regulation of phosphatase activity" .
+
+<http://example.org/biointegrate/goterm/GO_0016020> a bio:GOTerm ;
+    bio:goId "GO:0016020" ;
+    bio:goLabel "membrane" .
+
+<http://example.org/biointegrate/goterm/GO_0016435> a bio:GOTerm ;
+    bio:goId "GO:0016435" ;
+    bio:goLabel "rRNA (guanine) methyltransferase activity" .
+
+<http://example.org/biointegrate/goterm/GO_0016655> a bio:GOTerm ;
+    bio:goId "GO:0016655" ;
+    bio:goLabel "oxidoreductase activity, acting on NAD(P)H, quinone or similar compound as acceptor" .
+
+<http://example.org/biointegrate/goterm/GO_0019104> a bio:GOTerm ;
+    bio:goId "GO:0019104" ;
+    bio:goLabel "DNA N-glycosylase activity" .
+
+<http://example.org/biointegrate/goterm/GO_0019211> a bio:GOTerm ;
+    bio:goId "GO:0019211" ;
+    bio:goLabel "phosphatase activator activity" .
+
+<http://example.org/biointegrate/goterm/GO_0019901> a bio:GOTerm ;
+    bio:goId "GO:0019901" ;
+    bio:goLabel "protein kinase binding" .
+
+<http://example.org/biointegrate/goterm/GO_0021537> a bio:GOTerm ;
+    bio:goId "GO:0021537" ;
+    bio:goLabel "telencephalon development" .
+
+<http://example.org/biointegrate/goterm/GO_0021978> a bio:GOTerm ;
+    bio:goId "GO:0021978" ;
+    bio:goLabel "telencephalon regionalization" .
+
+<http://example.org/biointegrate/goterm/GO_0030041> a bio:GOTerm ;
+    bio:goId "GO:0030041" ;
+    bio:goLabel "actin filament polymerization" .
+
+<http://example.org/biointegrate/goterm/GO_0030177> a bio:GOTerm ;
+    bio:goId "GO:0030177" ;
+    bio:goLabel "positive regulation of Wnt signaling pathway" .
+
+<http://example.org/biointegrate/goterm/GO_0030282> a bio:GOTerm ;
+    bio:goId "GO:0030282" ;
+    bio:goLabel "bone mineralization" .
+
+<http://example.org/biointegrate/goterm/GO_0030316> a bio:GOTerm ;
+    bio:goId "GO:0030316" ;
+    bio:goLabel "osteoclast differentiation" .
+
+<http://example.org/biointegrate/goterm/GO_0030335> a bio:GOTerm ;
+    bio:goId "GO:0030335" ;
+    bio:goLabel "positive regulation of cell migration" .
+
+<http://example.org/biointegrate/goterm/GO_0030501> a bio:GOTerm ;
+    bio:goId "GO:0030501" ;
+    bio:goLabel "positive regulation of bone mineralization" .
+
+<http://example.org/biointegrate/goterm/GO_0030509> a bio:GOTerm ;
+    bio:goId "GO:0030509" ;
+    bio:goLabel "BMP signaling pathway" .
+
+<http://example.org/biointegrate/goterm/GO_0030512> a bio:GOTerm ;
+    bio:goId "GO:0030512" ;
+    bio:goLabel "negative regulation of transforming growth factor beta receptor signaling pathway" .
+
+<http://example.org/biointegrate/goterm/GO_0030687> a bio:GOTerm ;
+    bio:goId "GO:0030687" ;
+    bio:goLabel "preribosome, large subunit precursor" .
+
+<http://example.org/biointegrate/goterm/GO_0030688> a bio:GOTerm ;
+    bio:goId "GO:0030688" ;
+    bio:goLabel "preribosome, small subunit precursor" .
+
+<http://example.org/biointegrate/goterm/GO_0030855> a bio:GOTerm ;
+    bio:goId "GO:0030855" ;
+    bio:goLabel "epithelial cell differentiation" .
+
+<http://example.org/biointegrate/goterm/GO_0031167> a bio:GOTerm ;
+    bio:goId "GO:0031167" ;
+    bio:goLabel "rRNA methylation" .
+
+<http://example.org/biointegrate/goterm/GO_0031406> a bio:GOTerm ;
+    bio:goId "GO:0031406" ;
+    bio:goLabel "carboxylic acid binding" .
+
+<http://example.org/biointegrate/goterm/GO_0031648> a bio:GOTerm ;
+    bio:goId "GO:0031648" ;
+    bio:goLabel "protein destabilization" .
+
+<http://example.org/biointegrate/goterm/GO_0032052> a bio:GOTerm ;
+    bio:goId "GO:0032052" ;
+    bio:goLabel "bile acid binding" .
+
+<http://example.org/biointegrate/goterm/GO_0032348> a bio:GOTerm ;
+    bio:goId "GO:0032348" ;
+    bio:goLabel "negative regulation of aldosterone biosynthetic process" .
+
+<http://example.org/biointegrate/goterm/GO_0032991> a bio:GOTerm ;
+    bio:goId "GO:0032991" ;
+    bio:goLabel "protein-containing complex" .
+
+<http://example.org/biointegrate/goterm/GO_0033690> a bio:GOTerm ;
+    bio:goId "GO:0033690" ;
+    bio:goLabel "positive regulation of osteoblast proliferation" .
+
+<http://example.org/biointegrate/goterm/GO_0034236> a bio:GOTerm ;
+    bio:goId "GO:0034236" ;
+    bio:goLabel "protein kinase A catalytic subunit binding" .
+
+<http://example.org/biointegrate/goterm/GO_0035051> a bio:GOTerm ;
+    bio:goId "GO:0035051" ;
+    bio:goLabel "cardiocyte differentiation" .
+
+<http://example.org/biointegrate/goterm/GO_0035054> a bio:GOTerm ;
+    bio:goId "GO:0035054" ;
+    bio:goLabel "embryonic heart tube anterior/posterior pattern specification" .
+
+<http://example.org/biointegrate/goterm/GO_0035360> a bio:GOTerm ;
+    bio:goId "GO:0035360" ;
+    bio:goLabel "positive regulation of peroxisome proliferator activated receptor signaling pathway" .
+
+<http://example.org/biointegrate/goterm/GO_0036064> a bio:GOTerm ;
+    bio:goId "GO:0036064" ;
+    bio:goLabel "ciliary basal body" .
+
+<http://example.org/biointegrate/goterm/GO_0036305> a bio:GOTerm ;
+    bio:goId "GO:0036305" ;
+    bio:goLabel "ameloblast differentiation" .
+
+<http://example.org/biointegrate/goterm/GO_0038023> a bio:GOTerm ;
+    bio:goId "GO:0038023" ;
+    bio:goLabel "signaling receptor activity" .
+
+<http://example.org/biointegrate/goterm/GO_0039706> a bio:GOTerm ;
+    bio:goId "GO:0039706" ;
+    bio:goLabel "co-receptor binding" .
+
+<http://example.org/biointegrate/goterm/GO_0042308> a bio:GOTerm ;
+    bio:goId "GO:0042308" ;
+    bio:goLabel "negative regulation of protein import into nucleus" .
+
+<http://example.org/biointegrate/goterm/GO_0042448> a bio:GOTerm ;
+    bio:goId "GO:0042448" ;
+    bio:goLabel "progesterone metabolic process" .
+
+<http://example.org/biointegrate/goterm/GO_0042475> a bio:GOTerm ;
+    bio:goId "GO:0042475" ;
+    bio:goLabel "odontogenesis of dentin-containing tooth" .
+
+<http://example.org/biointegrate/goterm/GO_0042482> a bio:GOTerm ;
+    bio:goId "GO:0042482" ;
+    bio:goLabel "positive regulation of odontogenesis" .
+
+<http://example.org/biointegrate/goterm/GO_0042487> a bio:GOTerm ;
+    bio:goId "GO:0042487" ;
+    bio:goLabel "regulation of odontogenesis of dentin-containing tooth" .
+
+<http://example.org/biointegrate/goterm/GO_0042645> a bio:GOTerm ;
+    bio:goId "GO:0042645" ;
+    bio:goLabel "mitochondrial nucleoid" .
+
+<http://example.org/biointegrate/goterm/GO_0043065> a bio:GOTerm ;
+    bio:goId "GO:0043065" ;
+    bio:goLabel "positive regulation of apoptotic process" .
+
+<http://example.org/biointegrate/goterm/GO_0043149> a bio:GOTerm ;
+    bio:goId "GO:0043149" ;
+    bio:goLabel "stress fiber assembly" .
+
+<http://example.org/biointegrate/goterm/GO_0043410> a bio:GOTerm ;
+    bio:goId "GO:0043410" ;
+    bio:goLabel "positive regulation of MAPK cascade" .
+
+<http://example.org/biointegrate/goterm/GO_0043539> a bio:GOTerm ;
+    bio:goId "GO:0043539" ;
+    bio:goLabel "protein serine/threonine kinase activator activity" .
+
+<http://example.org/biointegrate/goterm/GO_0043569> a bio:GOTerm ;
+    bio:goId "GO:0043569" ;
+    bio:goLabel "negative regulation of insulin-like growth factor receptor signaling pathway" .
+
+<http://example.org/biointegrate/goterm/GO_0044597> a bio:GOTerm ;
+    bio:goId "GO:0044597" ;
+    bio:goLabel "daunorubicin metabolic process" .
+
+<http://example.org/biointegrate/goterm/GO_0044598> a bio:GOTerm ;
+    bio:goId "GO:0044598" ;
+    bio:goLabel "doxorubicin metabolic process" .
+
+<http://example.org/biointegrate/goterm/GO_0045007> a bio:GOTerm ;
+    bio:goId "GO:0045007" ;
+    bio:goLabel "depurination" .
+
+<http://example.org/biointegrate/goterm/GO_0045165> a bio:GOTerm ;
+    bio:goId "GO:0045165" ;
+    bio:goLabel "cell fate commitment" .
+
+<http://example.org/biointegrate/goterm/GO_0045599> a bio:GOTerm ;
+    bio:goId "GO:0045599" ;
+    bio:goLabel "negative regulation of fat cell differentiation" .
+
+<http://example.org/biointegrate/goterm/GO_0045600> a bio:GOTerm ;
+    bio:goId "GO:0045600" ;
+    bio:goLabel "positive regulation of fat cell differentiation" .
+
+<http://example.org/biointegrate/goterm/GO_0045666> a bio:GOTerm ;
+    bio:goId "GO:0045666" ;
+    bio:goLabel "positive regulation of neuron differentiation" .
+
+<http://example.org/biointegrate/goterm/GO_0045669> a bio:GOTerm ;
+    bio:goId "GO:0045669" ;
+    bio:goLabel "positive regulation of osteoblast differentiation" .
+
+<http://example.org/biointegrate/goterm/GO_0045778> a bio:GOTerm ;
+    bio:goId "GO:0045778" ;
+    bio:goLabel "positive regulation of ossification" .
+
+<http://example.org/biointegrate/goterm/GO_0045786> a bio:GOTerm ;
+    bio:goId "GO:0045786" ;
+    bio:goLabel "negative regulation of cell cycle" .
+
+<http://example.org/biointegrate/goterm/GO_0045892> a bio:GOTerm ;
+    bio:goId "GO:0045892" ;
+    bio:goLabel "negative regulation of DNA-templated transcription" .
+
+<http://example.org/biointegrate/goterm/GO_0045893> a bio:GOTerm ;
+    bio:goId "GO:0045893" ;
+    bio:goLabel "positive regulation of DNA-templated transcription" .
+
+<http://example.org/biointegrate/goterm/GO_0045944> a bio:GOTerm ;
+    bio:goId "GO:0045944" ;
+    bio:goLabel "positive regulation of transcription by RNA polymerase II" .
+
+<http://example.org/biointegrate/goterm/GO_0046602> a bio:GOTerm ;
+    bio:goId "GO:0046602" ;
+    bio:goLabel "regulation of mitotic centrosome separation" .
+
+<http://example.org/biointegrate/goterm/GO_0047023> a bio:GOTerm ;
+    bio:goId "GO:0047023" ;
+    bio:goLabel "androsterone dehydrogenase [NAD(P)+] activity" .
+
+<http://example.org/biointegrate/goterm/GO_0047044> a bio:GOTerm ;
+    bio:goId "GO:0047044" ;
+    bio:goLabel "androstan-3-alpha,17-beta-diol dehydrogenase (NAD+) activity" .
+
+<http://example.org/biointegrate/goterm/GO_0047086> a bio:GOTerm ;
+    bio:goId "GO:0047086" ;
+    bio:goLabel "ketosteroid monooxygenase activity" .
+
+<http://example.org/biointegrate/goterm/GO_0047115> a bio:GOTerm ;
+    bio:goId "GO:0047115" ;
+    bio:goLabel "trans-1,2-dihydrobenzene-1,2-diol dehydrogenase activity" .
+
+<http://example.org/biointegrate/goterm/GO_0047718> a bio:GOTerm ;
+    bio:goId "GO:0047718" ;
+    bio:goLabel "indanol dehydrogenase activity" .
+
+<http://example.org/biointegrate/goterm/GO_0048662> a bio:GOTerm ;
+    bio:goId "GO:0048662" ;
+    bio:goLabel "negative regulation of smooth muscle cell proliferation" .
+
+<http://example.org/biointegrate/goterm/GO_0048708> a bio:GOTerm ;
+    bio:goId "GO:0048708" ;
+    bio:goLabel "astrocyte differentiation" .
+
+<http://example.org/biointegrate/goterm/GO_0048711> a bio:GOTerm ;
+    bio:goId "GO:0048711" ;
+    bio:goLabel "positive regulation of astrocyte differentiation" .
+
+<http://example.org/biointegrate/goterm/GO_0048762> a bio:GOTerm ;
+    bio:goId "GO:0048762" ;
+    bio:goLabel "mesenchymal cell differentiation" .
+
+<http://example.org/biointegrate/goterm/GO_0048839> a bio:GOTerm ;
+    bio:goId "GO:0048839" ;
+    bio:goLabel "inner ear development" .
+
+<http://example.org/biointegrate/goterm/GO_0051042> a bio:GOTerm ;
+    bio:goId "GO:0051042" ;
+    bio:goLabel "negative regulation of calcium-independent cell-cell adhesion" .
+
+<http://example.org/biointegrate/goterm/GO_0051231> a bio:GOTerm ;
+    bio:goId "GO:0051231" ;
+    bio:goLabel "spindle elongation" .
+
+<http://example.org/biointegrate/goterm/GO_0051301> a bio:GOTerm ;
+    bio:goId "GO:0051301" ;
+    bio:goLabel "cell division" .
+
+<http://example.org/biointegrate/goterm/GO_0051865> a bio:GOTerm ;
+    bio:goId "GO:0051865" ;
+    bio:goLabel "protein autoubiquitination" .
+
+<http://example.org/biointegrate/goterm/GO_0051897> a bio:GOTerm ;
+    bio:goId "GO:0051897" ;
+    bio:goLabel "positive regulation of phosphatidylinositol 3-kinase/protein kinase B signal transduction" .
+
+<http://example.org/biointegrate/goterm/GO_0055007> a bio:GOTerm ;
+    bio:goId "GO:0055007" ;
+    bio:goLabel "cardiac muscle cell differentiation" .
+
+<http://example.org/biointegrate/goterm/GO_0055008> a bio:GOTerm ;
+    bio:goId "GO:0055008" ;
+    bio:goLabel "cardiac muscle tissue morphogenesis" .
+
+<http://example.org/biointegrate/goterm/GO_0060039> a bio:GOTerm ;
+    bio:goId "GO:0060039" ;
+    bio:goLabel "pericardium development" .
+
+<http://example.org/biointegrate/goterm/GO_0060128> a bio:GOTerm ;
+    bio:goId "GO:0060128" ;
+    bio:goLabel "corticotropin hormone secreting cell differentiation" .
+
+<http://example.org/biointegrate/goterm/GO_0060129> a bio:GOTerm ;
+    bio:goId "GO:0060129" ;
+    bio:goLabel "thyroid-stimulating hormone-secreting cell differentiation" .
+
+<http://example.org/biointegrate/goterm/GO_0060271> a bio:GOTerm ;
+    bio:goId "GO:0060271" ;
+    bio:goLabel "cilium assembly" .
+
+<http://example.org/biointegrate/goterm/GO_0060317> a bio:GOTerm ;
+    bio:goId "GO:0060317" ;
+    bio:goLabel "cardiac epithelial to mesenchymal transition" .
+
+<http://example.org/biointegrate/goterm/GO_0060348> a bio:GOTerm ;
+    bio:goId "GO:0060348" ;
+    bio:goLabel "bone development" .
+
+<http://example.org/biointegrate/goterm/GO_0060391> a bio:GOTerm ;
+    bio:goId "GO:0060391" ;
+    bio:goLabel "positive regulation of SMAD protein signal transduction" .
+
+<http://example.org/biointegrate/goterm/GO_0060426> a bio:GOTerm ;
+    bio:goId "GO:0060426" ;
+    bio:goLabel "lung vasculature development" .
+
+<http://example.org/biointegrate/goterm/GO_0060485> a bio:GOTerm ;
+    bio:goId "GO:0060485" ;
+    bio:goLabel "mesenchyme development" .
+
+<http://example.org/biointegrate/goterm/GO_0061036> a bio:GOTerm ;
+    bio:goId "GO:0061036" ;
+    bio:goLabel "positive regulation of cartilage development" .
+
+<http://example.org/biointegrate/goterm/GO_0062023> a bio:GOTerm ;
+    bio:goId "GO:0062023" ;
+    bio:goLabel "collagen-containing extracellular matrix" .
+
+<http://example.org/biointegrate/goterm/GO_0062105> a bio:GOTerm ;
+    bio:goId "GO:0062105" ;
+    bio:goLabel "RNA 2'-O-methyltransferase activity" .
+
+<http://example.org/biointegrate/goterm/GO_0070062> a bio:GOTerm ;
+    bio:goId "GO:0070062" ;
+    bio:goLabel "extracellular exosome" .
+
+<http://example.org/biointegrate/goterm/GO_0070374> a bio:GOTerm ;
+    bio:goId "GO:0070374" ;
+    bio:goLabel "positive regulation of ERK1 and ERK2 cascade" .
+
+<http://example.org/biointegrate/goterm/GO_0070700> a bio:GOTerm ;
+    bio:goId "GO:0070700" ;
+    bio:goLabel "BMP receptor binding" .
+
+<http://example.org/biointegrate/goterm/GO_0070724> a bio:GOTerm ;
+    bio:goId "GO:0070724" ;
+    bio:goLabel "BMP receptor complex" .
+
+<http://example.org/biointegrate/goterm/GO_0071395> a bio:GOTerm ;
+    bio:goId "GO:0071395" ;
+    bio:goLabel "cellular response to jasmonic acid stimulus" .
+
+<http://example.org/biointegrate/goterm/GO_0071559> a bio:GOTerm ;
+    bio:goId "GO:0071559" ;
+    bio:goLabel "response to transforming growth factor beta" .
+
+<http://example.org/biointegrate/goterm/GO_0071773> a bio:GOTerm ;
+    bio:goId "GO:0071773" ;
+    bio:goLabel "cellular response to BMP stimulus" .
+
+<http://example.org/biointegrate/goterm/GO_0071799> a bio:GOTerm ;
+    bio:goId "GO:0071799" ;
+    bio:goLabel "cellular response to prostaglandin D stimulus" .
+
+<http://example.org/biointegrate/goterm/GO_0072138> a bio:GOTerm ;
+    bio:goId "GO:0072138" ;
+    bio:goLabel "mesenchymal cell proliferation involved in ureteric bud development" .
+
+<http://example.org/biointegrate/goterm/GO_0072686> a bio:GOTerm ;
+    bio:goId "GO:0072686" ;
+    bio:goLabel "mitotic spindle" .
+
+<http://example.org/biointegrate/goterm/GO_0090090> a bio:GOTerm ;
+    bio:goId "GO:0090090" ;
+    bio:goLabel "negative regulation of canonical Wnt signaling pathway" .
+
+<http://example.org/biointegrate/goterm/GO_0090161> a bio:GOTerm ;
+    bio:goId "GO:0090161" ;
+    bio:goLabel "Golgi ribbon formation" .
+
+<http://example.org/biointegrate/goterm/GO_0090307> a bio:GOTerm ;
+    bio:goId "GO:0090307" ;
+    bio:goLabel "mitotic spindle assembly" .
+
+<http://example.org/biointegrate/goterm/GO_0141162> a bio:GOTerm ;
+    bio:goId "GO:0141162" ;
+    bio:goLabel "negative regulation of cAMP/PKA signal transduction" .
+
+<http://example.org/biointegrate/goterm/GO_0150005> a bio:GOTerm ;
+    bio:goId "GO:0150005" ;
+    bio:goLabel "enzyme activator complex" .
+
+<http://example.org/biointegrate/goterm/GO_1900159> a bio:GOTerm ;
+    bio:goId "GO:1900159" ;
+    bio:goLabel "positive regulation of bone mineralization involved in bone maturation" .
+
+<http://example.org/biointegrate/goterm/GO_1900745> a bio:GOTerm ;
+    bio:goId "GO:1900745" ;
+    bio:goLabel "positive regulation of p38MAPK cascade" .
+
+<http://example.org/biointegrate/goterm/GO_1901331> a bio:GOTerm ;
+    bio:goId "GO:1901331" ;
+    bio:goLabel "positive regulation of odontoblast differentiation" .
+
+<http://example.org/biointegrate/goterm/GO_1902895> a bio:GOTerm ;
+    bio:goId "GO:1902895" ;
+    bio:goLabel "positive regulation of miRNA transcription" .
+
+<http://example.org/biointegrate/goterm/GO_1905072> a bio:GOTerm ;
+    bio:goId "GO:1905072" ;
+    bio:goLabel "cardiac jelly development" .
+
+<http://example.org/biointegrate/goterm/GO_1905222> a bio:GOTerm ;
+    bio:goId "GO:1905222" ;
+    bio:goLabel "atrioventricular canal morphogenesis" .
+
+<http://example.org/biointegrate/goterm/GO_2000065> a bio:GOTerm ;
+    bio:goId "GO:2000065" ;
+    bio:goLabel "negative regulation of cortisol biosynthetic process" .
+
+<http://example.org/biointegrate/goterm/GO_2000480> a bio:GOTerm ;
+    bio:goId "GO:2000480" ;
+    bio:goLabel "negative regulation of cAMP-dependent protein kinase activity" .
+
+<http://example.org/biointegrate/goterm/GO_2000726> a bio:GOTerm ;
+    bio:goId "GO:2000726" ;
+    bio:goLabel "negative regulation of cardiac muscle cell differentiation" .
+
 <http://example.org/biointegrate/protein/P12643> a bio:Protein ;
     bio:functionText "FUNCTION: Growth factor of the TGF-beta superfamily that plays essential roles in many developmental processes, including cardiogenesis, neurogenesis, and osteogenesis (PubMed:18436533, PubMed:24362451, PubMed:31019025). Induces cartilage and bone formation (PubMed:3201241). Initiates the canonical BMP signaling cascade by associating with type I receptor BMPR1A and type II receptor BMPR2 (PubMed:15064755, PubMed:17295905, PubMed:18436533). Once all three components are bound together in a compl" ;
+    bio:hasBiologicalProcess <http://example.org/biointegrate/goterm/GO_0000122>,
+        <http://example.org/biointegrate/goterm/GO_0001501>,
+        <http://example.org/biointegrate/goterm/GO_0001649>,
+        <http://example.org/biointegrate/goterm/GO_0001658>,
+        <http://example.org/biointegrate/goterm/GO_0001666>,
+        <http://example.org/biointegrate/goterm/GO_0001701>,
+        <http://example.org/biointegrate/goterm/GO_0001837>,
+        <http://example.org/biointegrate/goterm/GO_0001934>,
+        <http://example.org/biointegrate/goterm/GO_0002062>,
+        <http://example.org/biointegrate/goterm/GO_0003129>,
+        <http://example.org/biointegrate/goterm/GO_0003133>,
+        <http://example.org/biointegrate/goterm/GO_0003176>,
+        <http://example.org/biointegrate/goterm/GO_0003181>,
+        <http://example.org/biointegrate/goterm/GO_0003203>,
+        <http://example.org/biointegrate/goterm/GO_0003210>,
+        <http://example.org/biointegrate/goterm/GO_0003272>,
+        <http://example.org/biointegrate/goterm/GO_0003331>,
+        <http://example.org/biointegrate/goterm/GO_0006029>,
+        <http://example.org/biointegrate/goterm/GO_0006355>,
+        <http://example.org/biointegrate/goterm/GO_0006366>,
+        <http://example.org/biointegrate/goterm/GO_0006954>,
+        <http://example.org/biointegrate/goterm/GO_0007219>,
+        <http://example.org/biointegrate/goterm/GO_0007267>,
+        <http://example.org/biointegrate/goterm/GO_0007507>,
+        <http://example.org/biointegrate/goterm/GO_0008284>,
+        <http://example.org/biointegrate/goterm/GO_0008285>,
+        <http://example.org/biointegrate/goterm/GO_0009617>,
+        <http://example.org/biointegrate/goterm/GO_0009887>,
+        <http://example.org/biointegrate/goterm/GO_0010628>,
+        <http://example.org/biointegrate/goterm/GO_0010629>,
+        <http://example.org/biointegrate/goterm/GO_0010718>,
+        <http://example.org/biointegrate/goterm/GO_0010894>,
+        <http://example.org/biointegrate/goterm/GO_0010922>,
+        <http://example.org/biointegrate/goterm/GO_0021537>,
+        <http://example.org/biointegrate/goterm/GO_0021978>,
+        <http://example.org/biointegrate/goterm/GO_0030177>,
+        <http://example.org/biointegrate/goterm/GO_0030282>,
+        <http://example.org/biointegrate/goterm/GO_0030316>,
+        <http://example.org/biointegrate/goterm/GO_0030335>,
+        <http://example.org/biointegrate/goterm/GO_0030501>,
+        <http://example.org/biointegrate/goterm/GO_0030509>,
+        <http://example.org/biointegrate/goterm/GO_0030512>,
+        <http://example.org/biointegrate/goterm/GO_0031648>,
+        <http://example.org/biointegrate/goterm/GO_0032348>,
+        <http://example.org/biointegrate/goterm/GO_0033690>,
+        <http://example.org/biointegrate/goterm/GO_0035051>,
+        <http://example.org/biointegrate/goterm/GO_0035054>,
+        <http://example.org/biointegrate/goterm/GO_0035360>,
+        <http://example.org/biointegrate/goterm/GO_0036305>,
+        <http://example.org/biointegrate/goterm/GO_0042475>,
+        <http://example.org/biointegrate/goterm/GO_0042482>,
+        <http://example.org/biointegrate/goterm/GO_0042487>,
+        <http://example.org/biointegrate/goterm/GO_0043065>,
+        <http://example.org/biointegrate/goterm/GO_0043410>,
+        <http://example.org/biointegrate/goterm/GO_0043569>,
+        <http://example.org/biointegrate/goterm/GO_0045165>,
+        <http://example.org/biointegrate/goterm/GO_0045599>,
+        <http://example.org/biointegrate/goterm/GO_0045600>,
+        <http://example.org/biointegrate/goterm/GO_0045666>,
+        <http://example.org/biointegrate/goterm/GO_0045669>,
+        <http://example.org/biointegrate/goterm/GO_0045778>,
+        <http://example.org/biointegrate/goterm/GO_0045786>,
+        <http://example.org/biointegrate/goterm/GO_0045892>,
+        <http://example.org/biointegrate/goterm/GO_0045893>,
+        <http://example.org/biointegrate/goterm/GO_0045944>,
+        <http://example.org/biointegrate/goterm/GO_0048662>,
+        <http://example.org/biointegrate/goterm/GO_0048708>,
+        <http://example.org/biointegrate/goterm/GO_0048711>,
+        <http://example.org/biointegrate/goterm/GO_0048762>,
+        <http://example.org/biointegrate/goterm/GO_0048839>,
+        <http://example.org/biointegrate/goterm/GO_0051042>,
+        <http://example.org/biointegrate/goterm/GO_0055007>,
+        <http://example.org/biointegrate/goterm/GO_0055008>,
+        <http://example.org/biointegrate/goterm/GO_0060039>,
+        <http://example.org/biointegrate/goterm/GO_0060128>,
+        <http://example.org/biointegrate/goterm/GO_0060129>,
+        <http://example.org/biointegrate/goterm/GO_0060317>,
+        <http://example.org/biointegrate/goterm/GO_0060348>,
+        <http://example.org/biointegrate/goterm/GO_0060391>,
+        <http://example.org/biointegrate/goterm/GO_0060426>,
+        <http://example.org/biointegrate/goterm/GO_0060485>,
+        <http://example.org/biointegrate/goterm/GO_0061036>,
+        <http://example.org/biointegrate/goterm/GO_0070374>,
+        <http://example.org/biointegrate/goterm/GO_0071773>,
+        <http://example.org/biointegrate/goterm/GO_0072138>,
+        <http://example.org/biointegrate/goterm/GO_0090090>,
+        <http://example.org/biointegrate/goterm/GO_1900159>,
+        <http://example.org/biointegrate/goterm/GO_1900745>,
+        <http://example.org/biointegrate/goterm/GO_1901331>,
+        <http://example.org/biointegrate/goterm/GO_1902895>,
+        <http://example.org/biointegrate/goterm/GO_1905072>,
+        <http://example.org/biointegrate/goterm/GO_1905222>,
+        <http://example.org/biointegrate/goterm/GO_2000065>,
+        <http://example.org/biointegrate/goterm/GO_2000726> ;
+    bio:hasCellularComponent <http://example.org/biointegrate/goterm/GO_0005576>,
+        <http://example.org/biointegrate/goterm/GO_0005615>,
+        <http://example.org/biointegrate/goterm/GO_0005886>,
+        <http://example.org/biointegrate/goterm/GO_0005929>,
+        <http://example.org/biointegrate/goterm/GO_0009986>,
+        <http://example.org/biointegrate/goterm/GO_0043231>,
+        <http://example.org/biointegrate/goterm/GO_0070724>,
+        <http://example.org/biointegrate/goterm/GO_0150005> ;
+    bio:hasMolecularFunction <http://example.org/biointegrate/goterm/GO_0005102>,
+        <http://example.org/biointegrate/goterm/GO_0005125>,
+        <http://example.org/biointegrate/goterm/GO_0008083>,
+        <http://example.org/biointegrate/goterm/GO_0019211>,
+        <http://example.org/biointegrate/goterm/GO_0039706>,
+        <http://example.org/biointegrate/goterm/GO_0043539>,
+        <http://example.org/biointegrate/goterm/GO_0070700> ;
     bio:proteinName "Bone morphogenetic protein 2 (BMP-2) (Bone morphogenetic protein 2A) (BMP-2A)" ;
     bio:proteinProductOf <http://example.org/biointegrate/gene/HGNC_1069> ;
     bio:sequenceLength 396 ;
@@ -10,6 +895,17 @@
 
 <http://example.org/biointegrate/protein/P29372> a bio:Protein ;
     bio:functionText "FUNCTION: Hydrolysis of the deoxyribose N-glycosidic bond to excise 3-methyladenine, and 7-methylguanine from the damaged DNA polymer formed by alkylation lesions." ;
+    bio:hasBiologicalProcess <http://example.org/biointegrate/goterm/GO_0006284>,
+        <http://example.org/biointegrate/goterm/GO_0006307>,
+        <http://example.org/biointegrate/goterm/GO_0045007> ;
+    bio:hasCellularComponent <http://example.org/biointegrate/goterm/GO_0005654>,
+        <http://example.org/biointegrate/goterm/GO_0005739>,
+        <http://example.org/biointegrate/goterm/GO_0005829>,
+        <http://example.org/biointegrate/goterm/GO_0042645> ;
+    bio:hasMolecularFunction <http://example.org/biointegrate/goterm/GO_0003677>,
+        <http://example.org/biointegrate/goterm/GO_0003684>,
+        <http://example.org/biointegrate/goterm/GO_0003905>,
+        <http://example.org/biointegrate/goterm/GO_0019104> ;
     bio:proteinName "DNA-3-methyladenine glycosylase (EC 3.2.2.21) (3-alkyladenine DNA glycosylase) (3-methyladenine DNA glycosidase) (ADPG) (N-methylpurine-DNA glycosylase)" ;
     bio:proteinProductOf <http://example.org/biointegrate/gene/HGNC_7211> ;
     bio:sequenceLength 298 ;
@@ -17,6 +913,31 @@
 
 <http://example.org/biointegrate/protein/P52732> a bio:Protein ;
     bio:functionText "FUNCTION: Motor protein required for establishing a bipolar spindle and thus contributing to chromosome congression during mitosis (PubMed:19001501, PubMed:37728657). Required in non-mitotic cells for transport of secretory proteins from the Golgi complex to the cell surface (PubMed:23857769). {ECO:0000269|PubMed:19001501, ECO:0000269|PubMed:23857769}." ;
+    bio:hasBiologicalProcess <http://example.org/biointegrate/goterm/GO_0000278>,
+        <http://example.org/biointegrate/goterm/GO_0007018>,
+        <http://example.org/biointegrate/goterm/GO_0007051>,
+        <http://example.org/biointegrate/goterm/GO_0007052>,
+        <http://example.org/biointegrate/goterm/GO_0007100>,
+        <http://example.org/biointegrate/goterm/GO_0046602>,
+        <http://example.org/biointegrate/goterm/GO_0051231>,
+        <http://example.org/biointegrate/goterm/GO_0051301>,
+        <http://example.org/biointegrate/goterm/GO_0090307> ;
+    bio:hasCellularComponent <http://example.org/biointegrate/goterm/GO_0000922>,
+        <http://example.org/biointegrate/goterm/GO_0005634>,
+        <http://example.org/biointegrate/goterm/GO_0005819>,
+        <http://example.org/biointegrate/goterm/GO_0005829>,
+        <http://example.org/biointegrate/goterm/GO_0005871>,
+        <http://example.org/biointegrate/goterm/GO_0005874>,
+        <http://example.org/biointegrate/goterm/GO_0016020>,
+        <http://example.org/biointegrate/goterm/GO_0032991>,
+        <http://example.org/biointegrate/goterm/GO_0036064>,
+        <http://example.org/biointegrate/goterm/GO_0043231>,
+        <http://example.org/biointegrate/goterm/GO_0072686> ;
+    bio:hasMolecularFunction <http://example.org/biointegrate/goterm/GO_0003777>,
+        <http://example.org/biointegrate/goterm/GO_0005524>,
+        <http://example.org/biointegrate/goterm/GO_0008017>,
+        <http://example.org/biointegrate/goterm/GO_0008574>,
+        <http://example.org/biointegrate/goterm/GO_0019901> ;
     bio:proteinName "Kinesin-like protein KIF11 (Kinesin-like protein 1) (Kinesin-like spindle protein HKSP) (Kinesin-related motor protein Eg5) (Thyroid receptor-interacting protein 5) (TR-interacting protein 5) (TRIP-5)" ;
     bio:proteinProductOf <http://example.org/biointegrate/gene/HGNC_6388> ;
     bio:sequenceLength 1056 ;
@@ -24,6 +945,29 @@
 
 <http://example.org/biointegrate/protein/P52895> a bio:Protein ;
     bio:functionText "FUNCTION: Cytosolic aldo-keto reductase that catalyzes the NADH and NADPH-dependent reduction of ketosteroids to hydroxysteroids (PubMed:19218247). Most probably acts as a reductase in vivo since the oxidase activity measured in vitro is inhibited by physiological concentrations of NADPH (PubMed:14672942). Displays a broad positional specificity acting on positions 3, 17 and 20 of steroids and regulates the metabolism of hormones like estrogens and androgens (PubMed:10998348). Works in concert w" ;
+    bio:hasBiologicalProcess <http://example.org/biointegrate/goterm/GO_0006693>,
+        <http://example.org/biointegrate/goterm/GO_0007186>,
+        <http://example.org/biointegrate/goterm/GO_0007586>,
+        <http://example.org/biointegrate/goterm/GO_0008202>,
+        <http://example.org/biointegrate/goterm/GO_0008284>,
+        <http://example.org/biointegrate/goterm/GO_0030855>,
+        <http://example.org/biointegrate/goterm/GO_0042448>,
+        <http://example.org/biointegrate/goterm/GO_0044597>,
+        <http://example.org/biointegrate/goterm/GO_0044598>,
+        <http://example.org/biointegrate/goterm/GO_0051897>,
+        <http://example.org/biointegrate/goterm/GO_0071395>,
+        <http://example.org/biointegrate/goterm/GO_0071799> ;
+    bio:hasCellularComponent <http://example.org/biointegrate/goterm/GO_0005829> ;
+    bio:hasMolecularFunction <http://example.org/biointegrate/goterm/GO_0004032>,
+        <http://example.org/biointegrate/goterm/GO_0004303>,
+        <http://example.org/biointegrate/goterm/GO_0016655>,
+        <http://example.org/biointegrate/goterm/GO_0031406>,
+        <http://example.org/biointegrate/goterm/GO_0032052>,
+        <http://example.org/biointegrate/goterm/GO_0047023>,
+        <http://example.org/biointegrate/goterm/GO_0047044>,
+        <http://example.org/biointegrate/goterm/GO_0047086>,
+        <http://example.org/biointegrate/goterm/GO_0047115>,
+        <http://example.org/biointegrate/goterm/GO_0047718> ;
     bio:proteinName "Aldo-keto reductase family 1 member C2 (EC 1.-.-.-) (EC 1.1.1.112) (EC 1.1.1.209) (EC 1.1.1.53) (EC 1.1.1.62) (EC 1.3.1.20) (3-alpha-HSD3) (Chlordecone reductase homolog HAKRD) (Dihydrodiol dehydrogenase 2) (DD-2) (DD2) (Dihydrodiol dehydrogenase/bile acid-binding protein) (DD/BABP) (Type III 3-alpha-hydroxysteroid dehydrogenase) (EC 1.1.1.357)" ;
     bio:proteinProductOf <http://example.org/biointegrate/gene/HGNC_385> ;
     bio:sequenceLength 323 ;
@@ -31,6 +975,15 @@
 
 <http://example.org/biointegrate/protein/P61925> a bio:Protein ;
     bio:functionText "FUNCTION: Extremely potent competitive inhibitor of cAMP-dependent protein kinase activity, this protein interacts with the catalytic subunit of the enzyme after the cAMP-induced dissociation of its regulatory chains." ;
+    bio:hasBiologicalProcess <http://example.org/biointegrate/goterm/GO_0000122>,
+        <http://example.org/biointegrate/goterm/GO_0010389>,
+        <http://example.org/biointegrate/goterm/GO_0042308>,
+        <http://example.org/biointegrate/goterm/GO_0141162>,
+        <http://example.org/biointegrate/goterm/GO_2000480> ;
+    bio:hasCellularComponent <http://example.org/biointegrate/goterm/GO_0005634>,
+        <http://example.org/biointegrate/goterm/GO_0005737> ;
+    bio:hasMolecularFunction <http://example.org/biointegrate/goterm/GO_0004862>,
+        <http://example.org/biointegrate/goterm/GO_0034236> ;
     bio:proteinName "cAMP-dependent protein kinase inhibitor alpha (PKI-alpha) (cAMP-dependent protein kinase inhibitor, muscle/brain isoform)" ;
     bio:proteinProductOf <http://example.org/biointegrate/gene/HGNC_9017> ;
     bio:sequenceLength 76 ;
@@ -38,6 +991,13 @@
 
 <http://example.org/biointegrate/protein/Q5W0B1> a bio:Protein ;
     bio:functionText "FUNCTION: E3 ubiquitin ligase essential for DNA replication origin activation during S phase (PubMed:31160578). Acts as a replication origin selector which selects the origins to be fired and catalyzes the multi-mono-ubiquitination of a subset of chromatin-bound ORC3 and ORC5 during S-phase (PubMed:31160578). {ECO:0000269|PubMed:31160578}." ;
+    bio:hasBiologicalProcess <http://example.org/biointegrate/goterm/GO_0006275>,
+        <http://example.org/biointegrate/goterm/GO_0006513>,
+        <http://example.org/biointegrate/goterm/GO_0051865> ;
+    bio:hasCellularComponent <http://example.org/biointegrate/goterm/GO_0000785> ;
+    bio:hasMolecularFunction <http://example.org/biointegrate/goterm/GO_0003682>,
+        <http://example.org/biointegrate/goterm/GO_0004842>,
+        <http://example.org/biointegrate/goterm/GO_0008270> ;
     bio:proteinName "ORC ubiquitin ligase 1 (OBI1) (EC 2.3.2.27) (RING finger protein 219)" ;
     bio:proteinProductOf <http://example.org/biointegrate/gene/HGNC_20308> ;
     bio:sequenceLength 726 ;
@@ -45,6 +1005,9 @@
 
 <http://example.org/biointegrate/protein/Q6TCH4> a bio:Protein ;
     bio:functionText "FUNCTION: Plasma membrane progesterone (P4) receptor coupled to G proteins (PubMed:23161870, PubMed:23763432). Seems to act through a G(s) mediated pathway (PubMed:23161870). Involved in neurosteroid inhibition of apoptosis (PubMed:23161870). May be involved in regulating rapid P4 signaling in the nervous system (PubMed:23763432). Also binds dehydroepiandrosterone (DHEA), pregnanolone, pregnenolone and allopregnanolone (PubMed:23161870, PubMed:23763432). {ECO:0000269|PubMed:23161870, ECO:0000303" ;
+    bio:hasCellularComponent <http://example.org/biointegrate/goterm/GO_0005886> ;
+    bio:hasMolecularFunction <http://example.org/biointegrate/goterm/GO_0005496>,
+        <http://example.org/biointegrate/goterm/GO_0038023> ;
     bio:proteinName "Membrane progestin receptor delta (mPR delta) (Membrane progesterone P4 receptor delta) (Membrane progesterone receptor delta) (Progesterone and adipoQ receptor family member 6) (Progestin and adipoQ receptor family member 6)" ;
     bio:proteinProductOf <http://example.org/biointegrate/gene/HGNC_30132> ;
     bio:sequenceLength 344 ;
@@ -52,6 +1015,19 @@
 
 <http://example.org/biointegrate/protein/Q8IY81> a bio:Protein ;
     bio:functionText "FUNCTION: RNA 2'-O-methyltransferase involved in the processing of the 34S pre-rRNA to 18S rRNA and in 40S ribosomal subunit formation. {ECO:0000255|HAMAP-Rule:MF_03163, ECO:0000269|PubMed:22195017}.; FUNCTION: (Microbial infection) In case of infection by HIV-1 virus, recruited to HIV-1 RNA and catalyzes 2'-O-methylation of the viral genome, allowing HIV-1 virus to escape the innate immune system (PubMed:30626973). RNA 2'-O-methylation provides a molecular signature for discrimination of self f" ;
+    bio:hasBiologicalProcess <http://example.org/biointegrate/goterm/GO_0000463>,
+        <http://example.org/biointegrate/goterm/GO_0000466>,
+        <http://example.org/biointegrate/goterm/GO_0001510>,
+        <http://example.org/biointegrate/goterm/GO_0031167> ;
+    bio:hasCellularComponent <http://example.org/biointegrate/goterm/GO_0005654>,
+        <http://example.org/biointegrate/goterm/GO_0005694>,
+        <http://example.org/biointegrate/goterm/GO_0005730>,
+        <http://example.org/biointegrate/goterm/GO_0030687>,
+        <http://example.org/biointegrate/goterm/GO_0030688> ;
+    bio:hasMolecularFunction <http://example.org/biointegrate/goterm/GO_0003723>,
+        <http://example.org/biointegrate/goterm/GO_0008650>,
+        <http://example.org/biointegrate/goterm/GO_0016435>,
+        <http://example.org/biointegrate/goterm/GO_0062105> ;
     bio:proteinName "pre-rRNA 2'-O-ribose RNA methyltransferase FTSJ3 (EC 2.1.1.-) (Protein ftsJ homolog 3) (Putative rRNA methyltransferase 3)" ;
     bio:proteinProductOf <http://example.org/biointegrate/gene/HGNC_17136> ;
     bio:sequenceLength 847 ;
@@ -59,6 +1035,17 @@
 
 <http://example.org/biointegrate/protein/Q9C0D6> a bio:Protein ;
     bio:functionText "FUNCTION: Microtubule-associated formin which regulates both actin and microtubule dynamics. Induces microtubule acetylation and stabilization and actin stress fiber formation (PubMed:18815276). Regulates Golgi ribbon formation (PubMed:26564798). Required for normal cilia assembly. Early in cilia assembly, may assist in the maturation and positioning of the centrosome/basal body, and once cilia assembly has initiated, may also promote cilia elongation by inhibiting disassembly (PubMed:29742020)." ;
+    bio:hasBiologicalProcess <http://example.org/biointegrate/goterm/GO_0030041>,
+        <http://example.org/biointegrate/goterm/GO_0043149>,
+        <http://example.org/biointegrate/goterm/GO_0060271>,
+        <http://example.org/biointegrate/goterm/GO_0090161> ;
+    bio:hasCellularComponent <http://example.org/biointegrate/goterm/GO_0005794>,
+        <http://example.org/biointegrate/goterm/GO_0005874>,
+        <http://example.org/biointegrate/goterm/GO_0005881>,
+        <http://example.org/biointegrate/goterm/GO_0005884>,
+        <http://example.org/biointegrate/goterm/GO_0005929> ;
+    bio:hasMolecularFunction <http://example.org/biointegrate/goterm/GO_0003779>,
+        <http://example.org/biointegrate/goterm/GO_0008017> ;
     bio:proteinName "FH2 domain-containing protein 1 (Inverted formin-1)" ;
     bio:proteinProductOf <http://example.org/biointegrate/gene/HGNC_29363> ;
     bio:sequenceLength 1143 ;
@@ -66,10 +1053,50 @@
 
 <http://example.org/biointegrate/protein/Q9NR99> a bio:Protein ;
     bio:functionText "FUNCTION: In kidney, has anti-inflammatory and anti-fibrotic properties by limiting the induction of chemokines, fibronectin and collagen expression in response to TGB1 and pro-inflammatory stimuli. {ECO:0000269|PubMed:27599751}." ;
+    bio:hasBiologicalProcess <http://example.org/biointegrate/goterm/GO_0071559> ;
+    bio:hasCellularComponent <http://example.org/biointegrate/goterm/GO_0062023>,
+        <http://example.org/biointegrate/goterm/GO_0070062> ;
+    bio:hasMolecularFunction <http://example.org/biointegrate/goterm/GO_0005201> ;
     bio:proteinName "Matrix-remodeling-associated protein 5 (Adhesion protein with leucine-rich repeats and immunoglobulin domains related to perlecan) (Adlican)" ;
     bio:proteinProductOf <http://example.org/biointegrate/gene/HGNC_7539> ;
     bio:sequenceLength 2828 ;
     bio:uniprotId "Q9NR99" .
+
+<http://example.org/biointegrate/goterm/GO_0000122> a bio:GOTerm ;
+    bio:goId "GO:0000122" ;
+    bio:goLabel "negative regulation of transcription by RNA polymerase II" .
+
+<http://example.org/biointegrate/goterm/GO_0005634> a bio:GOTerm ;
+    bio:goId "GO:0005634" ;
+    bio:goLabel "nucleus" .
+
+<http://example.org/biointegrate/goterm/GO_0005654> a bio:GOTerm ;
+    bio:goId "GO:0005654" ;
+    bio:goLabel "nucleoplasm" .
+
+<http://example.org/biointegrate/goterm/GO_0005874> a bio:GOTerm ;
+    bio:goId "GO:0005874" ;
+    bio:goLabel "microtubule" .
+
+<http://example.org/biointegrate/goterm/GO_0005886> a bio:GOTerm ;
+    bio:goId "GO:0005886" ;
+    bio:goLabel "plasma membrane" .
+
+<http://example.org/biointegrate/goterm/GO_0005929> a bio:GOTerm ;
+    bio:goId "GO:0005929" ;
+    bio:goLabel "cilium" .
+
+<http://example.org/biointegrate/goterm/GO_0008017> a bio:GOTerm ;
+    bio:goId "GO:0008017" ;
+    bio:goLabel "microtubule binding" .
+
+<http://example.org/biointegrate/goterm/GO_0008284> a bio:GOTerm ;
+    bio:goId "GO:0008284" ;
+    bio:goLabel "positive regulation of cell population proliferation" .
+
+<http://example.org/biointegrate/goterm/GO_0043231> a bio:GOTerm ;
+    bio:goId "GO:0043231" ;
+    bio:goLabel "intracellular membrane-bounded organelle" .
 
 <http://example.org/biointegrate/expression/HGNC_1069_TCGA-GBM_3ed101b5-0007-4957-a25d-4cf43bde08b6> a bio:ExpressionMeasurement ;
     bio:fileId "d4649bc7-09d2-4d90-bafd-0bec72429b00" ;
@@ -3598,6 +4625,10 @@
     bio:strandedSecondCount 1579.0 ;
     bio:tpmUnstranded 37.7376 ;
     bio:unstrandedCount 3131.0 .
+
+<http://example.org/biointegrate/goterm/GO_0005829> a bio:GOTerm ;
+    bio:goId "GO:0005829" ;
+    bio:goLabel "cytosol" .
 
 <http://example.org/biointegrate/gene/HGNC_11522> a bio:Gene ;
     bio:ensemblGeneId "ENSG00000147526" ;
