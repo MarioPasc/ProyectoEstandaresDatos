@@ -1,5 +1,6 @@
 import logging
 import sys
+import argparse
 from pathlib import Path
 from typing import Dict, Set, Any, List
 
@@ -15,14 +16,25 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Constants
-ROOT_DIR = Path(__file__).resolve().parent.parent.parent
-OWL_PATH = ROOT_DIR / "ontology" / "assets" / "biointegrate-ontology-reasoned.owl"
-OUTPUT_TTL_PATH = ROOT_DIR / "data" / "rdf" / "biointegrate_data_overlay.ttl"
-
 # Namespaces
 BI_NS = "http://example.org/biointegrate/"
 BI = Namespace(BI_NS)
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Generate coherent TTL from MongoDB based on OWL entities.")
+    parser.add_argument(
+        "--owl-file",
+        type=Path,
+        default=Path("ontology/data/owl/biointegrate-ontology-reasoned.owl"),
+        help="Path to the input OWL ontology file."
+    )
+    parser.add_argument(
+        "--output-ttl",
+        type=Path,
+        default=Path("ontology/data/rdf/biointegrate_data_overlay.ttl"),
+        help="Path to the output TTL file."
+    )
+    return parser.parse_args()
 
 def extract_ids_from_owl(owl_file_path: Path) -> Dict[str, Set[str]]:
     """
@@ -37,18 +49,18 @@ def extract_ids_from_owl(owl_file_path: Path) -> Dict[str, Set[str]]:
 
     g = Graph()
     
-    # Try parsing as Turtle first (common for modern OWL/RDF), then fallback to XML
+    # Try parsing as RDF/XML first (standard for .owl), then fallback to Turtle
     try:
-        logger.info("Attempting to parse as Turtle...")
-        g.parse(str(owl_file_path), format="turtle")
-    except Exception as e_turtle:
-        logger.warning(f"Turtle parsing failed ({e_turtle}). Attempting RDF/XML...")
+        logger.info("Attempting to parse as RDF/XML...")
+        g.parse(str(owl_file_path), format="xml")
+    except Exception as e_xml:
+        logger.warning(f"RDF/XML parsing failed ({e_xml}). Attempting Turtle...")
         try:
             g = Graph() # Reset graph
-            g.parse(str(owl_file_path), format="xml")
-        except Exception as e_xml:
-            logger.error(f"Failed to parse OWL file as Turtle or RDF/XML.")
-            raise e_xml
+            g.parse(str(owl_file_path), format="turtle")
+        except Exception as e_turtle:
+            logger.error(f"Failed to parse OWL file as RDF/XML or Turtle.")
+            raise e_turtle
 
     ids = {
         "genes": set(),
@@ -333,9 +345,10 @@ def validate_coherence(ids_map: Dict[str, Set[str]], graph: Graph):
                 logger.warning(f"  Missing {k}: {len(v)} (e.g., {v[:3]}...)")
 
 def main():
+    args = parse_args()
     try:
         # 1. Extract IDs from OWL
-        ids_map = extract_ids_from_owl(OWL_PATH)
+        ids_map = extract_ids_from_owl(args.owl_file)
         
         # 2. Fetch Data from MongoDB
         mongo_data = fetch_mongo_data(ids_map)
@@ -347,9 +360,9 @@ def main():
         validate_coherence(ids_map, ttl_graph)
         
         # 5. Save
-        OUTPUT_TTL_PATH.parent.mkdir(parents=True, exist_ok=True)
-        ttl_graph.serialize(destination=str(OUTPUT_TTL_PATH), format="turtle")
-        logger.info(f"TTL file saved to: {OUTPUT_TTL_PATH}")
+        args.output_ttl.parent.mkdir(parents=True, exist_ok=True)
+        ttl_graph.serialize(destination=str(args.output_ttl), format="turtle")
+        logger.info(f"TTL file saved to: {args.output_ttl}")
         
     except Exception as e:
         logger.error(f"Pipeline failed: {e}", exc_info=True)

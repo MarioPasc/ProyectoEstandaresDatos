@@ -13,9 +13,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Paths
-ROOT_DIR = Path(__file__).resolve().parent.parent.parent
-TTL_PATH = ROOT_DIR / "data" / "rdf" / "biointegrate_data_overlay.ttl"
-OUTPUT_HTML_PATH = ROOT_DIR / "data" / "rdf" / "biointegrate_graph.html"
+TTL_PATH = Path("ontology/data/rdf/biointegrate_data_overlay.ttl")
+OUTPUT_HTML_PATH = Path("ontology/data/rdf/biointegrate_graph.html")
 
 def generate_visualization():
     if not TTL_PATH.exists():

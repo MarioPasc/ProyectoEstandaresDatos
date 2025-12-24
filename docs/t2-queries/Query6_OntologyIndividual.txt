@@ -10,7 +10,7 @@
       }
     },
     {
-      "$sample": { "size": 1 }
+      "$sample": { "size": 10 }
     },
     {
       "$lookup": {

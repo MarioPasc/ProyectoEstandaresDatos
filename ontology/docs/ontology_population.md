@@ -25,6 +25,6 @@ biointegrate-execute-queries \
 
 biointegrate-populate-ontology \
     --input docs/t2-resultados/query_6_ontology_individual.json \
-    --ontology ontology/assets/biointegrate_populated.owl \
-    --output ontology/assets/biointegrate_populated.owl
+    --ontology ontology/data/owl/biointegrate-ontology-reasoned.owl \
+    --output ontology/data/owl/biointegrate-ontology-reasoned.owl
 ```
